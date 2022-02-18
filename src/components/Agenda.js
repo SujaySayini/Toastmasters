@@ -30,7 +30,7 @@ const Agenda = () => {
             </nav>
             <div className='container'>
                 <div className = 'row'>
-                    <div className = 'col-7'>
+                    <div className = 'col-lg-7'>
                         <h4>Agenda for {today}</h4>
                         <div style={{border:"1px solid black"}}>
                             <div className='container'>
@@ -105,11 +105,126 @@ const Agenda = () => {
                                                     <p>Speech Giver #2</p>
                                                 </div>
                                             </div>
+                                            <div className = 'row'>
+                                                <div className='col-12'>
+                                                    <p style={{marginBottom: '3px', textDecoration: 'underline', fontWeight:'bolder'}}>Table Topics</p>
+                                                </div>
+                                            </div>
+                                            <div className = 'row' >
+                                                <div className='col-2'>
+                                                    <p style={{marginBottom:'0'}}>2 min</p>
+                                                </div>
+                                                <div className='col-6'>
+                                                    <p style={{marginBottom:'0'}}>Table Topics Introduction</p>
+                                                </div>
+                                            </div>
+                                            <div className = 'row' style={{marginTop:'0'}}>
+                                                <div className='col-2'>
+                                                    <p>20 min</p>
+                                                </div>
+                                                <div className='col-6'>
+                                                    <p>Table Topics</p>
+                                                </div>
+                                                <div className='col-4'>
+                                                    <p>TT Master</p>
+                                                </div>
+                                            </div>
+                                            <div className = 'row'>
+                                                <div className='col-12'>
+                                                    <p style={{marginBottom: '3px', textDecoration: 'underline', fontWeight:'bolder'}}>Evaluations and Reports</p>
+                                                </div>
+                                            </div>
+                                            <div className = 'row' >
+                                                <div className='col-2'>
+                                                    <p style={{marginBottom:'0'}}>2-3 min</p>
+                                                </div>
+                                                <div className='col-6'>
+                                                    <p style={{marginBottom:'0'}}>Evaluation #1</p>
+                                                </div>
+                                                
+                                                <div className='col-4'>
+                                                    <p style={{marginBottom:'0'}}>Evaluator #1</p>
+                                                </div>
+                                            </div>
+                                            <div className = 'row' style={{marginTop:'0'}}>
+                                                <div className='col-2'>
+                                                    <p>2 min</p>
+                                                </div>
+                                                <div className='col-6'>
+                                                    <p>Ah Counter's Report</p>
+                                                </div>
+                                                <div className='col-4'>
+                                                    <p>Ah Counter</p>
+                                                </div>
+                                            </div>
+                                            <div className = 'row' style={{marginTop:'0'}}>
+                                                <div className='col-2'>
+                                                    <p>2 min</p>
+                                                </div>
+                                                <div className='col-6'>
+                                                    <p>Timer's Report</p>
+                                                </div>
+                                                <div className='col-4'>
+                                                    <p>Timer</p>
+                                                </div>
+                                            </div>
+
+
+
+
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    <div className='col-lg-5'>
+                        <div className = 'row'>
+                            <h4>Sign up for a role!</h4>
+                        </div>
+                        <div className='row' style={{marginTop: '5%'}}>
+                            <div className="dropdown">
+                                <button type="button" className="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown">
+                                  Select the role you want to sign up for!
+                                </button>
+                                <ul className="dropdown-menu">
+                                  <li><a className="dropdown-item" href="#">Pathways Speech</a></li>
+                                  <li><a className="dropdown-item" href="#">Table Topics Master</a></li>
+                                  <li><a className="dropdown-item" href="#">Evaluator</a></li>
+                                  <li><a className="dropdown-item" href="#">Ah Counter</a></li>
+                                  <li><a className="dropdown-item" href="#">Timer</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div className ='row text-center' style={{marginTop:'3.75%', paddingLeft: '25%', paddingRight:'25%'}} >
+                            <button type='button' className = 'btn btn-success'>Sign Up!</button>
+                        </div>
+                        <div className = 'row' style={{marginTop:'5%'}}>
+                            <h5>No longer able to fill a role? Remove it here!</h5>
+                        </div>
+                        <div className='row' style={{marginTop: '3.75%'}}>
+                            <div className="dropdown">
+                                <button type="button" className="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown">
+                                  Select the role that you signed up for!
+                                </button>
+                                <ul className="dropdown-menu">
+                                  <li><a className="dropdown-item" href="#">Pathways Speech</a></li>
+                                  <li><a className="dropdown-item" href="#">Table Topics Master</a></li>
+                                  <li><a className="dropdown-item" href="#">Evaluator</a></li>
+                                  <li><a className="dropdown-item" href="#">Ah Counter</a></li>
+                                  <li><a className="dropdown-item" href="#">Timer</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div className ='row text-center' style={{marginTop:'3.75%', paddingLeft: '25%', paddingRight:'25%'}} >
+                            <button type='button' className = 'btn btn-success'>Remove It!</button>
+                        </div>
+                        <h5 style={{marginTop: '7.5%'}}>View a different date's agenda!</h5>
+                        <div className ='row text-center' style={{marginTop:'3.75%', paddingLeft: '25%', paddingRight:'25%'}} >
+                            <input type='date' text='Select'></input>
+                            <button type='button' className = 'btn btn-success' style={{marginTop: '10px'}}>Go!</button>
+                        </div>
+
                     </div>
                 </div>
             </div>
