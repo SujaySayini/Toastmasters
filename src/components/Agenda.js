@@ -1,5 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
+
 import toastyblack from '../images/toasty-black.png';
 
 const Agenda = () => {
@@ -11,23 +12,6 @@ const Agenda = () => {
     today = mm + '/' + dd + '/' + yyyy;
     return (
         <div>
-            <nav style={{marginBottom: '20px'}}className = "navbar navbar-expand-sm bg-dark navbar-dark">
-                <div className = "container-fluid">
-                <a className="navbar-brand" href="#"><img style = {{height:'40px'}} src={toastyblack}/> <span>Rutgers Toastmasters</span></a>
-               
-                    <ul className = "navbar-nav">
-                        <li className = "nav-item" >
-                            <a className = "nav-link" href = "#">Timer</a>
-                        </li>
-                        <li className = "nav-item" >
-                            <a className = "nav-link" href = "#">Ah Counter</a>
-                        </li>
-                        <li className = "nav-item" >
-                            <a className = "nav-link" href = "#">Comment Cards</a>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
             <div className='container'>
                 <div className = 'row'>
                     <div className = 'col-lg-7'>

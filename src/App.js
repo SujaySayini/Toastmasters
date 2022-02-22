@@ -1,11 +1,17 @@
 import logo from './logo.svg';
 import './App.css';
 import Agenda  from './components/Agenda';
+import { useState } from 'react';
+import Navbar from './components/Navbar';
 
 function App() {
+  const [page,setPage] = useState(<Agenda></Agenda>);
+
+
   return (
-    <div className="App">
-      <Agenda/>
+    <div className="App">   
+      <Navbar swap={setPage}/> 
+      {page}
     </div>
   );
 }
