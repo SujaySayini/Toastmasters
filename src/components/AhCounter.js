@@ -29,9 +29,9 @@ const AhCounter = (props) => {
                                 Type of Speech
                             </button>
                             <ul className="dropdown-menu">
-                                <li><a className="dropdown-item" href="#">Speech1</a></li>
-                                <li><a className="dropdown-item" href="#">Speech2</a></li>
-                                <li><a className="dropdown-item" href="#">Speech3</a></li>
+                                <li><a className="dropdown-item" href="#">Evaluation</a></li>
+                                <li><a className="dropdown-item" href="#">Prepared Speech</a></li>
+                                <li><a className="dropdown-item" href="#">Table Topics</a></li>
                             </ul>
                         </div>
                     </div>

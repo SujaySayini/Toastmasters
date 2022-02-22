@@ -1,8 +1,11 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import toastyblack from '../images/toasty-black.png';
+import AhCounter from './AhCounter';
+import CommentCard from './CommentCard';
+import Timer from './Timer';
 
-const Navbar = () =>{
+const Navbar = (props) =>{
 
     return(
             <nav className = "navbar align-left navbar-dark bg-dark">
@@ -24,14 +27,14 @@ const Navbar = () =>{
 
                 <div className = "collapse navbar-collapse" id="navbarNav">
                     <ul className = "navbar-nav">
-                        <li className = "nav-item" style={{textAlign: 'left', paddingLeft: '2em'}}>
-                            <a className = "nav-link" href = "#">Timer</a>
+                        <li className = "nav-item" >
+                            <a className = "nav-link" href = "#" style={{textAlign: 'left', paddingLeft: '2em'}} onClick={() =>{props.swap(<Timer/>)}}>Timer</a>
                         </li>
-                        <li className = "nav-item" style={{textAlign: 'left', paddingLeft: '2em'}}>
-                            <a className = "nav-link" href = "#">Ah Counter</a>
+                        <li className = "nav-item" >
+                            <a className = "nav-link" href = "#" style={{textAlign: 'left', paddingLeft: '2em'}} onClick={() =>{props.swap(<AhCounter/>)}}>Ah Counter</a>
                         </li>
-                        <li className = "nav-item" style={{textAlign: 'left', paddingLeft: '2em'}}>
-                            <a className = "nav-link" href = "#">Comment Cards</a>
+                        <li className = "nav-item" >
+                            <a className = "nav-link" href = "#" style={{textAlign: 'left', paddingLeft: '2em'}} onClick={() =>{props.swap(<CommentCard/>)}}>Comment Cards</a>
                         </li>
                     </ul>
                 </div>
