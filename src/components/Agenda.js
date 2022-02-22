@@ -1,5 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
+
 import toastyblack from '../images/toasty-black.png';
 import Navbar from './Navbar';
 
@@ -12,7 +13,6 @@ const Agenda = () => {
     today = mm + '/' + dd + '/' + yyyy;
     return (
         <div>
-            <Navbar />
             <div className='container'>
                 <div className = 'row'>
                     <div className = 'col-lg-7'>
