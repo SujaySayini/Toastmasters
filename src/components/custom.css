@@ -1,0 +1,21 @@
+.layout {
+    background: url("Background.JPG");
+    height: 100%;
+    width: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: fixed;
+  top: 0;
+  left: 0;
+  }
+
+  .title{
+    padding: 30px;
+  text-align: center;
+  background: #49b39d;
+  color: white;
+  font-size: 30px;
+
+  }
+ 
