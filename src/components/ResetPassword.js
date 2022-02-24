@@ -1,8 +1,7 @@
 import React from 'react';
-import './App.css';
-import Img from './Toastmasters.png'
+import Img from '../images/Toastmasters.png';
+
 import background from "./Background.JPG";
-import Title from './Title.js';
 import "./custom.css";
 
 
@@ -46,7 +45,7 @@ class ResetPassword extends React.Component{
 					<br/> <b></b>
 				</center>
 
-        <div class="Title">
+        <div class="title">
             <h4>RESET PASSWORD</h4>
             
         

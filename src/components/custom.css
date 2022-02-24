@@ -9,4 +9,13 @@
   top: 0;
   left: 0;
   }
+
+  .title{
+    padding: 30px;
+  text-align: center;
+  background: #49b39d;
+  color: white;
+  font-size: 30px;
+
+  }
  

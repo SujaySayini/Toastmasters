@@ -1,8 +1,9 @@
 import React from 'react';
-import './App.css';
-import Img from './Toastmasters.png'
+
+
+import Img from '../images/Toastmasters.png';
 import background from "./Background.JPG";
-import Title from './Title.js';
+
 import "./custom.css";
 
 
@@ -51,7 +52,7 @@ class Login extends React.Component{
          <br/> <b></b>
        </center>
  
-       <div class="Title">
+       <div class="title">
        <h4>SIGN IN</h4>
        </div>
        <br></br>
