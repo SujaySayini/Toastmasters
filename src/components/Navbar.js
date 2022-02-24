@@ -28,13 +28,13 @@ const Navbar = (props) =>{
                 <div className = "collapse navbar-collapse" id="navbarNav">
                     <ul className = "navbar-nav">
                         <li className = "nav-item" >
-                            <a className = "nav-link" href = "#" style={{textAlign: 'left', paddingLeft: '2em'}} onClick={() =>{props.swap(<Timer/>)}}>Timer</a>
+                            <a className = "nav-link" href = "#" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show" style={{textAlign: 'left', paddingLeft: '2em'}} onClick={() =>{props.swap(<Timer/>)}}>Timer</a>
                         </li>
                         <li className = "nav-item" >
-                            <a className = "nav-link" href = "#" style={{textAlign: 'left', paddingLeft: '2em'}} onClick={() =>{props.swap(<AhCounter/>)}}>Ah Counter</a>
+                            <a className = "nav-link" href = "#" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show" style={{textAlign: 'left', paddingLeft: '2em'}} onClick={() =>{props.swap(<AhCounter/>)}}>Ah Counter</a>
                         </li>
                         <li className = "nav-item" >
-                            <a className = "nav-link" href = "#" style={{textAlign: 'left', paddingLeft: '2em'}} onClick={() =>{props.swap(<CommentCard/>)}}>Comment Cards</a>
+                            <a className = "nav-link" href = "#" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show" style={{textAlign: 'left', paddingLeft: '2em'}} onClick={() =>{props.swap(<CommentCard/>)}}>Comment Cards</a>
                         </li>
                     </ul>
                 </div>
