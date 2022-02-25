@@ -1,6 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import toastyblack from '../images/toasty-black.png';
+import profilepic from '../images/profile2.jpg'
 import Agenda from './Agenda';
 import AhCounter from './AhCounter';
 import CommentCard from './CommentCard';
@@ -8,10 +9,17 @@ import Timer from './Timer';
 
 const Navbar = (props) =>{
 
+    //note: in order to make the page that you are currently on appear active, use ternary operator in rendering
+        // {props.page === pageName ? <a className = active> : <a> <a/>}
+
     return(
             <nav className = "navbar align-left navbar-dark bg-dark">
                 <div className="container-fluid">
                     <a className="navbar-brand" href="#">
+                        <img style = {{height:'40px', paddingRight: '10px'}} src={profilepic}/> 
+                        <span>User Name</span>
+                    </a>
+                    <a className="navbar-brand mx-auto" href="#">
                         <img style = {{height:'40px', paddingRight: '10px'}} src={toastyblack}/> 
                         <span>Rutgers Toastmasters</span>
                     </a>

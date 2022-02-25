@@ -1,6 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
-
 import toastyblack from '../images/toasty-black.png';
 import Navbar from './Navbar';
 
@@ -9,7 +8,7 @@ const Agenda = () => {
     const dd = String(today.getDate()).padStart(2, '0');
     const mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
     const yyyy = today.getFullYear();
-
+    
     today = mm + '/' + dd + '/' + yyyy;
     return (
         <div>
@@ -163,23 +162,19 @@ const Agenda = () => {
                             </div>
                         </div>
                     </div>
-                    <div className='col-lg-5'>
+                    <div className='col-lg-5' style={{marginTop: '20px'}}>
                         <div className = 'row'>
                             <h4>Sign up for a role!</h4>
                         </div>
                         <div className='row' style={{marginTop: '5%'}}>
-                            <div className="dropdown">
-                                <button type="button" className="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown">
-                                  Select the role you want to sign up for!
-                                </button>
-                                <ul className="dropdown-menu">
-                                  <li><a className="dropdown-item" href="#">Pathways Speech</a></li>
-                                  <li><a className="dropdown-item" href="#">Table Topics Master</a></li>
-                                  <li><a className="dropdown-item" href="#">Evaluator</a></li>
-                                  <li><a className="dropdown-item" href="#">Ah Counter</a></li>
-                                  <li><a className="dropdown-item" href="#">Timer</a></li>
-                                </ul>
-                            </div>
+                            <select className="form-select">
+                                  <option selected>Select Role</option>
+                                  <option> Pathways Speech </option>
+                                  <option> Table Topics Master </option>
+                                  <option> Evaluator </option>
+                                  <option> Ah Counter</option>
+                                  <option> Timer </option>
+                            </select>
                         </div>
                         <div className ='row text-center' style={{marginTop:'3.75%', paddingLeft: '25%', paddingRight:'25%'}} >
                             <button type='button' className = 'btn btn-success'>Sign Up!</button>
@@ -188,18 +183,14 @@ const Agenda = () => {
                             <h5>No longer able to fill a role? Remove it here!</h5>
                         </div>
                         <div className='row' style={{marginTop: '3.75%'}}>
-                            <div className="dropdown">
-                                <button type="button" className="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown">
-                                  Select the role that you signed up for!
-                                </button>
-                                <ul className="dropdown-menu">
-                                  <li><a className="dropdown-item" href="#">Pathways Speech</a></li>
-                                  <li><a className="dropdown-item" href="#">Table Topics Master</a></li>
-                                  <li><a className="dropdown-item" href="#">Evaluator</a></li>
-                                  <li><a className="dropdown-item" href="#">Ah Counter</a></li>
-                                  <li><a className="dropdown-item" href="#">Timer</a></li>
-                                </ul>
-                            </div>
+                            <select className="form-select" >
+                                  <option selected>Select Role</option>
+                                  <option> Pathways Speech </option>
+                                  <option> Table Topics Master </option>
+                                  <option> Evaluator </option>
+                                  <option> Ah Counter</option>
+                                  <option> Timer </option>
+                            </select>
                         </div>
                         <div className ='row text-center' style={{marginTop:'3.75%', paddingLeft: '25%', paddingRight:'25%'}} >
                             <button type='button' className = 'btn btn-success'>Remove It!</button>
