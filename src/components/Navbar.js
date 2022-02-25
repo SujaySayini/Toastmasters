@@ -4,6 +4,7 @@ import toastyblack from '../images/toasty-black.png';
 import Agenda from './Agenda';
 import AhCounter from './AhCounter';
 import CommentCard from './CommentCard';
+import Evaluation from './Evaluation';
 import Timer from './Timer';
 
 const Navbar = (props) =>{
@@ -36,6 +37,9 @@ const Navbar = (props) =>{
                         </li>
                         <li className = "nav-item" >
                             <a className = "nav-link" href = "#" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show" style={{textAlign: 'left', paddingLeft: '2em'}} onClick={() =>{props.swap(<CommentCard/>)}}>Comment Cards</a>
+                        </li>
+                        <li className = "nav-item" >
+                            <a className = "nav-link" href = "#" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show" style={{textAlign: 'left', paddingLeft: '2em'}} onClick={() =>{props.swap(<Evaluation/>)}}>Evaluation Form</a>
                         </li>
                         <li className = "nav-item" >
                             <a className = "nav-link" href = "#" style={{textAlign: 'left', paddingLeft: '2em'}} onClick={() =>{props.swap(<Agenda/>)}}>Agenda/Speech Sign Ups!</a>
