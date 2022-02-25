@@ -18,7 +18,7 @@ const CommentCard = () => {
         setPositive1("");
         setPositive2("");
         setImprovement("");
-        alert(`Comment Card Submitted`)
+        alert(`Comment Card Submitted`);
     }
 
     return (
@@ -26,37 +26,37 @@ const CommentCard = () => {
             <h3 className="text-center my-4">Comment Card</h3>
             <form className="container" onSubmit={handleSubmit}>
                 <div className="row my-4">
-                    <label className="col-md-3" style={{fontWeight: "bold"}}>
+                    <label className="col-md-3" style={{fontWeight: "bold", textAlign: "left"}}>
                         Date:
                     </label>
                     <textarea className="col-md-8" rows="1" value={date} onChange={e => setDate(e.target.value)}/>
                 </div>
                 <div className="row my-4">
-                    <label className="col-md-3" style={{fontWeight: "bold"}}>
+                    <label className="col-md-3" style={{fontWeight: "bold", textAlign: "left"}}>
                         Speaker:
                     </label>
                     <textarea className="col-md-8" rows="1" value={speaker} onChange={e => setSpeaker(e.target.value)}/>
                 </div>
                 <div className="row my-4">
-                    <label className="col-md-3" style={{fontWeight: "bold"}}>
+                    <label className="col-md-3" style={{fontWeight: "bold", textAlign: "left"}}>
                         Commenter:
                     </label>
                     <textarea className="col-md-8" rows="1" value={commenter} onChange={e => setCommenter(e.target.value)}/>
                 </div>
                 <div className="row my-4">
-                    <label className="col-md-3" style={{fontWeight: "bold"}}>
+                    <label className="col-md-3" style={{fontWeight: "bold", textAlign: "left"}}>
                         Positive #1:
                     </label>
                     <textarea className="col-md-8" rows="4" value={positive1} onChange={e => setPositive1(e.target.value)}/>
                 </div>
                 <div className="row my-4">
-                    <label className="col-md-3" style={{fontWeight: "bold"}}>
+                    <label className="col-md-3" style={{fontWeight: "bold", textAlign: "left"}}>
                         Positive #2:
                     </label>
                     <textarea className="col-md-8" rows="4" value={positive2} onChange={e => setPositive2(e.target.value)}/>
                 </div>
                 <div className="row my-4">
-                    <label className="col-md-3" style={{fontWeight: "bold"}}>
+                    <label className="col-md-3" style={{fontWeight: "bold", textAlign: "left"}}>
                         Something to Improve:
                     </label>
                     <textarea className="col-md-8" rows="4" value={improvement} onChange={e => setImprovement(e.target.value)}/>
