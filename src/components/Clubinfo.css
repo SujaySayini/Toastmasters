@@ -1,0 +1,50 @@
+.background{
+    background-image: url(../images/Rectangle.png)  !important;
+    background-size: cover;
+    -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+}
+.clubName{
+    font-size: 24px;
+}
+
+.section{
+    padding-top: 20px;
+    padding-bottom: 40px;
+}
+.bg-shape {
+    position: relative;
+    overflow: hidden;
+    padding: 50px;
+  }
+  
+  .bg-shape:after {
+    content: '';
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    background: red;
+    border-radius: 50%;
+    top: 0;
+    right: 0;
+    z-index: -1;
+    top: -60%; /* change value as required */
+    right: -20%; /* change value as required */
+  }
+.underline{
+    height:04px;
+    width: 4rem;
+    background-color: #66c1ca;
+    margin-bottom: 10px !important;
+    border-radius: 99px;
+    margin: 0 5px;
+
+}
+.text-box{
+    padding: 10px;
+    border: 2px solid;
+    border-radius: 10px;
+    border-color: #66c1ca;
+    margin-bottom: 30px;
+}

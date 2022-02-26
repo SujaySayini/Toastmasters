@@ -1,0 +1,25 @@
+.search input{
+    margin-top: 30px;
+    height: 40px;
+    width: 500px;
+    border-right: none;
+    border-radius: 2px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+
+    
+
+}
+.search{
+    display: flex;
+}
+.search button{
+    border-radius: 2px;
+    width: 50px;
+    height: 40px;
+    border:1px round rgb(66, 66, 66);
+    background-color:#66c1ca;
+    cursor: pointer;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
