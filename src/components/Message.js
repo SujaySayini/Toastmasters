@@ -11,12 +11,12 @@ const Message = (props) => {
     });
 
     return (
-        <div className='message'>
+        <button onClick = {()=>props.swap(<Agenda/>)} className='message'>
             <p className='messageText'>{props.title}</p>
             <ul>
                 {list}
             </ul>
-        </div>
+        </button>
     )
 }
 

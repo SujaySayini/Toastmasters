@@ -5,6 +5,7 @@ import Img from '../images/Toastmasters.png';
 import background from "./Background.JPG";
 
 import "./custom.css";
+import HomePage from './HomePage';
 
 
 
@@ -18,7 +19,8 @@ class Login extends React.Component{
  constructor(props) {
    super(props);
    this.state = {
-    value: ''
+    value: '',
+    isLogin: true
    };
  
    this.handleChangeUsername = this.handleChangeUsername.bind(this);
@@ -35,11 +37,15 @@ class Login extends React.Component{
  }
  
  handleSubmit(event) {
-   alert('Login credentials entered: ' + this.state.value);
+   this.setState({isLogin: false})
+   //alert('Login credentials entered: ' + this.state.value);
    event.preventDefault();
  }
  
   render(){
+      if(!this.state.isLogin){
+        return <HomePage></HomePage>
+      }
       return (
        
        

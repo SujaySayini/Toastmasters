@@ -1,6 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import Message from './Message';
+import Agenda from './Agenda';
 import toastyblack from '../images/toasty-black.png'
 import {LineChart, Line, CartesianGrid, XAxis, YAxis, ResponsiveContainer, Legend, Tooltip} from 'recharts';
 
@@ -84,7 +85,7 @@ const HomePage = (props) => {
                         <p>Here are some upcoming events:</p>
                         <div className='row' style={{border: 'solid 1px black', borderRadius: '5px',}}>
                             <div className='container-fluid overflow-auto' style = {{height: '30vh'}}>
-                                <Message title = 'General Meeting, 2/17/2022' data = {['You signed up to be the Ah Counter for this meeting!']}/>
+                                <Message swap = {()=>props.swap(<Agenda/>)} title = 'General Meeting, 2/17/2022' data = {['You signed up to be the Ah Counter for this meeting!']}/>
                                 <Message title = 'General Meeting, 2/24/2022' data = {["You haven't signed up for a role for this meeting yet!"]} swap = {props.swap}/>
                                 <Message title = 'General Meeting, 3/3/2022' data = {["You haven't signed up for a role for this meeting yet!"]} swap = {props.swap}/>
                             </div>
