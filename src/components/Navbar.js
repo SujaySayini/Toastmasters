@@ -7,6 +7,7 @@ import AhCounter from './AhCounter';
 import CommentCard from './CommentCard';
 import Evaluation from './Evaluation';
 import Timer from './Timer';
+import HomePage from './HomePage';
 
 const Navbar = (props) =>{
 
@@ -16,7 +17,7 @@ const Navbar = (props) =>{
     return(
             <nav className = "navbar align-left navbar-dark bg-dark">
                 <div className="container-fluid">
-                    <a className="navbar-brand" href="#">
+                    <a className="navbar-brand" href="#" onClick={()=>props.swap(<HomePage/>)}>
                         <img style = {{height:'40px', paddingRight: '10px'}} src={profilepic}/> 
                         <span>User Name</span>
                     </a>
