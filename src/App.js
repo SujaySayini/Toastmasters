@@ -14,8 +14,9 @@ import ResetPassword from './components/ResetPassword';
 
 
 
-function App() {
-  const [page, setPage] = useState(<Login></Login>)
+function App(props) {
+  const [page, setPage] = useState(props.page)
+  
   const changePage = (newPage) => {
     if(newPage === 'AhCounter'){
       console.log('ok')
@@ -33,6 +34,9 @@ function App() {
     } else if(newPage === 'ResetPassword'){
       setPage(<ResetPassword swap = {changePage}></ResetPassword>)
     }
+  }
+  if(!page){
+    setPage(<App page = {<Login swap = {changePage}></Login>} swap = {changePage}></App>)
   }
   return (
     <div className="App">   

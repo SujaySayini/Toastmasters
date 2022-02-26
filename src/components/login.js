@@ -3,7 +3,7 @@ import React from 'react';
 
 import Img from '../images/Toastmasters.png';
 import background from "./Background.JPG";
-
+import App from '../App';
 import "./custom.css";
 import HomePage from './HomePage';
 
@@ -37,15 +37,14 @@ class Login extends React.Component{
  }
  
  handleSubmit(event) {
-   this.setState({isLogin: false})
+    this.props.swap('HomePage')
+  
    //alert('Login credentials entered: ' + this.state.value);
    event.preventDefault();
  }
  
   render(){
-      if(!this.state.isLogin){
-        return <HomePage></HomePage>
-      }
+      
       return (
        
        
@@ -93,7 +92,7 @@ class Login extends React.Component{
     
      <center>
      <div>
-     <a href="https://google.com">Forgot Password?</a>
+     <a href="#" onClick = {()=>this.props.swap('ResetPassword')}>Forgot Password?</a>
      </div>
      </center>
  

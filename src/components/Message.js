@@ -11,7 +11,7 @@ const Message = (props) => {
     });
 
     return (
-        <button onClick = {()=>props.swap(<Agenda/>)} className='message'>
+        <button onClick = {()=>props.swap('Agenda')} className='message'>
             <p className='messageText'>{props.title}</p>
             <ul>
                 {list}
