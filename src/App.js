@@ -11,6 +11,7 @@ import ManageMembers from './components/ManageMembers';
 import Evaluation from './components/Evaluation';
 import Login from './components/Login'
 import ResetPassword from './components/ResetPassword';
+import ClubInfo from './components/ClubInfo';
 
 
 
@@ -33,6 +34,8 @@ function App(props) {
       setPage(<Evaluation swap = {changePage}></Evaluation>)
     } else if(newPage === 'ResetPassword'){
       setPage(<ResetPassword swap = {changePage}></ResetPassword>)
+    } else if(newPage === 'ClubInfo'){
+      setPage(<ClubInfo swap={changePage}></ClubInfo>)
     }
   }
   if(!page){

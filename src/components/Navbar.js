@@ -21,7 +21,7 @@ const Navbar = (props) =>{
                         <img style = {{height:'40px', paddingRight: '10px'}} src={profilepic}/> 
                         <span>User Name</span>
                     </a>
-                    <a className="navbar-brand mx-auto" href="#">
+                    <a className="navbar-brand mx-auto" href="#" onClick={()=>props.swap('ClubInfo')}>
                         <img style = {{height:'40px', paddingRight: '10px'}} src={toastyblack}/> 
                         <span>Rutgers Toastmasters</span>
                     </a>
@@ -41,6 +41,10 @@ const Navbar = (props) =>{
                         <li class="dropdown nav-item" style={{textAlign: 'left', paddingLeft: '2em', marginBottom: '0'}}>
                             <a class="dropdown-toggle nav-link" data-bs-toggle="dropdown" data-bs-target='dropdown-menu' href="#">Club Tools<span class="caret"></span></a>
                             <ul class="dropdown-menu bg-dark" style={{marginTop: '0', paddingTop: '0'}}>
+                                
+                                <li className = "nav-item" >
+                                    <a className = "nav-link" href = "#" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show"  style={{textAlign: 'left', paddingLeft: '2em'}} onClick={() =>{props.swap('ClubInfo')}}>Club Home</a>
+                                </li>
                                 <li className = "nav-item" >
                                     <a className = "nav-link" href = "#" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show" style={{textAlign: 'left', paddingLeft: '2em'}} onClick={() =>{props.swap('Timer')}}>Timer</a>
                                 </li>

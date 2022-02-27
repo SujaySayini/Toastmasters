@@ -4,30 +4,11 @@ import toastyblack from '../images/toasty-black.png';
 import './Clubinfo.css'
 import toasty from '../images/toasty.jpg';
 
-const Clubinfo = () => {
+const ClubInfo = () => {
     return(
 
             <div className='background'>
-            <nav style={{marginBottom: '20px'}}className = "navbar navbar-expand-sm bg-info navbar-dark">
-                <div className = "container-fluid">
-                <a className="navbar-brand" href="#"><img style = {{height:'40px'}} src={toasty}/> <span>Rutgers Toastmasters</span></a>
-               
-                    <ul className = "navbar-nav">
-                        <li className = "nav-item" >
-                            <a className = "nav-link" href = "#">Timer</a>
-                        </li>
-                        <li className = "nav-item" >
-                            <a className = "nav-link" href = "#">Ah Counter</a>
-                        </li>
-                        <li className = "nav-item" >
-                            <a className = "nav-link" href = "#">Comment Cards</a>
-                        </li>
-                        <li className='nav-item'>
-                            <a className='nav-link' href = "#">Club info</a>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
+            
             <section className='section'>
                 <div className='container'>
                     <div className='row'>
@@ -81,4 +62,4 @@ const Clubinfo = () => {
     );
 }
 
-export default Clubinfo;
+export default ClubInfo;
