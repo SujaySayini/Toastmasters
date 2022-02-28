@@ -13,6 +13,7 @@ import Login from './components/Login'
 import ResetPassword from './components/ResetPassword';
 import ClubInfo from './components/ClubInfo';
 import SearchBar from './components/SearchBar';
+import Search from './components/Search';
 
 
 
@@ -37,8 +38,8 @@ function App(props) {
       setPage(<ResetPassword swap = {changePage}></ResetPassword>)
     } else if(newPage === 'ClubInfo'){
       setPage(<ClubInfo swap={changePage}></ClubInfo>)
-    } else if(newPage === 'SearchBar'){
-      setPage(<SearchBar swap = {changePage}></SearchBar>)
+    } else if(newPage === 'Search'){
+      setPage(<Search swap = {changePage}></Search>)
     } else if(newPage === 'ManageClub'){
       setPage(<ManageMembers swap = {changePage}></ManageMembers>)
     }
