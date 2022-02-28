@@ -46,7 +46,7 @@ const Navbar = (props) =>{
                                     <a className = "nav-link" href = "#" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show"  style={{textAlign: 'left', paddingLeft: '2em'}} onClick={() =>{props.swap('ClubInfo')}}>Club Home</a>
                                 </li>
                                 <li className = "nav-item" >
-                                    <a className = "nav-link" href = "#" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show"  style={{textAlign: 'left', paddingLeft: '2em'}} onClick={() =>{props.swap('SearchBar')}}>Find a Club</a>
+                                    <a className = "nav-link" href = "#" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show"  style={{textAlign: 'left', paddingLeft: '2em'}} onClick={() =>{props.swap('Search')}}>Find a Club</a>
                                 </li>
                                 <li className = "nav-item" >
                                     <a className = "nav-link" href = "#" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show" style={{textAlign: 'left', paddingLeft: '2em'}} onClick={() =>{props.swap('Timer')}}>Timer</a>
@@ -73,6 +73,9 @@ const Navbar = (props) =>{
                                 </li>
                                 <li className = "nav-item" >
                                     <a className = "nav-link" href = "#" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show" style={{textAlign: 'left', paddingLeft: '2em'}} onClick={() =>{props.swap('ResetPassword')}}>Reset Your Password</a>
+                                </li>
+                                <li className = "nav-item" >
+                                    <a className = "nav-link" href = "#" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show" style={{textAlign: 'left', paddingLeft: '2em'}} onClick={() =>{props.swap('Statistics')}}>Personal Statistics</a>
                                 </li>
                             </ul>
                         </li>

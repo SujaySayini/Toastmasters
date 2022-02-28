@@ -14,6 +14,7 @@ import ResetPassword from './components/ResetPassword';
 import ClubInfo from './components/ClubInfo';
 import SearchBar from './components/SearchBar';
 import Search from './components/Search';
+import Statistics from './components/Statistics';
 
 
 
@@ -42,6 +43,8 @@ function App(props) {
       setPage(<Search swap = {changePage}></Search>)
     } else if(newPage === 'ManageClub'){
       setPage(<ManageMembers swap = {changePage}></ManageMembers>)
+    } else if(newPage === 'Statistics'){
+      setPage(<Statistics swap={changePage}></Statistics>)
     }
   }
   if(!page){
