@@ -45,3 +45,28 @@ export const deleteSpeech = async (req, res)=>{
         
     }
 }
+
+export const setTime = async (req, res) => {
+    try{
+        console.log('hello')
+        let today = new Date()
+        const dd = String(today.getDate()).padStart(2, '0');
+        const mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+        const yyyy = today.getFullYear();
+        today = mm + '/' + dd + '/' + yyyy;
+        const { time, speaker, type } = req.body;
+        console.log(time)
+        console.log(speaker)
+        console.log(type)
+        //if(type === 'Pathways Speech' || type === 'Evaluation'){
+        const update = await speechModel.updateOne({speechDate: today, speechType: type ,speechGiver: speaker}, {$set: {'time': time}});
+        if(update.matchedCount === 0){
+            const newSpeech = new speechModel({speechDate: today, speechType: type, speechGiver:speaker, time: time});
+            await newSpeech.save()
+        }
+        //} 
+        res.status(200);
+    } catch(error){
+        res.status(404).json({message:error.message})
+    }
+}

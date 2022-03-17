@@ -5,6 +5,8 @@ export default (state = [], action) => {
         return [...state, action.payload]
     } if(action.type === 'DELETE'){
         return action.payload;
+    } if(action.type === 'SETTIME'){
+        return action.payload;
     } else{
         return state;
     }

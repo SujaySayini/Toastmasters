@@ -4,6 +4,7 @@ import mongoose from 'mongoose';
 import cors from 'cors';
 import speechRoutes from './routes/speech.js'
 import deleteSpeechRoutes from './routes/deletespeech.js';
+import timerRoutes from './routes/timer.js'
 
 const app = express();
 
@@ -13,6 +14,7 @@ app.use(bodyParser.json({limit: "30mb", extended: true}));
 app.use(bodyParser.urlencoded({limit: "30mb", extended: true}));
 app.use(cors());
 
+app.use('/timer', timerRoutes);
 app.use('/speech', speechRoutes);
 app.use('/deletespeech', deleteSpeechRoutes);
 
