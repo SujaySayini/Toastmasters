@@ -8,7 +8,7 @@ export const getSpeech = async (req, res)=>{
         const yyyy = today.getFullYear();
     
         today = mm + '/' + dd + '/' + yyyy;
-        const speeches = await speechModel.find({speechDate: today, speechType: 'Pathways Speech'});
+        const speeches = await speechModel.find({speechDate: today});
         console.log(speeches);
         res.status(200).json(speeches);
     } catch (error) {
