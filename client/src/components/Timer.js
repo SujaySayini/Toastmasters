@@ -79,7 +79,7 @@ const Timer = () => {
                         {/* Evaluation, Prepared Speech, Table Topics */}
                         <DropDownList
                             name={currSpeech}
-                            elements={["Evaluation", "Pathways Speech", "Table Topics"]}
+                            elements={["Evaluator", "Pathways Speech", "Table Topics"]}
                             setSelected={setSpeech} />
                     </div>
                     <div className=" col-2">

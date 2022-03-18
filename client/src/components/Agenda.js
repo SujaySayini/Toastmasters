@@ -79,13 +79,13 @@ const Agenda = () => {
                 preparedspeeches.push(theSpeeches[i])
             } else if (theSpeeches[i].speechType === 'Evaluator'){
                 evaluations.push(theSpeeches[i])
-            } else {
+            } else if (theSpeeches[i].speechType === 'Table Topics Master' ){
                 tabletopics = theSpeeches[i]
             }
         }
         
-        if (evaluations.length < preparedspeeches.length){
-            while(evaluations.length < preparedspeeches.length){
+        if (evaluations.length < 3){
+            while(evaluations.length < 3){
                 evaluations.push({speechGiver:'None'})
             }
         }
@@ -125,8 +125,8 @@ const Agenda = () => {
             }
         }
         
-        if (evaluations.length < preparedspeeches.length){
-            while(evaluations.length < preparedspeeches.length){
+        if (evaluations.length < 3){
+            while(evaluations.length < 3){
                 evaluations.push({speechGiver:'None'})
             }
         }
