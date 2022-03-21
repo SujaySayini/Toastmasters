@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
+import { useDispatch } from 'react-redux';
+import { createEvaluation } from "../actions/evaluation.js";
 
 const Evaluation = () => {
     const [date, setDate] = useState("");
@@ -17,9 +19,25 @@ const Evaluation = () => {
     const [comfortLevel, setComfortLevel] = useState("");
     const [interest, setInterest] = useState("");
     const [additionalComments, setAdditionalComments] = useState("");
+    const dispatch = useDispatch();
 
     const handleSubmit = (evt) => {
         evt.preventDefault();
+        dispatch(createEvaluation({speechDate: date,
+                                   speechGiver: speaker, 
+                                   speechEvaluator: evaluator, 
+                                   positive: positive, 
+                                   challenge: challenge, 
+                                   improvement: improvement,
+                                   clarity: parseInt(clarity),
+                                   vocalVariety: parseInt(vocalVariety),
+                                   eyeContact: parseInt(eyeContact),
+                                   gestures: parseInt(gestures),
+                                   audienceAwareness: parseInt(audienceAwareness),
+                                   comfortLevel: parseInt(comfortLevel),
+                                   interest: parseInt(interest),
+                                   additionalComments: additionalComments
+                                }))
         setDate("");
         setEvaluator("");
         setSpeaker("");

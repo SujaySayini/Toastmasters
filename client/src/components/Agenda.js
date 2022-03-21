@@ -19,16 +19,42 @@ const Agenda = () => {
     const dispatch = useDispatch();
 
     const [speeches, setSpeeches] = useState([{speechGiver: 'None', speechTitle: 'None'}, {speechGiver: 'None', speechTitle: 'None'}, {speechGiver: 'None', speechTitle: 'None'}])
-
+    const [evals, setEvals] = useState([{speechGiver: 'None'}, {speechGiver: 'None'}, {speechGiver: 'None'}])
+    const [ttmaster, setTTMaster] = useState({speechGiver: 'None'})
     useEffect(async ()=>{
         let theSpeeches = await dispatch(getSpeech());
-        if(theSpeeches.length < 3){
-            while(theSpeeches.length<3){
-                theSpeeches.push({speechGiver:'None', speechTitle: 'None'})
+        let evaluations = []
+        let tabletopics = []
+        let preparedspeeches = []
+        console.log(theSpeeches)
+        for(let i = 0; i < theSpeeches.length; i++){
+            if(theSpeeches[i].speechType === 'Pathways Speech'){
+                preparedspeeches.push(theSpeeches[i])
+            } else if (theSpeeches[i].speechType === 'Evaluator'){
+                evaluations.push(theSpeeches[i])
+            } else {
+                tabletopics = theSpeeches[i]
             }
         }
-        console.log(theSpeeches)
-        setSpeeches(theSpeeches)
+        
+        if (evaluations.length < 3){
+            while(evaluations.length < 3){
+                evaluations.push({speechGiver:'None'})
+            }
+        }
+        if(preparedspeeches.length < 3){
+            while(preparedspeeches.length<3){
+                preparedspeeches.push({speechGiver:'None', speechTitle: 'None'})
+            }
+        }
+        if(tabletopics.length === 0){
+            tabletopics= {speechGiver:'None'}
+        }
+        console.log('evals:')
+        console.log(evaluations)
+        setSpeeches(preparedspeeches)
+        setEvals(evaluations)
+        setTTMaster(tabletopics)
     }, [dispatch]);
 
     let today = new Date();
@@ -44,13 +70,38 @@ const Agenda = () => {
         const title = document.getElementById('title').value;
         await dispatch(createSpeech({speechType: role, speechGiver: name, speechDate: today, speechTitle: title}))
         let theSpeeches = await dispatch(getSpeech());
-        if(theSpeeches.length < 3){
-            while(theSpeeches.length<3){
-                theSpeeches.push({speechGiver:'None', speechTitle: 'None'})
+        let evaluations = []
+        let tabletopics = []
+        let preparedspeeches = []
+        console.log(theSpeeches)
+        for(let i = 0; i < theSpeeches.length; i++){
+            if(theSpeeches[i].speechType === 'Pathways Speech'){
+                preparedspeeches.push(theSpeeches[i])
+            } else if (theSpeeches[i].speechType === 'Evaluator'){
+                evaluations.push(theSpeeches[i])
+            } else if (theSpeeches[i].speechType === 'Table Topics Master' ){
+                tabletopics = theSpeeches[i]
             }
         }
-        console.log(theSpeeches)
-        setSpeeches(theSpeeches)
+        
+        if (evaluations.length < 3){
+            while(evaluations.length < 3){
+                evaluations.push({speechGiver:'None'})
+            }
+        }
+        if(preparedspeeches.length < 3){
+            while(preparedspeeches.length<3){
+                preparedspeeches.push({speechGiver:'None', speechTitle: 'None'})
+            }
+        }
+        if(tabletopics.length === 0){
+            tabletopics= {speechGiver:'None'}
+        }
+        console.log('evals:')
+        console.log(evaluations)
+        setSpeeches(preparedspeeches)
+        setEvals(evaluations)
+        setTTMaster(tabletopics)
     }
 
     const deleteClicked = async () => {
@@ -60,13 +111,38 @@ const Agenda = () => {
         const title = document.getElementById('delete-title').value;
         await dispatch(deleteSpeech({speechType: role, speechGiver: name, speechDate: today, speechTitle: title}))
         let theSpeeches = await dispatch(getSpeech());
-        if(theSpeeches.length < 3){
-            while(theSpeeches.length<3){
-                theSpeeches.push({speechGiver:'None', speechTitle: 'None'})
+        let evaluations = []
+        let tabletopics = []
+        let preparedspeeches = []
+        console.log(theSpeeches)
+        for(let i = 0; i < theSpeeches.length; i++){
+            if(theSpeeches[i].speechType === 'Pathways Speech'){
+                preparedspeeches.push(theSpeeches[i])
+            } else if (theSpeeches[i].speechType === 'Evaluator'){
+                evaluations.push(theSpeeches[i])
+            } else {
+                tabletopics = theSpeeches[i]
             }
         }
-        console.log(theSpeeches)
-        setSpeeches(theSpeeches)
+        
+        if (evaluations.length < 3){
+            while(evaluations.length < 3){
+                evaluations.push({speechGiver:'None'})
+            }
+        }
+        if(preparedspeeches.length < 3){
+            while(preparedspeeches.length<3){
+                preparedspeeches.push({speechGiver:'None', speechTitle: 'None'})
+            }
+        }
+        if(tabletopics.length === 0){
+            tabletopics = {speechGiver:'None'}
+        }
+        console.log('evals:')
+        console.log(evaluations)
+        setSpeeches(preparedspeeches)
+        setEvals(evaluations)
+        setTTMaster(tabletopics)
     }
 
 
@@ -181,7 +257,7 @@ const Agenda = () => {
                                                     <p>Table Topics</p>
                                                 </div>
                                                 <div className='col-4'>
-                                                    <p>TT Master</p>
+                                                    <p>{ttmaster.speechGiver}</p>
                                                 </div>
                                             </div>
                                             <div className = 'row'>
@@ -198,7 +274,31 @@ const Agenda = () => {
                                                 </div>
                                                 
                                                 <div className='col-4'>
-                                                    <p style={{marginBottom:'0'}}>Evaluator #1</p>
+                                                    <p style={{marginBottom:'0'}}>{evals[0].speechGiver}</p>
+                                                </div>
+                                            </div>
+                                            <div className = 'row' >
+                                                <div className='col-2'>
+                                                    <p style={{marginBottom:'0'}}>2-3 min</p>
+                                                </div>
+                                                <div className='col-6'>
+                                                    <p style={{marginBottom:'0'}}>Evaluation #2</p>
+                                                </div>
+                                                
+                                                <div className='col-4'>
+                                                    <p style={{marginBottom:'0'}}>{evals[1].speechGiver}</p>
+                                                </div>
+                                            </div>
+                                            <div className = 'row' >
+                                                <div className='col-2'>
+                                                    <p style={{marginBottom:'0'}}>2-3 min</p>
+                                                </div>
+                                                <div className='col-6'>
+                                                    <p style={{marginBottom:'0'}}>Evaluation #3</p>
+                                                </div>
+                                                
+                                                <div className='col-4'>
+                                                    <p style={{marginBottom:'0'}}>{evals[2].speechGiver}</p>
                                                 </div>
                                             </div>
                                             <div className = 'row' style={{marginTop:'0'}}>

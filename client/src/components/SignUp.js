@@ -1,6 +1,4 @@
-​​​​import React from 'react';
- 
- 
+import React from 'react';
 import Img from '../images/Toastmasters.png';
 import background from "./Background.JPG";
 import App from '../App';

@@ -1,16 +1,30 @@
 import { Fragment, useEffect, useState } from "react";
 import DropDownList from "./DropDownList";
 
+import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
+import { setTimer, getSpeech } from '../actions/speech.js';
+
+
 const Timer = () => {
+    const speech = useSelector((state)=>state.speech)
+    const dispatch = useDispatch();
     const [time, setTime] = useState(0);
     //const [inputState, setInputState] = useState("");
     const [start, setStart] = useState(false);
 
-    const [members, setMember] = useState(["Name1", "Name2", "Name3"]); //
+    const [members, setMember] = useState(["Nick"]); //
     const [currMember, setCurrMember] = useState("Member");
     const [currSpeech, setSpeech] = useState("Type of Speech");
 
     const [isPTag, setPTag] = useState(true);
+
+    useEffect(async ()=>{
+        let theSpeeches = await dispatch(getSpeech());
+        for(let i =0; i < theSpeeches.length; i++){
+            console.log(theSpeeches[i])
+        }
+    }, [dispatch]);
 
     function func(e) {
         console.log(e.target.value);
@@ -43,6 +57,13 @@ const Timer = () => {
         return () => clearInterval(interval);
     }, [start])
 
+    const saveTime = async () =>{
+        if(!start){
+            console.log('saved')
+            let data = await dispatch(setTimer({type: currSpeech, speaker: currMember, time: time}))
+        }
+    }
+
     return (
         <div>
             <h6>Directions: As the timer, You will time the Table Topics speakers, formal speeches, and the evaluations.
@@ -58,7 +79,7 @@ const Timer = () => {
                         {/* Evaluation, Prepared Speech, Table Topics */}
                         <DropDownList
                             name={currSpeech}
-                            elements={["Evaluation", "Prepared Speech", "Table Topics"]}
+                            elements={["Evaluator", "Pathways Speech", "Table Topics"]}
                             setSelected={setSpeech} />
                     </div>
                     <div className=" col-2">
@@ -91,7 +112,7 @@ const Timer = () => {
                     <button onClick={() => setPTag(!isPTag)}>Edit</button>
                 </div>
                 <div>
-                    <button type='button' className='btn btn-success'>Submit!</button>
+                    <button type='button' className='btn btn-success' onClick = {saveTime}>Submit!</button>
                 </div>
             </div>
 
