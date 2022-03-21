@@ -51,3 +51,8 @@ export const createCommentCard = (data) => async(dispatch) => {
         
     }
 }
+
+export const createAhCounter = (data) =>async(dispatch) => {
+    const { res } = await api.postAhCounter(data)
+    dispatch({type:"ADDCOMMENTCARD", payload: res})
+}

@@ -7,6 +7,7 @@ import deleteSpeechRoutes from './routes/deletespeech.js';
 import timerRoutes from './routes/timer.js'
 import commentCardRoutes from './routes/commentCards.js'
 import evaluationRoutes from './routes/evaluation.js'
+import ahCounterRoutes from './routes/ahcounter.js'
 
 const app = express();
 
@@ -21,6 +22,7 @@ app.use('/speech', speechRoutes);
 app.use('/deletespeech', deleteSpeechRoutes);
 app.use('/commentcard', commentCardRoutes);
 app.use('/evaluation', evaluationRoutes);
+app.use('/ahcounter', ahCounterRoutes);
 
 
 const CONNECTION_URL = 'mongodb+srv://m220student:m220password@cluster0.lgpgi.mongodb.net/react-hero?retryWrites=true&w=majority'
