@@ -81,15 +81,6 @@ export const addCommentCard = async (req, res) => {
         today = mm + '/' + dd + '/' + yyyy;
         const {speaker, positive1, positive2, negative1} = req.body
         const commentcard = [positive1, negative1, positive2]
-        /*console.log(commentcard)
-        const speeches = await speechModel.findOne({speechDate: today, speechType: 'Pathways Speech', speechGiver: speaker}).lean().exec();
-        let commentcards = speeches.commentCards
-        console.log('hello')
-        if (commentcards){
-            commentcards.push(commentcard)
-        } else{
-            commentcards = [commentcard]
-        }*/
         console.log(speaker)
         console.log(today)
         const update = await speechModel.updateOne(

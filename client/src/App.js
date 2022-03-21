@@ -15,7 +15,7 @@ import ClubInfo from './components/ClubInfo';
 import SearchBar from './components/SearchBar';
 import Search from './components/Search';
 import Statistics from './components/Statistics';
-
+import SignUp from './components/SignUp'
 
 
 function App(props) {
@@ -45,6 +45,8 @@ function App(props) {
       setPage(<ManageMembers swap = {changePage}></ManageMembers>)
     } else if(newPage === 'Statistics'){
       setPage(<Statistics swap={changePage}></Statistics>)
+    } else if (newPage === 'SignUp'){
+      setPage(<SignUp swap={changePage}></SignUp>)
     }
   }
   if(!page){

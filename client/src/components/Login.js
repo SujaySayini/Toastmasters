@@ -100,7 +100,7 @@ class Login extends React.Component{
      <br></br>
      <center>
        <text>New User?</text>
-     <a href="https://google.com"> Sign Up!</a>
+     <a href="#" onClick = {()=>this.props.swap('SignUp')}> Sign Up!</a>
      </center>
     
  
