@@ -15,14 +15,11 @@ import ClubInfo from './components/ClubInfo';
 import SearchBar from './components/SearchBar';
 import Search from './components/Search';
 import Statistics from './components/Statistics';
-<<<<<<< HEAD
 import ErrorPage from './components/ErrorPage';
 import Club2 from './components/Club2'
 import Club3 from './components/Club3'
 import Club4 from './components/Club4'
-=======
 import SignUp from './components/SignUp'
->>>>>>> 166e8639dcccf52b2ca23b8af79d9c16afd79ec1
 
 
 function App(props) {
@@ -52,7 +49,6 @@ function App(props) {
       setPage(<ManageMembers swap = {changePage}></ManageMembers>)
     } else if(newPage === 'Statistics'){
       setPage(<Statistics swap={changePage}></Statistics>)
-<<<<<<< HEAD
     }else if(newPage === 'Errorpage'){
       setPage(<ErrorPage swap = {changePage}></ErrorPage>)
     }else if(newPage === 'Club2'){
@@ -61,10 +57,8 @@ function App(props) {
       setPage(<Club3 swap = {changePage}></Club3>)
     }else if(newPage === 'Club4'){
       setPage(<Club4 swap = {changePage}></Club4>)
-=======
     } else if (newPage === 'SignUp'){
       setPage(<SignUp swap={changePage}></SignUp>)
->>>>>>> 166e8639dcccf52b2ca23b8af79d9c16afd79ec1
     }
   }
   if(!page){
