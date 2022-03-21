@@ -15,7 +15,10 @@ import ClubInfo from './components/ClubInfo';
 import SearchBar from './components/SearchBar';
 import Search from './components/Search';
 import Statistics from './components/Statistics';
-
+import ErrorPage from './components/ErrorPage';
+import Club2 from './components/Club2'
+import Club3 from './components/Club3'
+import Club4 from './components/Club4'
 
 
 function App(props) {
@@ -45,6 +48,14 @@ function App(props) {
       setPage(<ManageMembers swap = {changePage}></ManageMembers>)
     } else if(newPage === 'Statistics'){
       setPage(<Statistics swap={changePage}></Statistics>)
+    }else if(newPage === 'Errorpage'){
+      setPage(<ErrorPage swap = {changePage}></ErrorPage>)
+    }else if(newPage === 'Club2'){
+      setPage(<Club2 swap = {changePage}></Club2>)
+    }else if(newPage === 'Club3'){
+      setPage(<Club3 swap = {changePage}></Club3>)
+    }else if(newPage === 'Club4'){
+      setPage(<Club4 swap = {changePage}></Club4>)
     }
   }
   if(!page){
@@ -53,8 +64,10 @@ function App(props) {
   return (
     <div className="App">   
       <Navbar swap={changePage}/> 
+      
       {page}
     </div>
+
   );
 }
 

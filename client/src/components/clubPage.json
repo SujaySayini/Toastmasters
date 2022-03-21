@@ -1,0 +1,19 @@
+[{
+    "clubName": "Club1",
+    "url": "ClubInfo"
+
+},
+{
+    "clubName":"Club2",
+    "url": "Club2"
+},
+
+{
+    "clubName": "Club3",
+    "url":"Club3"
+}
+,
+{
+    "clubName":"Club4",
+    "url":"Club4"
+}]

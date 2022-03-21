@@ -6,7 +6,7 @@ import toasty from '../images/toasty.jpg';
 
 const ClubInfo = () => {
     return(
-
+        
             <div className='background'>
             
             <section className='section'>
@@ -58,6 +58,7 @@ const ClubInfo = () => {
                 </div>
             </section>
         </div>
+
 
     );
 }

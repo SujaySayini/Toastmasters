@@ -63,6 +63,9 @@ const Navbar = (props) =>{
                                 <li className = "nav-item" >
                                     <a className = "nav-link" href = "#" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show"  style={{textAlign: 'left', paddingLeft: '2em'}} onClick={() =>{props.swap('Agenda')}}>Agenda/Speech Sign Ups!</a>
                                 </li>
+                                <li className = "nav-item" >
+                                    <a className = "nav-link" href = "#" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show"  style={{textAlign: 'left', paddingLeft: '2em'}} onClick={() =>{props.swap('Errorpage')}}>Error</a>
+                                </li>
                             </ul>
                         </li>
                         <li class="dropdown nav-item" style={{textAlign: 'left', paddingLeft: '2em', marginBottom: '0'}}>

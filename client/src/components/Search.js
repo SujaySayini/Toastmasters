@@ -2,6 +2,8 @@ import React from 'react';
 import './Search.css'
 import SearchBar from './SearchBar'
 import SearchIcon from '@mui/icons-material/Search';
+import {BrowserRouter as Router,Route,Link} from 'react-router-dom'
+import clubData from './clubPage.json';
 
 const Search = () => {
   return (
@@ -13,7 +15,7 @@ const Search = () => {
         </div>
                 
         <div className='bar'>
-        <SearchBar/>
+        <SearchBar data={clubData}/>
         </div>
 
     </div>

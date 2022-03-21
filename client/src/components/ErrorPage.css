@@ -1,0 +1,11 @@
+.btn-primary{
+    background-color: #66c1ca !important;
+    border: none;
+    top: 50px !important;
+}
+.searchResult{
+    margin-top: 100px;
+    text-align: center;
+    font-size: 50px;
+    font-family: fantasy;
+}
