@@ -5,6 +5,7 @@ import cors from 'cors';
 import speechRoutes from './routes/speech.js'
 import deleteSpeechRoutes from './routes/deletespeech.js';
 import timerRoutes from './routes/timer.js'
+import commentCardRoutes from './routes/commentCards.js'
 
 const app = express();
 
@@ -17,6 +18,7 @@ app.use(cors());
 app.use('/timer', timerRoutes);
 app.use('/speech', speechRoutes);
 app.use('/deletespeech', deleteSpeechRoutes);
+app.use('/commentcard', commentCardRoutes);
 
 
 const CONNECTION_URL = 'mongodb+srv://m220student:m220password@cluster0.lgpgi.mongodb.net/react-hero?retryWrites=true&w=majority'

@@ -41,3 +41,13 @@ export const setTimer = (data) => async(dispatch) => {
         console.log(error)
     }
 }
+
+export const createCommentCard = (data) => async(dispatch) => {
+    try {
+        const { res } = await api.addCommentCards(data)
+        dispatch({type:"ADDCOMMENTCARD", payload: res})
+    } catch (error) {
+        console.log(error)
+        
+    }
+}

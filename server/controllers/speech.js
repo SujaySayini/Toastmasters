@@ -1,3 +1,4 @@
+import e from "express";
 import speechModel from "../models/speechModel.js"
 
 export const getSpeech = async (req, res)=>{
@@ -69,4 +70,36 @@ export const setTime = async (req, res) => {
     } catch(error){
         res.status(404).json({message:error.message})
     }
+}
+
+export const addCommentCard = async (req, res) => {
+    try {
+        let today = new Date()
+        const dd = String(today.getDate()).padStart(2, '0');
+        const mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+        const yyyy = today.getFullYear();
+        today = mm + '/' + dd + '/' + yyyy;
+        const {speaker, positive1, positive2, negative1} = req.body
+        const commentcard = [positive1, negative1, positive2]
+        /*console.log(commentcard)
+        const speeches = await speechModel.findOne({speechDate: today, speechType: 'Pathways Speech', speechGiver: speaker}).lean().exec();
+        let commentcards = speeches.commentCards
+        console.log('hello')
+        if (commentcards){
+            commentcards.push(commentcard)
+        } else{
+            commentcards = [commentcard]
+        }*/
+        console.log(speaker)
+        console.log(today)
+        const update = await speechModel.updateOne(
+            {speechDate: today, speechType: 'Pathways Speech', speechGiver: speaker}, 
+            {$push: {commentCards : commentcard}})
+
+        console.log(update)
+    } catch (error) {
+        res.status(404).json({message:error.message})
+    }
+    
+
 }
