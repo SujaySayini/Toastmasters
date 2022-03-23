@@ -15,8 +15,6 @@ import ClubInfo from './components/ClubInfo';
 import Search from './components/Search';
 import Statistics from './components/Statistics';
 
-
-
 function App(props) {
   const [page, setPage] = useState(props.page)
   
