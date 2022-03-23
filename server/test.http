@@ -1,8 +1,11 @@
-POST const url7 = 'http://localhost:5000/user'
+POST http://localhost:5000/signup/
 Content-Type: application/json
 
 {
-    "name":"Jackie",
+    "first":"Jackie",
+    "last":"Idowu",
     "email":"jacquelynnei@yahoo.com",
-    "password":"toastmasters"
+    "username":"jidowu",
+    "password":"toastmasters",
+    "number":""
 }
