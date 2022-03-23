@@ -20,6 +20,7 @@ import Club2 from './components/Club2'
 import Club3 from './components/Club3'
 import Club4 from './components/Club4'
 import SignUp from './components/SignUp'
+import Reports from './components/Reports';
 
 
 function App(props) {
@@ -59,6 +60,8 @@ function App(props) {
       setPage(<Club4 swap = {changePage}></Club4>)
     } else if (newPage === 'SignUp'){
       setPage(<SignUp swap={changePage}></SignUp>)
+    } else if (newPage === 'Reports'){
+      setPage(<Reports swap={changePage}></Reports>)
     }
   }
   if(!page){
