@@ -1,0 +1,8 @@
+POST const url7 = 'http://localhost:5000/user'
+Content-Type: application/json
+
+{
+    "name":"Jackie",
+    "email":"jacquelynnei@yahoo.com",
+    "password":"toastmasters"
+}
