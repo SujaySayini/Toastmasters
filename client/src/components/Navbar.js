@@ -38,9 +38,9 @@ const Navbar = (props) =>{
 
                 <div className = "collapse navbar-collapse" id="navbarNav">
                     <ul className = "navbar-nav">
-                        <li class="dropdown nav-item" style={{textAlign: 'left', paddingLeft: '2em', marginBottom: '0'}}>
-                            <a class="dropdown-toggle nav-link" data-bs-toggle="dropdown" data-bs-target='dropdown-menu' href="#">Club Tools<span class="caret"></span></a>
-                            <ul class="dropdown-menu bg-dark" style={{marginTop: '0', paddingTop: '0'}}>
+                        <li className="dropdown nav-item" style={{textAlign: 'left', paddingLeft: '2em', marginBottom: '0'}}>
+                            <a className="dropdown-toggle nav-link" data-bs-toggle="dropdown" data-bs-target='dropdown-menu' href="#">Club Tools<span className="caret"></span></a>
+                            <ul className="dropdown-menu bg-dark" style={{marginTop: '0', paddingTop: '0'}}>
                                 
                                 <li className = "nav-item" >
                                     <a className = "nav-link" href = "#" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show"  style={{textAlign: 'left', paddingLeft: '2em'}} onClick={() =>{props.swap('ClubInfo')}}>Club Home</a>
@@ -63,14 +63,16 @@ const Navbar = (props) =>{
                                 <li className = "nav-item" >
                                     <a className = "nav-link" href = "#" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show"  style={{textAlign: 'left', paddingLeft: '2em'}} onClick={() =>{props.swap('Agenda')}}>Agenda/Speech Sign Ups!</a>
                                 </li>
+                                
                                 <li className = "nav-item" >
-                                    <a className = "nav-link" href = "#" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show"  style={{textAlign: 'left', paddingLeft: '2em'}} onClick={() =>{props.swap('Errorpage')}}>Error</a>
+                                    <a className = "nav-link" href = "#" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show"  style={{textAlign: 'left', paddingLeft: '2em'}} onClick={() =>{props.swap('Reports')}}>Reports</a>
                                 </li>
+    
                             </ul>
                         </li>
-                        <li class="dropdown nav-item" style={{textAlign: 'left', paddingLeft: '2em', marginBottom: '0'}}>
-                            <a class="dropdown-toggle nav-link" data-bs-toggle="dropdown" data-bs-target='dropdown-menu' href="#">Profile Tools<span class="caret"></span></a>
-                            <ul class="dropdown-menu bg-dark" style={{marginTop: '0', paddingTop: '0'}}>
+                        <li className="dropdown nav-item" style={{textAlign: 'left', paddingLeft: '2em', marginBottom: '0'}}>
+                            <a className="dropdown-toggle nav-link" data-bs-toggle="dropdown" data-bs-target='dropdown-menu' href="#">Profile Tools<span className="caret"></span></a>
+                            <ul className="dropdown-menu bg-dark" style={{marginTop: '0', paddingTop: '0'}}>
                                 <li className = "nav-item" >
                                     <a className = "nav-link" href = "#" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show" style={{textAlign: 'left', paddingLeft: '2em'}} onClick={() =>{props.swap('HomePage')}}>Your Home Page</a>
                                 </li>
@@ -82,9 +84,9 @@ const Navbar = (props) =>{
                                 </li>
                             </ul>
                         </li>
-                        <li class="dropdown nav-item" style={{textAlign: 'left', paddingLeft: '2em', marginBottom: '0'}}>
-                            <a class="dropdown-toggle nav-link" data-bs-toggle="dropdown" data-bs-target='dropdown-menu' href="#">Officer Tools<span class="caret"></span></a>
-                            <ul class="dropdown-menu bg-dark" style={{marginTop: '0', paddingTop: '0'}}>
+                        <li className="dropdown nav-item" style={{textAlign: 'left', paddingLeft: '2em', marginBottom: '0'}}>
+                            <a className="dropdown-toggle nav-link" data-bs-toggle="dropdown" data-bs-target='dropdown-menu' href="#">Officer Tools<span className="caret"></span></a>
+                            <ul className="dropdown-menu bg-dark" style={{marginTop: '0', paddingTop: '0'}}>
                                 <li className = "nav-item" >
                                     <a className = "nav-link" href = "#" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show" style={{textAlign: 'left', paddingLeft: '2em'}} onClick={() =>{props.swap('ManageClub')}}>Club Management</a>
                                 </li>

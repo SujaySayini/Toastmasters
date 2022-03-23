@@ -1,12 +1,21 @@
 import { useState } from "react";
 import Tracker from "./Tracker";
 import DropDownList from "./DropDownList";
+import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
+import {createAhCounter} from '../actions/speech.js';
 
 const AhCounter = (props) => {
+    const dispatch = useDispatch();
     const [trackerStates, setTrackerStates] = useState([0, 0, 0, 0, 0, 0, 0, 0, 0]);
-    const [members, setMember] = useState(["Name1", "Name2", "Name3"]); //
+    const [members, setMember] = useState(["Nick", "Name2", "Name3"]); //
     const [currMember, setCurrMember] = useState("Member");
     const [currSpeech, setSpeech] = useState("Type of Speech");
+    
+    const saveAhCounter = () =>{
+        dispatch(createAhCounter({speaker: currMember, type: currSpeech, counts: trackerStates}))
+        alert('saved ah counter')
+    }
     
     
     return (
@@ -23,7 +32,7 @@ const AhCounter = (props) => {
                     <div className='row col-3'>
                         <DropDownList
                             name={currSpeech}
-                            elements={["Evaluation", "Prepared Speech", "Table Topics"]}
+                            elements={["Evaluation", "Pathways Speech", "Table Topics"]}
                             setSelected={setSpeech}/>
                     </div>
                     <div className=" col-2">
@@ -47,7 +56,7 @@ const AhCounter = (props) => {
                 </div>
 
                 <div>
-                    <button type='button' className='btn btn-success'>Submit!</button>
+                    <button onClick = {saveAhCounter} type='button' className='btn btn-success'>Submit!</button>
                 </div>
             </div>
         </div>

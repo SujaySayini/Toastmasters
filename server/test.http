@@ -1,0 +1,11 @@
+POST http://localhost:5000/signup/
+Content-Type: application/json
+
+{
+    "first":"Jackie",
+    "last":"Idowu",
+    "email":"jacquelynnei@yahoo.com",
+    "username":"jidowu",
+    "password":"toastmasters",
+    "number":""
+}

@@ -5,7 +5,7 @@ import ClubInfo from "./ClubInfo";
 import { TextField } from "@material-ui/core";
 
 import InputBase from "@mui/material/InputBase";
-import { useNavigate, useLocation } from "react-router-dom";
+//import { useNavigate, useLocation } from "react-router-dom";
 
 import SearchIcon from "@mui/icons-material/Search";
 import './SearchBar.css'
@@ -91,7 +91,8 @@ const SearchBar = (props)=> {
         {filterData.length!=0&&(
           <div className="pageResult">
           {filterData.slice(0,4).map((value, key) => {
-            return <a className="dataItem" href = "#" onClick={() =>{this.props.swap(value.url)}}>
+            console.log(value.url)
+            return <a className="dataItem" href = "#" onClick={() =>{props.swap(value.url)}}>
               <p>{value.clubName}</p>
     
             </a>

@@ -13,67 +13,29 @@ import { createSpeech } from '../actions/speech.js';
 
 
 const Agenda = () => {
-    const speech = useSelector((state)=>state.speech)
-
-    console.log(speech)
+    //const speech = useSelector((state)=>state.speech)
+    //console.log("HERE:")
+    //console.log(speech)
     const dispatch = useDispatch();
-
-    const [speeches, setSpeeches] = useState([{speechGiver: 'None', speechTitle: 'None'}, {speechGiver: 'None', speechTitle: 'None'}, {speechGiver: 'None', speechTitle: 'None'}])
-    const [evals, setEvals] = useState([{speechGiver: 'None'}, {speechGiver: 'None'}, {speechGiver: 'None'}])
-    const [ttmaster, setTTMaster] = useState({speechGiver: 'None'})
-    useEffect(async ()=>{
-        let theSpeeches = await dispatch(getSpeech());
-        let evaluations = []
-        let tabletopics = []
-        let preparedspeeches = []
-        console.log(theSpeeches)
-        for(let i = 0; i < theSpeeches.length; i++){
-            if(theSpeeches[i].speechType === 'Pathways Speech'){
-                preparedspeeches.push(theSpeeches[i])
-            } else if (theSpeeches[i].speechType === 'Evaluator'){
-                evaluations.push(theSpeeches[i])
-            } else {
-                tabletopics = theSpeeches[i]
-            }
-        }
-        
-        if (evaluations.length < 3){
-            while(evaluations.length < 3){
-                evaluations.push({speechGiver:'None'})
-            }
-        }
-        if(preparedspeeches.length < 3){
-            while(preparedspeeches.length<3){
-                preparedspeeches.push({speechGiver:'None', speechTitle: 'None'})
-            }
-        }
-        if(tabletopics.length === 0){
-            tabletopics= {speechGiver:'None'}
-        }
-        console.log('evals:')
-        console.log(evaluations)
-        setSpeeches(preparedspeeches)
-        setEvals(evaluations)
-        setTTMaster(tabletopics)
-    }, [dispatch]);
-
+    
     let today = new Date();
     const dd = String(today.getDate()).padStart(2, '0');
     const mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
     const yyyy = today.getFullYear();
     
     today = mm + '/' + dd + '/' + yyyy;
-    const clicked = async () =>{
-        console.log('test')
-        const role = document.getElementById("role").value;
-        const name = document.getElementById('name').value;
-        const title = document.getElementById('title').value;
-        await dispatch(createSpeech({speechType: role, speechGiver: name, speechDate: today, speechTitle: title}))
-        let theSpeeches = await dispatch(getSpeech());
+    const [speeches, setSpeeches] = useState([{speechGiver: 'None', speechTitle: 'None'}, {speechGiver: 'None', speechTitle: 'None'}, {speechGiver: 'None', speechTitle: 'None'}])
+    const [evals, setEvals] = useState([{speechGiver: 'None'}, {speechGiver: 'None'}, {speechGiver: 'None'}])
+    const [ttmaster, setTTMaster] = useState({speechGiver: 'None'})
+    const [date, setDate] = useState([today])
+
+    const updateSpeeches = async () =>{
+        const result = await dispatch(getSpeech(date));
+        let theSpeeches = result
         let evaluations = []
         let tabletopics = []
         let preparedspeeches = []
-        console.log(theSpeeches)
+        console.log('dispatch')
         for(let i = 0; i < theSpeeches.length; i++){
             if(theSpeeches[i].speechType === 'Pathways Speech'){
                 preparedspeeches.push(theSpeeches[i])
@@ -102,6 +64,21 @@ const Agenda = () => {
         setSpeeches(preparedspeeches)
         setEvals(evaluations)
         setTTMaster(tabletopics)
+    
+    }
+
+    useEffect(()=>{
+        console.log('updated speeches')
+        updateSpeeches()
+    }, []);
+
+    const clicked = async () =>{
+        console.log('test')
+        const role = document.getElementById("role").value;
+        const name = document.getElementById('name').value;
+        const title = document.getElementById('title').value;
+        await dispatch(createSpeech({speechType: role, speechGiver: name, speechDate: today, speechTitle: title}))
+        updateSpeeches()
     }
 
     const deleteClicked = async () => {
@@ -110,39 +87,14 @@ const Agenda = () => {
         const name = document.getElementById('delete-name').value;
         const title = document.getElementById('delete-title').value;
         await dispatch(deleteSpeech({speechType: role, speechGiver: name, speechDate: today, speechTitle: title}))
-        let theSpeeches = await dispatch(getSpeech());
-        let evaluations = []
-        let tabletopics = []
-        let preparedspeeches = []
-        console.log(theSpeeches)
-        for(let i = 0; i < theSpeeches.length; i++){
-            if(theSpeeches[i].speechType === 'Pathways Speech'){
-                preparedspeeches.push(theSpeeches[i])
-            } else if (theSpeeches[i].speechType === 'Evaluator'){
-                evaluations.push(theSpeeches[i])
-            } else {
-                tabletopics = theSpeeches[i]
-            }
-        }
-        
-        if (evaluations.length < 3){
-            while(evaluations.length < 3){
-                evaluations.push({speechGiver:'None'})
-            }
-        }
-        if(preparedspeeches.length < 3){
-            while(preparedspeeches.length<3){
-                preparedspeeches.push({speechGiver:'None', speechTitle: 'None'})
-            }
-        }
-        if(tabletopics.length === 0){
-            tabletopics = {speechGiver:'None'}
-        }
-        console.log('evals:')
-        console.log(evaluations)
-        setSpeeches(preparedspeeches)
-        setEvals(evaluations)
-        setTTMaster(tabletopics)
+        updateSpeeches()
+    }
+    const selected = () => {
+        let newDate = document.getElementById("datePicker").value;
+        const x = newDate.split('-')
+        console.log(x)
+        setDate([x[1] + '/' + x[2] + '/'+x[0]])
+        updateSpeeches()
     }
 
 
@@ -151,7 +103,7 @@ const Agenda = () => {
             <div className='container'>
                 <div className = 'row'>
                     <div className = 'col-lg-7'>
-                        <h4>Agenda for {today}</h4>
+                        <h4>Agenda for {date}</h4>
                         <div style={{border:"1px solid black"}}>
                             <div className='container'>
                                 <div className = 'row'>
@@ -339,7 +291,7 @@ const Agenda = () => {
                         </div>
                         <div  className='row' style={{marginTop: '5%'}}>
                             <select id='role' className="form-select">
-                                  <option selected>Select Role</option>
+                                  <option selected disabled hidden>Select Role</option>
                                   <option> Pathways Speech </option>
                                   <option> Table Topics Master </option>
                                   <option> Evaluator </option>
@@ -393,8 +345,7 @@ const Agenda = () => {
                         </div>
                         <h5 style={{marginTop: '7.5%'}}>View a different date's agenda!</h5>
                         <div className ='row text-center' style={{marginTop:'3.75%', paddingLeft: '25%', paddingRight:'25%'}} >
-                            <input type='date' text='Select'></input>
-                            <button type='button' className = 'btn btn-success' style={{marginTop: '10px'}}>Go!</button>
+                            <input id='datePicker' onSelect = {selected} type='date' text='Select'></input>
                         </div>
 
                     </div>

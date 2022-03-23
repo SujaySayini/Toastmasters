@@ -60,7 +60,14 @@ const Timer = () => {
     const saveTime = async () =>{
         if(!start){
             console.log('saved')
-            let data = await dispatch(setTimer({type: currSpeech, speaker: currMember, time: time}))
+            let temp = time
+            temp = Math.floor(temp/1000)
+            const seconds = temp%60
+            if(seconds < 10){
+                seconds = '0'+seconds
+            }
+            const minutes = Math.floor(temp/60)
+            let data = await dispatch(setTimer({type: currSpeech, speaker: currMember, time: minutes+':'+seconds}))
         }
     }
 

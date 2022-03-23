@@ -2,10 +2,10 @@ import React from 'react';
 import './Search.css'
 import SearchBar from './SearchBar'
 import SearchIcon from '@mui/icons-material/Search';
-import {BrowserRouter as Router,Route,Link} from 'react-router-dom'
+//import {BrowserRouter as Router,Route,Link} from 'react-router-dom'
 import clubData from './clubPage.json';
 
-const Search = () => {
+const Search = (props) => {
   return (
     <div className='page'>
         <div className='container'>
@@ -15,7 +15,7 @@ const Search = () => {
         </div>
                 
         <div className='bar'>
-        <SearchBar data={clubData}/>
+        <SearchBar swap = {props.swap} data={clubData}/>
         </div>
 
     </div>

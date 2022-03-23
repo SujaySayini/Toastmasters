@@ -2,11 +2,13 @@ import * as api from '../api';
 
 //functions that return actions
 
-export const getSpeech = () => async (dispatch) => {
+export const getSpeech = (date) => async (dispatch) => {
     try {
-        const { data } = await api.fetchSpeech();
-        dispatch({type: 'FETCH', payload:data});
-        return data;
+        //const { data } = await api.fetchSpeech(date);
+        const  data2  = await api.fetchSpeech2(date);
+        console.log(data2)
+        dispatch({type: 'FETCH', payload:data2});
+        return data2;
     } catch (error) {
         console.log(error.message);
         
@@ -50,4 +52,9 @@ export const createCommentCard = (data) => async(dispatch) => {
         console.log(error)
         
     }
+}
+
+export const createAhCounter = (data) =>async(dispatch) => {
+    const { res } = await api.postAhCounter(data)
+    dispatch({type:"ADDCOMMENTCARD", payload: res})
 }

@@ -3,13 +3,17 @@ import speechModel from "../models/speechModel.js"
 
 export const getSpeech = async (req, res)=>{
     try {
+        /*console.log('HELLO:')
+        console.log(req.body)
         let today = new Date()
         const dd = String(today.getDate()).padStart(2, '0');
         const mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
         const yyyy = today.getFullYear();
     
         today = mm + '/' + dd + '/' + yyyy;
-        const speeches = await speechModel.find({speechDate: today});
+        today = '03/21/2022'*/
+        console.log(req.body)
+        const speeches = await speechModel.find({speechDate: req.body[0]});
         console.log(speeches);
         res.status(200).json(speeches);
     } catch (error) {
@@ -86,6 +90,42 @@ export const addCommentCard = async (req, res) => {
         const update = await speechModel.updateOne(
             {speechDate: today, speechType: 'Pathways Speech', speechGiver: speaker}, 
             {$push: {commentCards : commentcard}})
+
+        console.log(update)
+    } catch (error) {
+        res.status(404).json({message:error.message})
+    }
+    
+
+}
+
+export const addAhCounterData = async (req, res) => {
+    try {
+        let today = new Date()
+        const dd = String(today.getDate()).padStart(2, '0');
+        const mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+        const yyyy = today.getFullYear();
+        today = mm + '/' + dd + '/' + yyyy;
+        const {speaker, type, counts} = req.body
+        console.log(speaker)
+        console.log(today)
+        const update = await speechModel.updateOne(
+            {speechDate: today, speechType: type, speechGiver: speaker}, 
+            {$set: 
+                {fillerWords : 
+                    {
+                        Ah: counts[0],
+                        Um: counts[1], 
+                        Er: counts[2], 
+                        Well: counts[3], 
+                        So: counts[4],
+                        Like: counts[5],
+                        But: counts[6],
+                        Repeats: counts[7], 
+                        Other: counts[8]
+                    }
+                }
+            })
 
         console.log(update)
     } catch (error) {
