@@ -8,7 +8,16 @@ const url4 = 'http://localhost:5000/commentcard'
 const url5 = 'http://localhost:5000/evaluation'
 const url6 = 'http://localhost:5000/ahcounter'
 
-export const fetchSpeech = () => axios.get(url)
+//export const fetchSpeech = (date) => axios.get(url)
+export const fetchSpeech2 = async (date) => {
+    let theData = []
+    await axios.post('http://localhost:5000/speech/test', date).then((response) => {
+    theData = response.data
+  }, (error) => {
+    console.log(error);
+  });
+  return theData
+}
 export const createSpeech = (newSpeech) => axios.post(url, newSpeech)
 export const deleteSpeech = (speech) =>axios.post(url2, speech)
 

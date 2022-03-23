@@ -3,13 +3,17 @@ import speechModel from "../models/speechModel.js"
 
 export const getSpeech = async (req, res)=>{
     try {
+        /*console.log('HELLO:')
+        console.log(req.body)
         let today = new Date()
         const dd = String(today.getDate()).padStart(2, '0');
         const mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
         const yyyy = today.getFullYear();
     
         today = mm + '/' + dd + '/' + yyyy;
-        const speeches = await speechModel.find({speechDate: today});
+        today = '03/21/2022'*/
+        console.log(req.body)
+        const speeches = await speechModel.find({speechDate: req.body[0]});
         console.log(speeches);
         res.status(200).json(speeches);
     } catch (error) {

@@ -57,7 +57,7 @@ class Login extends React.Component{
          <br/> <b></b>
        </center>
  
-       <div class="title">
+       <div className="title">
        <h4>SIGN IN</h4>
        </div>
        <br></br>
@@ -99,7 +99,7 @@ class Login extends React.Component{
    
      <br></br>
      <center>
-       <text>New User?</text>
+       <p>New User?</p>
      <a href="#" onClick = {()=>this.props.swap('SignUp')}> Sign Up!</a>
      </center>
     
