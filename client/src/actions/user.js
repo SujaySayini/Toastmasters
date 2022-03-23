@@ -15,9 +15,9 @@ import * as api from '../api';
  
 export const getUser = () => async (dispatch) => {
    try {
-       const { data } = await api.fetchSpeech();
-       dispatch({type: 'FETCH', payload:data});
-       return data;
+       //const { data } = await api.fetchSpeech();
+       //dispatch({type: 'FETCH', payload:data});
+       //return data;
    } catch (error) {
        console.log(error.message);
       
