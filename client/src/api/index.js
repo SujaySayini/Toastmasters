@@ -21,6 +21,17 @@ export const fetchSpeech2 = async (date) => {
 }
 export const createSpeech = (newSpeech) => axios.post(url, newSpeech)
 export const deleteSpeech = (speech) =>axios.post(url2, speech)
+<<<<<<< HEAD
+
+
+export const fetchPage=() =>baseAPI.get('/');
+export const fetchPostsBySearch =(searchQuery) => baseAPI.get(`/search?searchQuery=${searchQuery.search || 'none'}`)
+
+export const setTime = (data) => axios.post(url3, data)
+export const addCommentCards = (data) => axios.post(url4, data)
+export const createEvaluation = (data) => axios.post(url5, data)
+
+=======
 
 export const fetchPage=() =>baseAPI.get('/');
 export const fetchPostsBySearch =(searchQuery) => baseAPI.get(`/search?searchQuery=${searchQuery.search || 'none'}`)
@@ -29,3 +40,4 @@ export const addCommentCards = (data) => axios.post(url4, data)
 export const createEvaluation = (data) => axios.post(url5, data)
 export const postAhCounter = (data) => axios.post(url6, data)
 export const createUser = (data) => axios.post(url7, data)
+>>>>>>> cf0841f545b3f24b5ee3bbce7df943f1a15cf277
