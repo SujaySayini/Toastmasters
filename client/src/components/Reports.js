@@ -17,8 +17,8 @@ const Reports = (props) => {
     const [items, setItems] = useState([])
     const [date, setDate] = useState(currentDate)
 
-    const updateReports = async () => {
-        const speeches = await dispatch(getSpeech([date]))
+    const updateReports = async (data) => {
+        const speeches = await dispatch(getSpeech({date: data}))
         let words = []
         for(let i =0; i < speeches.length; i++){
             speeches[i].number = i
@@ -64,18 +64,19 @@ const Reports = (props) => {
         updateReports()
     }, [])
     useEffect(async ()=>{
-        updateReports()
-    }, [date])
+        updateReports(date)
+    }, date)
 
     const selected = () => {
         let newDate = document.getElementById("datePicker").value;
         if(!newDate){
+            console.log('hello')
             return
         }
         const x = newDate.split('-')
         console.log(x)
         setDate(x[1] + '/' + x[2] + '/'+x[0])
-        updateReports()
+        updateReports(x[1] + '/' + x[2] + '/'+x[0])
     }
             
 

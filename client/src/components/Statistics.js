@@ -2,8 +2,20 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import toastyblack from '../images/toasty-black.png'
 import {LineChart, Line, CartesianGrid, XAxis, YAxis, ResponsiveContainer, Legend, Tooltip} from 'recharts';
+import React, {useEffect, useState} from 'react';
+import { useDispatch } from 'react-redux';
+import { getSpeech } from '../actions/speech';
+
 
 const Statistics = (props) => {
+
+    const dispatch = useDispatch()
+    useEffect(async ()=>{
+        const theSpeeches = dispatch(getSpeech({user: 'Nick'}))
+    }, [])
+
+
+
     const data = [{
         name: '1/28',
         You: 35,
@@ -74,6 +86,23 @@ const Statistics = (props) => {
         </LineChart>
     )
 
+    const [currentSpeech, setCurrentSpeech] = useState({title: 'You have not given a speech',
+                                                        date: '', 
+                                                        evaluator: '', 
+                                                        evaluation: '', 
+                                                        time: '',
+                                                        fillerWords: {
+                                                            Ah: 0,
+                                                            Um: 0,
+                                                            Er: 0,
+                                                            Well: 0,
+                                                            So: 0,
+                                                            Like: 0,
+                                                            But: 0,
+                                                            Repeats: 0,
+                                                            Other: 0 
+                                                        }  })
+
     return (
         <div>
             <div className='container'>
@@ -94,13 +123,13 @@ const Statistics = (props) => {
                         <div style={{border:"1px solid black"}}>
                         <div className='container'>
                             <div className = 'row'>
-                                <h4>Untitled Speech</h4>
+                                <h4>{currentSpeech.title}</h4>
                             </div>
                             <div className = 'row' style={{textAlign: 'left',marginBottom: '10px'}}>
                                     <div className='container'>
-                                        <p style={{marginBottom: '0'}}>Date Given: 2/25/2021</p>
-                                        <p style={{marginBottom: '0'}}>Evaluator: Evaluator Name</p> 
-                                        <p style={{marginBottom: '0'}}>Evaluation Link: <a href='#'>Find the evaluation here</a></p>
+                                        <p style={{marginBottom: '0'}}>Date Given: {currentSpeech.date}</p>
+                                        <p style={{marginBottom: '0'}}>Evaluator: {currentSpeech.evaluator}</p> 
+                                        <p style={{marginBottom: '0'}}>Evaluation Link: <a href='#'>{currentSpeech.evaluation}</a></p>
                                         <a href='#'>Comment Cards for this speech</a>   
                                         
                                         <p style={{marginBottom: '3px', textDecoration: 'underline', fontWeight:'bolder'}}>Timing</p>
@@ -110,7 +139,7 @@ const Statistics = (props) => {
                                                 <p>Range: 5-7 minutes</p>
                                             </div>
                                             <div className='col-4'>
-                                                <p>Actual Time: 6:31</p>
+                                                <p>Actual Time: {currentSpeech.time}</p>
                                             </div>
                                             <div className='col-4'>
                                                 <p>Within Range!</p>
@@ -121,13 +150,15 @@ const Statistics = (props) => {
                                                 <p style={{marginBottom: '3px', textDecoration: 'underline', fontWeight:'bolder'}}>Filler Words:</p>
                                             </div>
                                         </div>
-                                        <p style={{marginBottom: '0'}}>And: 1</p>
-                                        <p style={{marginBottom: '0'}}>Um: 3</p>
-                                        <p style={{marginBottom: '0'}}>Ah: 0</p>
-                                        <p style={{marginBottom: '0'}}>So: 4</p>
-                                        <p style={{marginBottom: '0'}}>Like: 0</p>
-                                        <p style={{marginBottom: '0'}}>But: 0</p>
-                                        <p style={{marginBottom: '0'}}>You Know: 1</p>
+                                        <p style={{marginBottom: '0'}}>Ah: {currentSpeech.fillerWords.Ah}</p>
+                                        <p style={{marginBottom: '0'}}>Um: {currentSpeech.fillerWords.Um}</p>
+                                        <p style={{marginBottom: '0'}}>Er: {currentSpeech.fillerWords.Er}</p>
+                                        <p style={{marginBottom: '0'}}>Well: {currentSpeech.fillerWords.Well}</p>
+                                        <p style={{marginBottom: '0'}}>So: {currentSpeech.fillerWords.So}</p>
+                                        <p style={{marginBottom: '0'}}>Like: {currentSpeech.fillerWords.Like}</p>
+                                        <p style={{marginBottom: '0'}}>But: {currentSpeech.fillerWords.But}</p>
+                                        <p style={{marginBottom: '0'}}>Repeats: {currentSpeech.fillerWords.Repeats}</p>
+                                        <p style={{marginBottom: '0'}}>Other: {currentSpeech.fillerWords.Other}</p>
                                     </div>
                                 </div>
                             </div>

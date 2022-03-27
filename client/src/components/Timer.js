@@ -62,12 +62,13 @@ const Timer = () => {
             console.log('saved')
             let temp = time
             temp = Math.floor(temp/1000)
-            const seconds = temp%60
+            let seconds = temp%60
             if(seconds < 10){
                 seconds = '0'+seconds
             }
             const minutes = Math.floor(temp/60)
             let data = await dispatch(setTimer({type: currSpeech, speaker: currMember, time: minutes+':'+seconds}))
+            console.log(data)
         }
     }
 

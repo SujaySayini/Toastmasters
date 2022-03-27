@@ -13,7 +13,12 @@ export const getSpeech = async (req, res)=>{
         today = mm + '/' + dd + '/' + yyyy;
         today = '03/21/2022'*/
         console.log(req.body)
-        const speeches = await speechModel.find({speechDate: req.body[0]});
+        let speeches = ''
+        if(req.body.date){   
+            speeches = await speechModel.find({speechDate: req.body.date});
+        } else {
+            speeches = await speechModel.find({speechGiver: req.body.user});
+        }
         console.log(speeches);
         res.status(200).json(speeches);
     } catch (error) {
@@ -60,12 +65,14 @@ export const setTime = async (req, res) => {
         const yyyy = today.getFullYear();
         today = mm + '/' + dd + '/' + yyyy;
         const { time, speaker, type } = req.body;
+        console.log('test')
         console.log(time)
         console.log(speaker)
         console.log(type)
         //if(type === 'Pathways Speech' || type === 'Evaluation'){
         const update = await speechModel.updateOne({speechDate: today, speechType: type ,speechGiver: speaker}, {$set: {'time': time}});
         if(update.matchedCount === 0){
+            throw error
             const newSpeech = new speechModel({speechDate: today, speechType: type, speechGiver:speaker, time: time});
             await newSpeech.save()
         }
