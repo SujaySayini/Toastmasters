@@ -10,8 +10,29 @@ import { getSpeech } from '../actions/speech';
 const Statistics = (props) => {
 
     const dispatch = useDispatch()
+    const [currentSpeech, setCurrentSpeech] = useState({title: 'You have not given a speech',
+    date: '', 
+    evaluator: '', 
+    evaluation: '', 
+    time: '',
+    fillerWords: {
+        Ah: 0,
+        Um: 0,
+        Er: 0,
+        Well: 0,
+        So: 0,
+        Like: 0,
+        But: 0,
+        Repeats: 0,
+        Other: 0 
+    }  })
     useEffect(async ()=>{
-        const theSpeeches = dispatch(getSpeech({user: 'Nick'}))
+        const theSpeeches = await dispatch(getSpeech({user: 'Nick'}))
+        console.log(theSpeeches)
+        const speech1 = theSpeeches[4]
+        setCurrentSpeech({... currentSpeech, title: speech1.speechTitle, date: speech1.speechDate, evaluator: speech1.speechEvaluator, time: speech1.time, fillerWords: speech1.fillerWords })
+
+
     }, [])
 
 
@@ -85,23 +106,6 @@ const Statistics = (props) => {
             <Legend />
         </LineChart>
     )
-
-    const [currentSpeech, setCurrentSpeech] = useState({title: 'You have not given a speech',
-                                                        date: '', 
-                                                        evaluator: '', 
-                                                        evaluation: '', 
-                                                        time: '',
-                                                        fillerWords: {
-                                                            Ah: 0,
-                                                            Um: 0,
-                                                            Er: 0,
-                                                            Well: 0,
-                                                            So: 0,
-                                                            Like: 0,
-                                                            But: 0,
-                                                            Repeats: 0,
-                                                            Other: 0 
-                                                        }  })
 
     return (
         <div>
