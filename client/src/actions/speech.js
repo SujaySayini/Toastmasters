@@ -37,8 +37,9 @@ export const deleteSpeech = (speech) => async(dispatch) => {
 export const setTimer = (data) => async(dispatch) => {
     try {
         console.log('called action')
-        const { res } = await api.setTime(data)
-        dispatch({type:"SETTIME", payload: res})
+        const data2 = await api.setTime(data)
+        dispatch({type:"SETTIME", payload: data2})
+        return data2;
     } catch (error) {
         console.log(error)
     }
@@ -54,7 +55,18 @@ export const createCommentCard = (data) => async(dispatch) => {
     }
 }
 
-export const createAhCounter = (data) =>async(dispatch) => {
-    const { res } = await api.postAhCounter(data)
-    dispatch({type:"ADDCOMMENTCARD", payload: res})
+// export const createAhCounter = (data) =>async(dispatch) => {
+//     const { res } = await api.postAhCounter(data)
+//     dispatch({type:"ADDCOMMENTCARD", payload: res})
+// }
+
+export const createAhCounter = (data) => async(dispatch) => {
+    try {
+        console.log('called action')
+        const data2 = await api.postAhCounter(data)
+        dispatch({type:"ADDAHCOUNTER", payload: data2})
+        return data2;
+    } catch (error) {
+        console.log(error)
+    }
 }

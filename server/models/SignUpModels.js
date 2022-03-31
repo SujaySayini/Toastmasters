@@ -24,11 +24,11 @@ date:{
     type:Date,
     default:Date.now
 
-}
+},club:String
 })
 
 //module.exports=mongoose.model('users', signUpTemplate)
-var temp=mongoose.model('users',signUpTemplate)
-export default temp
+const usersModel = mongoose.model('users',signUpTemplate)
+export default usersModel
 
 
