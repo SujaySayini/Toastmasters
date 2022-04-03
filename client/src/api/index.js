@@ -8,6 +8,8 @@ const url4 = 'http://localhost:5000/commentcard'
 const url5 = 'http://localhost:5000/evaluation'
 const url6 = 'http://localhost:5000/ahcounter'
 const url7 = 'http://localhost:5000/signup'
+//const url8 = 'http://localhost:5000/users/signin'
+//const url9 = 'http://localhost:5000/users/signup'
 
 //export const fetchSpeech = (date) => axios.get(url)
 export const fetchSpeech2 = async (date) => {
@@ -64,4 +66,14 @@ export const addCommentCards = (data) => axios.post(url4, data)
 export const createEvaluation = (data) => axios.post(url5, data)
 //export const postAhCounter = (data) => axios.post(url6, data)
 export const createUser = (data) => axios.post(url7, data)
+<<<<<<< HEAD
+//export const AUTH='AUTH';
+//export const LOGOUT='LOGOUT';
+export const signIn=(formData)=>baseAPI.post('/users/signin', formData);
+export const signUp=(formData)=>baseAPI.post('/users/signup', formData)
+
+//export const signIn=(data)=>axios.post(url8, data);
+//export const signUp=(data)=>axios.post(url9, data);
+=======
+>>>>>>> 43a8c1dc081eeffa2ef44ececb3c29e6f254a99b
 
