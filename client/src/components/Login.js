@@ -1,49 +1,100 @@
 import React from 'react';
 
-
 import Img from '../images/Toastmasters.png';
 import background from "./Background.JPG";
 import App from '../App';
 import "./custom.css";
 import HomePage from './HomePage';
+import GoogleLogin from 'react-google-login'
+import {useDispatch} from 'react-redux'
+import {useNavigate} from 'react-router-dom'
+
+import 'bootstrap/dist/css/bootstrap.css';
+import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
+import {signin} from '../actions/auth.js'
+import {useState} from 'react'
+  
+import {BrowserRouter as Router}  from 'react-router-dom';
+
+ const initialState={username: '', password: ' '};
+
+ function Login(props){
+  return (
+    <Router>
+      <Login2/>
+
+    </Router>
 
 
+  )
 
+  
+//} 
  
+//class Login extends React.Component{
+  //const Login = () =>{
+    function Login2(){
+  
+    const dispatch=useDispatch();
+   const navigate=useNavigate();
+   const [formData, setFormData]=useState(initialState);
+ 
+ const handleSubmit=(e) =>{
+   
+   e.preventDefault();
+   dispatch(signin(formData, navigate))
 
- 
- 
-class Login extends React.Component{
 
-
- constructor(props) {
-   super(props);
-   this.state = {
-    value: '',
-    isLogin: true
-   };
- 
-   this.handleChangeUsername = this.handleChangeUsername.bind(this);
-   this.handleChangePassword=this.handleChangePassword.bind(this);
-   this.handleSubmit = this.handleSubmit.bind(this);
- }
- 
- handleChangeUsername(event) {
-   this.setState({value: event.target.user});
- }
- 
- handleChangePassword(event) {
-   this.setState({value: event.target.pass});
- }
- 
- handleSubmit(event) {
-    this.props.swap('HomePage')
+   //console.log(formData)
+    
+   //this.props.swap('HomePage')
   
    //alert('Login credentials entered: ' + this.state.value);
-   event.preventDefault();
+   //event.preventDefault();
  }
+
+ const handleChange=(e)=>{
+setFormData({...formData,[e.target.name]:e.target.value})
+
+
+ }
+
  
-  render(){
+
+ const responseGoogleFailure=(error)=>{
+   console.log(error);
+   //console.log(response.profileObj);
+   console.log('Google Sign In was unsuccessful. Try Again Later!');
+   
+
+ }
+
+ const responseGoogleSuccess=async (res)=>{
+  console.log(res);
+   const result=res?.profileObj; //undefined 
+   const token=res?.tokenId;
+
+  
+
+   
+
+   
+   try{
+     dispatch({type:'AUTH', data: {result, token}});
+     //navigate.push('/');
+     navigate('/');
+
+
+   }catch(error){
+     console.log(error);
+
+   }
+
+  
+
+}
+  //render(){
       
       return (
        
@@ -51,24 +102,52 @@ class Login extends React.Component{
         <div className="container-fluid layout">
       
            
-            
+        <Row> 
+          <Col>
       <center>
          <img src= {Img} alt="pic" />
          <br/> <b></b>
        </center>
- 
+
        <div className="title">
+         <Row>
+           <Col>
        <h4>SIGN IN</h4>
+       </Col>
+       <Col>
+       <div>
+        <GoogleLogin
+        clientId="422408827622-1n56espplvd573e6epkhs90o0r7bif7r.apps.googleusercontent.com"
+        buttonText="Login"
+        onSuccess={responseGoogleSuccess}
+        onFailure={responseGoogleFailure}
+        cookiePolicy={'single_host_origin'}
+          
+          
+          
+          />
+          
+
+  
+
+     </div>
+     
+     </Col>
+       <Col>
+       
+       </Col>
+       </Row>
        </div>
+       
        <br></br>
  
        <div>
        <center>
-       <form onSubmit={this.handleSubmit}>
+       <form onSubmit={handleSubmit}>
          <div>
        <label>
          Username:
-         <input type="text" value={this.state.value} onChange={this.handleChangeUsername} />
+         <input name="username" label="Username" onChange={handleChange} />
        </label>
        </div>
        <br></br>
@@ -76,43 +155,55 @@ class Login extends React.Component{
        <div>
        <label>
          Password:
-         <input type="password" value={this.state.value} onChange={this.handleChangePassword} />
+         <input name= "password" label="Password" input type="password" onChange={handleChange} />
        </label>
        </div>
  
        <br></br>
        
        <center>
-       <input type="submit" value="Sign In" />
+       <input type="submit" input value= "Sign In"  />
        </center>
        <br></br>
+
+      
+    
      
      </form>
      </center>
     
      <center>
      <div>
-     <a href="#" onClick = {()=>this.props.swap('ResetPassword')}>Forgot Password?</a>
+     <a href="#" onClick = {()=>props.swap('ResetPassword')}>Forgot Password?</a>
+     
      </div>
      </center>
  
    
      <br></br>
      <center>
-       <p>New User?</p>
-     <a href="#" onClick = {()=>this.props.swap('SignUp')}> Sign Up!</a>
+      
+     <a href="#" onClick = {()=>props.swap('SignUp')}> New User? Sign Up!</a>
      </center>
     
  
  
      </div>
+     </Col>
+
+
+   
+
+     </Row> 
      </div>
+     
  
       
        
       );
-    }
-  }
+   // };
+ }
+}
 export default Login;
  
  
