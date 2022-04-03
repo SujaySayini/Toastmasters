@@ -23,11 +23,8 @@ import * as api from '../api';
       
    }
  
-<<<<<<< HEAD
-} */
-//
-=======
 }
+*/
 export const getUsers = (club) => async (dispatch) => {
     try {
         //const { data } = await api.fetchSpeech(date);
@@ -41,7 +38,6 @@ export const getUsers = (club) => async (dispatch) => {
     }
 
 }
->>>>>>> 43a8c1dc081eeffa2ef44ececb3c29e6f254a99b
  
  
 /*export const createSpeech = (speech) => async(dispatch) => {

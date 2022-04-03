@@ -5,7 +5,7 @@ import sendEmail from "../utils/sendEmail.js";
 import crypto from "crypto";
 import bcrypt from "bcrypt";
 //import sendEmail from ""
-import User from "../models/users.js"
+import userModel from "../models/userModel.js"
 //const JWTSecret = process.env.JWT_SECRET;
 const bcryptSalt = process.env.BCRYPT_SALT;
 const clientURL = process.env.CLIENT_URL;
@@ -29,7 +29,7 @@ const clientURL = process.env.CLIENT_URL;
 }; */
 
 export const requestPasswordReset = async (email) => {
-  const user = await User.findOne({ email });
+  const user = await userModel.findOne({ email });
   if (!user) throw new Error("Email does not exist");
 
   let token = await Token.findOne({ userId: user._id });
@@ -80,7 +80,7 @@ export const resetPassword = async (userId, token, password) => {
     { new: true }
   );
 
-  const user = await User.findById({ _id: userId });
+  const user = await userModel.findById({ _id: userId });
 
   sendEmail(
     user.email,

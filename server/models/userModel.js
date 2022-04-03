@@ -56,8 +56,8 @@ userSchema.pre("save", async function (next) {
     this.password = hash;
     next();
   });
-let temp=mongoose.model('users',userSchema)
-export default temp
+const userModel = mongoose.model('users', userSchema)
+export default userModel
 
 //export default mongoose.model("users", userSchema);
 

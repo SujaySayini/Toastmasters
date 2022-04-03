@@ -1,4 +1,5 @@
-import userModel from "../models/SignUpModels.js"
+import signUpModel from "../models/signUpModel.js"
+import userModel from "../models/userModel.js";
  
 export const createUser = async (req, res)=>{
   
@@ -7,8 +8,8 @@ export const createUser = async (req, res)=>{
 
     try{
 
-        const existingUser=await user.findOne({email})
-        const username=await user.findOne({username})
+        const existingUser=await userModel.findOne({email})
+        const username=await userModel.findOne({username})
         if (existingUser)return res.status(400).json({message: "User already exists! "})
 
         if (username)return res.status(400).json({message: "Username already exists! "})
@@ -53,7 +54,7 @@ export const getUsers = async (req, res)=>{
         let users = ''
         if(req.body.club){
             // users = await userModel.find({club: req.body.club});
-            users = await userModel.find({});
+            users = await signUpModel.find({});
         }
         res.status(200).json(users);
     } catch (error) {

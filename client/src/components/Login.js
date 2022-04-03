@@ -10,19 +10,17 @@ import {useDispatch} from 'react-redux'
 import {useNavigate} from 'react-router-dom'
 
 import 'bootstrap/dist/css/bootstrap.css';
-import Col from 'react-bootstrap/Col';
-import Row from 'react-bootstrap/Row';
 import {signin} from '../actions/auth.js'
 import {useState} from 'react'
   
 import {BrowserRouter as Router}  from 'react-router-dom';
 
- const initialState={username: '', password: ' '};
+ const initialState={email: '', password: ' '};
 
  function Login(props){
   return (
     <Router>
-      <Login2/>
+      <Login2 swap = {props.swap}/>
 
     </Router>
 
@@ -34,18 +32,23 @@ import {BrowserRouter as Router}  from 'react-router-dom';
  
 //class Login extends React.Component{
   //const Login = () =>{
-    function Login2(){
+    function Login2(props){
   
     const dispatch=useDispatch();
    const navigate=useNavigate();
    const [formData, setFormData]=useState(initialState);
  
- const handleSubmit=(e) =>{
+ const handleSubmit= async (e) =>{
    
    e.preventDefault();
-   dispatch(signin(formData, navigate))
-
-
+   const res = await dispatch(signin(formData, navigate))
+  if(res === 200){
+    props.swap('HomePage')
+  } else{
+    
+   alert('Invalid Email or Password');
+  }
+  //console.log(res)
    //console.log(formData)
     
    //this.props.swap('HomePage')
@@ -102,20 +105,20 @@ setFormData({...formData,[e.target.name]:e.target.value})
         <div className="container-fluid layout">
       
            
-        <Row> 
-          <Col>
+        <div className='row'> 
+          <div className='col-12'>
       <center>
          <img src= {Img} alt="pic" />
          <br/> <b></b>
        </center>
 
        <div className="title">
-         <Row>
-           <Col>
+         <div className='row'>
+           <div className='col-12'>
        <h4>SIGN IN</h4>
-       </Col>
-       <Col>
-       <div>
+       </div>
+       <div className='col-12'>
+       </div>
         <GoogleLogin
         clientId="422408827622-1n56espplvd573e6epkhs90o0r7bif7r.apps.googleusercontent.com"
         buttonText="Login"
@@ -132,11 +135,11 @@ setFormData({...formData,[e.target.name]:e.target.value})
 
      </div>
      
-     </Col>
-       <Col>
+     </div>
+       <div className='col-12'>
        
-       </Col>
-       </Row>
+       <div>
+       </div>
        </div>
        
        <br></br>
@@ -146,8 +149,8 @@ setFormData({...formData,[e.target.name]:e.target.value})
        <form onSubmit={handleSubmit}>
          <div>
        <label>
-         Username:
-         <input name="username" label="Username" onChange={handleChange} />
+         Email:
+         <input name="email" label="Email" onChange={handleChange} />
        </label>
        </div>
        <br></br>
@@ -189,12 +192,12 @@ setFormData({...formData,[e.target.name]:e.target.value})
  
  
      </div>
-     </Col>
+     </div>
 
 
    
 
-     </Row> 
+     </div> 
      </div>
      
  

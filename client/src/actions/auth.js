@@ -9,7 +9,8 @@ export const signin =(formData, navigate) => async(dispatch) => {
 try{
 
     console.log(formData);
-    const {data}=await api.signIn(formData);
+    const data=await api.signIn(formData);
+    return data
    // console.log(data);
     dispatch({type:AUTH,  payload: data});
     //login the user 

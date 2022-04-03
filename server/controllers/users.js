@@ -1,9 +1,9 @@
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 //import user from '../../client/src/reducers/user';
-import users from "../models/SignUpModels.js"
+import signUpModel from "../models/signUpModel.js"
 
-import User from '../models/users.js'
+import userModel from '../models/userModel.js'
 
 import { requestPasswordReset } from '../services/auth.js';
 import { resetPassword } from '../services/auth.js';
@@ -25,15 +25,14 @@ export const signin=async (req, res)=>{
    
    //res.header("Referrer", "http://localhost:5000");
     const {email, password}=req.body;
-    console.log("we are here now1")
+    console.log(req.body)
 
     try{
-        const existingUser=await User.findOne({email});
-       // console.log("we are here now2")
+        const existingUser=await userModel.findOne({email: email});
+        console.log("we are here now2")
 
         if(!existingUser){
-            return res.status(404).json({message: "User does not exist! "});
-
+            return res.status(400).json({message: "User does not exist! "});
         }  
         const isPasswordCorrect=await bcrypt.compare(password, existingUser.password);
        // const isPasswordCorrect=await compare(password, existingUser.password);
@@ -45,10 +44,11 @@ export const signin=async (req, res)=>{
 
         const token=jwt.sign({email: existingUser.email, id:existingUser.id}, 'test', {expiresIn:"1h" })
         res.status(200).json({result:existingUser, token});
-        console.log(res);
+        //console.log(res);
         //res.send('Signed in');
     }catch(error){
-        res.status(500).json({messgae: 'Something went wrong.'})
+        console.log(error)
+        res.status(500).json({message: 'Something went wrong.'})
 
     }
 
@@ -65,8 +65,8 @@ const user = req.body
 const newUser = new users(user)
 
 try{
-const existingUser=await User.findOne({email});
-const existingUsername=await User.findOne({username});
+const existingUser=await userModel.findOne({email});
+const existingUsername=await userModel.findOne({username});
 
 if(existingUser)
     //console.log("we are here now 1")
