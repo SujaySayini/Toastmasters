@@ -24,15 +24,11 @@ date:{
     type:Date,
     default:Date.now
 
-<<<<<<< HEAD
 }, 
-clubName: String,
+club: String,
 userLevel: String, //can be General, Eboard, Admin 
 userPosition: String // if the user is an eboard member, also store their role
 
-=======
-},club:String
->>>>>>> d4ac5c27c4651e1dfc0c60c6e1f156f9da896cc5
 })
 
 //module.exports=mongoose.model('users', signUpTemplate)

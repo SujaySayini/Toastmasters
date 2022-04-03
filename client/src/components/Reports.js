@@ -18,7 +18,7 @@ const Reports = (props) => {
     const [date, setDate] = useState(currentDate)
 
     const updateReports = async (data) => {
-        const speeches = await dispatch(getSpeech({date: data}))
+        const speeches = await dispatch(getSpeech({speechDate: data}))
         let words = []
         for(let i =0; i < speeches.length; i++){
             speeches[i].number = i
