@@ -16,6 +16,7 @@ const speechSchema = mongoose.Schema({
         So: Number,
         Like: Number,
         But: Number,
+        Repeats: Number,
         Other: Number
     },
     commentCards: [[String]]

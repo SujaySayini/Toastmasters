@@ -15,16 +15,33 @@ import * as api from '../api';
  
 /*export const getUser = () => async (dispatch) => {
    try {
-       const { data } = await api.fetchSpeech();
-       dispatch({type: 'FETCH', payload:data});
-       return data;
+       //const { data } = await api.fetchSpeech();
+       //dispatch({type: 'FETCH', payload:data});
+       //return data;
    } catch (error) {
        console.log(error.message);
       
    }
  
+<<<<<<< HEAD
 } */
 //
+=======
+}
+export const getUsers = (club) => async (dispatch) => {
+    try {
+        //const { data } = await api.fetchSpeech(date);
+        const data2 = await api.getAllUsers(club);
+        console.log(data2)
+        dispatch({type: 'FETCH', payload:data2});
+        return data2;
+    } catch (error) {
+        console.log(error.message);
+        
+    }
+
+}
+>>>>>>> 43a8c1dc081eeffa2ef44ececb3c29e6f254a99b
  
  
 /*export const createSpeech = (speech) => async(dispatch) => {

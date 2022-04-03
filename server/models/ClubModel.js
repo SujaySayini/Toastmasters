@@ -4,9 +4,9 @@ const clubSchema = mongoose.Schema({
     clubID: Number,
     clubName: String,
     description: String,
-    meetingTime: String,
+    meetingTime: String, // need to have specific format
     announcement: String,
-    location: String,
+    location: String, //may need to have more fields (zipcode, etc)
 });
 
 const ClubModel = mongoose.model('ClubModel', clubSchema);

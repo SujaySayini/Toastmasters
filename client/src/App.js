@@ -50,6 +50,7 @@ function App(props) {
       setPage(<ManageMembers swap = {changePage}></ManageMembers>)
     } else if(newPage === 'Statistics'){
       setPage(<Statistics swap={changePage}></Statistics>)
+
     }else if(newPage === 'Errorpage'){
       setPage(<ErrorPage swap = {changePage}></ErrorPage>)
     }else if(newPage === 'Club2'){

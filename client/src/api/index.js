@@ -21,16 +21,52 @@ export const fetchSpeech2 = async (date) => {
   });
   return theData
 }
+
+export const getAllUsers = async (club) => {
+  let theData = []
+  await axios.post('http://localhost:5000/signup/getUser', club).then((response) => {
+  theData = response.data
+}, (error) => {
+  console.log(error);
+});
+console.log(theData);
+return theData
+}
+export const setTime = async (data) => {
+  let theData = []
+  await axios.post(url3, data).then((response) => {
+  theData = response.data
+}, (error) => {
+  console.log(error);
+});
+console.log("the data is " + theData);
+return theData
+}
+
+export const postAhCounter = async (data) => {
+  let theData = []
+  await axios.post(url6, data).then((response) => {
+  theData = response.data
+}, (error) => {
+  console.log(error);
+});
+console.log("the data for ah " + theData);
+return theData
+}
+
+
+
 export const createSpeech = (newSpeech) => axios.post(url, newSpeech)
 export const deleteSpeech = (speech) =>axios.post(url2, speech)
 
 export const fetchPage=() =>baseAPI.get('/');
 export const fetchPostsBySearch =(searchQuery) => baseAPI.get(`/search?searchQuery=${searchQuery.search || 'none'}`)
-export const setTime = (data) => axios.post(url3, data)
+//export const setTime = (data) => axios.post(url3, data)
 export const addCommentCards = (data) => axios.post(url4, data)
 export const createEvaluation = (data) => axios.post(url5, data)
-export const postAhCounter = (data) => axios.post(url6, data)
+//export const postAhCounter = (data) => axios.post(url6, data)
 export const createUser = (data) => axios.post(url7, data)
+<<<<<<< HEAD
 //export const AUTH='AUTH';
 //export const LOGOUT='LOGOUT';
 export const signIn=(formData)=>baseAPI.post('/users/signin', formData);
@@ -38,4 +74,6 @@ export const signUp=(formData)=>baseAPI.post('/users/signup', formData)
 
 //export const signIn=(data)=>axios.post(url8, data);
 //export const signUp=(data)=>axios.post(url9, data);
+=======
+>>>>>>> 43a8c1dc081eeffa2ef44ececb3c29e6f254a99b
 

@@ -46,3 +46,19 @@ export const createUser = async (req, res)=>{
    
 } */
 }
+
+export const getUsers = async (req, res)=>{
+    try {
+        console.log(req.body)
+        let users = ''
+        if(req.body.club){
+            // users = await userModel.find({club: req.body.club});
+            users = await userModel.find({});
+        }
+        res.status(200).json(users);
+    } catch (error) {
+        //console.log("fhere")
+        res.status(404).json({message: error.message});
+        
+    }
+}

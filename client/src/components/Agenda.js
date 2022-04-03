@@ -29,8 +29,8 @@ const Agenda = () => {
     const [ttmaster, setTTMaster] = useState({speechGiver: 'None'})
     const [date, setDate] = useState([today])
 
-    const updateSpeeches = async () =>{
-        const result = await dispatch(getSpeech(date));
+    const updateSpeeches = async (date) =>{
+        const result = await dispatch(getSpeech({date: date}));
         let theSpeeches = result
         let evaluations = []
         let tabletopics = []
@@ -69,7 +69,7 @@ const Agenda = () => {
 
     useEffect(()=>{
         console.log('updated speeches')
-        updateSpeeches()
+        updateSpeeches(today)
     }, []);
 
     const clicked = async () =>{
@@ -78,7 +78,7 @@ const Agenda = () => {
         const name = document.getElementById('name').value;
         const title = document.getElementById('title').value;
         await dispatch(createSpeech({speechType: role, speechGiver: name, speechDate: today, speechTitle: title}))
-        updateSpeeches()
+        updateSpeeches(date)
     }
 
     const deleteClicked = async () => {
@@ -87,14 +87,14 @@ const Agenda = () => {
         const name = document.getElementById('delete-name').value;
         const title = document.getElementById('delete-title').value;
         await dispatch(deleteSpeech({speechType: role, speechGiver: name, speechDate: today, speechTitle: title}))
-        updateSpeeches()
+        updateSpeeches(date)
     }
     const selected = () => {
         let newDate = document.getElementById("datePicker").value;
         const x = newDate.split('-')
         console.log(x)
-        setDate([x[1] + '/' + x[2] + '/'+x[0]])
-        updateSpeeches()
+        setDate(x[1] + '/' + x[2] + '/'+x[0])
+        updateSpeeches(x[1] + '/' + x[2] + '/'+x[0])
     }
 
 
