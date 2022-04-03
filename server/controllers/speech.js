@@ -72,9 +72,11 @@ export const setTime = async (req, res) => {
         //if(type === 'Pathways Speech' || type === 'Evaluation'){
         const update = await speechModel.updateOne({speechDate: today, speechType: type ,speechGiver: speaker}, {$set: {'time': time}});
         if(update.matchedCount === 0){
-            throw error
-            const newSpeech = new speechModel({speechDate: today, speechType: type, speechGiver:speaker, time: time});
-            await newSpeech.save()
+            // if entry doesnt exist 
+            res.status(200).send({ ifExists: 'No' });
+            // throw error
+            // const newSpeech = new speechModel({speechDate: today, speechType: type, speechGiver:speaker, time: time});
+            // await newSpeech.save()
         }
         //} 
         res.status(200);
@@ -133,6 +135,10 @@ export const addAhCounterData = async (req, res) => {
                     }
                 }
             })
+            if(update.matchedCount === 0){
+                // if entry doesnt exist 
+                res.status(200).send({ ifExists: 'No' });
+            }
 
         console.log(update)
     } catch (error) {

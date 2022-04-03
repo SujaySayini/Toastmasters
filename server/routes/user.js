@@ -4,11 +4,11 @@ import express from 'express';
 //import { createUser} from "../controllers/user.js";
 import signUpTemplateCopy from '../models/SignUpModels.js';
 const router = express.Router();
-
+import { getUsers } from "../controllers/user.js";
 
  
 //const express = require('express');
-
+router.post('/getUser', getUsers);
 
 
 ////////////////////////////////////////////////
