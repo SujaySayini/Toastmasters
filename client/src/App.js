@@ -63,6 +63,9 @@ function App(props) {
       setPage(<SignUp swap={changePage}></SignUp>)
     } else if (newPage === 'Reports'){
       setPage(<Reports swap={changePage}></Reports>)
+    } else if (newPage === 'Logout'){
+      localStorage.clear()
+      setPage(<Login swap={changePage}></Login>)
     }
   }
   if(!page){

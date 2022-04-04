@@ -82,6 +82,10 @@ const Navbar = (props) =>{
                                 <li className = "nav-item" >
                                     <a className = "nav-link" href = "#" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show" style={{textAlign: 'left', paddingLeft: '2em'}} onClick={() =>{props.swap('Statistics')}}>Personal Statistics</a>
                                 </li>
+                                <li className = "nav-item" >
+                                    <a className = "nav-link" href = "#" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show" style={{textAlign: 'left', paddingLeft: '2em'}} onClick={() =>{props.swap('Logout')}}>Logout</a>
+                                </li>
+
                             </ul>
                         </li>
                         <li className="dropdown nav-item" style={{textAlign: 'left', paddingLeft: '2em', marginBottom: '0'}}>

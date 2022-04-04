@@ -39,11 +39,7 @@ export const signin=async (req, res)=>{
        //if(!isPasswordCorrect) 
        ///password!=existingUser.password
        
-<<<<<<< HEAD
-       if(password!=existingUser.password && !isPasswordCorrect) return res.status(400)
-=======
        if(!isPasswordCorrect) return res.status(400)
->>>>>>> b43d6b2f4a4a5a35ee53bf23664eb9afdbb602fa
 .json({message: "Invalid Credentials"})
 
         const token=jwt.sign({email: existingUser.email, id:existingUser.id}, 'test', {expiresIn:"1h" })
