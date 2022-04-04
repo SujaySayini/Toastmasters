@@ -84,7 +84,18 @@ export const signIn=(formData)=>baseAPI.post('/users/signin', formData).then((re
 }, (error) => {
   console.log(error);
 });;
-export const signUp=(formData)=>baseAPI.post('/users/signup', formData)
+export const signUp=(formData)=>baseAPI.post('/users/signup', formData).then((response) => {
+  const theData = response.status
+  return theData
+}, (error) => {
+  console.log(error);
+});;
+export const changePassword=(formData)=>baseAPI.post('/users/changePassword', formData).then((response) => {
+  const theData = response.status
+  return theData
+}, (error) => {
+  console.log(error);
+});;
 
 //export const signIn=(data)=>axios.post(url8, data);
 //export const signUp=(data)=>axios.post(url9, data);

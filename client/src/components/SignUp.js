@@ -15,15 +15,37 @@ import {useState} from 'react'
  import {signup } from '../actions/auth.js';
  import {BrowserRouter as Router}  from 'react-router-dom';
  
+ const options = [
+  {
+    label:" What is your mother's maiden name? ",
+    value: " What is your mother's maiden name? ",
+  },
+  {
+    label: " What high school did you attend? ",
+    value: " What high school did you attend? ",
+  },
+  {
+    label: " What is the name of your first school?",
+    value: " What is the name of your first school?",
+  },
+  {
+    label: "In what city were you born?",
+    value: "In what city were you born?",
+  },
+  
+];
 
- const initialState={first: '', last: ' ', email: '', username: '', password:'', pass: '', securityQuestion:'', securityAnswer:'', club:''};
 
-function SignUp(){
+
+ const initialState={first: '', last: ' ', email: '', username: '', password:'', pass: '', securityQuestion:'In what city were you born?', securityAnswer:'', club:''};
+
+function SignUp(props){
   //const dispatch =useDispatch();
 //const navigate=useNavigate();
   return (
     <Router>
-      <SignUp2/>
+      <SignUp2 swap ={props.swap}/>
+      
 
     </Router>
 
@@ -36,7 +58,7 @@ function SignUp(){
 
 
   //const SignUp = () =>{
-    function SignUp2(){
+    function SignUp2(props){
    // function SignUp(){
 const dispatch =useDispatch();
 const navigate=useNavigate();
@@ -51,13 +73,24 @@ const [formData, setFormData]=useState(initialState);
     
      }
 
-     const handleSubmit=(e) =>{
+     const handleSubmit=async(e) =>{
+       
    
       e.preventDefault()
-      dispatch(signup(formData, navigate))
+      const res=await dispatch(signup(formData, navigate))
+      //console.log(res);
       //dispatchEvent(signup(formData, navigate));
+      console.log(res);
+      if(res===200){
+        props.swap('HomePage')
+      } else{
+        alert('Already used!')
+      }
+      console.log(res);
 
     }
+
+    
    
    
      return (
@@ -95,7 +128,7 @@ const [formData, setFormData]=useState(initialState);
       <div>
       <label>
          Last Name:
-         <input name="first" label="Last Name" onChange={handleChange} />
+         <input name="last" label="Last Name" onChange={handleChange} />
        </label>
       </div>
       <br></br>
@@ -129,9 +162,14 @@ const [formData, setFormData]=useState(initialState);
        <br></br>
        <div>
        <label>
-         Security Question
-         <input name="securityQuestion" label="Security Question" onChange={handleChange} />
-       </label>
+           Security Question:
+           <select>
+            {options.map((option) => (
+              <option value={option.value}>{option.label}</option>
+            ))}
+          </select>
+
+      </label>
       </div>
        <br></br>
 
@@ -152,12 +190,9 @@ const [formData, setFormData]=useState(initialState);
       
       </div>
 
-
       
        <br></br>
-    
-    
-    
+  
        
        <center>
        <input type="submit" input value= "Sign Up"  />
