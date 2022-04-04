@@ -10,10 +10,12 @@ import commentCardRoutes from './routes/commentCards.js'
 import evaluationRoutes from './routes/evaluation.js'
 import ahCounterRoutes from './routes/ahcounter.js'
 import signUpRoutes from './routes/user.js';
+import pageRoutes from './routes/pages.js';
 
 //dotenv.config()
 
 const app = express();
+
 
 
 
@@ -29,7 +31,7 @@ app.use('/evaluation', evaluationRoutes);
 app.use('/ahcounter', ahCounterRoutes);
 //app.use('/user', signUpRoutes);
 app.use('/signup', signUpRoutes);
-
+app.use('/pages', pageRoutes);
 
 const CONNECTION_URL = 'mongodb+srv://m220student:m220password@cluster0.lgpgi.mongodb.net/react-hero?retryWrites=true&w=majority'
 const PORT = process.env.PORT || 5000;

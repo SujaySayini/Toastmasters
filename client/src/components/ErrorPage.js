@@ -14,7 +14,7 @@ function ErrorPage(props) {
             <div className='searchResult'>
             OOps.. I cannot find the result
             </div>
-            <a class="btn btn-primary" href = "#" onClick={() =>{props.swap('Search')}}>Go back to Search Page</a>
+           
         </div>
        
     </div>
@@ -22,3 +22,4 @@ function ErrorPage(props) {
 }
 
 export default ErrorPage
+////<a class="btn btn-primary" href = "#" onClick={() =>{props.swap('Search')}}>Go back to Search Page</a> 

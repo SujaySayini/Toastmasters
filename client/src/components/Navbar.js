@@ -43,8 +43,12 @@ const Navbar = (props) =>{
                             <ul className="dropdown-menu bg-dark" style={{marginTop: '0', paddingTop: '0'}}>
                                 
                                 <li className = "nav-item" >
-                                    <a className = "nav-link" href = "#" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show"  style={{textAlign: 'left', paddingLeft: '2em'}} onClick={() =>{props.swap('ClubInfo')}}>Club Home</a>
+                                    <a className = "nav-link" href = "#" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show"  style={{textAlign: 'left', paddingLeft: '2em'}} onClick={() =>{props.swap('ClubPage')}}>Create A Club</a>
                                 </li>
+                                <li className = "nav-item" >
+                                    <a className = "nav-link" href = "#" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show"  style={{textAlign: 'left', paddingLeft: '2em'}} onClick={() =>{props.swap('ClubPageInfo')}}>Club Home</a>
+                                </li>
+                            
                                 <li className = "nav-item" >
                                     <a className = "nav-link" href = "#" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show"  style={{textAlign: 'left', paddingLeft: '2em'}} onClick={() =>{props.swap('Search')}}>Find a Club</a>
                                 </li>

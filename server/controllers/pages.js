@@ -1,30 +1,31 @@
-import express from "express";
-import mongoose from "mongoose";
+import ClubModel from '../models/ClubModel.js';
+import express from 'express';
+import mongoose from 'mongoose';
 
-import ClubModel from "../models/ClubModel";
 
-const router = express.Router();
-
-export const getPage = async(req, res) =>{
+export const getPage = async (req,res) =>{
+    const{id} = req.params;
     try{
-        const clubModel = await ClubModel.find(); 
-        res.status(200).json(clubModel);
+        const ClubPage = await ClubModel.findById(id);
+        console.log(ClubPage);
+        res.status(200).json(postMessage);
 
     }catch(error){
-        res.status(404).json({message: error.message})
+        res.status(404).json({message: error.message});
 
     }
 }
-export const getPostsBySearch = async (req, res) => {
-    const { searchQuery} = req.query;
+export const createPage = async (req,res)=>{
+    const page = req.body;
+    const newPage = new ClubModel(page);
+    try{
+        await newPage.save();
 
-    try {
-        const title = new RegExp(searchQuery, "i");
+        res.status(201).json(newPage);
 
-        const posts = await ClubModel.find({ title });
+    }catch(error){
+        res.status(409).json({message: error.message});
 
-        res.json({ data: posts });
-    } catch (error) {    
-        res.status(404).json({ message: error.message });
     }
 }
+
