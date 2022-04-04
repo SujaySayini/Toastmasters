@@ -42,6 +42,7 @@ import {BrowserRouter as Router}  from 'react-router-dom';
    
    e.preventDefault();
    const res = await dispatch(signin(formData, navigate))
+   console.log(res);
   if(res === 200){
     props.swap('HomePage')
   } else{
@@ -74,9 +75,12 @@ setFormData({...formData,[e.target.name]:e.target.value})
  }
 
  const responseGoogleSuccess=async (res)=>{
-  console.log(res);
+
    const result=res?.profileObj; //undefined 
+   //check if email is in database
    const token=res?.tokenId;
+   console.log(token);
+  
 
   
 
@@ -86,6 +90,7 @@ setFormData({...formData,[e.target.name]:e.target.value})
    try{
      dispatch({type:'AUTH', data: {result, token}});
      //navigate.push('/');
+     props.swap('HomePage')
      navigate('/');
 
 

@@ -34,8 +34,12 @@ catch(error){
 
 export const signup =(formData, navigate) => async(dispatch) => {
     try{
-        const {data}=await api.signUp(formData);
-    dispatch({type:AUTH, data});
+
+        console.log(formData);
+    const data=await api.signUp(formData);
+    return data
+        ////const {data}=await api.signUp(formData);
+    ////dispatch({type:AUTH, data});
         //login the user 
         //navigate to the home page 
     
@@ -54,3 +58,32 @@ export const signup =(formData, navigate) => async(dispatch) => {
     
     
     }
+
+    export const changepassword =(formData, navigate) => async(dispatch) => {
+        try{
+    
+            console.log(formData);
+        const data=await api.changePassword(formData);
+        return data
+            ////const {data}=await api.signUp(formData);
+        ////dispatch({type:AUTH, data});
+            //login the user 
+            //navigate to the home page 
+        
+            //history.push('/');
+            navigate('/');
+        
+        
+        }
+        catch(error){
+            console.log(error)
+        
+        
+        }
+        
+        
+        
+        
+        }
+
+    //const res = await dispatch(changePassword(formData, navigate))

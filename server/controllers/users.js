@@ -16,7 +16,7 @@ import { resetPassword } from '../services/auth.js';
   } = require("../services/auth.service"); */
 
 export const signin=async (req, res)=>{
-    res.header("Sec-Fetch-Site", "cross-site");
+   // res.header("Sec-Fetch-Site", "cross-site");
    //res.header("Access-Control-Allow-Origin", "*");
    //res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   //// res.setHeader("access-control-allow-origin", "*");
@@ -37,9 +37,9 @@ export const signin=async (req, res)=>{
         const isPasswordCorrect=await bcrypt.compare(password, existingUser.password);
        // const isPasswordCorrect=await compare(password, existingUser.password);
        //if(!isPasswordCorrect) 
-
+       ///password!=existingUser.password
        
-       if(password!=existingUser.password) return res.status(400)
+       if(!isPasswordCorrect) return res.status(400)
 .json({message: "Invalid Credentials"})
 
         const token=jwt.sign({email: existingUser.email, id:existingUser.id}, 'test', {expiresIn:"1h" })
@@ -57,12 +57,12 @@ export const signin=async (req, res)=>{
 }
 
 export const signup=async (req, res)=>{
-res.header("Access-Control-Allow-Origin", "*");
-res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+//res.header("Access-Control-Allow-Origin", "*");
+//res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     
-const{first, last, email, username, password, pass, club}=req.body; 
+const{first, last, email, username, password, pass,securityQuestion,securityAnswer, club}=req.body; 
 const user = req.body
-const newUser = new users(user)
+const newUser = new userModel(user)
 
 try{
 const existingUser=await userModel.findOne({email});
@@ -114,3 +114,63 @@ export const resetPasswordRequestController = async (req, res, next) => {
     );
     return res.json(resetPasswordService);
   };
+
+
+  export const changePassword=async (req, res)=>{
+    // res.header("Sec-Fetch-Site", "cross-site");
+    //res.header("Access-Control-Allow-Origin", "*");
+    //res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+   //// res.setHeader("access-control-allow-origin", "*");
+   //// res.setHeader("access-control-allow-credentials", "true");
+    //res.send();
+    
+    //res.header("Referrer", "http://localhost:5000");
+     const {email, password, pass, securityQuestion, securityAnswer}=req.body;
+     console.log(req.body)
+ 
+     try{
+         const existingUser=await userModel.findOne({email: email});
+         const Question=existingUser.securityQuestion;
+         const Answer=existingUser.securityAnswer;
+ 
+         if(!existingUser){
+             return res.status(400).json({message: "User does not exist! "});
+         }  
+         if(password!=pass){
+          return res.status(400).json({message: "Passwords do not match! "});
+         }
+         if(securityQuestion!=Question){
+          return res.status(400).json({message: "Not the Question you selected! "});
+         }
+         if(securityAnswer!=Answer){
+          return res.status(400).json({message: "Not the answer you submitted! "});
+         }
+
+        // const hash = await bcrypt.hash(password, Number(bcryptSalt));
+        const hash = await bcrypt.hash(password, Number(12));
+
+         //{ _id: userId },
+         await userModel.updateOne(
+         { email: email },
+        { $set: { password: hash } },
+         { new: true }
+         );
+         const token=jwt.sign({email: existingUser.email, id:existingUser.id}, 'test', {expiresIn:"1h" })
+         res.status(200).json({result:existingUser, token});
+        // return res.send('Succesfully changed password');
+       
+ 
+         //const token=jwt.sign({email: existingUser.email, id:existingUser.id}, 'test', {expiresIn:"1h" })
+         //res.status(200).json({result:existingUser, token});
+         //console.log(res);
+         //res.send('Signed in');
+     }catch(error){
+         console.log(error)
+         res.status(500).json({message: 'Something went wrong.'})
+ 
+     }
+ 
+ 
+ 
+ }
+ 
