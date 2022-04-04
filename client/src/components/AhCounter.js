@@ -1,23 +1,53 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Tracker from "./Tracker";
 import DropDownList from "./DropDownList";
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
+import { getUsers } from "../actions/user.js";
 import {createAhCounter} from '../actions/speech.js';
 
 const AhCounter = (props) => {
     const dispatch = useDispatch();
     const [trackerStates, setTrackerStates] = useState([0, 0, 0, 0, 0, 0, 0, 0, 0]);
-    const [members, setMember] = useState(["Nick", "Name2", "Name3"]); //
+    const [members, setMember] = useState([]); 
     const [currMember, setCurrMember] = useState("Member");
     const [currSpeech, setSpeech] = useState("Type of Speech");
     
-    const saveAhCounter = () =>{
-        dispatch(createAhCounter({speaker: currMember, type: currSpeech, counts: trackerStates}))
-        alert('saved ah counter')
+    const saveAhCounter = async () =>{
+        let data = await dispatch(createAhCounter({speaker: currMember, type: currSpeech, counts: trackerStates}))
+        console.log("data is " + data);
+        console.log(data);
+        if(data){
+            console.log(data.ifExists);
+            if(data.ifExists == "No"){
+              alert("The Entry doesn't exist today. Please try again.");
+            } 
+    } else {
+        alert('saved ah counter successfully.')
     }
-    
-    
+    }
+    const updateMembers = async (club) =>{
+        console.log('dispatch')
+        const result = await dispatch(getUsers({club: club}));
+        console.log(result);
+        setMember(result.map((user) => {
+            if(user.name){
+                return user.name;
+            }else if(user.first){
+                if(user.last){
+                    return user.first + " "+user.last;
+                }else {
+                    return user.first
+                }
+            }
+            return "no name";
+        }));
+    }
+    useEffect(()=>{
+        console.log('updated users')
+        let clubname = "Rutgers";
+        updateMembers(clubname);
+    }, []);
     return (
         <div>
             <h6>Directions: During the meeting, use the following table to mark down the filler words

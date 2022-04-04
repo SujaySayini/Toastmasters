@@ -1,12 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
+import DropDownList from "./DropDownList";
+import { getUsers } from "../actions/user.js";
 import { useDispatch } from 'react-redux';
 import { createEvaluation } from "../actions/evaluation.js";
+import { getSpeech } from '../actions/speech.js';
 
 const Evaluation = () => {
+    const [members, setMember] = useState([]); 
+    const [currMember, setCurrMember] = useState("Member");
+    const [currSpeech, setSpeech] = useState("Type of Speech");
     const [date, setDate] = useState("");
-    const [speaker, setSpeaker] = useState("");
     const [evaluator, setEvaluator] = useState("");
     const [positive, setPositive] = useState("");
     const [challenge, setChallenge] = useState("");
@@ -21,10 +26,40 @@ const Evaluation = () => {
     const [additionalComments, setAdditionalComments] = useState("");
     const dispatch = useDispatch();
 
+   /* useEffect(async ()=>{
+        let theSpeeches = await dispatch(getSpeech());
+        for(let i =0; i < theSpeeches.length; i++){
+            console.log(theSpeeches[i])
+        }
+    }, [dispatch]); */
+
+    const updateMembers = async (club) =>{
+        console.log('dispatch')
+        const result = await dispatch(getUsers({club: club}));
+        console.log(result);
+        setMember(result.map((user) => {
+            if(user.name){
+                return user.name;
+            }else if(user.first){
+                if(user.last){
+                    return user.first + " " + user.last
+                }
+                return user.first 
+            }
+            return "no name";
+        }));
+    }
+    useEffect(()=>{
+        console.log('updated users')
+        let clubname = "Rutgers";
+        updateMembers(clubname);
+    }, []);
+
     const handleSubmit = (evt) => {
         evt.preventDefault();
         dispatch(createEvaluation({speechDate: date,
-                                   speechGiver: speaker, 
+                                   speechGiver: currMember, 
+                                   speechType: currSpeech,
                                    speechEvaluator: evaluator, 
                                    positive: positive, 
                                    challenge: challenge, 
@@ -40,7 +75,8 @@ const Evaluation = () => {
                                 }))
         setDate("");
         setEvaluator("");
-        setSpeaker("");
+        setCurrMember("Member");
+        setSpeech("Type of Speech")
         setPositive("");
         setImprovement("");
         setChallenge("");
@@ -55,6 +91,13 @@ const Evaluation = () => {
         alert(`Evaluation Form Submitted`)
     }
 
+    const selected = () => {
+        let newDate = document.getElementById("datePicker").value;
+        const x = newDate.split('-')
+        console.log(x)
+        setDate(x[1] + '/' + x[2] + '/'+x[0])
+    }
+
     return (
       <div className="container-grid">
             <h1 className="text-center my-4">Evaluation Form</h1>
@@ -63,23 +106,36 @@ const Evaluation = () => {
                 Evaluation Guidelines
             </a>
             <form className="container" onSubmit={handleSubmit}>
+                <div className='row align-items-center' style={{ margin: '2em' }}>
+                    <h4 className='col-2'>Name:</h4>
+                    <div className='row col-3'>
+                        <DropDownList name={currMember} elements={members} setSelected={setCurrMember}></DropDownList>
+                    </div>
+                    <h4 className='col-2'>Speech Type:</h4>
+                    <div className='row col-3'>
+                        {/* Evaluation, Prepared Speech, Table Topics */}
+                        <DropDownList
+                            name={currSpeech}
+                            elements={["Evaluator", "Pathways Speech", "Table Topics"]}
+                            setSelected={setSpeech} />
+                    </div>
+                    <div className=" col-2">
+                        <button type='button' className='btn btn-success' /* onClick = {clicked} */ >Search!</button>
+                    </div>
+                </div>
                 <div className="row my-4">
                     <label className="col-md-3" style={{fontWeight: "bold", textAlign: "left"}}>
                         Date:
                     </label>
-                    <textarea className="col-md-8" rows="1" value={date} onChange={e => setDate(e.target.value)}/>
-                </div>
-                <div className="row my-4">
-                    <label className="col-md-3" style={{fontWeight: "bold", textAlign: "left"}}>
-                        Speaker:
-                    </label>
-                    <textarea className="col-md-8" rows="1" value={speaker} onChange={e => setSpeaker(e.target.value)}/>
+                    <div className = "col-md-8" rows="1" >
+                        <input id='datePicker' style={{width: "100%"}} onSelect = {selected} type='date' text='Select'></input>
+                    </div>
                 </div>
                 <div className="row my-4">
                     <label className="col-md-3" style={{fontWeight: "bold", textAlign: "left"}}>
                         Evaluator:
                     </label>
-                    <textarea className="col-md-8" rows="1" value={evaluator} onChange={e => setEvaluator(e.target.value)}/>
+                    <textarea className="col-md-8" align="left" rows="1" value={evaluator} onChange={e => setEvaluator(e.target.value)}/>
                 </div>
                 <div className="row my-4">
                     <label className="col-md-3" style={{fontWeight: "bold", textAlign: "left"}}>
@@ -282,7 +338,7 @@ const Evaluation = () => {
                 </div>
                 <button
                     type="submit"
-                    disabled={(date && speaker && evaluator && positive && improvement && challenge && clarity && vocalVariety && eyeContact && gestures && audienceAwareness && comfortLevel && interest) ? false:true}
+                    disabled={(date && currMember && !(currMember === "Member") && currSpeech && !(currSpeech === "Type of Speech") && evaluator && positive && improvement && challenge && clarity && vocalVariety && eyeContact && gestures && audienceAwareness && comfortLevel && interest) ? false:true}
                     className="btn btn-block btn-primary mt-3 text-uppercase"
                 >
                     Submit

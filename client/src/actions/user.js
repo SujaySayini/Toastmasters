@@ -13,7 +13,7 @@ import * as api from '../api';
    }
 } */
  
-export const getUser = () => async (dispatch) => {
+/*export const getUser = () => async (dispatch) => {
    try {
        //const { data } = await api.fetchSpeech();
        //dispatch({type: 'FETCH', payload:data});
@@ -24,7 +24,20 @@ export const getUser = () => async (dispatch) => {
    }
  
 }
-//
+*/
+export const getUsers = (club) => async (dispatch) => {
+    try {
+        //const { data } = await api.fetchSpeech(date);
+        const data2 = await api.getAllUsers(club);
+        console.log(data2)
+        dispatch({type: 'FETCH', payload:data2});
+        return data2;
+    } catch (error) {
+        console.log(error.message);
+        
+    }
+
+}
  
  
 /*export const createSpeech = (speech) => async(dispatch) => {
@@ -59,4 +72,5 @@ export const createUser = (newUser) => async(dispatch) => {
 } */
  
 
-
+export const AUTH='AUTH';
+export const LOGOUT='LOGOUT';

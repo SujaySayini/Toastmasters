@@ -1,7 +1,9 @@
+
+
 const DropDownList = (props) => {
     const {name, elements, setSelected } = props;
     const listElements = elements.map((m) => 
-        <li key={m} onClick={()=>{setSelected(m)}}>
+        <li key={Math.random()} onClick={()=>{setSelected(m)}}>
             <a className="dropdown-item" href="#">{m}</a>
         </li>
     );

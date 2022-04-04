@@ -17,10 +17,14 @@ const Reports = (props) => {
     const [items, setItems] = useState([])
     const [date, setDate] = useState(currentDate)
 
-    const updateReports = async () => {
-        const speeches = await dispatch(getSpeech([date]))
+    const updateReports = async (data) => {
+        const speeches = await dispatch(getSpeech({speechDate: data}))
         let words = []
         for(let i =0; i < speeches.length; i++){
+            if(speeches[i].speechType === 'Table Topics Master'){
+                speeches.splice(i, 1)
+                continue
+            }
             speeches[i].number = i
             let topWords = ''
             let max = 0
@@ -61,21 +65,22 @@ const Reports = (props) => {
         }
     }
     useEffect(async ()=>{
-        updateReports()
+        updateReports(today)
     }, [])
     useEffect(async ()=>{
-        updateReports()
-    }, [date])
+        updateReports(date)
+    }, date)
 
     const selected = () => {
         let newDate = document.getElementById("datePicker").value;
         if(!newDate){
+            console.log('hello')
             return
         }
         const x = newDate.split('-')
         console.log(x)
         setDate(x[1] + '/' + x[2] + '/'+x[0])
-        updateReports()
+        updateReports(x[1] + '/' + x[2] + '/'+x[0])
     }
             
 

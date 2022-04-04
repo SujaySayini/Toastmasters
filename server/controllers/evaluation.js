@@ -1,5 +1,18 @@
 import evaluationModel from "../models/evaluationModel.js"
 
+export const getEvaluation = async (req, res)=>{
+    try {
+        console.log(req.body)
+        let evaluations = ''    
+        evaluations = await evaluationModel.find(req.body);
+        console.log(evaluations);
+        res.status(200).json(evaluations);
+    } catch (error) {
+        res.status(404).json({message: error.message});
+        
+    }
+}
+
 export const createEvaluation = async (req, res)=>{
     
     const evaluation = req.body;
@@ -10,6 +23,7 @@ export const createEvaluation = async (req, res)=>{
         await newEvaluation.save();
         res.status(201).json(newEvaluation)
     } catch (error) {
+        console.log(error)
 
         res.status(409).json({message: error.message});
         

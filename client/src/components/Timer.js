@@ -1,6 +1,6 @@
 import { Fragment, useEffect, useState } from "react";
 import DropDownList from "./DropDownList";
-
+import { getUsers } from "../actions/user.js";
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { setTimer, getSpeech } from '../actions/speech.js';
@@ -13,18 +13,47 @@ const Timer = () => {
     //const [inputState, setInputState] = useState("");
     const [start, setStart] = useState(false);
 
-    const [members, setMember] = useState(["Nick"]); //
+    const [members, setMember] = useState([]); //
     const [currMember, setCurrMember] = useState("Member");
     const [currSpeech, setSpeech] = useState("Type of Speech");
 
     const [isPTag, setPTag] = useState(true);
 
-    useEffect(async ()=>{
+    /*useEffect(async ()=>{
         let theSpeeches = await dispatch(getSpeech());
         for(let i =0; i < theSpeeches.length; i++){
             console.log(theSpeeches[i])
         }
-    }, [dispatch]);
+    }, [dispatch]);*/
+
+    const updateMembers = async (club) =>{
+        console.log('dispatch')
+        const result = await dispatch(getUsers({club: club}));
+        console.log(result);
+        setMember(result.map((user) => {
+            if(user.name){
+                return user.name;
+            }else if(user.first){
+                if(user.last){
+                    return user.first + " "+user.last;
+                }else {
+                    return user.first
+                }
+            }
+            return "no name";
+        }));
+    }
+    useEffect(()=>{
+        console.log('updated users')
+        let clubname = "Rutgers";
+        updateMembers(clubname);
+    }, []);
+
+    const clicked = async () =>{
+        console.log('test')
+        // updateMembers("Club1")
+        alert("Hello! I am an alert box!!");
+    }
 
     function func(e) {
         console.log(e.target.value);
@@ -62,12 +91,23 @@ const Timer = () => {
             console.log('saved')
             let temp = time
             temp = Math.floor(temp/1000)
-            const seconds = temp%60
+            let seconds = temp%60
             if(seconds < 10){
                 seconds = '0'+seconds
             }
             const minutes = Math.floor(temp/60)
             let data = await dispatch(setTimer({type: currSpeech, speaker: currMember, time: minutes+':'+seconds}))
+            console.log(data);
+            if(data){
+                console.log(data.ifExists);
+                if(data.ifExists == "No"){
+                  alert("The Entry doesn't exist today. Please try again.");
+                } else {
+                    alert('saved timer successfully.');
+                }  
+            }else {
+                alert('saved timer successfully.');
+            }
         }
     }
 
@@ -90,7 +130,7 @@ const Timer = () => {
                             setSelected={setSpeech} />
                     </div>
                     <div className=" col-2">
-                        <button type='button' className='btn btn-success' onClick={() => { console.log(currSpeech) }}>Search!</button>
+                        <button type='button' className='btn btn-success' onClick = {clicked} /* onClick = {clicked} */ >Search!</button>
                     </div>
                 </div>
             </div>

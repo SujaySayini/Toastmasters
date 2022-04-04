@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 const evaluationSchema = mongoose.Schema({
     speechDate: String,
     speechGiver: String,
+    speechType: String,
     speechEvaluator: String,
     positive: String,
     challenge: String,
@@ -17,6 +18,6 @@ const evaluationSchema = mongoose.Schema({
     additionalComments: String
 });
 
-const speechModel = mongoose.model('EvaluationModel', evaluationSchema);
+const evaluationModel = mongoose.model('EvaluationModel', evaluationSchema);
 
-export default speechModel;
+export default evaluationModel;
