@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 const evaluationSchema = mongoose.Schema({
     speechDate: String,
     speechGiver: String,
+    speechType: String,
     speechEvaluator: String,
     positive: String,
     challenge: String,

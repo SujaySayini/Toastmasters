@@ -20,6 +20,16 @@ export const fetchSpeech2 = async (date) => {
   return theData
 }
 
+export const fetchEvaluation = async (date) => {
+  let theData = []
+  await axios.post('http://localhost:5000/evaluation', date).then((response) => {
+  theData = response.data
+}, (error) => {
+  console.log(error);
+});
+return theData
+}
+
 export const getAllUsers = async (club) => {
   let theData = []
   await axios.post('http://localhost:5000/signup/getUser', club).then((response) => {
