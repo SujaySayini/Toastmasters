@@ -29,7 +29,7 @@ app.use('/deletespeech', deleteSpeechRoutes);
 app.use('/commentcard', commentCardRoutes);
 app.use('/evaluation', evaluationRoutes);
 app.use('/ahcounter', ahCounterRoutes);
-//app.use('/user', signUpRoutes);
+app.use('/user', signUpRoutes);
 //app.use('/signup', signUpRoutes);
 //app.use('/users', userRoutes)
 app.use('/users', userRoutes)

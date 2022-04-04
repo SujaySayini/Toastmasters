@@ -1,7 +1,7 @@
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 //import user from '../../client/src/reducers/user';
-import signUpModel from "../models/signUpModel.js"
+//import signUpModel from "../models/signUpModel.js"
 
 import userModel from '../models/userModel.js'
 
@@ -39,7 +39,7 @@ export const signin=async (req, res)=>{
        //if(!isPasswordCorrect) 
 
        
-       if(password!=existingUser.password) return res.status(400)
+       if(password!=existingUser.password && !isPasswordCorrect) return res.status(400)
 .json({message: "Invalid Credentials"})
 
         const token=jwt.sign({email: existingUser.email, id:existingUser.id}, 'test', {expiresIn:"1h" })
@@ -62,7 +62,7 @@ res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Ty
     
 const{first, last, email, username, password, pass, club}=req.body; 
 const user = req.body
-const newUser = new users(user)
+const newUser = new userModel(user)
 
 try{
 const existingUser=await userModel.findOne({email});

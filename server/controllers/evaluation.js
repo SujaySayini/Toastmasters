@@ -1,14 +1,10 @@
 import evaluationModel from "../models/evaluationModel.js"
 
-export const getSpeech = async (req, res)=>{
+export const getEvaluation = async (req, res)=>{
     try {
         console.log(req.body)
-        let evaluations = ''
-        if(req.body.date){   
-            evaluations = await evaluationModel.find({speechDate: req.body.date});
-        } else {
-            evaluations = await evaluationModel.find({speechGiver: req.body.user});
-        }
+        let evaluations = ''    
+        evaluations = await evaluationModel.find(req.body);
         console.log(evaluations);
         res.status(200).json(evaluations);
     } catch (error) {
@@ -27,6 +23,7 @@ export const createEvaluation = async (req, res)=>{
         await newEvaluation.save();
         res.status(201).json(newEvaluation)
     } catch (error) {
+        console.log(error)
 
         res.status(409).json({message: error.message});
         

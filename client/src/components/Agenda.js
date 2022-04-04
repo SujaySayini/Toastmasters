@@ -8,6 +8,8 @@ import { useSelector } from 'react-redux';
 import {getSpeech} from '../actions/speech.js';
 import { deleteSpeech } from '../actions/speech';
 import { createSpeech } from '../actions/speech.js';
+import {getUsers} from '../actions/user.js'
+import {createEvaluation, getEvaluation} from '../actions/evaluation.js'
 
 
 
@@ -27,28 +29,71 @@ const Agenda = () => {
     const [speeches, setSpeeches] = useState([{speechGiver: 'None', speechTitle: 'None'}, {speechGiver: 'None', speechTitle: 'None'}, {speechGiver: 'None', speechTitle: 'None'}])
     const [evals, setEvals] = useState([{speechGiver: 'None'}, {speechGiver: 'None'}, {speechGiver: 'None'}])
     const [ttmaster, setTTMaster] = useState({speechGiver: 'None'})
-    const [date, setDate] = useState([today])
+    const [date, setDate] = useState(today)
+    const [members, setMembers] = useState([])
+    const [timer, setTimer] = useState({speechGiver: 'None'})
+    const [ahCounter, setAhCounter] = useState({speechGiver: 'None'})
+
+
+    const updateMembers = async (club) =>{
+        console.log('dispatch')
+        const result = await dispatch(getUsers({club: club}));
+        console.log(result);
+        const elements = result.map((user) => {
+            if(user.name){
+                return user.name;
+            }else if(user.first){
+                if(user.last){
+                    return user.first + " " + user.last
+                }
+                return user.first 
+            }
+            return "no name";
+        })
+        const listElements = elements.map((m) => 
+        <option key={Math.random()}>
+            {m}
+        </option>
+        );
+        setMembers(listElements)
+    
+    }
+    useEffect(()=>{
+        console.log('updated users')
+        let clubname = "Rutgers";
+        updateMembers(clubname);
+    }, []);
+
 
     const updateSpeeches = async (date) =>{
         const result = await dispatch(getSpeech({speechDate: date}));
+        const eval_res = await dispatch(getEvaluation({speechDate: date}))
         let theSpeeches = result
         let evaluations = []
         let tabletopics = []
         let preparedspeeches = []
+        let thetimer = {speechGiver:'None'}
+        let theahcounter = {speechGiver:'None'}
         console.log('dispatch')
         for(let i = 0; i < theSpeeches.length; i++){
             if(theSpeeches[i].speechType === 'Pathways Speech'){
                 preparedspeeches.push(theSpeeches[i])
-            } else if (theSpeeches[i].speechType === 'Evaluator'){
-                evaluations.push(theSpeeches[i])
             } else if (theSpeeches[i].speechType === 'Table Topics Master' ){
                 tabletopics = theSpeeches[i]
+            } else if(theSpeeches[i].speechType === 'Ah Counter'){
+                theahcounter = theSpeeches[i]
+            } else if(theSpeeches[i].speechType === 'Timer'){
+                thetimer = theSpeeches[i]
             }
         }
+        for(let i = 0; i < eval_res.length; i++){
+            evaluations.push(eval_res[i])
+        }
+        console.log(evaluations)
         
         if (evaluations.length < 3){
             while(evaluations.length < 3){
-                evaluations.push({speechGiver:'None'})
+                evaluations.push({speechGiver:'None', speechEvaluator:'None'})
             }
         }
         if(preparedspeeches.length < 3){
@@ -64,6 +109,8 @@ const Agenda = () => {
         setSpeeches(preparedspeeches)
         setEvals(evaluations)
         setTTMaster(tabletopics)
+        setTimer(thetimer)
+        setAhCounter(theahcounter)
     
     }
 
@@ -76,8 +123,42 @@ const Agenda = () => {
         console.log('test')
         const role = document.getElementById("role").value;
         const name = document.getElementById('name').value;
+        if(role === 'Select Role' || name === 'Select Name'){
+            return
+        }
         const title = document.getElementById('title').value;
-        await dispatch(createSpeech({speechType: role, speechGiver: name, speechDate: today, speechTitle: title}))
+        if(role === 'Evaluator'){
+            let speech_length = 0
+            let eval_length = 0
+            for(let i = 0; i < 3; i++){
+                if(speeches[i].speechGiver !== 'None'){
+                    speech_length += 1
+                }
+                if(evals[i].speechGiver !=='None'){
+                    eval_length += 1
+                }
+            }
+            if(eval_length >= speech_length){
+                alert('there are not enough speeches for you to sign up to be an evaluator')
+                return
+            }
+            await(dispatch(createEvaluation({speechDate: date,
+                speechGiver: speeches[eval_length].speechGiver, 
+                speechType: role,
+                speechEvaluator: name})))
+        } else{
+            await dispatch(createSpeech({speechType: role, speechGiver: name, speechDate: date, speechTitle: title,  fillerWords: {
+                Ah: 0,
+                Um: 0,
+                Er: 0,
+                Well: 0,
+                So: 0,
+                Like: 0,
+                But: 0,
+                Repeats: 0,
+                Other: 0 
+            }}))
+        }
         updateSpeeches(date)
     }
 
@@ -86,10 +167,13 @@ const Agenda = () => {
         const role = document.getElementById("delete-role").value;
         const name = document.getElementById('delete-name').value;
         const title = document.getElementById('delete-title').value;
-        await dispatch(deleteSpeech({speechType: role, speechGiver: name, speechDate: today, speechTitle: title}))
+        if(role === 'Select Role' || name === 'Select Name'){
+            return
+        }
+        await dispatch(deleteSpeech({speechType: role, speechGiver: name, speechDate: date, speechTitle: title}))
         updateSpeeches(date)
     }
-    const selected = () => {
+    const selected = () => { //dates
         let newDate = document.getElementById("datePicker").value;
         const x = newDate.split('-')
         console.log(x)
@@ -226,7 +310,7 @@ const Agenda = () => {
                                                 </div>
                                                 
                                                 <div className='col-4'>
-                                                    <p style={{marginBottom:'0'}}>{evals[0].speechGiver}</p>
+                                                    <p style={{marginBottom:'0'}}>{evals[0].speechEvaluator}</p>
                                                 </div>
                                             </div>
                                             <div className = 'row' >
@@ -238,7 +322,7 @@ const Agenda = () => {
                                                 </div>
                                                 
                                                 <div className='col-4'>
-                                                    <p style={{marginBottom:'0'}}>{evals[1].speechGiver}</p>
+                                                    <p style={{marginBottom:'0'}}>{evals[1].speechEvaluator}</p>
                                                 </div>
                                             </div>
                                             <div className = 'row' >
@@ -250,7 +334,7 @@ const Agenda = () => {
                                                 </div>
                                                 
                                                 <div className='col-4'>
-                                                    <p style={{marginBottom:'0'}}>{evals[2].speechGiver}</p>
+                                                    <p style={{marginBottom:'0'}}>{evals[2].speechEvaluator}</p>
                                                 </div>
                                             </div>
                                             <div className = 'row' style={{marginTop:'0'}}>
@@ -261,7 +345,7 @@ const Agenda = () => {
                                                     <p>Ah Counter's Report</p>
                                                 </div>
                                                 <div className='col-4'>
-                                                    <p>Ah Counter</p>
+                                                    <p>{ahCounter.speechGiver}</p>
                                                 </div>
                                             </div>
                                             <div className = 'row' style={{marginTop:'0'}}>
@@ -272,7 +356,7 @@ const Agenda = () => {
                                                     <p>Timer's Report</p>
                                                 </div>
                                                 <div className='col-4'>
-                                                    <p>Timer</p>
+                                                    <p>{timer.speechGiver}</p>
                                                 </div>
                                             </div>
 
@@ -303,8 +387,8 @@ const Agenda = () => {
 
                         <div  className='row' style={{marginTop: '2%'}}>
                             <select id='name' className="form-select">
-                                  <option selected>Select Name</option>
-                                  <option> Nick </option>
+                                  <option selected hidden>Select Name</option>
+                                  {members}
                             </select>
                         </div>
 
@@ -322,7 +406,7 @@ const Agenda = () => {
                         </div>
                         <div className='row' style={{marginTop: '3.75%'}}>
                             <select id='delete-role' className="form-select" >
-                                  <option selected>Select Role</option>
+                                  <option selected hidden>Select Role</option>
                                   <option> Pathways Speech </option>
                                   <option> Table Topics Master </option>
                                   <option> Evaluator </option>
@@ -332,8 +416,8 @@ const Agenda = () => {
                         </div>
                         <div  className='row' style={{marginTop: '2%'}}>
                             <select id='delete-name' className="form-select">
-                                  <option selected>Select Name</option>
-                                  <option> Nick </option>
+                                  <option selected hidden>Select Name</option>
+                                  {members}
                             </select>
                         </div>
 

@@ -19,12 +19,12 @@ const Timer = () => {
 
     const [isPTag, setPTag] = useState(true);
 
-    useEffect(async ()=>{
+    /*useEffect(async ()=>{
         let theSpeeches = await dispatch(getSpeech());
         for(let i =0; i < theSpeeches.length; i++){
             console.log(theSpeeches[i])
         }
-    }, [dispatch]);
+    }, [dispatch]);*/
 
     const updateMembers = async (club) =>{
         console.log('dispatch')
@@ -33,15 +33,19 @@ const Timer = () => {
         setMember(result.map((user) => {
             if(user.name){
                 return user.name;
-            }else if(user.first && user.last){
-                return user.first + " "+user.last;
+            }else if(user.first){
+                if(user.last){
+                    return user.first + " "+user.last;
+                }else {
+                    return user.first
+                }
             }
             return "no name";
         }));
     }
     useEffect(()=>{
         console.log('updated users')
-        let clubname = "sample";
+        let clubname = "Rutgers";
         updateMembers(clubname);
     }, []);
 
@@ -93,12 +97,14 @@ const Timer = () => {
             }
             const minutes = Math.floor(temp/60)
             let data = await dispatch(setTimer({type: currSpeech, speaker: currMember, time: minutes+':'+seconds}))
-            console.log("data is " + data);
+            console.log(data);
             if(data){
                 console.log(data.ifExists);
                 if(data.ifExists == "No"){
                   alert("The Entry doesn't exist today. Please try again.");
-                }   
+                } else {
+                    alert('saved timer successfully.');
+                }  
             }else {
                 alert('saved timer successfully.');
             }

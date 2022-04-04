@@ -1,4 +1,4 @@
-import signUpModel from "../models/signUpModel.js"
+//import signUpModel from "../models/signUpModel.js"
 import userModel from "../models/userModel.js";
  
 export const createUser = async (req, res)=>{
@@ -50,12 +50,11 @@ export const createUser = async (req, res)=>{
 
 export const getUsers = async (req, res)=>{
     try {
-        console.log(req.body)
+        console.log('hello')
         let users = ''
-        if(req.body.club){
-            // users = await userModel.find({club: req.body.club});
-            users = await signUpModel.find({});
-        }
+        // users = await userModel.find({club: req.body.club});
+        users = await userModel.find(req.body);
+        console.log(users)
         res.status(200).json(users);
     } catch (error) {
         //console.log("fhere")

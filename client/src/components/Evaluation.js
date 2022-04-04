@@ -26,12 +26,12 @@ const Evaluation = () => {
     const [additionalComments, setAdditionalComments] = useState("");
     const dispatch = useDispatch();
 
-    useEffect(async ()=>{
+   /* useEffect(async ()=>{
         let theSpeeches = await dispatch(getSpeech());
         for(let i =0; i < theSpeeches.length; i++){
             console.log(theSpeeches[i])
         }
-    }, [dispatch]);
+    }, [dispatch]); */
 
     const updateMembers = async (club) =>{
         console.log('dispatch')
@@ -40,15 +40,18 @@ const Evaluation = () => {
         setMember(result.map((user) => {
             if(user.name){
                 return user.name;
-            }else if(user.first && user.last){
-                return user.first + " "+user.last;
+            }else if(user.first){
+                if(user.last){
+                    return user.first + " " + user.last
+                }
+                return user.first 
             }
             return "no name";
         }));
     }
     useEffect(()=>{
         console.log('updated users')
-        let clubname = "sample";
+        let clubname = "Rutgers";
         updateMembers(clubname);
     }, []);
 

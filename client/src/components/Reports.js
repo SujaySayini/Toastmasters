@@ -21,6 +21,10 @@ const Reports = (props) => {
         const speeches = await dispatch(getSpeech({speechDate: data}))
         let words = []
         for(let i =0; i < speeches.length; i++){
+            if(speeches[i].speechType === 'Table Topics Master'){
+                speeches.splice(i, 1)
+                continue
+            }
             speeches[i].number = i
             let topWords = ''
             let max = 0
@@ -61,7 +65,7 @@ const Reports = (props) => {
         }
     }
     useEffect(async ()=>{
-        updateReports()
+        updateReports(today)
     }, [])
     useEffect(async ()=>{
         updateReports(date)

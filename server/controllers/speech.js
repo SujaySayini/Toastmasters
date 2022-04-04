@@ -1,4 +1,6 @@
 import e from "express";
+import { toNamespacedPath } from "path";
+import evaluationModel from "../models/evaluationModel.js";
 import speechModel from "../models/speechModel.js"
 
 export const getSpeech = async (req, res)=>{
@@ -48,10 +50,20 @@ export const createSpeech = async (req, res)=>{
 export const deleteSpeech = async (req, res)=>{
     try {
         const speech = req.body;
-        const speeches = await speechModel.deleteOne({speechDate: req.body.speechDate, speechType: req.body.speechType, speechGiver: req.body.speechGiver, speechTitle: req.body.speechTitle});
-        console.log(speeches);
-        res.status(200).json(speeches);
+        console.log('-------------')
+        console.log(req.body)
+        let speeches = []
+        if (req.body.speechType === 'Evaluator' ){
+            speeches = await evaluationModel.deleteOne({speechDate: req.body.speechDate, speechType: req.body.speechType, speechEvaluator: req.body.speechGiver});
+        }else if(req.body.speechType !== 'Pathways Speech'){
+            speeches = await speechModel.deleteOne({speechDate: req.body.speechDate, speechType: req.body.speechType, speechGiver: req.body.speechGiver});
+        } else {
+            speeches = await speechModel.deleteOne({speechDate: req.body.speechDate, speechType: req.body.speechType, speechGiver: req.body.speechGiver, speechTitle: req.body.speechTitle});
+        } 
+        //console.log(speeches);
+        res.status(200).json(speeches.op);
     } catch (error) {
+        console.log(error)
         res.status(404).json({message: error.message});
         
     }
@@ -68,10 +80,13 @@ export const setTime = async (req, res) => {
         const { time, speaker, type } = req.body;
         console.log('test')
         console.log(time)
-        console.log(speaker)
+        console.log('--'+speaker+'--')
         console.log(type)
+        console.log(today)
         //if(type === 'Pathways Speech' || type === 'Evaluation'){
+        //const update = await speechModel.find({speechDate: today, speechGiver: speaker}) 
         const update = await speechModel.updateOne({speechDate: today, speechType: type ,speechGiver: speaker}, {$set: {'time': time}});
+        console.log(update)
         if(update.matchedCount === 0){
             // if entry doesnt exist 
             res.status(200).send({ ifExists: 'No' });
@@ -82,6 +97,7 @@ export const setTime = async (req, res) => {
         //} 
         res.status(200);
     } catch(error){
+        console.log(error)
         res.status(404).json({message:error.message})
     }
 }
