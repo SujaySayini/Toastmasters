@@ -13,12 +13,13 @@ export const getSpeech = async (req, res)=>{
         today = mm + '/' + dd + '/' + yyyy;
         today = '03/21/2022'*/
         console.log(req.body)
-        let speeches = ''
+        let speeches = await speechModel.find(req.body);
+        /*let speeches = ''
         if(req.body.date){   
             speeches = await speechModel.find({speechDate: req.body.date});
         } else {
             speeches = await speechModel.find({speechGiver: req.body.user});
-        }
+        }*/
         console.log(speeches);
         res.status(200).json(speeches);
     } catch (error) {
@@ -93,7 +94,7 @@ export const addCommentCard = async (req, res) => {
         const yyyy = today.getFullYear();
         today = mm + '/' + dd + '/' + yyyy;
         const {speaker, positive1, positive2, negative1} = req.body
-        const commentcard = [positive1, negative1, positive2]
+        const commentcard = {positive1: positive1, negative1: negative1, positive2: positive2}
         console.log(speaker)
         console.log(today)
         const update = await speechModel.updateOne(

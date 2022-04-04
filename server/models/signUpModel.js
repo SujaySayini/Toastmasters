@@ -24,11 +24,15 @@ date:{
     type:Date,
     default:Date.now
 
-},club:String
+}, 
+club: String,
+userLevel: String, //can be General, Eboard, Admin 
+userPosition: String // if the user is an eboard member, also store their role
+
 })
 
 //module.exports=mongoose.model('users', signUpTemplate)
-const usersModel = mongoose.model('users',signUpTemplate)
-export default usersModel
+const signUpModel = mongoose.model('SignUpModel',signUpTemplate)
+export default signUpModel
 
 

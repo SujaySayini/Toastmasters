@@ -1,7 +1,7 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
-//import dotenv from 'dotenv';
+import dotenv from 'dotenv';
 import cors from 'cors';
 import speechRoutes from './routes/speech.js'
 import deleteSpeechRoutes from './routes/deletespeech.js';
@@ -10,8 +10,10 @@ import commentCardRoutes from './routes/commentCards.js'
 import evaluationRoutes from './routes/evaluation.js'
 import ahCounterRoutes from './routes/ahcounter.js'
 import signUpRoutes from './routes/user.js';
+import userRoutes from './routes/users.js';
 
-//dotenv.config()
+
+dotenv.config()
 
 const app = express();
 
@@ -28,7 +30,9 @@ app.use('/commentcard', commentCardRoutes);
 app.use('/evaluation', evaluationRoutes);
 app.use('/ahcounter', ahCounterRoutes);
 //app.use('/user', signUpRoutes);
-app.use('/signup', signUpRoutes);
+//app.use('/signup', signUpRoutes);
+//app.use('/users', userRoutes)
+app.use('/users', userRoutes)
 
 
 const CONNECTION_URL = 'mongodb+srv://m220student:m220password@cluster0.lgpgi.mongodb.net/react-hero?retryWrites=true&w=majority'

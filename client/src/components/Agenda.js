@@ -30,7 +30,7 @@ const Agenda = () => {
     const [date, setDate] = useState([today])
 
     const updateSpeeches = async (date) =>{
-        const result = await dispatch(getSpeech({date: date}));
+        const result = await dispatch(getSpeech({speechDate: date}));
         let theSpeeches = result
         let evaluations = []
         let tabletopics = []

@@ -19,7 +19,7 @@ const speechSchema = mongoose.Schema({
         Repeats: Number,
         Other: Number
     },
-    commentCards: [[String]]
+    commentCards: [Object]
 });
 
 const speechModel = mongoose.model('SpeechModel', speechSchema);
