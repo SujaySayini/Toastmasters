@@ -15,11 +15,17 @@ import ClubInfo from './components/ClubInfo';
 import SearchBar from './components/SearchBar';
 import Search from './components/Search';
 import Statistics from './components/Statistics';
+import ClubPage from './components/ClubPage';
+
 import ErrorPage from './components/ErrorPage';
 import Club2 from './components/Club2'
 import Club3 from './components/Club3'
 import Club4 from './components/Club4'
+import ClubPageInfo from'./components/ClubPageInfo'
+
 import SignUp from './components/SignUp'
+
+
 import Reports from './components/Reports';
 
 
@@ -50,7 +56,6 @@ function App(props) {
       setPage(<ManageMembers swap = {changePage}></ManageMembers>)
     } else if(newPage === 'Statistics'){
       setPage(<Statistics swap={changePage}></Statistics>)
-
     }else if(newPage === 'Errorpage'){
       setPage(<ErrorPage swap = {changePage}></ErrorPage>)
     }else if(newPage === 'Club2'){
@@ -59,16 +64,29 @@ function App(props) {
       setPage(<Club3 swap = {changePage}></Club3>)
     }else if(newPage === 'Club4'){
       setPage(<Club4 swap = {changePage}></Club4>)
+
     } else if (newPage === 'SignUp'){
       setPage(<SignUp swap={changePage}></SignUp>)
+<<<<<<< HEAD
+
+    }
+    else if (newPage === 'ClubPage'){
+      setPage(<ClubPage swap={changePage}></ClubPage>)
+
+    }
+    else if(newPage === 'ClubPageInfo'){
+      setPage(<ClubPageInfo swap = {changePage}></ClubPageInfo>)
+=======
     } else if (newPage === 'Reports'){
       setPage(<Reports swap={changePage}></Reports>)
     } else if (newPage === 'Logout'){
       localStorage.clear()
       setPage(<Login swap={changePage}></Login>)
+>>>>>>> 9ec04c097cf2325da87f2adc7edc59286351c467
     }
   }
   if(!page){
+    //
     setPage(<App page = {<Login swap = {changePage}></Login>} swap = {changePage}></App>)
   }
   return (
