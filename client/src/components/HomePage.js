@@ -7,8 +7,8 @@ import {LineChart, Line, CartesianGrid, XAxis, YAxis, ResponsiveContainer, Legen
 
 const HomePage = (props) => {
 
-    let userName = ''
-    const cname = 'name'
+    let user = ''
+    const cname = 'user'
     let name = cname + "=";
     let decodedCookie = decodeURIComponent(document.cookie);
     let ca = decodedCookie.split(';');
@@ -18,9 +18,10 @@ const HomePage = (props) => {
         c = c.substring(1);
       }
       if (c.indexOf(name) == 0) {
-        userName = c.substring(name.length, c.length);
+        user = JSON.parse(c.substring(name.length, c.length)).user;
       }
     }
+    console.log(user)
 
     
 
@@ -100,7 +101,7 @@ const HomePage = (props) => {
             <div className='container'>
                 <div className = 'row'>
                     <div style={{marginTop: '20px'}}className = 'col-lg-6'>
-                        <h4>Welcome Back, {userName}.</h4>
+                        <h4>Welcome Back, {user.first}.</h4>
                         <p>Here are some upcoming events:</p>
                         <div className='row' style={{border: 'solid 1px black', borderRadius: '5px',}}>
                             <div className='container-fluid overflow-auto' style = {{height: '30vh'}}>

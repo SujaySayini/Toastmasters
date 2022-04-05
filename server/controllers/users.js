@@ -42,8 +42,14 @@ export const signin=async (req, res)=>{
        if(!isPasswordCorrect) return res.status(400)
 .json({message: "Invalid Credentials"})
 
-        const token=jwt.sign({email: existingUser.email, id:existingUser.id}, 'test', {expiresIn:"1h" })
-        res.status(200).json({result:existingUser, token});
+        const token=jwt.sign({user: {
+          club: existingUser.club,
+          email: existingUser.email,
+          first: existingUser.first, 
+          last: existingUser.last,
+          username: existingUser.username
+        }}, 'test', {expiresIn:"1h" })
+        res.status(200).json({token: token});
         //console.log(res);
         //res.send('Signed in');
     }catch(error){
