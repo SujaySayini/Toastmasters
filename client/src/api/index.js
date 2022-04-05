@@ -79,7 +79,7 @@ export const createUser = (data) => axios.post(url7, data)
 //export const AUTH='AUTH';
 //export const LOGOUT='LOGOUT';
 export const signIn=(formData)=>baseAPI.post('/users/signin', formData).then((response) => {
-  const theData = response.status
+  const theData = response
   return theData
 }, (error) => {
   console.log(error);
