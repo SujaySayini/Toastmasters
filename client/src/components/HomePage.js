@@ -6,6 +6,25 @@ import toastyblack from '../images/toasty-black.png'
 import {LineChart, Line, CartesianGrid, XAxis, YAxis, ResponsiveContainer, Legend, Tooltip} from 'recharts';
 
 const HomePage = (props) => {
+
+    let userName = ''
+    const cname = 'name'
+    let name = cname + "=";
+    let decodedCookie = decodeURIComponent(document.cookie);
+    let ca = decodedCookie.split(';');
+    for(let i = 0; i <ca.length; i++) {
+      let c = ca[i];
+      while (c.charAt(0) == ' ') {
+        c = c.substring(1);
+      }
+      if (c.indexOf(name) == 0) {
+        userName = c.substring(name.length, c.length);
+      }
+    }
+
+    
+
+
     const data = [{
         name: '1/28',
         You: 35,
@@ -81,7 +100,7 @@ const HomePage = (props) => {
             <div className='container'>
                 <div className = 'row'>
                     <div style={{marginTop: '20px'}}className = 'col-lg-6'>
-                        <h4>Welcome Back, User Name.</h4>
+                        <h4>Welcome Back, {userName}.</h4>
                         <p>Here are some upcoming events:</p>
                         <div className='row' style={{border: 'solid 1px black', borderRadius: '5px',}}>
                             <div className='container-fluid overflow-auto' style = {{height: '30vh'}}>

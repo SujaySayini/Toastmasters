@@ -10,11 +10,8 @@ import commentCardRoutes from './routes/commentCards.js'
 import evaluationRoutes from './routes/evaluation.js'
 import ahCounterRoutes from './routes/ahcounter.js'
 import signUpRoutes from './routes/user.js';
-<<<<<<< HEAD
 import pageRoutes from './routes/pages.js';
-=======
 import userRoutes from './routes/users.js';
->>>>>>> 9ec04c097cf2325da87f2adc7edc59286351c467
 
 
 dotenv.config()
@@ -34,17 +31,14 @@ app.use('/deletespeech', deleteSpeechRoutes);
 app.use('/commentcard', commentCardRoutes);
 app.use('/evaluation', evaluationRoutes);
 app.use('/ahcounter', ahCounterRoutes);
-<<<<<<< HEAD
 //app.use('/user', signUpRoutes);
 app.use('/signup', signUpRoutes);
 app.use('/pages', pageRoutes);
-=======
 app.use('/user', signUpRoutes);
 //app.use('/signup', signUpRoutes);
 //app.use('/users', userRoutes)
 app.use('/users', userRoutes)
 
->>>>>>> 9ec04c097cf2325da87f2adc7edc59286351c467
 
 const CONNECTION_URL = 'mongodb+srv://m220student:m220password@cluster0.lgpgi.mongodb.net/react-hero?retryWrites=true&w=majority'
 const PORT = process.env.PORT || 5000;

@@ -43,7 +43,9 @@ import {BrowserRouter as Router}  from 'react-router-dom';
    e.preventDefault();
    const res = await dispatch(signin(formData, navigate))
    console.log(res);
-  if(res === 200){
+  if(res.status === 200){
+    document.cookie = 'name='+ res.data.result.first
+    console.log(document.cookie)
     props.swap('HomePage')
   } else{
     

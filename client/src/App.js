@@ -67,7 +67,6 @@ function App(props) {
 
     } else if (newPage === 'SignUp'){
       setPage(<SignUp swap={changePage}></SignUp>)
-<<<<<<< HEAD
 
     }
     else if (newPage === 'ClubPage'){
@@ -76,13 +75,11 @@ function App(props) {
     }
     else if(newPage === 'ClubPageInfo'){
       setPage(<ClubPageInfo swap = {changePage}></ClubPageInfo>)
-=======
     } else if (newPage === 'Reports'){
       setPage(<Reports swap={changePage}></Reports>)
     } else if (newPage === 'Logout'){
       localStorage.clear()
       setPage(<Login swap={changePage}></Login>)
->>>>>>> 9ec04c097cf2325da87f2adc7edc59286351c467
     }
   }
   if(!page){
