@@ -12,6 +12,7 @@ import {useNavigate} from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.css';
 import {signin} from '../actions/auth.js'
 import {useState} from 'react'
+import jwt_decode from 'jwt-decode'
   
 import {BrowserRouter as Router}  from 'react-router-dom';
 
@@ -42,12 +43,13 @@ import {BrowserRouter as Router}  from 'react-router-dom';
    
    e.preventDefault();
    const res = await dispatch(signin(formData, navigate))
-   console.log(res);
+   console.log('---------')
+   console.log(res.data.token)
+   console.log(jwt_decode(res.data.token));
 
   if(res?.status === 200){
-    document.cookie = 'name='+ res.data.result.first + ';club='+ res.data.result.club
-    //document.cookie = 'club='+ res.data.result.club
-    console.log(document.cookie)
+    //console.log(document.cookie)
+    document.cookie = 'user=' + JSON.stringify(jwt_decode(res.data.token)) 
     props.swap('HomePage')
   } else{
     

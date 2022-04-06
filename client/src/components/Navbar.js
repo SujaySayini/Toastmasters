@@ -14,27 +14,27 @@ const Navbar = (props) =>{
     //note: in order to make the page that you are currently on appear active, use ternary operator in rendering
         // {props.page === pageName ? <a className = active> : <a> <a/>}
 
-    let userName = ''
-    const cname = 'name'
-    let name = cname + "=";
-    let decodedCookie = decodeURIComponent(document.cookie);
-    let ca = decodedCookie.split(';');
-    for(let i = 0; i <ca.length; i++) {
-      let c = ca[i];
-      while (c.charAt(0) == ' ') {
-        c = c.substring(1);
-      }
-      if (c.indexOf(name) == 0) {
-        userName = c.substring(name.length, c.length);
-      }
-    }
+        let user = ''
+        const cname = 'user'
+        let name = cname + "=";
+        let decodedCookie = decodeURIComponent(document.cookie);
+        let ca = decodedCookie.split(';');
+        for(let i = 0; i <ca.length; i++) {
+          let c = ca[i];
+          while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+          }
+          if (c.indexOf(name) == 0) {
+            user = JSON.parse(c.substring(name.length, c.length)).user;
+          }
+        }
 
     return(
             <nav className = "navbar align-left navbar-dark bg-dark">
                 <div className="container-fluid">
                     <a className="navbar-brand" href="#" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show"  onClick={()=>props.swap('HomePage')}>
                         <img style = {{height:'40px', paddingRight: '10px'}} src={profilepic}/> 
-                        <span>{userName}</span>
+                        <span>{user.first}</span>
                     </a>
                     <a className="navbar-brand mx-auto" href="#" onClick={()=>props.swap('ClubInfo')}>
                         <img style = {{height:'40px', paddingRight: '10px'}} src={toastyblack}/> 
