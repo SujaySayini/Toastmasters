@@ -26,20 +26,20 @@ const Timer = () => {
         }
     }, [dispatch]);*/
 
-    function getCookie(cname) {
-        let name = cname + "=";
-        let decodedCookie = decodeURIComponent(document.cookie);
-        let ca = decodedCookie.split(';');
-        for(let i = 0; i <ca.length; i++) {
-          let c = ca[i];
-          while (c.charAt(0) == ' ') {
-            c = c.substring(1);
-          }
-          if (c.indexOf(name) == 0) {
-            return(JSON.parse(c.substring(name.length, c.length)).user);
-          }
-        }
+    let user = ''
+    const cname = 'user'
+    let name = cname + "=";
+    let decodedCookie = decodeURIComponent(document.cookie);
+    let ca = decodedCookie.split(';');
+    for(let i = 0; i <ca.length; i++) {
+      let c = ca[i];
+      while (c.charAt(0) == ' ') {
+        c = c.substring(1);
       }
+      if (c.indexOf(name) == 0) {
+        user = JSON.parse(c.substring(name.length, c.length)).user;
+      }
+    }
 
     const updateMembers = async (club) =>{
         console.log('dispatch')
@@ -60,8 +60,8 @@ const Timer = () => {
     }
     useEffect(()=>{
         console.log('updated users')
-        let user = getCookie("user");
-        console.log("club names is the " + user.club);
+        //let user = getCookie('club');
+        //console.log("club names is the " + user);
         updateMembers(user.club);
     }, []);
 
