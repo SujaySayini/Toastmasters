@@ -36,10 +36,9 @@ const Timer = () => {
             c = c.substring(1);
           }
           if (c.indexOf(name) == 0) {
-            return c.substring(name.length, c.length);
+            return(JSON.parse(c.substring(name.length, c.length)).user);
           }
         }
-        return "";
       }
 
     const updateMembers = async (club) =>{
@@ -61,9 +60,9 @@ const Timer = () => {
     }
     useEffect(()=>{
         console.log('updated users')
-        let clubName = getCookie("club");
-        console.log("club names is the " + clubName);
-        updateMembers(clubName);
+        let user = getCookie("user");
+        console.log("club names is the " + user.club);
+        updateMembers(user.club);
     }, []);
 
     const clicked = async () =>{
@@ -76,6 +75,7 @@ const Timer = () => {
         console.log(e.target.value);
         //setInputState(e.target.value);
         //setTime(100);
+        console.log(e.target.value)
         setTime(parseInt(e.target.value
             .split("")
             .filter(val => ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', ":"].includes(val))
@@ -83,7 +83,7 @@ const Timer = () => {
         //console.log(inputState);
     }
     function getValue() {
-        return ("0" + Math.floor((time / 60000) % 60)).slice(-2) + ":" + ("0" + Math.floor((time / 1000) % 60)).slice(-2) + ":" + ("0" + Math.floor((time / 10) % 1000)).slice(-2);
+        return ("0" + Math.floor((time / 60000) % 60)).slice(-2) + ":" + ("0" + Math.floor((time / 1000) % 60)).slice(-2);
     }
     function getValue2() {
         return parseInt(("0" + Math.floor((time / 60000) % 60)).slice(-2) + ("0" + Math.floor((time / 1000) % 60)).slice(-2) + ("0" + Math.floor((time / 10) % 1000)).slice(-2));
@@ -94,8 +94,8 @@ const Timer = () => {
 
         if (start) {
             interval = setInterval(() => {
-                setTime(prevTime => prevTime + 10)
-            }, 10)
+                setTime(prevTime => prevTime + 1000)
+            }, 1000)
         } else {
             clearInterval(interval);
         }
@@ -129,29 +129,27 @@ const Timer = () => {
     }
 
     return (
-        <div>
-            <h6>Directions: As the timer, You will time the Table Topics speakers, formal speeches, and the evaluations.
+        <div className = 'container mycard2' style={{marginTop: '50px'}}>
+            <h5 style = {{marginTop: '20px'}}>Directions: </h5>
+            <h6>As the timer, You will time the Table Topics speakers, formal speeches, and the evaluations.
                 You will also alert each speaker of the time they have left, using the green, yellow, and red cards, which denote specific times remaining.</h6>
             <div class="container">
-                <div className='row align-items-center' style={{ margin: '2em' }}>
-                    <h4 className='col-2'>Name:</h4>
-                    <div className='row col-3'>
+                <div className='row align-items-left' style={{ margin: '2em' }}>
+                    <div className='col-12'>
+                        <span style={{display: 'inline-block', width: '100px'}}>Name: </span>
                         <DropDownList name={currMember} elements={members} setSelected={setCurrMember}></DropDownList>
                     </div>
-                    <h4 className='col-2'>Speech Type:</h4>
-                    <div className='row col-3'>
+                    <div className='col-12' style={{marginTop: '20px'}}>
                         {/* Evaluation, Prepared Speech, Table Topics */}
+                        <span style={{display: 'inline-block', width: '100px'}}>Member: </span>
                         <DropDownList
                             name={currSpeech}
                             elements={["Evaluator", "Pathways Speech", "Table Topics"]}
                             setSelected={setSpeech} />
                     </div>
-                    <div className=" col-2">
-                        <button type='button' className='btn btn-success' onClick = {clicked} /* onClick = {clicked} */ >Search!</button>
-                    </div>
                 </div>
             </div>
-            <div>
+            <div className="mycard2" style={{marginLeft: '15%', marginRight: '15%', marginBottom: '20px'}}>
                 <h1>Stopwatch</h1>
                 <h1>
                     <Fragment>
@@ -169,14 +167,15 @@ const Timer = () => {
                     </Fragment>
 
                 </h1>
-                <div>
-                    <button onClick={() => setStart(true)}>Start</button>
-                    <button onClick={() => setStart(false)}>Stop</button>
-                    <button onClick={() => { setTime(0); setStart(false); }}>Reset</button>
-                    <button onClick={() => setPTag(!isPTag)}>Edit</button>
+                <div >
+                    
+                    <button className = 'btn' style={{marginLeft: '5px', marginRight: '5px', color: 'white', backgroundColor: 'rgb(119, 36, 50)'}} onClick={() => setStart(true)}>Start</button>
+                    <button className = 'btn' style={{marginLeft: '5px', marginRight: '5px', color: 'white', backgroundColor: 'rgb(119, 36, 50)'}} onClick={() => setStart(false)}>Stop</button>
+                    <button className = 'btn' style={{marginLeft: '5px', marginRight: '5px', color: 'white', backgroundColor: 'rgb(119, 36, 50)'}} onClick={() => { setTime(0); setStart(false); }}>Reset</button>
+                    <button className = 'btn' style={{marginLeft: '5px', marginRight: '5px', color: 'white', backgroundColor: 'rgb(119, 36, 50)'}} onClick={() => setPTag(!isPTag)}>Edit</button>
                 </div>
-                <div>
-                    <button type='button' className='btn btn-success' onClick = {saveTime}>Submit!</button>
+                <div style={{marginTop: '20px', marginBottom: '20px'}}>
+                    <button type='button' className='btn' style={{color: 'white', backgroundColor: 'rgb(0, 65, 101)'}}onClick = {saveTime}>Submit!</button>
                 </div>
             </div>
 

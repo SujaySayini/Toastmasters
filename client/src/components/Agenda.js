@@ -186,9 +186,9 @@ const Agenda = () => {
         <div>
             <div className='container'>
                 <div className = 'row'>
-                    <div className = 'col-lg-7'>
+                    <div className = 'col-lg-7' style={{marginTop: '20px'}}>
                         <h4>Agenda for {date}</h4>
-                        <div className = 'mycard2' >
+                        <div className = 'mycard2' style={{ paddingTop: '10px', paddingBottom: '10px'}}>
                             <div className='container'>
                                 <div className = 'row'>
                                     <div className = 'col-7 align-self-center'>
@@ -203,20 +203,19 @@ const Agenda = () => {
                                     <div className = 'col-3' style={{marginBottom: '10px', border:"1px solid black"}}>
                                         <p style={{textDecoration: 'underline', fontWeight: 'bolder'}}>E-board Members:</p>
                                         <p style={{marginBottom: '0', textDecoration: 'underline'}}>President</p>
-                                        <p>Nicholas Schenk</p>
+                                        <p style={{marginBottom: '5px'}}>Nicholas Schenk</p>
                                         <p style={{marginBottom: '0', textDecoration: 'underline'}}>VP of Education</p>
-                                        <p>Nidhi Gurrala</p>
+                                        <p style={{marginBottom: '5px'}}>Nidhi Gurrala</p>
                                         <p style={{marginBottom: '0', textDecoration: 'underline'}}>VP of Membership</p>
-                                        <p> Gauri Kshirsgar</p>
-                                        <p style={{marginBottom: '0', textDecoration: 'underline'}}>VP of Public Relations</p>
-                                        <p>Ethan Sinyavsky</p>
+                                        <p style = {{marginBottom: '5px'}}> Gauri Kshirsgar</p>
+                                        <p style={{marginBottom: '0', textDecoration: 'underline'}}>VP of PR</p>
+                                        <p style = {{marginBottom: '5px'}}>Ethan Sinyavsky</p>
                                         <p style={{marginBottom: '0', textDecoration: 'underline'}}>Secretary</p>
-                                        <p>Harsh Sharma</p>
+                                        <p style = {{marginBottom: '5px'}}>Harsh Sharma</p>
                                         <p style={{marginBottom: '0', textDecoration: 'underline'}}>Treasurer</p>
-                                        <p>Afreen Shaalan</p>
+                                        <p style = {{marginBottom: '5px'}}>Afreen Shaalan</p>
                                         <p style={{marginBottom: '0', textDecoration: 'underline'}}>Sergeant of Arms</p>
-                                        <p>Arishita Gupta</p>
-                                        <p></p>
+                                        <p style={{marginBottom: '0'}}>Arishita Gupta</p>
                                     </div>
                                     <div className='col-9' style={{textAlign: 'left'}}>
                                         <div className='container'>
@@ -339,13 +338,13 @@ const Agenda = () => {
                                             </div>
                                             <div className = 'row' style={{marginTop:'0'}}>
                                                 <div className='col-2'>
-                                                    <p>2 min</p>
+                                                    <p style={{marginBottom:'0'}}>2 min</p>
                                                 </div>
                                                 <div className='col-6'>
-                                                    <p>Ah Counter's Report</p>
+                                                    <p style={{marginBottom:'0'}}>Ah Counter's Report</p>
                                                 </div>
                                                 <div className='col-4'>
-                                                    <p>{ahCounter.speechGiver}</p>
+                                                    <p style={{marginBottom:'0'}}>{ahCounter.speechGiver}</p>
                                                 </div>
                                             </div>
                                             <div className = 'row' style={{marginTop:'0'}}>
@@ -373,7 +372,7 @@ const Agenda = () => {
                         <div className = 'row'>
                             <h4>Sign up for a role!</h4>
                         </div>
-                        <div  className='row' style={{marginTop: '5%'}}>
+                        <div  className='row' style={{marginTop: '2.5%'}}>
                             <select id='role' className="form-select">
                                   <option selected disabled hidden>Select Role</option>
                                   <option> Pathways Speech </option>
@@ -398,13 +397,13 @@ const Agenda = () => {
 
 
 
-                        <div className ='row text-center' style={{marginTop:'3.75%', paddingLeft: '25%', paddingRight:'25%'}} >
-                            <button type='button' className = 'btn btn-success' onClick = {clicked}>Sign Up!</button>
+                        <div className ='row text-center' style={{marginTop:'3%', paddingLeft: '25%', paddingRight:'25%'}} >
+                            <button type='button' className='btn' style={{color: 'white', backgroundColor: 'rgb(0, 65, 101)'}}onClick = {clicked}>Sign Up!</button>
                         </div>
-                        <div className = 'row' style={{marginTop:'5%'}}>
-                            <h5>No longer able to fill a role? Remove it here!</h5>
+                        <div className = 'row' style={{marginTop:'7.5%'}}>
+                            <h4>No longer able to fill a role? Remove it here!</h4>
                         </div>
-                        <div className='row' style={{marginTop: '3.75%'}}>
+                        <div className='row' style={{marginTop: '2%'}}>
                             <select id='delete-role' className="form-select" >
                                   <option selected hidden>Select Role</option>
                                   <option> Pathways Speech </option>
@@ -424,11 +423,11 @@ const Agenda = () => {
                         <div  className='row' style={{marginTop: '2%'}}>
                             <textarea id='delete-title' rows="1.5" placeholder="Speech Title"></textarea>
                         </div>
-                        <div className ='row text-center' style={{marginTop:'3.75%', paddingLeft: '25%', paddingRight:'25%'}} >
-                            <button type='button' className = 'btn btn-success' onClick={deleteClicked}>Remove It!</button>
+                        <div className ='row text-center' style={{marginTop:'3%', paddingLeft: '25%', paddingRight:'25%'}} >
+                            <button type='button' className='btn' style={{color: 'white', backgroundColor: 'rgb(0, 65, 101)'}} onClick={deleteClicked}>Remove It!</button>
                         </div>
-                        <h5 style={{marginTop: '7.5%'}}>View a different date's agenda!</h5>
-                        <div className ='row text-center' style={{marginTop:'3.75%', paddingLeft: '25%', paddingRight:'25%'}} >
+                        <h4 style={{marginTop: '7.5%'}}>View a different date's agenda!</h4>
+                        <div className ='row text-center' style={{marginTop:'3%', paddingLeft: '25%', paddingRight:'25%'}} >
                             <input id='datePicker' onSelect = {selected} type='date' text='Select'></input>
                         </div>
 
