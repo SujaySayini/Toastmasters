@@ -26,6 +26,22 @@ const AhCounter = (props) => {
         alert('saved ah counter successfully.')
     }
     }
+    function getCookie(cname) {
+        let name = cname + "=";
+        let decodedCookie = decodeURIComponent(document.cookie);
+        let ca = decodedCookie.split(';');
+        for(let i = 0; i <ca.length; i++) {
+          let c = ca[i];
+          while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+          }
+          if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+          }
+        }
+        return "";
+      }
+
     const updateMembers = async (club) =>{
         console.log('dispatch')
         const result = await dispatch(getUsers({club: club}));
@@ -45,8 +61,10 @@ const AhCounter = (props) => {
     }
     useEffect(()=>{
         console.log('updated users')
-        let clubname = "Rutgers";
-        updateMembers(clubname);
+        //let clubname = "Rutgers";
+        let clubName = getCookie("club");
+        console.log("club names is the2 " + clubName);
+        updateMembers(clubName);
     }, []);
     return (
         <div>

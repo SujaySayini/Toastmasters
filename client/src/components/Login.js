@@ -48,6 +48,7 @@ import {BrowserRouter as Router}  from 'react-router-dom';
    console.log(jwt_decode(res.data.token));
 
   if(res?.status === 200){
+    //console.log(document.cookie)
     document.cookie = 'user=' + JSON.stringify(jwt_decode(res.data.token)) 
     props.swap('HomePage')
   } else{
