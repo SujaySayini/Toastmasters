@@ -8,6 +8,7 @@ import CommentCard from './CommentCard';
 import Evaluation from './Evaluation';
 import Timer from './Timer';
 import HomePage from './HomePage';
+import { rgbToHex } from '@mui/material';
 
 const Navbar = (props) =>{
 
@@ -30,15 +31,15 @@ const Navbar = (props) =>{
         }
 
     return(
-            <nav className = "navbar align-left navbar-dark bg-dark">
+            <nav className = "navbar align-left navbar-dark" style={{background: 'linear-gradient(rgb(119, 36, 50), rgb(119, 36, 50) 30%, rgb(76, 23, 32))'}} >
                 <div className="container-fluid">
                     <a className="navbar-brand" href="#" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show"  onClick={()=>props.swap('HomePage')}>
                         <img style = {{height:'40px', paddingRight: '10px'}} src={profilepic}/> 
-                        <span>{user.first}</span>
+                        <span style={{color: 'rgb(235, 235, 235)'}}>{user.first}</span>
                     </a>
                     <a className="navbar-brand mx-auto" href="#" onClick={()=>props.swap('ClubInfo')}>
-                        <img style = {{height:'40px', paddingRight: '10px'}} src={toastyblack}/> 
-                        <span>Rutgers Toastmasters</span>
+                        <img style = {{height:'40px',marginLeft: '-40px', paddingRight: '10px'}} src={toastyblack}/> 
+                        <span style={{color: 'rgb(235, 235, 235)'}}>Rutgers Toastmasters</span>
                     </a>
 
                 <button 

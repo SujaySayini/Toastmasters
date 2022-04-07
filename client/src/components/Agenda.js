@@ -188,7 +188,7 @@ const Agenda = () => {
                 <div className = 'row'>
                     <div className = 'col-lg-7'>
                         <h4>Agenda for {date}</h4>
-                        <div style={{border:"1px solid black"}}>
+                        <div className = 'mycard2' >
                             <div className='container'>
                                 <div className = 'row'>
                                     <div className = 'col-7 align-self-center'>

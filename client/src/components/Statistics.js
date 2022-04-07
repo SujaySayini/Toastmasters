@@ -11,6 +11,22 @@ import { getEvaluation } from '../actions/evaluation.js';
 
 const Statistics = (props) => {
 
+    let user = ''
+    const cname = 'user'
+    let name = cname + "=";
+    let decodedCookie = decodeURIComponent(document.cookie);
+    let ca = decodedCookie.split(';');
+    for(let i = 0; i <ca.length; i++) {
+      let c = ca[i];
+      while (c.charAt(0) == ' ') {
+        c = c.substring(1);
+      }
+      if (c.indexOf(name) == 0) {
+        user = JSON.parse(c.substring(name.length, c.length)).user;
+      }
+    }
+    console.log(user)
+
     const dispatch = useDispatch()
     const [currentSpeech, setCurrentSpeech] = useState({title: 'You have not given a speech',
     date: '', 
@@ -32,10 +48,15 @@ const Statistics = (props) => {
     const [speechNum, setSpeechNum] = useState(0)
     const [collapsed, setCollapsed] = useState(true)
     const [evalcollapsed, setEvalCollapsed] = useState(true)
+    const [charts, setCharts] = useState([0])
+    const [chartNum, setChartNum] = useState(0)
     useEffect(async ()=>{
-        const theSpeeches = await dispatch(getSpeech({speechGiver: 'Nick', speechType: 'Pathways Speech'}))
-        const theEvals = await dispatch(getEvaluation({speechGiver: 'Nick'}))
+        //for actual thing, change speechGiver to have space between them!
+        const theSpeeches = await dispatch(getSpeech({speechGiver: user.first + '' + user.last, speechType: 'Pathways Speech'}))
+        const theEvals = await dispatch(getEvaluation({speechGiver: user.first + '' + user.last}))
         console.log(theEvals)
+
+        //find corresponding evaluations for speeches
         for(let i = 0; i < theSpeeches.length; i++){
             for(let j = 0; j < theEvals.length; j++){
                 if(theSpeeches[i].speechDate === theEvals[j].speechDate && theSpeeches[i].speechGiver === theEvals[j].speechGiver){
@@ -49,6 +70,82 @@ const Statistics = (props) => {
                 }
             }
         }
+
+        //create charts
+        const firstChart = []
+        let max = 0
+        let min = 0
+        for(let i=0; i < theSpeeches.length; i++){
+            if(!theSpeeches[i].time){
+                continue
+            }
+            if(theSpeeches[i].time.includes(':')){
+                const x = theSpeeches[i].time.split(':')
+                const seconds = parseInt(x[1])
+                const minutes = parseInt(x[0])
+                let diff = 0
+                if(seconds + minutes*60 < 300){
+                    diff = seconds + minutes*60 - 300
+                } else if (seconds + minutes*60 > 420){
+                    diff = seconds + minutes *60 - 420
+                }
+                if(diff > max){
+                    max = diff+10
+                } else if(diff < min){
+                    min = diff - 10
+                }
+                firstChart.push({name: theSpeeches[i].speechDate, You: diff})
+            }
+        }
+
+        const firstLineChart = (
+            <LineChart  data={firstChart}>
+                <Line type='monotone' dataKey='You' stroke = '#884d88'></Line>
+                <CartesianGrid stroke="#ccc" />
+                <XAxis dataKey="name" />
+                <YAxis type='number' domain = {[min, max]}/>
+                <Tooltip />
+                <Legend />
+            </LineChart>
+        )
+
+        const secondChart = []
+        max = 0
+        min = 0
+        for(let i=0; i < theSpeeches.length; i++){
+            if(!theSpeeches[i].fillerWords){
+                continue
+            }
+            console.log(theSpeeches[i].fillerWords)
+            let fillerWordCount = 0
+            for(let j in theSpeeches[i].fillerWords){
+                console.log(j)
+                fillerWordCount += theSpeeches[i].fillerWords[j]
+            }
+            //const fillerWordCount = theSpeeches[i].fillerWords?.Ah + theSpeeches[i].fillerWords?.But + theSpeeches[i].fillerWords?.Er + theSpeeches[i].fillerWords?.Like + theSpeeches[i].fillerWords?.Well + theSpeeches[i].fillerWords?.So + theSpeeches[i].fillerWords?.Um + theSpeeches[i].fillerWords?.Ah + theSpeeches[i].fillerWords?.Repeats + theSpeeches[i].fillerWords?.Other       
+            console.log(fillerWordCount)
+            if(fillerWordCount > max){
+                max = fillerWordCount + 5
+            }
+            secondChart.push({name: theSpeeches[i].speechDate, You: fillerWordCount})
+        }
+        const secondLineChart = (
+            <LineChart  data={secondChart}>
+                <Line type='monotone' dataKey='You' stroke = '#884d88'></Line>
+                <CartesianGrid stroke="#ccc" />
+                <XAxis dataKey="name" />
+                <YAxis type='number' domain = {[min, max]}/>
+                <Tooltip />
+                <Legend />
+            </LineChart>
+        )
+
+        
+
+        
+        setCharts([[firstLineChart, 'Seconds Over/Under Alotted Time'], [secondLineChart, 'Total Filler Words']])
+
+
         
         setSpeeches(theSpeeches)
         console.log(theSpeeches)
@@ -109,6 +206,13 @@ const Statistics = (props) => {
         console.log(newNum)
 
     }
+
+    const changeChart = (direction) => {
+        const newNum = chartNum + direction
+        if(newNum < charts.length && newNum >= 0){
+            setChartNum(newNum)
+        }
+    }
     const collapse = () =>{
         setCollapsed(!collapsed)
     }
@@ -121,93 +225,75 @@ const Statistics = (props) => {
     const data = [{
         name: '1/28',
         You: 35,
-        
         Club: 13,
-        pv: 100,
-        amt: 100,
       },
       {
         name: '2/3',
         You: 25,
-        
         Club: 10.5,
-        pv: 100,
-        amt: 100,
       },
       {
         name: '2/10',
         You: 0,
-        
         Club: -11,
-        pv: 100,
-        amt: 100,
       },
       {
         name: '2/17',
         You: -15,
-        
         Club: 0,
-        pv: 100,
-        amt: 100,
       },
       {
         name: '2/24',
         You: 0,
-        
         Club: -11,
-        pv: 100,
-        amt: 100,
       },
       {
         name: '3/3',
         You: 45,
-        
         Club: 3,
-        pv: 100,
-        amt: 100,
       },
       {
         name: '3/10',
         You: 0,
-        
         Club: -7,
-        pv: 100,
-        amt: 100,
       },];
       
 
-    const renderLineChart = (
-        <LineChart data={data}>
-            <Line type='monotone' dataKey='You' stroke = '#884d88'></Line>
-            <Line type='monotone' dataKey='Club' stroke = '#7bcd88'></Line>
-            <CartesianGrid stroke="#ccc" />
-            <XAxis dataKey="name" />
-            <YAxis label={{ value: 'Seconds Over/Under Time', angle: -90 }} type='number' domain = {[-60, 60]}/>
-            <Tooltip />
-            <Legend />
-        </LineChart>
-    )
+    
 
     return (
         <div>
             <div className='container'>
-                <div className = 'row'>
-                        <h3>Track Your Progress</h3>
-                        <div className='container-fluid' style={{marginTop: '3vh'}}>
+                <div className = 'row' style={{marginTop: '20px'}}>
+                        <h2>Track Your Progress</h2>
+                        <div className='container mycard2' style={{marginTop: '3vh'}}>
                             <h5>Charting Your Progress:</h5>
                             <p> Click below to navigate to all charts and statistics about your recent speeches!</p>
-                            <ResponsiveContainer width="95%" height={300}>
-                                {renderLineChart}
-                            </ResponsiveContainer>
+                            <div className = 'row'>
+                                <div className='col-2'>
+                                    <button className = 'btn btn-dark' style={{marginTop:'200px'}}onClick ={()=>changeChart(-1)}>Previous Chart</button>
+                                </div>
+                                <div className = 'col-8' style={{marginLeft: '-20px'}}>
+                                    <p style={{fontWeight: 'bold', textDecoration: 'underline'}}>
+                                        {charts[0] === 0 ? ' ' : charts[chartNum][1]} </p>
+                                    {charts[0] === 0 ? <div></div> : 
+                                    <ResponsiveContainer width="100%" height={400}>
+                                        {charts[chartNum][0]}
+                                    </ResponsiveContainer>}
+                                </div>
+                                <div className='col-2'>
+                                    <button className = 'btn btn-dark' style={{marginTop:'200px'}}onClick ={()=>changeChart(1)}>Next Chart</button>
+                                </div>
+                            </div>
                     </div>
                 </div>  
                 <div className = 'row'>
-                    <div className='container-fluid' style={{marginTop: '3vh'}}>
+                    <div className='container mycard2' style={{marginTop: '3vh', padding: '5px 5px 15px 5px'}}>
                         <h5>Review Individual Speeches You Gave:</h5>
                         <p> Click through below to view information for each of your speeches!</p>
                         <div className='row'>
                         <div className='col-2'><button className = 'btn btn-dark' style={{marginTop:'200px'}}onClick ={()=>changeSpeech(-1)}>Previous Speech</button></div>
-                        <div className='col-8' style={{border:"1px solid black"}}>
+                        <div className='col-8 mycard' style={{border: '1px solid rgb(205, 205, 230)'}}>
                             <div className = 'row'>
                                 <h4>{currentSpeech.title}</h4>
                             </div>
