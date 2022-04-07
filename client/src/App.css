@@ -1,7 +1,23 @@
 @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css");
+@import url('https://fonts.googleapis.com/css2?family=Monoton&family=Quicksand:wght@400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Monoton&family=Nunito&display=swap');
 .App {
   text-align: center;
-  background-color: rgb(231, 231, 231);
+  background-color: rgb(0, 65, 101, 0.1);
+  height: 100vh;
+  width: 100vw;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6, p, li {
+  color:rgb(97, 96, 96)
+}
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Nunito';
+}
+
+p, li, a {
+  font-family: 'Quicksand';
 }
 
 .App-logo {
@@ -16,7 +32,7 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: rgb(62, 19, 26);
   min-height: 100vh;
   display: flex;
   flex-direction: column;
