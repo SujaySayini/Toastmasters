@@ -189,6 +189,7 @@ const [formData, setFormData]=useState(initialState);
        </label>
       
       </div>
+      <label>Profile Image: <input type="file" accept="image/*" id="myFile" name="filename"/></label>
 
       
        <br></br>
