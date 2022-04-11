@@ -91,7 +91,8 @@ export const signIn=(formData)=>baseAPI.post('/users/signin', formData).then((re
   console.log(error);
 });;
 export const signUp=(formData)=>baseAPI.post('/users/signup', formData).then((response) => {
-  const theData = response.status
+  //const theData = response.status
+  const theData = response
   return theData
 }, (error) => {
   console.log(error);
