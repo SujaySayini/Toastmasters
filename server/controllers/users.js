@@ -69,23 +69,38 @@ export const signup=async (req, res)=>{
 const{first, last, email, username, password, pass,securityQuestion,securityAnswer, club}=req.body; 
 const user = req.body
 const newUser = new userModel(user)
+const message=""
 
 try{
 const existingUser=await userModel.findOne({email});
 const existingUsername=await userModel.findOne({username});
 
-if(existingUser)
+if(existingUser){
     //console.log("we are here now 1")
+    message+="User already exists"+ "/n"
     return res.status(400).json({message: "User already exists! "});
 
-if(existingUsername)
+    ////return res.status(400).json({message: message});
+}
+
+else if(existingUsername){
+  message+="Username already exists!" + "/n"
     return res.status(400).json({message: "Username already exists! "});
 
- if(password!=pass)
+    ////return res.status(400).json({message: message});
+
+}
+
+ else if(password!=pass){
+   message+="Passwords don't match" + "/n"
  return res.status(400).json({message: "Passwords don't match"})
+ ////return res.status(400).json({message:message});
+
  //console.log("we are here now2");
  //const hashedPassword=await bcrypt.hash(password, 12)
 
+ }
+ else{
  ////const result=await User.create(first, last, email, username, password, club)
  await newUser.save();
        //res.status(201).json(newUser)
@@ -94,8 +109,10 @@ if(existingUsername)
  const token=jwt.sign({email: newUser.email, id:result._id}, 'test', {expiresIn:"1h" })
  res.status(200).json({newUser, token});
  //res.send("Signed Up");
- 
+ }
+
    }   catch(error){
+    return res.status(400).json({message: message});
 
    // console.log(error);
     //res.status(500).json({message: 'Something went wrong.'})

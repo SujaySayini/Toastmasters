@@ -37,7 +37,8 @@ import {useState} from 'react'
 
 
 
- const initialState={first: '', last: ' ', email: '', username: '', password:'', pass: '', securityQuestion:'In what city were you born?', securityAnswer:'', club:''};
+
+ const initialState={first: '', last: ' ', email: '', username: '', password:'', pass: '', securityQuestion:'In what city were you born?', securityAnswer:'', club:'', requestAdmin:'No'};
 
 function SignUp(props){
   //const dispatch =useDispatch();
@@ -80,13 +81,24 @@ const [formData, setFormData]=useState(initialState);
       const res=await dispatch(signup(formData, navigate))
       //console.log(res);
       //dispatchEvent(signup(formData, navigate));
-      console.log(res);
-      if(res===200){
+      console.log('__________')
+      //console.log()
+      //console.log(res.status);
+      //^not returning response 
+     
+      if(res?.status===200){
         props.swap('HomePage')
-      } else{
-        alert('Already used!')
       }
-      console.log(res);
+        else if(res?.status===400){
+        console.log(res.data.message)
+     
+
+       // alert('Already used!')
+       alert(res.data.message)
+      }
+      //console.log(res);
+      else {alert("Something went wrong");
+    }
 
     }
 
@@ -108,6 +120,7 @@ const [formData, setFormData]=useState(initialState);
        <br/> <b></b>
      </center>
       SIGN UP
+ 
   
       </h12>
       </div>
@@ -191,8 +204,19 @@ const [formData, setFormData]=useState(initialState);
       </div>
       <label>Profile Image: <input type="file" accept="image/*" id="myFile" name="filename"/></label>
 
+      <div>
+        <label>
+        Become an Admin?
+        <label> Yes</label>
+        <input type="radio" name="requestAdmin" value="Yes" onChange={handleChange} checked={formData.requestAdmin=="Yes"}/>
+        <label> No</label>
+        <input type="radio" name= "requestAdmin" value="No" onChange={handleChange} checked={formData.requestAdmin=="No"}/>
+        
+      </label>
+    </div>
+
       
-       <br></br>
+      
   
        
        <center>
