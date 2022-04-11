@@ -3,12 +3,18 @@ import 'bootstrap/dist/js/bootstrap.bundle.min';
 import Message from './Message';
 import Agenda from './Agenda';
 import toastyblack from '../images/toasty-black.png'
-import {LineChart, Line, CartesianGrid, XAxis, YAxis, ResponsiveContainer, Legend, Tooltip} from 'recharts';
-
+import React, {useEffect, useState} from 'react';
+import { useDispatch } from 'react-redux';
+import { getSpeech } from '../actions/speech';
+import {LineChart, Line, CartesianGrid, XAxis, YAxis, ResponsiveContainer, Legend, Tooltip, ScatterChart} from 'recharts';
+import './Homepage.css'
 const HomePage = (props) => {
 
-    let userName = ''
-    const cname = 'name'
+
+    const dispatch = useDispatch()
+    const [chart, setChart] = useState(<div></div>)
+    let user = ''
+    const cname = 'user'
     let name = cname + "=";
     let decodedCookie = decodeURIComponent(document.cookie);
     let ca = decodedCookie.split(';');
@@ -18,110 +24,83 @@ const HomePage = (props) => {
         c = c.substring(1);
       }
       if (c.indexOf(name) == 0) {
-        userName = c.substring(name.length, c.length);
+        user = JSON.parse(c.substring(name.length, c.length)).user;
       }
     }
+    console.log(user)
 
-    
 
+    useEffect(async ()=>{
+        //for actual thing, change speechGiver to have space between them!
+        const theSpeeches = await dispatch(getSpeech({speechGiver: user.first + '' + user.last, speechType: 'Pathways Speech'}))
 
-    const data = [{
-        name: '1/28',
-        You: 35,
-        
-        Club: 13,
-        pv: 100,
-        amt: 100,
-      },
-      {
-        name: '2/3',
-        You: 25,
-        
-        Club: 10.5,
-        pv: 100,
-        amt: 100,
-      },
-      {
-        name: '2/10',
-        You: 0,
-        
-        Club: -11,
-        pv: 100,
-        amt: 100,
-      },
-      {
-        name: '2/17',
-        You: -15,
-        
-        Club: 0,
-        pv: 100,
-        amt: 100,
-      },
-      {
-        name: '2/24',
-        You: 0,
-        
-        Club: -11,
-        pv: 100,
-        amt: 100,
-      },
-      {
-        name: '3/3',
-        You: 45,
-        
-        Club: 3,
-        pv: 100,
-        amt: 100,
-      },
-      {
-        name: '3/10',
-        You: 0,
-        
-        Club: -7,
-        pv: 100,
-        amt: 100,
-      },];
-      
+        const firstChart = []
+        let max = 0
+        let min = 0
+        for(let i=0; i < theSpeeches.length; i++){
+            if(!theSpeeches[i].time){
+                continue
+            }
+            if(theSpeeches[i].time.includes(':')){
+                const x = theSpeeches[i].time.split(':')
+                const seconds = parseInt(x[1])
+                const minutes = parseInt(x[0])
+                let diff = 0
+                if(seconds + minutes*60 < 300){
+                    diff = seconds + minutes*60 - 300
+                } else if (seconds + minutes*60 > 420){
+                    diff = seconds + minutes *60 - 420
+                }
+                if(diff > max){
+                    max = diff+10
+                } else if(diff < min){
+                    min = diff - 10
+                }
+                firstChart.push({name: theSpeeches[i].speechDate, You: diff})
+            }
+        }
 
-    const renderLineChart = (
-        <LineChart data={data}>
-            <Line type='monotone' dataKey='You' stroke = '#884d88'></Line>
-            <Line type='monotone' dataKey='Club' stroke = '#7bcd88'></Line>
-            <CartesianGrid stroke="#ccc" />
-            <XAxis dataKey="name" />
-            <YAxis label={{ value: 'Seconds Over/Under Time', angle: -90 }} type='number' domain = {[-60, 60]}/>
-            <Tooltip />
-            <Legend />
-        </LineChart>
-    )
+        const firstLineChart = (
+            <ResponsiveContainer style={{cursor: 'pointer'}} width="95%" height={275} onClick = {() => props.swap('Statistics')}>
+            <LineChart  data={firstChart}>
+                <Line type='monotone' dataKey='You' stroke = '#884d88'></Line>
+                <CartesianGrid stroke="#ccc" />
+                <XAxis dataKey="name" />
+                <YAxis type='number' domain = {[min, max]}/>
+                <Tooltip />
+                <Legend />
+            </LineChart>
+            </ResponsiveContainer>
+        )
+        setChart(firstLineChart)
+    }, [])
 
     return (
         <div>
             <div className='container'>
                 <div className = 'row'>
-                    <div style={{marginTop: '20px'}}className = 'col-lg-6'>
-                        <h4>Welcome Back, {userName}.</h4>
-                        <p>Here are some upcoming events:</p>
-                        <div className='row' style={{border: 'solid 1px black', borderRadius: '5px',}}>
-                            <div className='container-fluid overflow-auto' style = {{height: '30vh'}}>
+                    
+                    <h3 style={{marginTop: '20px'}}>Welcome Back, {user.first}.</h3>
+                    <div className = 'col-lg-6' style={{marginTop: '20px'}}>
+                            <div className='container-fluid mycard overflow-auto' style = {{height: '25vh'}}>
+                                
+                            <p style={{marginBottom: '0px'}}><strong>Upcoming Events:</strong></p>
                                 <Message swap = {props.swap} title = 'General Meeting, 2/17/2022' data = {['You signed up to be the Ah Counter for this meeting!']}/>
                                 <Message title = 'General Meeting, 2/24/2022' data = {["You haven't signed up for a role for this meeting yet!"]} swap = {props.swap}/>
                                 <Message title = 'General Meeting, 3/3/2022' data = {["You haven't signed up for a role for this meeting yet!"]} swap = {props.swap}/>
                             </div>
-                        </div>
                         
-                        <div className='container-fluid' style={{marginTop: '3vh'}}>
+                        
+                        <div className='container-fluid mycard' style={{marginTop: '3vh', cursor: 'pointer'}} onClick = {() => props.swap('Statistics')}>
                             <h4>Your Progress:</h4>
-                            <p> Click below to navigate to all charts and statistics about your recent speeches!</p>
-                            <ResponsiveContainer width="95%" height={300}>
-                                {renderLineChart}
-                            </ResponsiveContainer>
+                            <p style={{height: '48px'}}> Click below to navigate to all charts and statistics about your recent speeches!</p>
+                            {chart}
                         </div>
                     </div>
-                    <div style={{marginTop: '40px'}}className = 'col-lg-6'>
-                        <div style={{border:'1px solid black', borderRadius:'5px', backgroundColor:'#ffffff3f'}}>
+                    <div className = 'col-lg-6' style={{marginTop: '20px'}}>
+                        <div className = 'mycard' style = {{height: 'calc(28vh + 375px)'}}>
                             <h5>Recent Notifications</h5>
-                            <div className='container-fluid overflow-auto' style = {{height: '75vh'}}>  
+                            <div className='container-fluid overflow-auto' >  
                                 <div className='message row'>
                                     <div className='col-10' style={{textDecoration:'none'}}>
                                         <p> Hi all, there will be another meeting tonight from 7:45-8:45 pm tomorrow over zoom! hope to see you there! Remember to sign up for a role if you haven’t already.</p>

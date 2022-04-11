@@ -19,11 +19,11 @@ function Tracker(props) {
         <div className='container col-4' style={{paddingLeft:'2em', paddingRight:'2em'}}>
             <h6>{label}</h6>
             <div className='row'>
-                <button type="button" className="btn btn-dark col-4" onClick={() => { updateState(value - 1) }}>
+                <button type="button" className="btn col-4" style={{backgroundColor:  'rgb(119, 36, 50)', color: 'white'}} onClick={() => { updateState(value - 1) }}>
                     <span className="bi-arrow-left-short" style={{ fontSize: '1em' }}></span>
                 </button>
                 <p className="col-4">{value}</p>
-                <button type="button" className="btn btn-dark col-4" onClick={() => { updateState(value + 1) }}>
+                <button type="button" className="btn col-4" style={{backgroundColor:  'rgb(119, 36, 50)', color: 'white'}}  onClick={() => { updateState(value + 1) }}>
                     <span className="bi-arrow-right-short" style={{ fontSize: '1em' }}></span>
                 </button>
             </div>

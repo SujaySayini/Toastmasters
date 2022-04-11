@@ -77,31 +77,31 @@ const ManageMembers = (props) => {
     return (
         <div>
             <div className='container'>
-                <h1>Manage Your Club.</h1>
+                <h2 style ={{marginTop: '10px'}}>Manage Your Club.</h2>
                 <div className = 'row'>
-                    <div style={{marginTop: '20px'}}className = 'col-lg-6'>
+                    <div style={{marginTop: '5px'}}className = 'col-lg-6'>
                         <h4>Member Activity Updates</h4>
-                        <div className='row' style={{border: 'solid 1px black', borderRadius: '5px',}}>
-                            <div className='container-fluid overflow-auto' style = {{height: '30vh'}}>
+                            <div className='container-fluid mycard overflow-auto' style = {{height: '25vh'}}>
                                 <Message title = 'Ram Patel' data = {['Has attended 50% less meetings this month', 'Has not given a speech in over 5 meetings']}/>
                                 <Message title = 'Nick Schenk' data = {['Has attended 5 consecutive meetings', 'Has not held a role in over 5 meetings']} swap = {props.swap}/>
                                 <Message title = 'John Doe' data = {['Has attended 13 consecutive meetings', 'Has held a role/given a speech at 3 consecutive meetings']} swap = {props.swap}/>
                             </div>
-                        </div>
+                    
                         
-                        <div className='container-fluid' style={{marginTop: '3vh'}}>
+                        <div className='container-fluid mycard' style={{marginTop: '3vh'}}>
                             <h4>Club Progress:</h4>
                             <p> Click below to navigate to all charts and statistics about your club!</p>
-                            <ResponsiveContainer width="95%" height={300}>
+                            <ResponsiveContainer width="95%" height={275}>
                                 {renderLineChart}
                             </ResponsiveContainer>
                         </div>
                     </div>
-                    <div style={{marginTop: '40px'}}className = 'col-lg-6'>
-                        <div style={{border:'1px solid black', borderRadius:'5px', backgroundColor:'#ffffff3f'}}>
-                            <h3>Members List</h3>
+                    <div style={{marginTop: '5px'}}className = 'col-lg-6'>
+                        
+                        <h4>Members List</h4>
+                        <div className = 'mycard2' style = {{height:'calc(28vh + 351px)'}}>
                             <input style={{borderRadius:'5px', marginBottom: '10px'}} defaultValue={'Search'}></input> <button style={{marginBottom: '5px'}} className='btn btn-success'>Search</button>
-                            <div className='container-fluid overflow-auto' style = {{height: '75vh'}}>  
+                            <div className='container-fluid overflow-auto' >  
                                 <div className='message row' style={{padding:'10px'}}>
                                     <div className='col-2'>
                                         <img style={{height: '40px'}}src = {toastyblack}></img>

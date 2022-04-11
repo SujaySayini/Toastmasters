@@ -8,9 +8,9 @@ const DropDownList = (props) => {
         </li>
     );
     return (
-        <div>
+        <div style={{display: 'inline-block'}}>
             <div className="dropdown">
-                <button type="button" className="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown">
+                <button type="button" style={{width: '175px', color: 'white', backgroundColor: 'rgb(0, 65, 101)'}}className="btn dropdown-toggle" data-bs-toggle="dropdown">
                     {name}
                 </button>
                 <ul className="dropdown-menu">

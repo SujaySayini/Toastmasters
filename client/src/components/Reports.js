@@ -26,7 +26,7 @@ const Reports = (props) => {
                 continue
             }
             speeches[i].number = i
-            let topWords = ''
+            let topWords = 'None'
             let max = 0
             for(let j in speeches[i].fillerWords){
                 if(speeches[i].fillerWords[j] > max){
@@ -34,8 +34,8 @@ const Reports = (props) => {
                 }
             }
             for(let j in speeches[i].fillerWords){
-                if(speeches[i].fillerWords[j] === max){
-                    if(topWords === ''){
+                if(speeches[i].fillerWords[j] === max && max > 0){
+                    if(topWords === 'None'){
                         topWords = j
                     } else {
                         topWords += ', ' + j

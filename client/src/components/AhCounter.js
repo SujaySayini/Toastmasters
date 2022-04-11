@@ -26,6 +26,22 @@ const AhCounter = (props) => {
         alert('saved ah counter successfully.')
     }
     }
+
+    let user = ''
+    const cname = 'user'
+    let name = cname + "=";
+    let decodedCookie = decodeURIComponent(document.cookie);
+    let ca = decodedCookie.split(';');
+    for(let i = 0; i <ca.length; i++) {
+      let c = ca[i];
+      while (c.charAt(0) == ' ') {
+        c = c.substring(1);
+      }
+      if (c.indexOf(name) == 0) {
+        user = JSON.parse(c.substring(name.length, c.length)).user;
+      }
+    }
+
     const updateMembers = async (club) =>{
         console.log('dispatch')
         const result = await dispatch(getUsers({club: club}));
@@ -45,28 +61,29 @@ const AhCounter = (props) => {
     }
     useEffect(()=>{
         console.log('updated users')
-        let clubname = "Rutgers";
-        updateMembers(clubname);
+        //let clubname = "Rutgers";
+        //let clubName = getCookie("club");
+        //console.log("club names is the2 " + clubName);
+        updateMembers(user.club);
     }, []);
     return (
-        <div>
-            <h6>Directions: During the meeting, use the following table to mark down the filler words
+        <div className = 'container mycard2' style={{marginTop: '50px', paddingBottom: '20px'}}>
+            <h5 style = {{marginTop: '20px'}}>Directions: </h5>
+            <h6>During the meeting, use the following table to mark down the filler words
                 and sounds used by each speaker and then reference it when giving your report.</h6>
             <div className="container">
-                <div className='row align-items-center' style={{ margin: '2em' }}>
-                    <h4 className='col-2'>Name:</h4>
-                    <div className='row col-3'>
-                        <DropDownList name={currMember} elements={members} setSelected={setCurrMember}/>
+                <div className='row align-items-left' style={{ margin: '2em' }}>
+                    <div className='col-12'>
+                        <span style={{display: 'inline-block', width: '100px'}}>Name: </span>
+                        <DropDownList name={currMember} elements={members} setSelected={setCurrMember}></DropDownList>
                     </div>
-                    <h4 className='col-2'>Speech Type:</h4>
-                    <div className='row col-3'>
+                    <div className='col-12' style={{marginTop: '20px'}}>
+                        {/* Evaluation, Prepared Speech, Table Topics */}
+                        <span style={{display: 'inline-block', width: '100px'}}>Member: </span>
                         <DropDownList
                             name={currSpeech}
-                            elements={["Evaluation", "Pathways Speech", "Table Topics"]}
-                            setSelected={setSpeech}/>
-                    </div>
-                    <div className=" col-2">
-                        <button type='button' className='btn btn-success' onClick={() =>{console.log(currSpeech)}}>Search!</button>
+                            elements={["Evaluator", "Pathways Speech", "Table Topics"]}
+                            setSelected={setSpeech} />
                     </div>
                 </div>
                 <div className="row" style={{ margin: "2em" }}>
@@ -86,7 +103,7 @@ const AhCounter = (props) => {
                 </div>
 
                 <div>
-                    <button onClick = {saveAhCounter} type='button' className='btn btn-success'>Submit!</button>
+                    <button onClick = {saveAhCounter} type='button' className='btn' style={{color: 'white', backgroundColor: 'rgb(0, 65, 101)'}}>Submit!</button>
                 </div>
             </div>
         </div>
