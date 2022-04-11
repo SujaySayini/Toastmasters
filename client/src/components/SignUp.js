@@ -85,6 +85,7 @@ const [formData, setFormData]=useState(initialState);
       //console.log()
       //console.log(res.status);
       //^not returning response 
+      console.log(res)
      
       if(res?.status===200){
         props.swap('HomePage')

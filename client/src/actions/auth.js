@@ -37,6 +37,8 @@ export const signup =(formData, navigate) => async(dispatch) => {
 
         console.log(formData);
     const data=await api.signUp(formData);
+    console.log('---------------------')
+    console.log(data)
     return data
         ////const {data}=await api.signUp(formData);
     ////dispatch({type:AUTH, data});

@@ -95,7 +95,9 @@ export const signUp=(formData)=>baseAPI.post('/users/signup', formData).then((re
   const theData = response
   return theData
 }, (error) => {
-  console.log(error);
+  //this error function is called upon an error in the post. however it doesn't retain the data, just that an error happened. you can see this by console logging the error and seeing that its just blank
+  console.log(error)
+  return {status: 400, data: {message: 'Could Not Sign Up :('}};
 });;
 export const changePassword=(formData)=>baseAPI.post('/users/changePassword', formData).then((response) => {
   const theData = response.status

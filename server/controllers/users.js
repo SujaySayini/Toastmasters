@@ -69,50 +69,53 @@ export const signup=async (req, res)=>{
 const{first, last, email, username, password, pass,securityQuestion,securityAnswer, club}=req.body; 
 const user = req.body
 const newUser = new userModel(user)
-const message=""
+let message=""
 
 try{
-const existingUser=await userModel.findOne({email});
-const existingUsername=await userModel.findOne({username});
+  const existingUser=await userModel.findOne({email});
+  const existingUsername=await userModel.findOne({username});
 
-if(existingUser){
-    //console.log("we are here now 1")
-    message+="User already exists"+ "/n"
-    return res.status(400).json({message: "User already exists! "});
+  console.log(existingUser)
 
-    ////return res.status(400).json({message: message});
-}
+  if(existingUser){
+      console.log("we are here now 1")
+      message+="User already exists"+ "/n"
+      res.status(400).json({message: "User already exists! "});
 
-else if(existingUsername){
-  message+="Username already exists!" + "/n"
-    return res.status(400).json({message: "Username already exists! "});
+      ////return res.status(400).json({message: message});
+  }
 
-    ////return res.status(400).json({message: message});
+  else if(existingUsername){
+    message+="Username already exists!" + "/n"
+    res.status(400).json({message: "Username already exists! "});
 
-}
+      ////return res.status(400).json({message: message});
 
- else if(password!=pass){
-   message+="Passwords don't match" + "/n"
- return res.status(400).json({message: "Passwords don't match"})
- ////return res.status(400).json({message:message});
+  }
 
- //console.log("we are here now2");
- //const hashedPassword=await bcrypt.hash(password, 12)
+   else if(password!=pass){
+    message+="Passwords don't match" + "/n"
+    res.status(400).json({message: "Passwords don't match"})
+    ////return res.status(400).json({message:message});
 
- }
- else{
- ////const result=await User.create(first, last, email, username, password, club)
- await newUser.save();
-       //res.status(201).json(newUser)
- //console.log("we are here now2");
- ////const token=jwt.sign({email: result.email, id:result._id}, 'test', {expiresIn:"1h" })
- const token=jwt.sign({email: newUser.email, id:result._id}, 'test', {expiresIn:"1h" })
- res.status(200).json({newUser, token});
- //res.send("Signed Up");
- }
+    //console.log("we are here now2");
+    //const hashedPassword=await bcrypt.hash(password, 12)
 
-   }   catch(error){
-    return res.status(400).json({message: message});
+   }
+   else{
+    ////const result=await User.create(first, last, email, username, password, club)
+    await newUser.save();
+          //res.status(201).json(newUser)
+    //console.log("we are here now2");
+    ////const token=jwt.sign({email: result.email, id:result._id}, 'test', {expiresIn:"1h" })
+    const token=jwt.sign({email: newUser.email, id:result._id}, 'test', {expiresIn:"1h" })
+    res.status(200).json({newUser, token});
+    //res.send("Signed Up");
+   }
+
+} catch(error){
+  console.log(error)
+  res.status(400).json({message: message});
 
    // console.log(error);
     //res.status(500).json({message: 'Something went wrong.'})
