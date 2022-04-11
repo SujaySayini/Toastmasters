@@ -12,7 +12,6 @@ const Evaluation = () => {
     const [currMember, setCurrMember] = useState("Member");
     const [currSpeech, setSpeech] = useState("Type of Speech");
     const [date, setDate] = useState("");
-    const [evaluator, setEvaluator] = useState("");
     const [positive, setPositive] = useState("");
     const [challenge, setChallenge] = useState("");
     const [improvement, setImprovement] = useState("");
@@ -26,12 +25,27 @@ const Evaluation = () => {
     const [additionalComments, setAdditionalComments] = useState("");
     const dispatch = useDispatch();
 
-   /* useEffect(async ()=>{
-        let theSpeeches = await dispatch(getSpeech());
-        for(let i =0; i < theSpeeches.length; i++){
-            console.log(theSpeeches[i])
-        }
-    }, [dispatch]); */
+    // useEffect(async ()=>{
+    //     let theSpeeches = await dispatch(getSpeech());
+    //     for(let i =0; i < theSpeeches.length; i++){
+    //         console.log(theSpeeches[i])
+    //     }
+    // }, [dispatch]);
+
+    let user = ''
+    const cname = 'user'
+    let name = cname + "=";
+    let decodedCookie = decodeURIComponent(document.cookie);
+    let ca = decodedCookie.split(';');
+    for(let i = 0; i <ca.length; i++) {
+      let c = ca[i];
+      while (c.charAt(0) == ' ') {
+        c = c.substring(1);
+      }
+      if (c.indexOf(name) == 0) {
+        user = JSON.parse(c.substring(name.length, c.length)).user;
+      }
+    }
 
     const updateMembers = async (club) =>{
         console.log('dispatch')
@@ -51,16 +65,16 @@ const Evaluation = () => {
     }
     useEffect(()=>{
         console.log('updated users')
-        let clubname = "Rutgers";
-        updateMembers(clubname);
+        updateMembers(user.club);
     }, []);
 
     const handleSubmit = (evt) => {
         evt.preventDefault();
+        let name = user.first + " " + user.last;
         dispatch(createEvaluation({speechDate: date,
                                    speechGiver: currMember, 
                                    speechType: currSpeech,
-                                   speechEvaluator: evaluator, 
+                                   speechEvaluator: name, 
                                    positive: positive, 
                                    challenge: challenge, 
                                    improvement: improvement,
@@ -74,7 +88,6 @@ const Evaluation = () => {
                                    additionalComments: additionalComments
                                 }))
         setDate("");
-        setEvaluator("");
         setCurrMember("Member");
         setSpeech("Type of Speech")
         setPositive("");
@@ -130,12 +143,6 @@ const Evaluation = () => {
                     <div className = "col-md-8" rows="1" >
                         <input id='datePicker' style={{width: "100%"}} onSelect = {selected} type='date' text='Select'></input>
                     </div>
-                </div>
-                <div className="row my-4">
-                    <label className="col-md-3" style={{fontWeight: "bold", textAlign: "left"}}>
-                        Evaluator:
-                    </label>
-                    <textarea className="col-md-8" align="left" rows="1" value={evaluator} onChange={e => setEvaluator(e.target.value)}/>
                 </div>
                 <div className="row my-4">
                     <label className="col-md-3" style={{fontWeight: "bold", textAlign: "left"}}>
@@ -338,7 +345,7 @@ const Evaluation = () => {
                 </div>
                 <button
                     type="submit"
-                    disabled={(date && currMember && !(currMember === "Member") && currSpeech && !(currSpeech === "Type of Speech") && evaluator && positive && improvement && challenge && clarity && vocalVariety && eyeContact && gestures && audienceAwareness && comfortLevel && interest) ? false:true}
+                    disabled={(date && currMember && !(currMember === "Member") && currSpeech && !(currSpeech === "Type of Speech") && positive && improvement && challenge && clarity && vocalVariety && eyeContact && gestures && audienceAwareness && comfortLevel && interest) ? false:true}
                     className="btn btn-block btn-primary mt-3 text-uppercase"
                 >
                     Submit
