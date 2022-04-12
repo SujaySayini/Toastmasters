@@ -3,8 +3,95 @@ import 'bootstrap/dist/js/bootstrap.bundle.min';
 import Message from './Message';
 import toastyblack from '../images/toasty-black.png'
 import {LineChart, Line, CartesianGrid, XAxis, YAxis, ResponsiveContainer, Legend, Tooltip} from 'recharts';
+import { getUsers } from '../actions/user';
+import React, {useEffect, useState} from 'react';
+import { useDispatch } from 'react-redux';
+import ExpandLess from '@mui/icons-material/ExpandLess';
+import ExpandMore from '@mui/icons-material/ExpandMore';
 
 const ManageMembers = (props) => {
+    const dispatch = useDispatch()
+
+    const[user, setUser] = useState([])
+    const[members, setMembers] = useState([])
+    const[memberList, setMemberList] = useState([])
+    const[minimize, setMinimize] = useState(false)
+    const test = (id) => {
+        var d = document.getElementById(id);
+        if(d.className === 'visible'){
+            
+            d.className = "invisible";
+        } else {
+            d.className = "visible";
+        }
+        console.log(id)
+    }
+    const updateMembers = async (club) =>{
+        //first, get the eboard and other club information
+
+
+        console.log('dispatch')
+        let result = await dispatch(getUsers({club: club}));
+        
+        console.log(result);
+    
+        setMemberList(result)
+        const elements = result.map((user) => {
+            let title = ''
+            if(user.title){
+                title = user.title
+            }
+            if(user.name){
+                return {user: user.name, title: title, pos: user.pos};
+            }else if(user.first){
+                if(user.last){
+                    return {user: user.first + " " + user.last, title: title, pos: user.pos}
+                }
+                return {user: user.first, title: title, pos: user.pos}
+            }
+            return {user: 'no name', title: title, pos: user.pos};
+        })
+        const listElements = elements.map((m) => 
+            <div onClick = {()=>test(m.user)}className='message row' style={{marginLeft: '10px', marginRight: '10px',padding:'10px'}}>
+                <div className='col-2'>
+                    <img style={{height: '40px'}}src = {toastyblack}></img>
+                </div>
+
+                <div className='col-6' style={{textDecoration:'none'}}>
+                    <p>{m.user}</p>
+                </div>
+
+                <div className='col-4'>
+                    <p style={{fontStyle:'italic'}}>{m.title}</p>
+                </div>
+                <div id = {m.user} className = 'visible'>Test</div>
+            </div>
+            
+        );
+        setMembers(listElements)
+    
+    }
+
+    useEffect(()=>{ 
+        let temp = ''
+        const cname = 'user'
+        let name = cname + "=";
+        let decodedCookie = decodeURIComponent(document.cookie);
+        let ca = decodedCookie.split(';');
+        for(let i = 0; i <ca.length; i++) {
+          let c = ca[i];
+          while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+          }
+          if (c.indexOf(name) == 0) {
+            temp = JSON.parse(c.substring(name.length, c.length)).user;
+          }
+        }
+        setUser(temp)
+        updateMembers(temp.club)
+        console.log(temp)
+    }, [])
+
     const data = [{
         name: '1/28',
         You: 35,
@@ -81,11 +168,26 @@ const ManageMembers = (props) => {
                 <div className = 'row'>
                     <div style={{marginTop: '5px'}}className = 'col-lg-6'>
                         <h4>Member Activity Updates</h4>
-                            <div className='container-fluid mycard overflow-auto' style = {{height: '25vh'}}>
-                                <Message title = 'Ram Patel' data = {['Has attended 50% less meetings this month', 'Has not given a speech in over 5 meetings']}/>
-                                <Message title = 'Nick Schenk' data = {['Has attended 5 consecutive meetings', 'Has not held a role in over 5 meetings']} swap = {props.swap}/>
-                                <Message title = 'John Doe' data = {['Has attended 13 consecutive meetings', 'Has held a role/given a speech at 3 consecutive meetings']} swap = {props.swap}/>
-                            </div>
+                        {minimize 
+                        ? <div className='container-fluid mycard overflow-auto' style = {{height: 'calc(28vh + 351.5px)'}}>
+                            <nav class='navbar sticky-top' >
+                                <ExpandLess onClick = {()=>setMinimize(!minimize)} style={{cursor: 'pointer', color: 'rgb(70, 70, 75)', position:'absolute', right: '-20px', top: '5px'}} />
+                            </nav>
+                            <Message title = 'Ram Patel' data = {['Has attended 50% less meetings this month', 'Has not given a speech in over 5 meetings']}/>
+                            <Message title = 'Nick Schenk' data = {['Has attended 5 consecutive meetings', 'Has not held a role in over 5 meetings']} swap = {props.swap}/>
+                            <Message title = 'John Doe' data = {['Has attended 13 consecutive meetings', 'Has held a role/given a speech at 3 consecutive meetings']} swap = {props.swap}/>
+                        </div>
+                        :
+                        <div>
+                        <div className='container-fluid mycard overflow-auto' style = {{height: '25vh'}}>
+                            <nav class='navbar sticky-top' >
+                                <ExpandMore onClick = {()=>setMinimize(!minimize)} style={{cursor: 'pointer', color: 'rgb(70, 70, 75)', position:'absolute', right: '-20px', top: '5px'}} />
+                            </nav>
+                            <Message title = 'Ram Patel' data = {['Has attended 50% less meetings this month', 'Has not given a speech in over 5 meetings']}/>
+                            <Message title = 'Nick Schenk' data = {['Has attended 5 consecutive meetings', 'Has not held a role in over 5 meetings']} swap = {props.swap}/>
+                            <Message title = 'John Doe' data = {['Has attended 13 consecutive meetings', 'Has held a role/given a speech at 3 consecutive meetings']} swap = {props.swap}/>
+                            
+                         </div>
                     
                         
                         <div className='container-fluid mycard' style={{marginTop: '3vh'}}>
@@ -95,67 +197,16 @@ const ManageMembers = (props) => {
                                 {renderLineChart}
                             </ResponsiveContainer>
                         </div>
+                        </div>
+                        }
                     </div>
                     <div style={{marginTop: '5px'}}className = 'col-lg-6'>
                         
                         <h4>Members List</h4>
-                        <div className = 'mycard2' style = {{height:'calc(28vh + 351px)'}}>
-                            <input style={{borderRadius:'5px', marginBottom: '10px'}} defaultValue={'Search'}></input> <button style={{marginBottom: '5px'}} className='btn btn-success'>Search</button>
-                            <div className='container-fluid overflow-auto' >  
-                                <div className='message row' style={{padding:'10px'}}>
-                                    <div className='col-2'>
-                                        <img style={{height: '40px'}}src = {toastyblack}></img>
-                                    </div>
-
-                                    <div className='col-6' style={{textDecoration:'none'}}>
-                                        <p>User Name</p>
-                                    </div>
-
-                                    <div className='col-4'>
-                                        <p style={{fontStyle:'italic'}}>President</p>
-                                    </div>
-                                </div>
-                                <div className='message row' style={{padding:'10px'}}>
-                                    <div className='col-2'>
-                                        <img style={{height: '40px'}}src = {toastyblack}></img>
-                                    </div>
-
-                                    <div className='col-6' style={{textDecoration:'none'}}>
-                                        <p>User Name #2</p>
-                                    </div>
-
-                                    <div className='col-4'>
-                                        <p style={{fontStyle:'italic'}}> Vice President</p>
-                                    </div>
-                                </div>
-
-                                <div className='message row' style={{padding:'10px'}}>
-                                    <div className='col-2'>
-                                        <img style={{height: '40px'}}src = {toastyblack}></img>
-                                    </div>
-
-                                    <div className='col-6' style={{textDecoration:'none'}}>
-                                        <p>User Name</p>
-                                    </div>
-
-                                    <div className='col-4'>
-                                        <p style={{fontStyle:'italic'}}></p>
-                                    </div>
-                                </div>
-                                <div className='message row' style={{padding:'10px'}}>
-                                    <div className='col-2'>
-                                        <img style={{height: '40px'}}src = {toastyblack}></img>
-                                    </div>
-
-                                    <div className='col-6' style={{textDecoration:'none'}}>
-                                        <p>User Name</p>
-                                    </div>
-
-                                    <div className='col-4'>
-                                        <p style={{fontStyle:'italic'}}></p>
-                                    </div>
-                                </div>
-                            </div>
+                        <div className = 'container-fluid mycard overflow-auto' style = {{height:'calc(28vh + 351px)', paddingTop: '10px'}}>
+                            {members} 
+                               
+                            
 
                             
 

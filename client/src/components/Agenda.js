@@ -19,6 +19,7 @@ const Agenda = () => {
     //console.log("HERE:")
     //console.log(speech)
     const dispatch = useDispatch();
+
     
     let today = new Date();
     const dd = String(today.getDate()).padStart(2, '0');
@@ -33,9 +34,46 @@ const Agenda = () => {
     const [members, setMembers] = useState([])
     const [timer, setTimer] = useState({speechGiver: 'None'})
     const [ahCounter, setAhCounter] = useState({speechGiver: 'None'})
+    const [user, setUser] = useState([])
+
+
+
+    const [pres, setPres] = useState("None")
+    const [vpe, setVpe] = useState("None")
+    const [vpm, setVpm] = useState("None")
+    const [treasurer, setTreasuer] = useState("None")
+    const [saa, setSaa] = useState("None")
+    const [vppr, setVppr] = useState("None")
+    const [sec, setSec] = useState("None")
+
 
 
     const updateMembers = async (club) =>{
+        //first, get the eboard and other club information
+
+        const eboard = await dispatch(getUsers({club: club, userLevel: "Eboard"}))
+        for(let i =0; i < eboard.length; i++){
+            switch(eboard[i].title){
+                case 'President':
+                    setPres(eboard[i].first + ' ' + eboard[i].last)
+                case 'Vice President of Education':
+                    setVpe(eboard[i].first + ' ' + eboard[i].last)
+                case 'Vice President of Public Relations':
+                    setVppr(eboard[i].first + ' ' + eboard[i].last)
+                case 'Secretary':
+                    setSec(eboard[i].first + ' ' + eboard[i].last)
+                case 'Treasurer':
+                    setTreasuer(eboard[i].first + ' ' + eboard[i].last)
+                case 'Vice President of Membership':
+                    setVpm(eboard[i].first + ' ' + eboard[i].last)
+                case 'Sargeant at Arms':
+                    setSaa(eboard[i].first + ' ' + eboard[i].last)
+            }
+
+        }
+
+
+
         console.log('dispatch')
         const result = await dispatch(getUsers({club: club}));
         console.log(result);
@@ -58,16 +96,31 @@ const Agenda = () => {
         setMembers(listElements)
     
     }
-    useEffect(()=>{
-        console.log('updated users')
-        let clubname = "Rutgers";
-        updateMembers(clubname);
-    }, []);
+
+    useEffect(()=>{ 
+        let temp = ''
+        const cname = 'user'
+        let name = cname + "=";
+        let decodedCookie = decodeURIComponent(document.cookie);
+        let ca = decodedCookie.split(';');
+        for(let i = 0; i <ca.length; i++) {
+          let c = ca[i];
+          while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+          }
+          if (c.indexOf(name) == 0) {
+            temp = JSON.parse(c.substring(name.length, c.length)).user;
+          }
+        }
+        setUser(temp)
+        updateMembers(temp.club)
+        console.log(temp)
+    }, [])
 
 
     const updateSpeeches = async (date) =>{
-        const result = await dispatch(getSpeech({speechDate: date}));
-        const eval_res = await dispatch(getEvaluation({speechDate: date}))
+        const result = await dispatch(getSpeech({speechDate: date, clubName: user.club}));
+        const eval_res = await dispatch(getEvaluation({speechDate: date, clubName: user.club}))
         let theSpeeches = result
         let evaluations = []
         let tabletopics = []
@@ -142,12 +195,12 @@ const Agenda = () => {
                 alert('there are not enough speeches for you to sign up to be an evaluator')
                 return
             }
-            await(dispatch(createEvaluation({speechDate: date,
+            await(dispatch(createEvaluation({clubName: user.club, speechDate: date,
                 speechGiver: speeches[eval_length].speechGiver, 
                 speechType: role,
                 speechEvaluator: name})))
         } else{
-            await dispatch(createSpeech({speechType: role, speechGiver: name, speechDate: date, speechTitle: title,  fillerWords: {
+            await dispatch(createSpeech({clubName: user.club, speechType: role, speechGiver: name, speechDate: date, speechTitle: title,  fillerWords: {
                 Ah: 0,
                 Um: 0,
                 Er: 0,
@@ -170,7 +223,7 @@ const Agenda = () => {
         if(role === 'Select Role' || name === 'Select Name'){
             return
         }
-        await dispatch(deleteSpeech({speechType: role, speechGiver: name, speechDate: date, speechTitle: title}))
+        await dispatch(deleteSpeech({clubName: user.club, speechType: role, speechGiver: name, speechDate: date, speechTitle: title}))
         updateSpeeches(date)
     }
     const selected = () => { //dates
@@ -192,7 +245,7 @@ const Agenda = () => {
                             <div className='container'>
                                 <div className = 'row'>
                                     <div className = 'col-7 align-self-center'>
-                                        <p>Toastmasters International<br></br> Rutgers Chapter <br></br>February 10th, 7:45-8:45 p.m.</p>
+                                        <p>Toastmasters International<br></br> {user.club} <br></br>February 10th, 7:45-8:45 p.m.</p>
                                     </div>
                                     <div className='col-5'>
                                         <img style={{height:'7.5vw'}}src = {toastyblack}></img>
@@ -203,19 +256,19 @@ const Agenda = () => {
                                     <div className = 'col-3' style={{marginBottom: '10px', border:"1px solid black"}}>
                                         <p style={{textDecoration: 'underline', fontWeight: 'bolder'}}>E-board Members:</p>
                                         <p style={{marginBottom: '0', textDecoration: 'underline'}}>President</p>
-                                        <p style={{marginBottom: '5px'}}>Nicholas Schenk</p>
+                                        <p style={{marginBottom: '5px'}}>{pres}</p>
                                         <p style={{marginBottom: '0', textDecoration: 'underline'}}>VP of Education</p>
-                                        <p style={{marginBottom: '5px'}}>Nidhi Gurrala</p>
+                                        <p style={{marginBottom: '5px'}}>{vpe}</p>
                                         <p style={{marginBottom: '0', textDecoration: 'underline'}}>VP of Membership</p>
-                                        <p style = {{marginBottom: '5px'}}> Gauri Kshirsgar</p>
+                                        <p style = {{marginBottom: '5px'}}>{vpm}</p>
                                         <p style={{marginBottom: '0', textDecoration: 'underline'}}>VP of PR</p>
-                                        <p style = {{marginBottom: '5px'}}>Ethan Sinyavsky</p>
+                                        <p style = {{marginBottom: '5px'}}>{vppr}</p>
                                         <p style={{marginBottom: '0', textDecoration: 'underline'}}>Secretary</p>
-                                        <p style = {{marginBottom: '5px'}}>Harsh Sharma</p>
+                                        <p style = {{marginBottom: '5px'}}>{sec}</p>
                                         <p style={{marginBottom: '0', textDecoration: 'underline'}}>Treasurer</p>
-                                        <p style = {{marginBottom: '5px'}}>Afreen Shaalan</p>
+                                        <p style = {{marginBottom: '5px'}}>{treasurer}</p>
                                         <p style={{marginBottom: '0', textDecoration: 'underline'}}>Sergeant of Arms</p>
-                                        <p style={{marginBottom: '0'}}>Arishita Gupta</p>
+                                        <p style={{marginBottom: '0'}}>{saa}</p>
                                     </div>
                                     <div className='col-9' style={{textAlign: 'left'}}>
                                         <div className='container'>
