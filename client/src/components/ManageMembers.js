@@ -8,6 +8,7 @@ import React, {useEffect, useState} from 'react';
 import { useDispatch } from 'react-redux';
 import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
+import Expand from '@mui/icons-material/Expand'
 
 const ManageMembers = (props) => {
     const dispatch = useDispatch()
@@ -16,13 +17,49 @@ const ManageMembers = (props) => {
     const[members, setMembers] = useState([])
     const[memberList, setMemberList] = useState([])
     const[minimize, setMinimize] = useState(false)
+
+
+    //stuff I need you to do
+
+
+    // this needs to get which role was selected (the form has an id of 'new-role'+username) and then update the database to give 
+    // this user the new role. First it should check that there aren't any other club members with the role they're trying to update as u cant
+    // have 2 of the same eboard member, if there isn't then you should set their userLevel to Eboard and their title to the selected role
+
+    // if the role selected is just General Member, you should set their userLevel to general member and their title to ''
+
+    //maybe also you should confirm that they aren't making it so there are 0 eboard members in the club before changing it
+    // as you kinda need at least 1 in order to change the eboard
+
+    //to make it easy to search i pass in the email to this function
+    const changeUserRole = (userEmail) => {
+        console.log(userEmail)
+        const selectedRole = document.getElementById("new-role"+userEmail).value;
+        console.log(selectedRole)
+    }
+
+    //this literally just needs to set their clubName to ''
+
+    const removeUser = (userEmail) => {
+        console.log(userEmail)
+
+    }
+
+
+
+
     const test = (id) => {
         var d = document.getElementById(id);
-        if(d.className === 'visible'){
-            
+        if(d.className === 'visible row'){
             d.className = "invisible";
         } else {
-            d.className = "visible";
+            d.className = "visible row";
+        }
+        var d2 = document.getElementById(id+'1')
+        if(d2.className === 'visible row'){
+            d2.className = "invisible";
+        } else {
+            d2.className = "visible row";
         }
         console.log(id)
     }
@@ -42,17 +79,24 @@ const ManageMembers = (props) => {
                 title = user.title
             }
             if(user.name){
-                return {user: user.name, title: title, pos: user.pos};
+                return {user: user.name, title: title, pos: user.pos, email: user.email};
             }else if(user.first){
                 if(user.last){
-                    return {user: user.first + " " + user.last, title: title, pos: user.pos}
+                    return {user: user.first + " " + user.last, title: title, pos: user.pos, email: user.email}
                 }
-                return {user: user.first, title: title, pos: user.pos}
+                return {user: user.first, title: title, pos: user.pos, email: user.email}
             }
-            return {user: 'no name', title: title, pos: user.pos};
+            return {user: 'no name', title: title, pos: user.pos , email: user.email};
         })
         const listElements = elements.map((m) => 
-            <div onClick = {()=>test(m.user)}className='message row' style={{marginLeft: '10px', marginRight: '10px',padding:'10px'}}>
+            <div className='message' >
+                <nav class='navbar sticky-top' style={{height: 0, padding:0}}>
+                    <Expand onClick = {()=>test(m.user)} style={{cursor: 'pointer', color: 'rgb(70, 70, 75)', position:'absolute', right: '-10px', top: '10px'}} />
+                </nav>
+                
+            <div  className = 'row' style={{marginLeft: '10px', marginRight: '10px',padding:'10px'}}>
+                
+            
                 <div className='col-2'>
                     <img style={{height: '40px'}}src = {toastyblack}></img>
                 </div>
@@ -64,7 +108,45 @@ const ManageMembers = (props) => {
                 <div className='col-4'>
                     <p style={{fontStyle:'italic'}}>{m.title}</p>
                 </div>
-                <div id = {m.user} className = 'visible'>Test</div>
+            </div>
+            <div id = {m.user} className = 'row invisible' style={{}}>
+                    
+                    <div className='col-3' style={{paddingTop: '8px', paddingLeft: 0, paddingRight: 0}}>
+                        <p style={{textAlign: 'left'}}>Edit Role: </p>
+                    </div>
+                    <div className='col-6'>
+                        
+                        <select id={'new-role' + m.email} className="form-select" >
+                          <option selected hidden>Select Role</option>
+                          <option> President </option>
+                          <option> VPE</option>
+                          <option> VPPR </option>
+                          <option> VPM</option>
+                          <option> Secretary </option>
+                          <option> Treasurer</option>
+                          <option> Sargeant at Arms </option>
+                          <option>General Member</option>
+                        </select>
+                    </div>
+                    
+               
+                
+                    <div className='col-2' style={{textDecoration:'none'}}>
+                        <button className ='btn btn-dark' onClick = {()=> changeUserRole(m.email)}style={{backgroundColor: 'rgb(0, 65, 101)'}}>Submit</button>
+                    </div>
+                </div>
+                <div id = {m.user + '1'} className = 'row invisible' style={{}}>
+                    
+                    <div className='col-9' style={{textAlign: 'left', padding:'8px', paddingLeft: 0, paddingRight: 0}}>
+                        <p> Remove this user from the Club: </p>
+                    </div>
+
+                     {// ON clicking this we simply need to change the users club to be an empty string and that should work
+                }
+                    <div className='col-2' style={{ textDecoration:'none'}}>
+                        <button className ='btn btn-dark'  onClick = {()=> removeUser(m.email)} style={{backgroundColor: 'rgb(0, 65, 101)'}}>Submit</button>
+                    </div>
+                </div>
             </div>
             
         );
