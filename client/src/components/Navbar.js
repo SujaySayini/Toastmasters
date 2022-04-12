@@ -39,7 +39,7 @@ const Navbar = (props) =>{
                     </a>
                     <a className="navbar-brand mx-auto" href="#" onClick={()=>props.swap('ClubInfo')}>
                         <img style = {{height:'40px',marginLeft: '-40px', paddingRight: '10px'}} src={toastyblack}/> 
-                        <span style={{color: 'rgb(235, 235, 235)'}}>Rutgers Toastmasters</span>
+                        <span style={{color: 'rgb(235, 235, 235)'}}>{user.club} Toastmasters</span>
                     </a>
 
                 <button 

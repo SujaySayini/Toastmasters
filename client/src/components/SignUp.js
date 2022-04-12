@@ -232,7 +232,7 @@ const [formData, setFormData]=useState(initialState);
  
     <center>
     <div>
-    <a href="#" onClick = {()=>this.props.swap('Login')}>Login</a>
+    <a href="#" onClick = {()=>props.swap('Login')}>Login</a>
     </div>
     </center>
      </div>
