@@ -56,18 +56,25 @@ const Agenda = () => {
             switch(eboard[i].title){
                 case 'President':
                     setPres(eboard[i].first + ' ' + eboard[i].last)
+                    break
                 case 'Vice President of Education':
                     setVpe(eboard[i].first + ' ' + eboard[i].last)
+                    break
                 case 'Vice President of Public Relations':
                     setVppr(eboard[i].first + ' ' + eboard[i].last)
+                    break
                 case 'Secretary':
                     setSec(eboard[i].first + ' ' + eboard[i].last)
+                    break
                 case 'Treasurer':
                     setTreasuer(eboard[i].first + ' ' + eboard[i].last)
+                    break
                 case 'Vice President of Membership':
                     setVpm(eboard[i].first + ' ' + eboard[i].last)
+                    break
                 case 'Sargeant at Arms':
                     setSaa(eboard[i].first + ' ' + eboard[i].last)
+                    break
             }
 
         }

@@ -50,7 +50,7 @@ function Login2(props){
     if(res?.status === 200){
       //console.log(document.cookie)
       document.cookie = 'user=' + JSON.stringify(jwt_decode(res.data.token)) 
-      props.swap('HomePage')
+      props.swap('Agenda')
     } else{
     
       alert('Invalid Email or Password');
