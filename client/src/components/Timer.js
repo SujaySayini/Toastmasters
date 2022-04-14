@@ -141,7 +141,7 @@ const Timer = () => {
                     </div>
                     <div className='col-12' style={{marginTop: '20px'}}>
                         {/* Evaluation, Prepared Speech, Table Topics */}
-                        <span style={{display: 'inline-block', width: '100px'}}>Member: </span>
+                        <span style={{display: 'inline-block', width: '100px'}}>Type: </span>
                         <DropDownList
                             name={currSpeech}
                             elements={["Evaluator", "Pathways Speech", "Table Topics"]}

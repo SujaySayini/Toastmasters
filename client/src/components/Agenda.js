@@ -57,10 +57,10 @@ const Agenda = () => {
                 case 'President':
                     setPres(eboard[i].first + ' ' + eboard[i].last)
                     break
-                case 'Vice President of Education':
+                case 'VPE':
                     setVpe(eboard[i].first + ' ' + eboard[i].last)
                     break
-                case 'Vice President of Public Relations':
+                case 'VPPR':
                     setVppr(eboard[i].first + ' ' + eboard[i].last)
                     break
                 case 'Secretary':
@@ -69,7 +69,7 @@ const Agenda = () => {
                 case 'Treasurer':
                     setTreasuer(eboard[i].first + ' ' + eboard[i].last)
                     break
-                case 'Vice President of Membership':
+                case 'VPM':
                     setVpm(eboard[i].first + ' ' + eboard[i].last)
                     break
                 case 'Sargeant at Arms':
@@ -252,7 +252,7 @@ const Agenda = () => {
                             <div className='container'>
                                 <div className = 'row'>
                                     <div className = 'col-7 align-self-center'>
-                                        <p>Toastmasters International<br></br> {user.club} <br></br>February 10th, 7:45-8:45 p.m.</p>
+                                        <p>Toastmasters International<br></br> {user.club} <br></br>{date}, 7:45-8:45 p.m.</p>
                                     </div>
                                     <div className='col-5'>
                                         <img style={{height:'7.5vw'}}src = {toastyblack}></img>

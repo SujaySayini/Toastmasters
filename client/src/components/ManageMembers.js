@@ -32,16 +32,24 @@ const ManageMembers = (props) => {
     // as you kinda need at least 1 in order to change the eboard
 
     //to make it easy to search i pass in the email to this function
-    const changeUserRole = (userEmail, userClub) => {
+    const changeUserRole = async (userEmail, userClub) => {
         console.log(userEmail)
-        const selectedRole = document.getElementById("new-role"+userEmail).value;
+        let selectedRole = document.getElementById("new-role"+userEmail).value;
+        switch (selectedRole) {
+            case "":
+                
+                break;
+        
+            default:
+                break;
+        }
         let result = await dispatch(cUR({userEmail: userEmail, selectedRole: selectedRole, userClub: userClub}));
         console.log(selectedRole)
     }
 
     //this literally just needs to set their clubName to ''
 
-    const removeUserClub = (userEmail) => {
+    const removeUserClub = async (userEmail) => {
         console.log(userEmail)
         let result = await dispatch(rUC({userEmail: userEmail}));
         console.log(result);
@@ -77,7 +85,7 @@ const ManageMembers = (props) => {
         setMemberList(result)
         const elements = result.map((user) => {
             let title = ''
-            if(user.title){
+            if(user.title && user.title != 'General Member'){
                 title = user.title
             }
             if(user.name){

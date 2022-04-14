@@ -120,22 +120,12 @@ const Evaluation = () => {
             </a>
             <form className="container" onSubmit={handleSubmit}>
                 <div className='row align-items-center' style={{ margin: '2em' }}>
-                    <h4 className='col-2'>Name:</h4>
-                    <div className='row col-3'>
-                        <DropDownList name={currMember} elements={members} setSelected={setCurrMember}></DropDownList>
+                    <div className='col-12'>
+                            <label> <h3 style={{display: "inline", margin: '1em'}}>Name:</h3>
+                            <DropDownList name={currMember} elements={members} setSelected={setCurrMember}></DropDownList>
+                            </label>
+                        </div>
                     </div>
-                    <h4 className='col-2'>Speech Type:</h4>
-                    <div className='row col-3'>
-                        {/* Evaluation, Prepared Speech, Table Topics */}
-                        <DropDownList
-                            name={currSpeech}
-                            elements={["Evaluator", "Pathways Speech", "Table Topics"]}
-                            setSelected={setSpeech} />
-                    </div>
-                    <div className=" col-2">
-                        <button type='button' className='btn btn-success' /* onClick = {clicked} */ >Search!</button>
-                    </div>
-                </div>
                 <div className="row my-4">
                     <label className="col-md-3" style={{fontWeight: "bold", textAlign: "left"}}>
                         Date:
@@ -345,7 +335,7 @@ const Evaluation = () => {
                 </div>
                 <button
                     type="submit"
-                    disabled={(date && currMember && !(currMember === "Member") && currSpeech && !(currSpeech === "Type of Speech") && positive && improvement && challenge && clarity && vocalVariety && eyeContact && gestures && audienceAwareness && comfortLevel && interest) ? false:true}
+                    disabled={(date && currMember && !(currMember === "Member")  && positive && improvement && challenge && clarity && vocalVariety && eyeContact && gestures && audienceAwareness && comfortLevel && interest) ? false:true}
                     className="btn btn-block btn-primary mt-3 text-uppercase"
                 >
                     Submit

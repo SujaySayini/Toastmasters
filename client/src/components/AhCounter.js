@@ -21,7 +21,9 @@ const AhCounter = (props) => {
             console.log(data.ifExists);
             if(data.ifExists == "No"){
               alert("The Entry doesn't exist today. Please try again.");
-            } 
+            }  else {
+                alert('saved ah counter successfully.')
+            }
     } else {
         alert('saved ah counter successfully.')
     }
