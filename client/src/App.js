@@ -1,4 +1,4 @@
-import logo from './logo.svg';
+//import logo from './logo.svg';
 import './App.css';
 import Agenda  from './components/Agenda';
 import { useState } from 'react';
@@ -26,6 +26,7 @@ import ClubPageInfo from'./components/ClubPageInfo'
 import SignUp from './components/SignUp'
 
 import Reports from './components/Reports';
+import React from 'react';
 
 
 function App(props) {

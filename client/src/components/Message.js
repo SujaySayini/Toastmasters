@@ -2,7 +2,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import '../App.css';
 import Agenda from './Agenda';
-
+import React from 'react';
 const Message = (props) => {
 
 

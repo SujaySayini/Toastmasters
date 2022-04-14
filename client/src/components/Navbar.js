@@ -9,6 +9,7 @@ import Evaluation from './Evaluation';
 import Timer from './Timer';
 import HomePage from './HomePage';
 import { rgbToHex } from '@mui/material';
+import React from 'react'
 
 const Navbar = (props) =>{
 
@@ -34,7 +35,7 @@ const Navbar = (props) =>{
             <nav className = "navbar align-left navbar-dark" style={{background: 'linear-gradient(rgb(119, 36, 50), rgb(119, 36, 50) 30%, rgb(76, 23, 32))'}} >
                 <div className="container-fluid">
                     <a className="navbar-brand" href="#" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show"  onClick={()=>props.swap('HomePage')}>
-                        <img style = {{height:'40px', paddingRight: '10px'}} src={profilepic}/> 
+                        <img style = {{borderRadius: '20px' ,height:'40px', marginRight: '10px'}} src={profilepic}/> 
                         <span style={{color: 'rgb(235, 235, 235)'}}>{user.first}</span>
                     </a>
                     <a className="navbar-brand mx-auto" href="#" onClick={()=>props.swap('ClubInfo')}>
