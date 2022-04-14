@@ -3,7 +3,7 @@ import 'bootstrap/dist/js/bootstrap.bundle.min';
 import Message from './Message';
 import toastyblack from '../images/toasty-black.png'
 import {LineChart, Line, CartesianGrid, XAxis, YAxis, ResponsiveContainer, Legend, Tooltip} from 'recharts';
-import { getUsers } from '../actions/user';
+import { getUsers, changeUserRole as cUR, removeUserClub as rUC } from '../actions/user';
 import React, {useEffect, useState} from 'react';
 import { useDispatch } from 'react-redux';
 import ExpandLess from '@mui/icons-material/ExpandLess';
@@ -32,17 +32,19 @@ const ManageMembers = (props) => {
     // as you kinda need at least 1 in order to change the eboard
 
     //to make it easy to search i pass in the email to this function
-    const changeUserRole = (userEmail) => {
+    const changeUserRole = (userEmail, userClub) => {
         console.log(userEmail)
         const selectedRole = document.getElementById("new-role"+userEmail).value;
+        let result = await dispatch(cUR({userEmail: userEmail, selectedRole: selectedRole, userClub: userClub}));
         console.log(selectedRole)
     }
 
     //this literally just needs to set their clubName to ''
 
-    const removeUser = (userEmail) => {
+    const removeUserClub = (userEmail) => {
         console.log(userEmail)
-
+        let result = await dispatch(rUC({userEmail: userEmail}));
+        console.log(result);
     }
 
 
@@ -132,7 +134,7 @@ const ManageMembers = (props) => {
                
                 
                     <div className='col-2' style={{textDecoration:'none'}}>
-                        <button className ='btn btn-dark' onClick = {()=> changeUserRole(m.email)}style={{backgroundColor: 'rgb(0, 65, 101)'}}>Submit</button>
+                        <button className ='btn btn-dark' onClick = {()=> changeUserRole(m.email, club)}style={{backgroundColor: 'rgb(0, 65, 101)'}}>Submit</button>
                     </div>
                 </div>
                 <div id = {m.user + '1'} className = 'row invisible' style={{}}>
@@ -144,7 +146,7 @@ const ManageMembers = (props) => {
                      {// ON clicking this we simply need to change the users club to be an empty string and that should work
                 }
                     <div className='col-2' style={{ textDecoration:'none'}}>
-                        <button className ='btn btn-dark'  onClick = {()=> removeUser(m.email)} style={{backgroundColor: 'rgb(0, 65, 101)'}}>Submit</button>
+                        <button className ='btn btn-dark'  onClick = {()=> removeUserClub(m.email)} style={{backgroundColor: 'rgb(0, 65, 101)'}}>Submit</button>
                     </div>
                 </div>
             </div>

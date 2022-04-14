@@ -64,8 +64,6 @@ console.log("the data for ah " + theData);
 return theData
 }
 
-
-
 export const createSpeech = (newSpeech) => axios.post(url, newSpeech)
 export const deleteSpeech = (speech) =>axios.post(url2, speech)
 export const fetchPages = () =>axios.get(url8);
@@ -82,6 +80,8 @@ export const addCommentCards = (data) => axios.post(url4, data)
 export const createEvaluation = (data) => axios.post(url5, data)
 //export const postAhCounter = (data) => axios.post(url6, data)
 export const createUser = (data) => axios.post(url7, data)
+export const changeUserRole = (data) => axios.post('http://localhost:5000/user/changeUserRole', data)
+export const removeUserClub = (data) => axios.post('http://localhost:5000/user/removeUserClub', data)
 //export const AUTH='AUTH';
 //export const LOGOUT='LOGOUT';
 export const signIn=(formData)=>baseAPI.post('/users/signin', formData).then((response) => {

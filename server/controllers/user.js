@@ -62,3 +62,48 @@ export const getUsers = async (req, res)=>{
         
     }
 }
+
+export const changeUserRole = async (req, res) => {
+    try {
+        const { userEmail, selectedRole, userClub } = req.body;
+        if (selectedRole==="General Member"){
+            const update = await userModel.updateOne(
+                {email: userEmail},
+                {userLevel: 'General', title: 'General Member'}
+            );
+            console.log(update);
+            return res.status(200).json(update);
+        }
+        let existingUser = await userModel.findOne({club: userClub, title: selectedRole})
+        if (existingUser){
+            return res.status(400).json({message: "Selected Role not Available"})
+        }
+        else{
+            const update = await userModel.updateOne(
+                {email: userEmail},
+                {userLevel: 'Eboard', title: selectedRole}
+            );
+            console.log(update);
+            return res.status(200).json(update);
+        }
+        
+    } catch (error) {
+        res.status(404).json({message:error.message})
+    }
+    
+
+}
+
+export const removeUserClub = async (req, res) => {
+    try {
+        const { userEmail } = req.body;
+        const update = await userModel.updateOne(
+            {email: userEmail},
+            {club: ''}
+        );
+        console.log(update);
+        res.status(200).json(update);
+    } catch (error) {
+        res.status(404).json({message:error.message})
+    }
+}
