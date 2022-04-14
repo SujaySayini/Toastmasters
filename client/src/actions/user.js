@@ -58,6 +58,24 @@ export const createUser = (newUser) => async(dispatch) => {
        console.log(error);
    }
 }
+
+export const changeUserRole = (email) => async(dispatch) => {
+    try {
+        const { data } = await api.changeUserRole(email)
+        dispatch({type:"UPDATE", payload: data})
+    } catch (error) {
+        console.log(error);
+    }
+ }
+
+export const removeUserClub = (email) => async(dispatch) => {
+    try {
+        const { data } = await api.removeUserClub(email)
+        dispatch({type:"UPDATE", payload: data})
+    } catch (error) {
+        console.log(error);
+    }
+ }
  
  
  

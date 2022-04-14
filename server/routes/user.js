@@ -4,12 +4,13 @@ import express from 'express';
 //import { createUser} from "../controllers/user.js";
 import userModel from '../models/userModel.js' 
 const router = express.Router();
-import { getUsers } from "../controllers/user.js";
+import { getUsers, removeUserClub, changeUserRole } from "../controllers/user.js";
 
  
 //const express = require('express');
 router.post('/getUser', getUsers);
-
+router.post('/removeUserClub', removeUserClub)
+router.post('/changeUserRole', changeUserRole)
 
 ////////////////////////////////////////////////
 
