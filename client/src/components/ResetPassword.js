@@ -1,7 +1,7 @@
 import React from 'react';
 
 import Img from '../images/Toastmasters.png';
-import background from "./Background.JPG";
+import background from "./Background.jpg";
 import App from '../App';
 import "./custom.css";
 import HomePage from './HomePage';
@@ -14,7 +14,6 @@ import {changepassword} from '../actions/auth.js'
 import {useState} from 'react'
   
 import {BrowserRouter as Router}  from 'react-router-dom';
-
 
                                   
                                  

@@ -1,7 +1,7 @@
 import React from 'react';
 
 import Img from '../images/Toastmasters.png';
-import background from "./Background.JPG";
+import background from "./Background.jpg";
 import App from '../App';
 import "./custom.css";
 import HomePage from './HomePage';
@@ -33,30 +33,28 @@ import {BrowserRouter as Router}  from 'react-router-dom';
  
 //class Login extends React.Component{
   //const Login = () =>{
-    function Login2(props){
+function Login2(props){
   
-    const dispatch=useDispatch();
-   const navigate=useNavigate();
-   const [formData, setFormData]=useState(initialState);
+  const dispatch=useDispatch();
+  const navigate=useNavigate();
+  const [formData, setFormData]=useState(initialState);
  
- const handleSubmit= async (e) =>{
-   
-   e.preventDefault();
-   const res = await dispatch(signin(formData, navigate))
-   console.log('---------')
-   console.log(res.data.token)
-   console.log(jwt_decode(res.data.token));
+  const handleSubmit= async (e) =>{
+    console.log('test')
+    e.preventDefault();
+    const res = await dispatch(signin({email: document.getElementById('login-email').value, password: document.getElementById('login-password').value}, navigate))
+    //console.log('---------')
+    //console.log(res.data.token)
+    //console.log(jwt_decode(res.data.token));
 
-  if(res?.status === 200){
-    //console.log(document.cookie)
-    document.cookie = 'name=;';
-    document.cookie = 'club=;';
-    document.cookie = 'user=' + JSON.stringify(jwt_decode(res.data.token)) 
-    props.swap('HomePage')
-  } else{
+    if(res?.status === 200){
+      //console.log(document.cookie)
+      document.cookie = 'user=' + JSON.stringify(jwt_decode(res.data.token)) 
+      props.swap('Agenda')
+    } else{
     
-   alert('Invalid Email or Password');
-  }
+      alert('Invalid Email or Password');
+    }
   //console.log(res)
    //console.log(formData)
     
@@ -67,9 +65,7 @@ import {BrowserRouter as Router}  from 'react-router-dom';
  }
 
  const handleChange=(e)=>{
-setFormData({...formData,[e.target.name]:e.target.value})
-
-
+  setFormData({email: document.getElementById('login-email').value, password: document.getElementById('login-password').value})
  }
 
  
@@ -93,7 +89,7 @@ setFormData({...formData,[e.target.name]:e.target.value})
   
 
    
-
+//hi
    
    try{
      dispatch({type:'AUTH', data: {result, token}});
@@ -163,7 +159,7 @@ setFormData({...formData,[e.target.name]:e.target.value})
          <div>
        <label>
          Email:
-         <input name="email" label="Email" onChange={handleChange} />
+         <input id='login-email' name="email" label="Email" onChange={handleChange} />
        </label>
        </div>
        <br></br>
@@ -171,14 +167,14 @@ setFormData({...formData,[e.target.name]:e.target.value})
        <div>
        <label>
          Password:
-         <input name= "password" label="Password" input type="password" onChange={handleChange} />
+         <input id='login-password' name= "password" label="Password" input type="password" onChange={handleChange} />
        </label>
        </div>
  
        <br></br>
        
        <center>
-       <input type="submit" input value= "Sign In"  />
+       <input id = 'login-submit' type="submit" value= "Sign In"  />
        </center>
        <br></br>
 

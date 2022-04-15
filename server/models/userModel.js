@@ -46,6 +46,22 @@ date:{
     default:Date.now
 
 },
+userLevel : {
+    type : String,
+    enum : [ "General", "Eboard", "Admin" ],
+    default : "General",
+    required : true
+ },
+ requestAdmin : {
+    type : String,
+    default : "No",
+    required : false
+ },
+ title : {
+     type: String,
+     required: false
+ }
+ 
 });
 
 userSchema.pre("save", async function (next) {

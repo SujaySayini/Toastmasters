@@ -1,4 +1,4 @@
-import logo from './logo.svg';
+//import logo from './logo.svg';
 import './App.css';
 import Agenda  from './components/Agenda';
 import { useState } from 'react';
@@ -25,16 +25,34 @@ import ClubPageInfo from'./components/ClubPageInfo'
 
 import SignUp from './components/SignUp'
 
-
 import Reports from './components/Reports';
+import React from 'react';
 
 
 function App(props) {
   const [page, setPage] = useState(props.page)
+
+  let temp = ''
+  const cname = 'page'
+  let name = cname + "=";
+  let decodedCookie = decodeURIComponent(document.cookie);
+  let ca = decodedCookie.split(';');
+  for(let i = 0; i <ca.length; i++) {
+    let c = ca[i];
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) == 0) {
+      temp = c.substring(name.length, c.length);
+    }
+  }
+  console.log(temp)
   
   const changePage = (newPage) => {
+    
+    console.log('ok')
+    document.cookie= 'page='+newPage+';'
     if(newPage === 'AhCounter'){
-      console.log('ok')
       setPage(<AhCounter swap = {changePage}></AhCounter>)
     } else if(newPage === 'Timer'){
       setPage(<Timer swap = {changePage}></Timer>)
@@ -80,11 +98,19 @@ function App(props) {
     } else if (newPage === 'Logout'){
       localStorage.clear()
       setPage(<Login swap={changePage}></Login>)
+    } else {
+      localStorage.clear()
+      setPage(<Login swap={changePage}></Login>)
     }
   }
   if(!page){
     //
-    setPage(<App page = {<Login swap = {changePage}></Login>} swap = {changePage}></App>)
+    if(!temp){
+      document.cookie+= 'page=Login;'
+      setPage(<App page = {<Login swap = {changePage}></Login>} swap = {changePage}></App>)
+    } else {
+      changePage(temp)
+    }
   }
   return (
     <div className="App">   
