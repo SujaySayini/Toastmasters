@@ -3,17 +3,16 @@ import { styled, alpha } from "@mui/material/styles";
 import AppBar from "@mui/material/AppBar";
 import ClubInfo from "./ClubInfo";
 import { TextField } from "@material-ui/core";
-
+import { getClubs } from "../actions/clubpage.js";
 import InputBase from "@mui/material/InputBase";
 //import { useNavigate, useLocation } from "react-router-dom";
 
 import SearchIcon from "@mui/icons-material/Search";
 import './SearchBar.css'
 import { Button } from "@mui/material";
-import {getPage, getPageBySearch} from '../actions/search';
+import { getPage, getPageBySearch } from '../actions/search';
 import { useDispatch } from 'react-redux';
 import { Box } from "@mui/system";
-import clubData from './clubPage.json';
 import { SliderValueLabelUnstyled } from "@mui/base";
 
 
@@ -25,7 +24,7 @@ import { SliderValueLabelUnstyled } from "@mui/base";
 
 
 
-const SearchBar = (props)=> {
+const SearchBar = (props) => {
   /* const [search, setSearch] = useState("");
   const handleKeyPress = (e) => {
     if(e.keyCode == 13){
@@ -66,42 +65,72 @@ const SearchBar = (props)=> {
       </AppBar>
             
   ) */
+  const dispatch = useDispatch();
+  const [filterData, setFiltData] = useState([]);
 
-  const[filterData, setFiltData] = useState([]);
-  const handleFilter =(event) =>{
-    const word =event.target.value
+    const updateClubs = async () =>{
+      console.log('dispatch')
+      const clubData = await dispatch(getClubs());
+      
+      setFiltData(
+        clubData.filter((value)=>{
+          return value.clubName.toLowerCase();
+        })
+      );
+    }
+
+    // const clearInput = () => {
+    //   setFilteredData([]);
+    //   setWordEntered("");
+    // };
+
+  useEffect(()=>{
+      console.log('updated users')
+      updateClubs();
+  }, []);
+
+  const handleFilter = async (event) => {
+    const word = event.target.value
+    console.log("word is " + word)
+
+    const clubData = await dispatch(getClubs());
+
     const newFilter = clubData.filter((value)=>{
       return value.clubName.toLowerCase().includes(word.toLowerCase());
     });
-    if(word ===""){
-      setFiltData([]);
+      if(word ===""){
+        setFiltData(
+          clubData.filter((value)=>{
+            return value.clubName.toLowerCase();
+          })
+        );
+      }
+      else{
+      setFiltData(newFilter);
     }
-    else{
-    setFiltData(newFilter);
   }
-  }
-  
+
   return (
     <div className='search'>
-        <div className='searchInputs'>
-            <Box>
-            <input name="Search" type="text" placeholder='Search...' onChange={handleFilter}/>
-            <button type='submit' postion ="static"><SearchIcon /></button>
-            </Box>
-        {filterData.length!=0&&(
+      <div className='searchInputs'>
+        <Box>
+          <input name="Search" type="text" placeholder='Search...' onChange={handleFilter} />
+          <button type='submit' postion="static"><SearchIcon/></button>
+        </Box>
+        {filterData.length != 0 && (
           <div className="pageResult">
-          {filterData.slice(0,4).map((value, key) => {
-            console.log(value.url)
-            return <a className="dataItem" href = "#" onClick={() =>{props.swap(value.url)}}>
-              <p>{value.clubName}</p>
-    
-            </a>
-          })}
-        </div>
+            {filterData.slice(0, 30).map((value, key) => {
+              console.log(value.url)
+              return <a className="dataItem" href="#" onClick={() => { props.swap(value.url) }}>
+                <p>{value.clubName}</p>
+
+              </a>
+            })}
+          </div>
         )}
-        </div>
+      </div>
     </div>
-    
+
   )
 }
 

@@ -20,3 +20,17 @@ export const createPages = (page) => async (dispatch) => {
     }
 
 }
+
+export const getClubs = () => async (dispatch) => {
+    try {
+        //const { data } = await api.fetchSpeech(date);
+        const data2 = await api.getAllClubs();
+        //console.log(data2)
+        dispatch({type: 'FETCH', payload:data2});
+        return data2;
+    } catch (error) {
+        console.log(error.message);
+        
+    }
+
+}

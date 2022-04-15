@@ -42,6 +42,19 @@ export const getAllUsers = async (club) => {
 console.log(theData);
 return theData
 }
+
+export const getAllClubs = async () => {
+  let theData = []
+  await axios.post('http://localhost:5000/pages/getClub').then((response) => {
+  theData = response.data
+}, (error) => {
+  console.log(error);
+});
+console.log(theData);
+return theData
+}
+
+
 export const setTime = async (data) => {
   let theData = []
   await axios.post(url3, data).then((response) => {

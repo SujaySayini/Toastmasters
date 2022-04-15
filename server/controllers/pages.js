@@ -28,4 +28,18 @@ export const createPage = async (req,res)=>{
 
     }
 }
+export const getClubs = async (req, res)=>{
+    try {
+        console.log('hello')
+        let clubs = ''
+        // clubs = await userModel.find({club: req.body.club});
+        clubs = await ClubModel.find({});
+        //console.log(clubs)
+        res.status(200).json(clubs);
+    } catch (error) {
+        //console.log("fhere")
+        res.status(404).json({message: error.message});
+        
+    }
+}
 
