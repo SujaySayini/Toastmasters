@@ -44,6 +44,7 @@ export const createPage = async (req,res)=>{
 
     }
 }
+<<<<<<< HEAD
 export const getPageBySearch = async(req,res) =>{
     const searchQuery = req.query;
     console.log('hihi');
@@ -69,5 +70,20 @@ export const updatePage = async(req, res) =>{
     if(!mongoose.Types.ObjectId.isValid(_id)) return res.status(404).send("Cannot find the Page");
     const updatedPage = await ClubModel.findByIdAndUpdate(_id,targetPage,{new: true});
     res.json(updatedPage);
+=======
+export const getClubs = async (req, res)=>{
+    try {
+        console.log('hello')
+        let clubs = ''
+        // clubs = await userModel.find({club: req.body.club});
+        clubs = await ClubModel.find({});
+        //console.log(clubs)
+        res.status(200).json(clubs);
+    } catch (error) {
+        //console.log("fhere")
+        res.status(404).json({message: error.message});
+        
+    }
+>>>>>>> d4f3a5967e15b53ac7500d9531b21c1d7a7e48e0
 }
 

@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 
 const evaluationSchema = mongoose.Schema({
+    clubName: String,
     speechDate: String,
     speechGiver: String,
     speechType: String,

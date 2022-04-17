@@ -57,6 +57,10 @@ userLevel : {
     default : "No",
     required : false
  },
+ title : {
+     type: String,
+     required: false
+ }
  
 });
 

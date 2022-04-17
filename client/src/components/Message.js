@@ -2,7 +2,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import '../App.css';
 import Agenda from './Agenda';
-
+import React from 'react';
 const Message = (props) => {
 
 
@@ -11,7 +11,7 @@ const Message = (props) => {
     });
 
     return (
-        <button onClick = {()=>props.swap('Agenda')} className='message'>
+        <button style={{overflow: 'hidden', width: '90%'}} onClick = {()=>props.swap('Agenda')} className='message'>
             <p className='messageText'>{props.title}</p>
             <ul>
                 {list}

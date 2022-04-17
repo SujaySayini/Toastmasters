@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import { getSpeech } from '../actions/speech';
 import { useSelector } from 'react-redux';
 import React, {useEffect, useState} from 'react';
+import { getEvaluation } from '../actions/evaluation';
 import { FormControlLabel } from '@mui/material';
 
 const Reports = (props) => {
@@ -19,11 +20,18 @@ const Reports = (props) => {
 
     const updateReports = async (data) => {
         const speeches = await dispatch(getSpeech({speechDate: data}))
+        const evaluations = await dispatch(getEvaluation({speechDate: data}))
         let words = []
+        let iChange = 0
         for(let i =0; i < speeches.length; i++){
-            if(speeches[i].speechType === 'Table Topics Master'){
+            if(speeches[i].speechType === 'Table Topics Master' || speeches[i].speechType === 'Ah Counter' || speeches[i].speechType === 'Timer'){
                 speeches.splice(i, 1)
+                iChange++;
+                i--
                 continue
+            }
+            if(speeches[i].speechType === "Table Topics"){
+                console.log('test')
             }
             speeches[i].number = i
             let topWords = 'None'
@@ -36,6 +44,7 @@ const Reports = (props) => {
             for(let j in speeches[i].fillerWords){
                 if(speeches[i].fillerWords[j] === max && max > 0){
                     if(topWords === 'None'){
+                        console.log(j)
                         topWords = j
                     } else {
                         topWords += ', ' + j
@@ -44,11 +53,35 @@ const Reports = (props) => {
             }
             words.push(topWords)
         }
+        for(let i =0; i < evaluations.length; i++){
+            evaluations[i].number = speeches.length
+            console.log(evaluations[i].number)
+            let topWords = 'None'
+            let max = 0
+            console.log(evaluations[i].fillerWords)
+            for(let j in evaluations[i].fillerWords){
+                if(evaluations[i].fillerWords[j] > max){
+                    max = evaluations[i].fillerWords[j]
+                }
+            }
+            for(let j in evaluations[i].fillerWords){
+                if(evaluations[i].fillerWords[j] === max && max > 0){
+                    if(topWords === 'None'){
+                        topWords = j
+                    } else {
+                        topWords += ', ' + j
+                    }
+                }
+            }
+            words.push(topWords)
+            speeches.push(evaluations[i])
+        }
+        console.log(words)
         console.log(speeches)
-        const listItems = speeches.map(({speechType, speechGiver, time, number}) =>
+        const listItems = speeches.map(({speechType, speechGiver, speechEvaluator, time, number}) =>
             <tr>
                 <td scope="row">{speechType}</td>
-                <td>{speechGiver}</td>
+                <td>{speechType === 'Evaluator' ? speechEvaluator : speechGiver}</td>
                 <td>{time}</td>
                 <td>{words[number]}</td>
             </tr>
@@ -58,10 +91,10 @@ const Reports = (props) => {
 
         for(let i =0; i < speeches.length; i++){
              const { speechType, speechGiver, time, fillerWords } = speeches[i]
-             console.log(speechType)
-             console.log(speechGiver)
-             console.log(time)
-             console.log(fillerWords)
+             //console.log(speechType)
+             //console.log(speechGiver)
+             //console.log(time)
+             //console.log(fillerWords)
         }
     }
     useEffect(async ()=>{

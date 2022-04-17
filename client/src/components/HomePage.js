@@ -80,7 +80,7 @@ const HomePage = (props) => {
             <div className='container'>
                 <div className = 'row'>
                     
-                    <h3 style={{marginTop: '20px'}}>Welcome Back, {user.first}.</h3>
+                    <h3 id = 'homepage-welcome' style={{marginTop: '20px'}}>Welcome Back, {user.first}.</h3>
                     <div className = 'col-lg-6' style={{marginTop: '20px'}}>
                             <div className='container-fluid mycard overflow-auto' style = {{height: '25vh'}}>
                                 

@@ -3,11 +3,11 @@ import DropDownList from "./DropDownList";
 import { getUsers } from "../actions/user.js";
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
-import { setTimer, getSpeech } from '../actions/speech.js';
+import { setTimer } from '../actions/speech.js';
 
 
 const Timer = () => {
-    const speech = useSelector((state)=>state.speech)
+    //const speech = useSelector((state)=>state.speech)
     const dispatch = useDispatch();
     const [time, setTime] = useState(0);
     //const [inputState, setInputState] = useState("");
@@ -33,10 +33,10 @@ const Timer = () => {
     let ca = decodedCookie.split(';');
     for(let i = 0; i <ca.length; i++) {
       let c = ca[i];
-      while (c.charAt(0) == ' ') {
+      while (c.charAt(0) === ' ') {
         c = c.substring(1);
       }
-      if (c.indexOf(name) == 0) {
+      if (c.indexOf(name) === 0) {
         user = JSON.parse(c.substring(name.length, c.length)).user;
       }
     }
@@ -85,9 +85,9 @@ const Timer = () => {
     function getValue() {
         return ("0" + Math.floor((time / 60000) % 60)).slice(-2) + ":" + ("0" + Math.floor((time / 1000) % 60)).slice(-2);
     }
-    function getValue2() {
+   /* function getValue2() {
         return parseInt(("0" + Math.floor((time / 60000) % 60)).slice(-2) + ("0" + Math.floor((time / 1000) % 60)).slice(-2) + ("0" + Math.floor((time / 10) % 1000)).slice(-2));
-    }
+    }*/
 
     useEffect(() => {
         let interval = null;
@@ -117,7 +117,7 @@ const Timer = () => {
             console.log(data);
             if(data){
                 console.log(data.ifExists);
-                if(data.ifExists == "No"){
+                if(data.ifExists === "No"){
                   alert("The Entry doesn't exist today. Please try again.");
                 } else {
                     alert('saved timer successfully.');
@@ -141,7 +141,7 @@ const Timer = () => {
                     </div>
                     <div className='col-12' style={{marginTop: '20px'}}>
                         {/* Evaluation, Prepared Speech, Table Topics */}
-                        <span style={{display: 'inline-block', width: '100px'}}>Member: </span>
+                        <span style={{display: 'inline-block', width: '100px'}}>Type: </span>
                         <DropDownList
                             name={currSpeech}
                             elements={["Evaluator", "Pathways Speech", "Table Topics"]}
