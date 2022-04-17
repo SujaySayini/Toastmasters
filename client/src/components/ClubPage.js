@@ -8,10 +8,12 @@ import {getPages} from '../actions/clubpage'
 
 function ClubPage() {
   const dispatch = useDispatch();
+  
 
   useEffect(() => {
-    dispatch(getPages);
+    dispatch(getPages());
   }, [dispatch]);
+
   const pages = useSelector((state) => state.clubpage);
   console.log(pages);
 

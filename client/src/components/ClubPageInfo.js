@@ -6,15 +6,26 @@ import ErrorPage from './ErrorPage';
 import './Clubinfo.css'
 import { Paper, Typography, CircularProgress, Divider } from '@material-ui/core/';
 
-const ClubPageInfo= ()=> {
+const ClubPageInfo= ({pageId})=> {
     const dispatch = useDispatch();
-   useEffect(() =>{
-       dispatch(getPages)},[dispatch]);
+    
+    
+ 
+   
    const clubpage = useSelector((state) =>state.clubpage);
+   useEffect(() =>{
+    getPages(clubpage)},[dispatch]);
    console.log("HI");
    console.log(clubpage.length);
    console.log(clubpage);
    console.log(clubpage[clubpage.length-1]);
+   const target = [];
+   for(let i = 0; i< clubpage.length; i++){
+       if(pageId == clubpage[i]._id){
+           target = clubpage[i];
+           break;
+       }
+   }
 
 
 

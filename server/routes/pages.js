@@ -1,8 +1,10 @@
 import express from 'express';
-import{getPage, createPage} from '../controllers/pages.js'
+import{getPages,getPageBySearch, createPage, updatePage} from '../controllers/pages.js'
 
 const router = express.Router();
 
-router.get('/:id' ,getPage);
+router.get('/' ,getPages);
+router.get('/search' ,getPageBySearch);
 router.post('/', createPage);
+router.patch('/:id', updatePage);
 export default router;

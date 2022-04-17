@@ -68,15 +68,28 @@ return theData
 
 export const createSpeech = (newSpeech) => axios.post(url, newSpeech)
 export const deleteSpeech = (speech) =>axios.post(url2, speech)
-export const fetchPages = () =>axios.get(url8);
+
 export const createPages = (newPage) =>axios.post(url8, newPage)
+export const fetchAllPages = async (clubsData) => {
+  let theData = []
+  await axios.get(url8,clubsData).then((response) => {
+  theData = response.data
+}, (error) => {
+  console.log(error);
+});
+console.log("Got it");
+console.log(theData);
+return theData
+}
+
+
 
 
 //export const fetchPage=() =>baseAPI.get('/');
-//export const fetchPostsBySearch =(searchQuery) => baseAPI.get(`/search?searchQuery=${searchQuery.search || 'none'}`)
+export const fetchPageBySearch =(searchQuery) => baseAPI.get(`/pages/search?searchQuery=Club`)
 //export const setTime = (data) => axios.post(url3, data)
-export const fetchPage=() =>baseAPI.get('/');
-export const fetchPostsBySearch =(searchQuery) => baseAPI.get(`/search?searchQuery=${searchQuery.search || 'none'}`)
+//export const fetchPage=() =>baseAPI.get('/');
+//export const fetchPostsBySearch =(searchQuery) => baseAPI.get(`/search?searchQuery=${searchQuery.search || 'none'}`)
 //export const setTime = (data) => axios.post(url3, data)
 export const addCommentCards = (data) => axios.post(url4, data)
 export const createEvaluation = (data) => axios.post(url5, data)
