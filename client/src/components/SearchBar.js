@@ -10,17 +10,10 @@ import { useNavigate, useLocation } from "react-router-dom";
 import SearchIcon from "@mui/icons-material/Search";
 import './SearchBar.css'
 import { Button } from "@mui/material";
-<<<<<<< HEAD
 import {getPages, getPageBySearch} from '../actions/clubpage';
 import { useDispatch } from 'react-redux';
 import { Box } from "@mui/system";
 import clubData from './clubPage.json';
-=======
-import { getPage, getPageBySearch } from '../actions/search';
-import { useDispatch } from 'react-redux';
-import { Box } from "@mui/system";
-import { SliderValueLabelUnstyled } from "@mui/base";
->>>>>>> d4f3a5967e15b53ac7500d9531b21c1d7a7e48e0
 
 
 
@@ -32,17 +25,14 @@ import { SliderValueLabelUnstyled } from "@mui/base";
 
 
 
-<<<<<<< HEAD
 const SearchBar = (props)=> {
-=======
-const SearchBar = (props) => {
+
   /* const [search, setSearch] = useState("");
   const handleKeyPress = (e) => {
     if(e.keyCode == 13){
  
     }
   }
->>>>>>> d4f3a5967e15b53ac7500d9531b21c1d7a7e48e0
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getPages());
@@ -98,30 +88,29 @@ const SearchBar = (props) => {
   //  */
 
 
-   return (
+  //  return (
    
 
-      <AppBar className="SearchBar" position="static" style={{width:"700px",borderRadius:"5px"}}>
-        <TextField 
-      fullWidth
-      onKeyDown={handleKeyPress} 
-      name="search" 
-      label="   Search Club..."
-      variant="standard" 
-      size="small" 
-      value={search} 
-      onChange={(e) => setSearch(e.target.value)}
-      style={{
-        backgroundColor:"#66c1ca",
-        borderRadius: "5px"
-      }} />
+  //     <AppBar className="SearchBar" position="static" style={{width:"700px",borderRadius:"5px"}}>
+  //       <TextField 
+  //     fullWidth
+  //     onKeyDown={handleKeyPress} 
+  //     name="search" 
+  //     label="   Search Club..."
+  //     variant="standard" 
+  //     size="small" 
+  //     value={search} 
+  //     onChange={(e) => setSearch(e.target.value)}
+  //     style={{
+  //       backgroundColor:"#66c1ca",
+  //       borderRadius: "5px"
+  //     }} />
        
 
-      </AppBar>
+  //     </AppBar>
             
-<<<<<<< HEAD
-  ) 
-    }
+  // ) 
+  //   }
 
   
 //   return (
@@ -147,8 +136,7 @@ const SearchBar = (props) => {
     
 //   )
 // }
-=======
-  ) */
+  
   const dispatch = useDispatch();
   const [filterData, setFiltData] = useState([]);
 
@@ -217,7 +205,6 @@ const SearchBar = (props) => {
 
   )
 }
->>>>>>> d4f3a5967e15b53ac7500d9531b21c1d7a7e48e0
 
 
 
