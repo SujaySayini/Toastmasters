@@ -35,8 +35,6 @@ export const createPages = (page) => async (dispatch) => {
 
 }
 
-<<<<<<< HEAD
-=======
 export const getClubs = () => async (dispatch) => {
     try {
         //const { data } = await api.fetchSpeech(date);
@@ -50,4 +48,3 @@ export const getClubs = () => async (dispatch) => {
     }
 
 }
->>>>>>> d4f3a5967e15b53ac7500d9531b21c1d7a7e48e0
