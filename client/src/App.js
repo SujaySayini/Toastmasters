@@ -16,7 +16,7 @@ import SearchBar from './components/SearchBar';
 import Search from './components/Search';
 import Statistics from './components/Statistics';
 import ClubPage from './components/ClubPage';
-
+import Admin from './components/Admin';
 import ErrorPage from './components/ErrorPage';
 import Club2 from './components/Club2'
 import Club3 from './components/Club3'
@@ -98,6 +98,8 @@ function App(props) {
     } else if (newPage === 'Logout'){
       localStorage.clear()
       setPage(<Login swap={changePage}></Login>)
+    } else if (newPage === 'Admin') {
+      setPage(<Admin swap={changePage}></Admin>)
     } else {
       localStorage.clear()
       setPage(<Login swap={changePage}></Login>)

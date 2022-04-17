@@ -11,7 +11,8 @@ const clubSchema = mongoose.Schema({
     theme:{
         type: Number,
         default:0
-    }
+    }, 
+    active: String
 });
 
 const ClubModel = mongoose.model('ClubModel', clubSchema);

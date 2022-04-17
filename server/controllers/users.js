@@ -47,7 +47,9 @@ export const signin=async (req, res)=>{
           email: existingUser.email,
           first: existingUser.first, 
           last: existingUser.last,
-          username: existingUser.username
+          username: existingUser.username,
+          title: existingUser.title,
+          userLevel: existingUser.userLevel
         }}, 'test', {expiresIn:"1h" })
         res.status(200).json({token: token});
         //console.log(res);
@@ -108,7 +110,7 @@ try{
           //res.status(201).json(newUser)
     //console.log("we are here now2");
     ////const token=jwt.sign({email: result.email, id:result._id}, 'test', {expiresIn:"1h" })
-    const token=jwt.sign({email: newUser.email, id:result._id}, 'test', {expiresIn:"1h" })
+    const token=jwt.sign({email: newUser.email}, 'test', {expiresIn:"1h" })
     res.status(200).json({newUser, token});
     //res.send("Signed Up");
    }

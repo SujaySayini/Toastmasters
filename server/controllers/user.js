@@ -107,3 +107,18 @@ export const removeUserClub = async (req, res) => {
         res.status(404).json({message:error.message})
     }
 }
+
+export const setAdmin = async (req, res)=>{
+    try {
+        console.log('SET ADMIN')
+        console.log(req.body)
+        const update = await userModel.updateOne({email: req.body.email}, {$set: {requestAdmin: req.body.requestAdmin, userLevel: req.body.userLevel }})
+        res.status(201).json(update)
+    } catch (error) {
+        console.log(error)
+
+        res.status(409).json({message: error.message});
+        
+    }
+}
+

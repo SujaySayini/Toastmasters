@@ -1,20 +1,36 @@
 import axios from 'axios';
 
-const baseAPI = axios.create({baseURL:'http://https://nick-toastmasters-app.herokuapp.com//'})
-const url = 'http://https://nick-toastmasters-app.herokuapp.com//speech';
-const url2 = 'http://https://nick-toastmasters-app.herokuapp.com//deletespeech'
-const url3 = 'http://https://nick-toastmasters-app.herokuapp.com//timer'
-const url4 = 'http://https://nick-toastmasters-app.herokuapp.com//commentcard'
-const url5 = 'http://https://nick-toastmasters-app.herokuapp.com//evaluation'
-const url6 = 'http://https://nick-toastmasters-app.herokuapp.com//ahcounter'
-const url7 = 'http://https://nick-toastmasters-app.herokuapp.com//signup'
-const url8 = 'http://https://nick-toastmasters-app.herokuapp.com//pages'
-//const url8 = 'http://https://nick-toastmasters-app.herokuapp.com//users/signin'
-//const url9 = 'http://https://nick-toastmasters-app.herokuapp.com//users/signup'
+
+
+const devURL = 'http://localhost:5000'
+const publicURL = 'https://nick-toastmasters-app.herokuapp.com'
+let theURL = ''
+if(true){
+  theURL = devURL
+} else {
+  theURL = publicURL
+}
+const baseAPI = axios.create({baseURL: theURL})
+const url = theURL+'/speech';
+const url2 = theURL+'/deletespeech'
+const url3 = theURL + '/timer'
+const url4 = theURL+'/commentcard'
+const url5 = theURL+'/evaluation'
+const url6 = theURL+'/ahcounter'
+const url7 = theURL+'/signup'
+const url8 = theURL+'/pages'
+const url9 = theURL + '/user/admin'
+
+export const setAdmin = async (data) => {
+  console.log('setadmin!')
+  axios.post(url9, data)
+}
+//const url8 = 'theURLusers/signin'
+//const url9 = 'theURLusers/signup'
 //export const fetchSpeech = (date) => axios.get(url)
 export const fetchSpeech2 = async (date) => {
     let theData = []
-    await axios.post('http://https://nick-toastmasters-app.herokuapp.com//speech/test', date).then((response) => {
+    await axios.post(theURL+'/speech/test', date).then((response) => {
     theData = response.data
   }, (error) => {
     console.log(error);
@@ -24,7 +40,7 @@ export const fetchSpeech2 = async (date) => {
 
 export const fetchEvaluation = async (date) => {
   let theData = []
-  await axios.post('http://https://nick-toastmasters-app.herokuapp.com//evaluation/get', date).then((response) => {
+  await axios.post(theURL+'/evaluation/get', date).then((response) => {
   theData = response.data
 }, (error) => {
   console.log(error);
@@ -34,7 +50,7 @@ return theData
 
 export const getAllUsers = async (club) => {
   let theData = []
-  await axios.post('http://https://nick-toastmasters-app.herokuapp.com//user/getUser', club).then((response) => {
+  await axios.post(theURL+'/user/getUser', club).then((response) => {
   theData = response.data
 }, (error) => {
   console.log(error);
@@ -43,9 +59,9 @@ console.log(theData);
 return theData
 }
 
-export const getAllClubs = async () => {
+export const getAllClubs = async (data) => {
   let theData = []
-  await axios.post('http://localhost:5000/pages/getClub').then((response) => {
+  await axios.post(theURL + '/pages/getClub', data).then((response) => {
   theData = response.data
 }, (error) => {
   console.log(error);
@@ -93,8 +109,8 @@ export const addCommentCards = (data) => axios.post(url4, data)
 export const createEvaluation = (data) => axios.post(url5, data)
 //export const postAhCounter = (data) => axios.post(url6, data)
 export const createUser = (data) => axios.post(url7, data)
-export const changeUserRole = (data) => axios.post('http://https://nick-toastmasters-app.herokuapp.com//user/changeUserRole', data)
-export const removeUserClub = (data) => axios.post('http://https://nick-toastmasters-app.herokuapp.com//user/removeUserClub', data)
+export const changeUserRole = (data) => axios.post(theURL+'/user/changeUserRole', data)
+export const removeUserClub = (data) => axios.post(theURL+'/user/removeUserClub', data)
 //export const AUTH='AUTH';
 //export const LOGOUT='LOGOUT';
 export const signIn=(formData)=>baseAPI.post('/users/signin', formData).then((response) => {

@@ -76,6 +76,16 @@ export const removeUserClub = (email) => async(dispatch) => {
         console.log(error);
     }
  }
+
+ export const admin = (data) => async(dispatch) => {
+    try {
+        const data2  = await api.setAdmin(data)
+        dispatch({type:"UPDATE", payload: data2})
+        return data2
+    } catch (error) {
+        console.log(error);
+    }
+ }
  
  
  

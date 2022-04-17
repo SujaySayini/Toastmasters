@@ -31,9 +31,11 @@ export const createPage = async (req,res)=>{
 export const getClubs = async (req, res)=>{
     try {
         console.log('hello')
+        console.log(req.body)
         let clubs = ''
         // clubs = await userModel.find({club: req.body.club});
-        clubs = await ClubModel.find({});
+        clubs = await ClubModel.find(req.body);
+        //console.log(clubs)
         //console.log(clubs)
         res.status(200).json(clubs);
     } catch (error) {
