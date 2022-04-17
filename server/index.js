@@ -10,8 +10,8 @@ import commentCardRoutes from './routes/commentCards.js'
 import evaluationRoutes from './routes/evaluation.js'
 import ahCounterRoutes from './routes/ahcounter.js'
 import signUpRoutes from './routes/user.js';
-import pageRoutes from './routes/pages.js';
 import userRoutes from './routes/users.js';
+import pagesRoutes from './routes/pages.js';
 
 
 dotenv.config()
@@ -31,10 +31,8 @@ app.use('/deletespeech', deleteSpeechRoutes);
 app.use('/commentcard', commentCardRoutes);
 app.use('/evaluation', evaluationRoutes);
 app.use('/ahcounter', ahCounterRoutes);
-//app.use('/user', signUpRoutes);
-app.use('/signup', signUpRoutes);
-app.use('/pages', pageRoutes);
 app.use('/user', signUpRoutes);
+app.use('/pages',pagesRoutes);
 //app.use('/signup', signUpRoutes);
 //app.use('/users', userRoutes)
 app.use('/users', userRoutes)

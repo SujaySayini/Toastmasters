@@ -12,7 +12,7 @@ function ErrorPage(props) {
     <div className='page'>
         <div className='container'>
             <div className='searchResult'>
-            OOps.. I cannot find the result
+            OOps.. Result is not found
             </div>
            
         </div>

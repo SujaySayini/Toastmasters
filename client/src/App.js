@@ -85,14 +85,6 @@ function App(props) {
 
     } else if (newPage === 'SignUp'){
       setPage(<SignUp swap={changePage}></SignUp>)
-
-    }
-    else if (newPage === 'ClubPage'){
-      setPage(<ClubPage swap={changePage}></ClubPage>)
-
-    }
-    else if(newPage === 'ClubPageInfo'){
-      setPage(<ClubPageInfo swap = {changePage}></ClubPageInfo>)
     } else if (newPage === 'Reports'){
       setPage(<Reports swap={changePage}></Reports>)
     } else if (newPage === 'Logout'){

@@ -6,13 +6,8 @@ const clubSchema = mongoose.Schema({
     description: String,
     meetingTime: String, // need to have specific format
     announcement: String,
-    location: String,
-    picture: String,//Base64
-    theme:{
-        type: Number,
-        default:0
-    }, 
-    active: String
+    active: String,
+    location: String, //may need to have more fields (zipcode, etc)
 });
 
 const ClubModel = mongoose.model('ClubModel', clubSchema);
