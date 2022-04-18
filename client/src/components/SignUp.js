@@ -88,6 +88,14 @@ const [formData, setFormData]=useState(initialState);
       //console.log(res)
      
       if(res?.data.message==="Signed Up!"){
+
+
+        document.cookie = 'user='+JSON.stringify({user: {
+          first: formData.first,
+          last: formData.last,
+          email: formData.email,
+          club: formData.club
+        }})
         props.swap('HomePage')
         //props.swap
       } else{

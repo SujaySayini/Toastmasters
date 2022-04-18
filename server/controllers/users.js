@@ -140,7 +140,7 @@ export const signup=async (req, res)=>{
      //const hashedPassword=await bcrypt.hash(password, 12)
    
     }
-    else if(club!="" &&!existingClub){
+    else if(clubName!="" && !existingClub){
      //message+="Passwords don't match" + "/n"
      res.status(200).json({message: "Club does not exist!"})
      ////return res.status(400).json({message:message});
