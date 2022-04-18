@@ -89,3 +89,57 @@ export const signup =(formData, navigate) => async(dispatch) => {
         }
 
     //const res = await dispatch(changePassword(formData, navigate))
+    export const clubderegister =(email, navigate) => async(dispatch) => {
+        //user.email
+        try{
+   
+            console.log(email);
+        //const data=await api.changePassword(formData);
+       const data=await api.clubDeregister(email);
+        return data
+            ////const {data}=await api.signUp(formData);
+        ////dispatch({type:AUTH, data});
+            //login the user
+            //navigate to the home page
+       
+            //history.push('/');
+            navigate('/');
+       
+       
+        }
+        catch(error){
+            console.log(error)
+       
+       
+        }
+        }
+        export const updateprofile =(formData,email, navigate) => async(dispatch) => {
+            //user.email
+            try{
+       
+                console.log(formData, email);
+            //const data=await api.changePassword(formData);
+           const data=await api.updateProfile(formData, email);
+            return data
+                ////const {data}=await api.signUp(formData);
+            ////dispatch({type:AUTH, data});
+                //login the user
+                //navigate to the home page
+           
+                //history.push('/');
+                navigate('/');
+           
+           
+            }
+            catch(error){
+                console.log(error)
+           
+           
+            }
+           
+       
+       
+       
+        }
+  
+ 

@@ -52,7 +52,10 @@ function Login2(props){
       document.cookie = 'user=' + JSON.stringify(jwt_decode(res.data.token)) 
       const userdata = jwt_decode(res.data.token).user
       console.log(userdata)
-      if(userdata.userLevel === 'Admin'){
+
+      if(userdata.club===""){
+        props.swap('Search')
+      }else if(userdata.userLevel === 'Admin'){
         props.swap('Admin')
       } else if(userdata.userLevel === 'Eboard'){
         props.swap('ManageClub')
