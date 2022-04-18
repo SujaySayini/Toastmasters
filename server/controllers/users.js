@@ -4,7 +4,7 @@ import jwt from 'jsonwebtoken';
 //import signUpModel from "../models/signUpModel.js"
 
 import userModel from '../models/userModel.js'
-import ClubModel from '../models/ClubModel'
+import ClubModel from '../models/ClubModel.js'
 
 import { requestPasswordReset } from '../services/auth.js';
 import { resetPassword } from '../services/auth.js';
@@ -253,17 +253,9 @@ export const resetPasswordRequestController = async (req, res, next) => {
    
  }
  export const updateProfile=async (req, res)=>{
-  // res.header("Sec-Fetch-Site", "cross-site");
-  //res.header("Access-Control-Allow-Origin", "*");
-  //res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
- //// res.setHeader("access-control-allow-origin", "*");
- //// res.setHeader("access-control-allow-credentials", "true");
-  //res.send();
-   //res.header("Referrer", "http://localhost:5000");
-   //const {email, password, pass, securityQuestion, securityAnswer}=req.body;
-   const {first, last, email}=req.body;
-   console.log(req.body)
-    const existingUser=await userModel.findOne({email: email});
+  let {first, last, email}=req.body;
+  console.log(req.body)
+  const existingUser=await userModel.findOne({email: email});
   
   
    if(first==""){
@@ -287,12 +279,7 @@ export const resetPasswordRequestController = async (req, res, next) => {
    
   
        //{ _id: userId },
-       await userModel.updateOne(
-       { email: email },
-      { $set: { first: first } },
-      { $set: { last: last } },
-       { new: true }
-       );
+       await userModel.updateOne({ email: email },{ $set: { first: first, last: last }},);
   
        //logout?????
       // const token=jwt.sign({email: existingUser.email, id:existingUser.id}, 'test', {expiresIn:"1h" })
@@ -320,26 +307,17 @@ export const resetPasswordRequestController = async (req, res, next) => {
   export const clubDeregister=async (req, res)=>{
   
      const {email}=req.body;
-     console.log(req.body)
+     console.log(email)
    
-     const existingUser=await userModel.findOne({email: email});
+     const existingUser =await userModel.findOne({email: email});
       try{
          //const existingUser=await userModel.findOne({email: email});
      
   
           //{ _id: userId },
-         await userModel.updateOne(
-         { email: email },
-        { $set: { club: "" } },
-         { new: true }
-         );
+         await userModel.updateOne({ email: email }, { $set: { club: "" } });
           //logout?????
-        // const token=jwt.sign({email: existingUser.email, id:existingUser.id}, 'test', {expiresIn:"1h" })
-         //res.status(200).json({result:existingUser, token});
-        // return res.send('Succesfully changed password');
-      
-          //const token=jwt.sign({email: existingUser.email, id:existingUser.id}, 'test', {expiresIn:"1h" })
-         //res.status(200).json({result:existingUser, token});
+         res.status(200).json({message: 'ye'});
          //console.log(res);
          //res.send('Signed in');
      }catch(error){

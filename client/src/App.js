@@ -22,9 +22,9 @@ import Club2 from './components/Club2'
 import Club3 from './components/Club3'
 import Club4 from './components/Club4'
 import ClubPageInfo from'./components/ClubPageInfo'
-
+import Profile from './components/Profile'
 import SignUp from './components/SignUp'
-
+import UpdateProfile from './components/UpdateProfile'
 import Reports from './components/Reports';
 import React from 'react';
 import CreatePageForm from './components/CreatePageForm';
@@ -95,7 +95,13 @@ function App(props) {
       setPage(<Admin swap={changePage}></Admin>)
     } else if (newPage === 'ClubPage'){
       setPage(<ClubPage swap={changePage}></ClubPage>)
-    }else {
+    } else if (newPage === 'Profile'){
+      setPage(<Profile swap={changePage}> </Profile>)
+    } else if (newPage === 'UpdateProfile'){
+      setPage(<UpdateProfile swap={changePage}> </UpdateProfile>)
+    }
+    
+    else {
       localStorage.clear()
       setPage(<Login swap={changePage}></Login>)
     }

@@ -89,7 +89,7 @@ export const signup =(formData, navigate) => async(dispatch) => {
         }
 
     //const res = await dispatch(changePassword(formData, navigate))
-    export const clubderegister =(email, navigate) => async(dispatch) => {
+    export const clubderegister =(email) => async(dispatch) => {
         //user.email
         try{
    
@@ -97,15 +97,6 @@ export const signup =(formData, navigate) => async(dispatch) => {
         //const data=await api.changePassword(formData);
        const data=await api.clubDeregister(email);
         return data
-            ////const {data}=await api.signUp(formData);
-        ////dispatch({type:AUTH, data});
-            //login the user
-            //navigate to the home page
-       
-            //history.push('/');
-            navigate('/');
-       
-       
         }
         catch(error){
             console.log(error)
@@ -113,22 +104,14 @@ export const signup =(formData, navigate) => async(dispatch) => {
        
         }
         }
-        export const updateprofile =(formData,email, navigate) => async(dispatch) => {
+        export const updateprofile =(formData,email) => async(dispatch) => {
             //user.email
             try{
-       
-                console.log(formData, email);
+                console.log(email)
+                console.log({...formData, email: email});
             //const data=await api.changePassword(formData);
-           const data=await api.updateProfile(formData, email);
+           const data=await api.updateProfile({...formData, email: email});
             return data
-                ////const {data}=await api.signUp(formData);
-            ////dispatch({type:AUTH, data});
-                //login the user
-                //navigate to the home page
-           
-                //history.push('/');
-                navigate('/');
-           
            
             }
             catch(error){

@@ -95,6 +95,9 @@ const Navbar = (props) =>{
                             <a className="dropdown-toggle  nav-link" data-bs-toggle="dropdown" data-bs-target='dropdown-menu' href="#">Profile Tools<span className="caret"></span></a>
                             <ul className="dropdown-menu bg-dark" style={{marginTop: '0', paddingTop: '0'}}>
                                 <li className = "nav-item" >
+                                    <a className = "nav-link" href = "#" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show" style={{textAlign: 'left', paddingLeft: '2em'}} onClick={() =>{props.swap('Profile')}}>Profile</a>
+                                </li>
+                                <li className = "nav-item" >
                                     <a className = "nav-link" href = "#" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show" style={{textAlign: 'left', paddingLeft: '2em'}} onClick={() =>{props.swap('HomePage')}}>Your Home Page</a>
                                 </li>
                                 <li className = "nav-item" >

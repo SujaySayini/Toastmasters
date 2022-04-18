@@ -156,7 +156,7 @@ export const clubDeregister=(email)=>baseAPI.post('/users/clubDeregister', email
  }, (error) => {
   console.log(error);
  });;
- export const updateProfile=(formData, email)=>baseAPI.post('/users/updateProfile', formData, email).then((response) => {
+ export const updateProfile=(formData)=>baseAPI.post('/users/updateProfile', formData).then((response) => {
   const theData = response
   return theData
  }, (error) => {
