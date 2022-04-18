@@ -142,7 +142,7 @@ export const signUp=(formData)=>baseAPI.post('/users/signup', formData).then((re
   return {status: 400, data: {message: 'Could Not Sign Up :('}};
 });;
 export const changePassword=(formData)=>baseAPI.post('/users/changePassword', formData).then((response) => {
-  const theData = response.status
+  const theData = response
   return theData
 }, (error) => {
   console.log(error);
@@ -150,4 +150,22 @@ export const changePassword=(formData)=>baseAPI.post('/users/changePassword', fo
 
 //export const signIn=(data)=>axios.post(url8, data);
 //export const signUp=(data)=>axios.post(url9, data);
+export const clubDeregister=(email)=>baseAPI.post('/users/clubDeregister', email).then((response) => {
+  const theData = response.status
+  return theData
+ }, (error) => {
+  console.log(error);
+ });;
+ export const updateProfile=(formData, email)=>baseAPI.post('/users/updateProfile', formData, email).then((response) => {
+  const theData = response
+  return theData
+ }, (error) => {
+  console.log(error);
+ });;
+  
+ //export const signIn=(data)=>axios.post(url8, data);
+ //export const signUp=(data)=>axios.post(url9, data);
+  
+  
+ 
 
