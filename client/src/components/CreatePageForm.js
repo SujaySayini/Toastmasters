@@ -28,6 +28,7 @@ const CreatePageForm = () => {
     
 
       e.preventDefault();
+    // add in user data, pass in the user's email as well
     dispatch(createPages(pageData));
     alert("Club Page has created");
 

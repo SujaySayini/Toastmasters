@@ -45,7 +45,7 @@ function Login2(props){
     const res = await dispatch(signin({email: document.getElementById('login-email').value, password: document.getElementById('login-password').value}, navigate))
     //console.log('---------')
     //console.log(res.data.token)
-    console.log(jwt_decode(res.data.token).user.email);
+    //console.log(jwt_decode(res.data.token).user.email);
 
     if(res?.status === 200){
       //console.log(document.cookie)

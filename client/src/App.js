@@ -27,6 +27,7 @@ import SignUp from './components/SignUp'
 
 import Reports from './components/Reports';
 import React from 'react';
+import CreatePageForm from './components/CreatePageForm';
 
 
 function App(props) {
@@ -92,7 +93,9 @@ function App(props) {
       setPage(<Login swap={changePage}></Login>)
     } else if (newPage === 'Admin') {
       setPage(<Admin swap={changePage}></Admin>)
-    } else {
+    } else if (newPage === 'ClubPage'){
+      setPage(<ClubPage swap={changePage}></ClubPage>)
+    }else {
       localStorage.clear()
       setPage(<Login swap={changePage}></Login>)
     }

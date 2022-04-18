@@ -32,6 +32,9 @@ export const getPages = async (req,res) =>{
     }
 }
 export const createPage = async (req,res)=>{
+
+
+    // userModel.updateOne({userEmail: req.body.userEmail}, {$set: {club: whatever the new clubname is, userLevel: 'Eboard', title: 'President'}})
     const page = req.body;
     const newPage = new ClubModel(page);
     try{
