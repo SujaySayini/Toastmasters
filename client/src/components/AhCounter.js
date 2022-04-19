@@ -77,12 +77,13 @@ const AhCounter = (props) => {
                 <div className='row align-items-left' style={{ margin: '2em' }}>
                     <div className='col-12'>
                         <span style={{display: 'inline-block', width: '100px'}}>Name: </span>
-                        <DropDownList name={currMember} elements={members} setSelected={setCurrMember}></DropDownList>
+                        <DropDownList id='member' name={currMember} elements={members} setSelected={setCurrMember}></DropDownList>
                     </div>
                     <div className='col-12' style={{marginTop: '20px'}}>
                         {/* Evaluation, Prepared Speech, Table Topics */}
                         <span style={{display: 'inline-block', width: '100px'}}>Member: </span>
                         <DropDownList
+                            id='type-speech'
                             name={currSpeech}
                             elements={["Evaluator", "Pathways Speech", "Table Topics"]}
                             setSelected={setSpeech} />
@@ -105,7 +106,7 @@ const AhCounter = (props) => {
                 </div>
 
                 <div>
-                    <button onClick = {saveAhCounter} type='button' className='btn' style={{color: 'white', backgroundColor: 'rgb(0, 65, 101)'}}>Submit!</button>
+                    <button id= "ahCounter-submit" onClick = {saveAhCounter} type='button' className='btn' style={{color: 'white', backgroundColor: 'rgb(0, 65, 101)'}}>Submit!</button>
                 </div>
             </div>
         </div>
