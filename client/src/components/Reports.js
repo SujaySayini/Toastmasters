@@ -55,6 +55,7 @@ const Reports = (props) => {
         }
         for(let i =0; i < evaluations.length; i++){
             evaluations[i].number = speeches.length
+            evaluations[i].speechType = 'Evaluator'
             console.log(evaluations[i].number)
             let topWords = 'None'
             let max = 0

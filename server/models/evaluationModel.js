@@ -16,7 +16,9 @@ const evaluationSchema = mongoose.Schema({
     audienceAwareness: Number,
     comfortLevel: Number,
     interest: Number,
-    additionalComments: String
+    additionalComments: String, 
+    time: String,
+    fillerWords: String
 });
 
 const evaluationModel = mongoose.model('EvaluationModel', evaluationSchema);

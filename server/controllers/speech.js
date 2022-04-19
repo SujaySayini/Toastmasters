@@ -83,7 +83,8 @@ export const setTime = async (req, res) => {
         console.log('--'+speaker+'--')
         console.log(type)
         console.log(today)
-        if(type === 'Evaluation'){
+        if(type === 'Evaluator'){
+            console.log('evaluation')
             const update = await evaluationModel.updateOne({speechDate: today, speechType: type ,speechEvaluator: speaker}, {$set: {'time': time}});
             console.log(update)
             if(update.matchedCount === 0){
@@ -95,7 +96,7 @@ export const setTime = async (req, res) => {
             return
         } else{
         //const update = await speechModel.find({speechDate: today, speechGiver: speaker}) 
-        const update = await speechModel.updateOne({speechDate: today, speechType: type ,speechGiver: speaker}, {$set: {'time': time}});
+        const update = await speechModel.updateOne({speechDate: today, speechType: type ,speechGiver: speaker}, {$set: {time: time}});
         console.log(update)
         if(update.matchedCount === 0){
             // if entry doesnt exist 
@@ -167,9 +168,9 @@ export const addAhCounterData = async (req, res) => {
         const {speaker, type, counts} = req.body
         console.log(speaker)
         console.log(today)
-        if(type === 'Evaluation'){
+        if(type === 'Evaluator'){
             const update = await evaluationModel.updateOne(
-                {speechDate: today, speechType: type, speechGiver: speaker}, 
+                {speechDate: today, speechType: type, speechEvaluator: speaker}, 
                 {$set: 
                     {fillerWords : 
                         {

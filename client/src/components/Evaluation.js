@@ -72,7 +72,7 @@ const Evaluation = () => {
         let name = user.first + " " + user.last;
         let data = dispatch(createEvaluation({speechDate: date,
                                    speechGiver: currMember, 
-                                   speechType: "Pathways Speech",
+                                   speechType: "Evaluation",
                                    speechEvaluator: name, 
                                    positive: positive, 
                                    challenge: challenge, 

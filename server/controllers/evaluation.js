@@ -18,7 +18,7 @@ export const createEvaluation = async (req, res)=>{
     
     const evaluation = req.body;
     console.log(req.body)
-    const existingSpeech = await speechModel.findOne({speechType: evaluation.speechType, speechDate: evaluation.speechDate, speechGiver: evaluation.speechGiver});
+    const existingSpeech = await speechModel.findOne({speechType: 'Pathways Speech', speechDate: evaluation.speechDate, speechGiver: evaluation.speechGiver});
     if(existingSpeech){
         const newEvaluation = new evaluationModel(evaluation);
         console.log(newEvaluation)
