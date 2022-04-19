@@ -16,7 +16,19 @@ const evaluationSchema = mongoose.Schema({
     audienceAwareness: Number,
     comfortLevel: Number,
     interest: Number,
-    additionalComments: String
+    additionalComments: String, 
+    time: String,
+    fillerWords:  {
+        Ah: Number,
+        Um: Number, 
+        Er: Number, 
+        Well: Number, 
+        So: Number,
+        Like: Number,
+        But: Number,
+        Repeats: Number,
+        Other: Number
+    }
 });
 
 const evaluationModel = mongoose.model('EvaluationModel', evaluationSchema);

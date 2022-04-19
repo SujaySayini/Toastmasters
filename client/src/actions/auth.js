@@ -89,3 +89,40 @@ export const signup =(formData, navigate) => async(dispatch) => {
         }
 
     //const res = await dispatch(changePassword(formData, navigate))
+    export const clubderegister =(email) => async(dispatch) => {
+        //user.email
+        try{
+   
+            console.log(email);
+        //const data=await api.changePassword(formData);
+       const data=await api.clubDeregister(email);
+        return data
+        }
+        catch(error){
+            console.log(error)
+       
+       
+        }
+        }
+        export const updateprofile =(formData,email) => async(dispatch) => {
+            //user.email
+            try{
+                console.log(email)
+                console.log({...formData, email: email});
+            //const data=await api.changePassword(formData);
+           const data=await api.updateProfile({...formData, email: email});
+            return data
+           
+            }
+            catch(error){
+                console.log(error)
+           
+           
+            }
+           
+       
+       
+       
+        }
+  
+ 

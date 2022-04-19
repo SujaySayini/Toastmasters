@@ -10,7 +10,6 @@ import { getSpeech } from '../actions/speech.js';
 const Evaluation = () => {
     const [members, setMember] = useState([]); 
     const [currMember, setCurrMember] = useState("Member");
-    const [currSpeech, setSpeech] = useState("Type of Speech");
     const [date, setDate] = useState("");
     const [positive, setPositive] = useState("");
     const [challenge, setChallenge] = useState("");
@@ -71,9 +70,9 @@ const Evaluation = () => {
     const handleSubmit = (evt) => {
         evt.preventDefault();
         let name = user.first + " " + user.last;
-        dispatch(createEvaluation({speechDate: date,
+        let data = dispatch(createEvaluation({speechDate: date,
                                    speechGiver: currMember, 
-                                   speechType: currSpeech,
+                                   speechType: "Evaluation",
                                    speechEvaluator: name, 
                                    positive: positive, 
                                    challenge: challenge, 
@@ -86,22 +85,45 @@ const Evaluation = () => {
                                    comfortLevel: parseInt(comfortLevel),
                                    interest: parseInt(interest),
                                    additionalComments: additionalComments
-                                }))
-        setDate("");
-        setCurrMember("Member");
-        setSpeech("Type of Speech")
-        setPositive("");
-        setImprovement("");
-        setChallenge("");
-        setClarity("");
-        setVocalVariety("");
-        setEyeContact("");
-        setGestures("");
-        setAudienceAwareness("");
-        setComfortLevel("");
-        setInterest("");
-        setAdditionalComments("");
-        alert(`Evaluation Form Submitted`)
+                                }));
+        console.log(data);
+        if(data){
+            console.log(data.ifExists);
+            if(data.ifExists == "No"){
+                alert("The speech doesn't exist. Please try again.");
+            } else {
+                alert(`Evaluation Submitted`);
+                setDate("");
+                setCurrMember("Member");
+                setPositive("");
+                setImprovement("");
+                setChallenge("");
+                setClarity("");
+                setVocalVariety("");
+                setEyeContact("");
+                setGestures("");
+                setAudienceAwareness("");
+                setComfortLevel("");
+                setInterest("");
+                setAdditionalComments("");
+            }  
+        }
+        else {
+            alert(`Evaluation Submitted`);
+            setDate("");
+            setCurrMember("Member");
+            setPositive("");
+            setImprovement("");
+            setChallenge("");
+            setClarity("");
+            setVocalVariety("");
+            setEyeContact("");
+            setGestures("");
+            setAudienceAwareness("");
+            setComfortLevel("");
+            setInterest("");
+            setAdditionalComments("");                    
+        }                        
     }
 
     const selected = () => {

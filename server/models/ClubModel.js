@@ -9,6 +9,7 @@ const clubSchema = mongoose.Schema({
     description: String,
     meetingTime: String, // need to have specific format
     announcement: String,
+    active: String,
     location: String, //may need to have more fields (zipcode, etc)
     picture: String
 });

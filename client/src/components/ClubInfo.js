@@ -3,8 +3,45 @@ import 'bootstrap/dist/js/bootstrap.bundle.min';
 import toastyblack from '../images/toasty-black.png';
 import './Clubinfo.css'
 import toasty from '../images/toasty.jpg';
+import React from 'react';
+import {useEffect, useState} from 'react';
+import { useDispatch } from 'react-redux';
+import { findOneClub } from '../actions/clubpage';
 
 const ClubInfo = () => {
+
+
+
+    const dispatch = useDispatch()
+    let user = ''
+    const cname = 'clubName'
+    let name = cname + "=";
+    let decodedCookie = decodeURIComponent(document.cookie);
+    let ca = decodedCookie.split(';');
+    for(let i = 0; i <ca.length; i++) {
+      let c = ca[i];
+      while (c.charAt(0) == ' ') {
+        c = c.substring(1);
+      }
+      if (c.indexOf(name) == 0) {
+        user = c.substring(name.length, c.length);
+      }
+    }
+    const [clubInfo, setClubInfo] = useState({description: 'None'})
+    console.log(user)
+    useEffect(async ()=>{
+        
+        const res = await dispatch(findOneClub({clubName: user}))
+        console.log(res)
+        setClubInfo(res)
+        
+        document.cookie = "clubnName=; expires=Thu, 01 Jan 1970 00:00:00 UTC"
+    }, []);
+
+
+
+
+
     return(
         
             <div className='background'>
@@ -13,11 +50,11 @@ const ClubInfo = () => {
                 <div className='container'>
                     <div className='row'>
                         <div className = "col-md-6">
-                            <h2 className='club-name'>Club 1</h2>
+                            <h2 className='club-name'>{clubInfo.clubName}</h2>
                             <div className='underline'></div>
                             <h4 className='club-des'>Club description</h4>
                             <div className='text-box'>
-                                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+                                    <p>{clubInfo.description}</p>
                             </div>
                         </div>
                         <div className = "col-md-6 align-self-center">

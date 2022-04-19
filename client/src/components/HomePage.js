@@ -62,7 +62,7 @@ const HomePage = (props) => {
 
         const firstLineChart = (
             <ResponsiveContainer style={{cursor: 'pointer'}} width="95%" height={275} onClick = {() => props.swap('Statistics')}>
-            <LineChart  data={firstChart}>
+            <LineChart id = 'lineChart' data={firstChart}>
                 <Line type='monotone' dataKey='You' stroke = '#884d88'></Line>
                 <CartesianGrid stroke="#ccc" />
                 <XAxis dataKey="name" />
@@ -85,7 +85,7 @@ const HomePage = (props) => {
                             <div className='container-fluid mycard overflow-auto' style = {{height: '25vh'}}>
                                 
                             <p style={{marginBottom: '0px'}}><strong>Upcoming Events:</strong></p>
-                                <Message swap = {props.swap} title = 'General Meeting, 2/17/2022' data = {['You signed up to be the Ah Counter for this meeting!']}/>
+                                <Message id = 'meeting-reminder' swap = {props.swap} title = 'General Meeting, 2/17/2022' data = {['You signed up to be the Ah Counter for this meeting!']}/>
                                 <Message title = 'General Meeting, 2/24/2022' data = {["You haven't signed up for a role for this meeting yet!"]} swap = {props.swap}/>
                                 <Message title = 'General Meeting, 3/3/2022' data = {["You haven't signed up for a role for this meeting yet!"]} swap = {props.swap}/>
                             </div>

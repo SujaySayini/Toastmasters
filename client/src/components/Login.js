@@ -1,7 +1,7 @@
 import React from 'react';
 
 import Img from '../images/Toastmasters.png';
-import background from "./Background.JPG";
+import background from "./Background.jpg";
 // import App from '../App';
 import "./custom.css";
 import HomePage from './HomePage';
@@ -45,12 +45,23 @@ function Login2(props){
     const res = await dispatch(signin({email: document.getElementById('login-email').value, password: document.getElementById('login-password').value}, navigate))
     //console.log('---------')
     //console.log(res.data.token)
-    //console.log(jwt_decode(res.data.token));
+    //console.log(jwt_decode(res.data.token).user.email);
 
     if(res?.status === 200){
       //console.log(document.cookie)
       document.cookie = 'user=' + JSON.stringify(jwt_decode(res.data.token)) 
-      props.swap('Agenda')
+      const userdata = jwt_decode(res.data.token).user
+      console.log(userdata)
+
+      if(userdata.club===""){
+        props.swap('Search')
+      }else if(userdata.userLevel === 'Admin'){
+        props.swap('Admin')
+      } else if(userdata.userLevel === 'Eboard'){
+        props.swap('ManageClub')
+      } else{
+        props.swap('HomePage')
+      }
     } else{
     
       alert('Invalid Email or Password');

@@ -83,16 +83,48 @@ export const setTime = async (req, res) => {
         console.log('--'+speaker+'--')
         console.log(type)
         console.log(today)
-        //if(type === 'Pathways Speech' || type === 'Evaluation'){
+        if(type === 'Evaluator'){
+            console.log('evaluation')
+            const update = await evaluationModel.updateOne({speechDate: today, speechType: type ,speechEvaluator: speaker}, {$set: {'time': time}});
+            console.log(update)
+            if(update.matchedCount === 0){
+            // if entry doesnt exist 
+                res.status(200).send({ ifExists: 'No' });
+            } else {
+                res.status(200).send({ifExists: 'Yes'})
+            }
+            return
+        } else{
         //const update = await speechModel.find({speechDate: today, speechGiver: speaker}) 
-        const update = await speechModel.updateOne({speechDate: today, speechType: type ,speechGiver: speaker}, {$set: {'time': time}});
+        const update = await speechModel.updateOne({speechDate: today, speechType: type ,speechGiver: speaker}, {$set: {time: time}});
         console.log(update)
         if(update.matchedCount === 0){
             // if entry doesnt exist 
+            if(type === 'Table Topics'){
+                const newSpeech = new speechModel({speechType: type, speechGiver: speaker, speechDate: today, time: time, fillerWords : 
+                    {
+                        Ah: 0,
+                        Um: 0, 
+                        Er: 0, 
+                        Well: 0, 
+                        So: 0,
+                        Like: 0,
+                        But: 0,
+                        Repeats: 0, 
+                        Other:  0
+                    }
+                })
+                await newSpeech.save()
+                
+                res.status(200).send({ ifExists: 'Yes' });
+                return
+            }
             res.status(200).send({ ifExists: 'No' });
+            return
             // throw error
             // const newSpeech = new speechModel({speechDate: today, speechType: type, speechGiver:speaker, time: time});
             // await newSpeech.save()
+        }
         }
         //} 
         res.status(200);
@@ -113,6 +145,7 @@ export const addCommentCard = async (req, res) => {
         const commentcard = {positive1: positive1, negative1: negative1, positive2: positive2}
         console.log(speaker)
         console.log(today)
+        
         const update = await speechModel.updateOne(
             {speechDate: today, speechType: 'Pathways Speech', speechGiver: speaker}, 
             {$push: {commentCards : commentcard}})
@@ -135,6 +168,33 @@ export const addAhCounterData = async (req, res) => {
         const {speaker, type, counts} = req.body
         console.log(speaker)
         console.log(today)
+        if(type === 'Evaluator'){
+            const update = await evaluationModel.updateOne(
+                {speechDate: today, speechType: type, speechEvaluator: speaker}, 
+                {$set: 
+                    {fillerWords : 
+                        {
+                            Ah: counts[0],
+                            Um: counts[1], 
+                            Er: counts[2], 
+                            Well: counts[3], 
+                            So: counts[4],
+                            Like: counts[5],
+                            But: counts[6],
+                            Repeats: counts[7], 
+                            Other: counts[8]
+                        }
+                    }
+                })
+                
+            if(update.matchedCount === 0){
+                // if entry doesnt exist 
+                res.status(200).send({ ifExists: 'No' });
+            } else {
+                res.status(200).send({ ifExists: 'Yes' });
+                return
+            }
+        }
         const update = await speechModel.updateOne(
             {speechDate: today, speechType: type, speechGiver: speaker}, 
             {$set: 
@@ -153,6 +213,28 @@ export const addAhCounterData = async (req, res) => {
                 }
             })
             if(update.matchedCount === 0){
+                if(type==='Table Topics'){
+                    const newSpeech = new speechModel(
+                        {speechDate: today, speechType: type, speechGiver: speaker}, 
+                            {fillerWords : 
+                                {
+                                    Ah: counts[0],
+                                    Um: counts[1], 
+                                    Er: counts[2], 
+                                    Well: counts[3], 
+                                    So: counts[4],
+                                    Like: counts[5],
+                                    But: counts[6],
+                                    Repeats: counts[7], 
+                                    Other: counts[8]
+                                }
+                            
+                        })
+                        await newSpeech.save()
+                    
+                    res.status(200).send({ ifExists: 'Yes' });
+                    return
+                }
                 // if entry doesnt exist 
                 res.status(200).send({ ifExists: 'No' });
             }

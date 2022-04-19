@@ -1,4 +1,5 @@
 import evaluationModel from "../models/evaluationModel.js"
+import speechModel from "../models/speechModel.js"
 
 export const getEvaluation = async (req, res)=>{
     try {
@@ -17,15 +18,18 @@ export const createEvaluation = async (req, res)=>{
     
     const evaluation = req.body;
     console.log(req.body)
-    const newEvaluation = new evaluationModel(evaluation);
-    console.log(newEvaluation)
-    try {
-        await newEvaluation.save();
-        res.status(201).json(newEvaluation)
-    } catch (error) {
-        console.log(error)
+    const existingSpeech = await speechModel.findOne({speechType: 'Pathways Speech', speechDate: evaluation.speechDate, speechGiver: evaluation.speechGiver});
+    if(existingSpeech){
+        const newEvaluation = new evaluationModel(evaluation);
+        console.log(newEvaluation)
+        try {
+            await newEvaluation.save();
+            res.status(201).json(newEvaluation)
+        } catch (error) {
+            console.log(error)
 
-        res.status(409).json({message: error.message});
+            res.status(409).json({message: error.message});
         
+        }
     }
 }

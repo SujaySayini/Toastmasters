@@ -8,13 +8,11 @@ import { createCommentCard } from '../actions/speech.js';
 
 
 const CommentCard = () => {
-    const [commenter, setCommenter] = useState("");
     const [positive1, setPositive1] = useState("");
     const [positive2, setPositive2] = useState("");
     const [improvement, setImprovement] = useState("");
     const [members, setMember] = useState([]); 
     const [currMember, setCurrMember] = useState("Member");
-    const [currSpeech, setSpeech] = useState("Type of Speech");
     const dispatch = useDispatch();
 
     let user = ''
@@ -69,8 +67,6 @@ const CommentCard = () => {
             } else {
                 alert(`Comment Card Submitted`);
                 setCurrMember("Member");
-                setSpeech("Type of Speech")
-                setCommenter("");
                 setPositive1("");
                 setPositive2("");
                 setImprovement("");
@@ -79,8 +75,6 @@ const CommentCard = () => {
         else {
             alert(`Comment Card Submitted`);
             setCurrMember("Member");
-            setSpeech("Type of Speech")
-            setCommenter("");
             setPositive1("");
             setPositive2("");
             setImprovement("");

@@ -38,7 +38,7 @@ import {useState} from 'react'
 
 
 
- const initialState={first: '', last: ' ', email: '', username: '', password:'', pass: '', securityQuestion:'In what city were you born?', securityAnswer:'', club:'', requestAdmin:'No'};
+ const initialState={first: '', last: ' ', email: '', password:'', pass: '', securityQuestion:'In what city were you born?', securityAnswer:'', clubName:'', requestAdmin:'No'};
 
 function SignUp(props){
   //const dispatch =useDispatch();
@@ -85,22 +85,26 @@ const [formData, setFormData]=useState(initialState);
       //console.log()
       //console.log(res.status);
       //^not returning response 
-      console.log(res)
+      //console.log(res)
      
-      if(res?.status===200){
+      if(res?.data.message==="Signed Up!"){
+
+
+        document.cookie = 'user='+JSON.stringify({user: {
+          first: formData.first,
+          last: formData.last,
+          email: formData.email,
+          club: formData.club
+        }})
         props.swap('HomePage')
+        //props.swap
+      } else{
+       
+       //alert(res.data.message)
+       console.log(res.data.message)
+      alert(res.data.message)
       }
-        else if(res?.status===400){
-        console.log(res.data.message)
      
-
-       // alert('Already used!')
-       alert(res.data.message)
-      }
-      //console.log(res);
-      else {alert("Something went wrong");
-    }
-
     }
 
     
@@ -153,13 +157,6 @@ const [formData, setFormData]=useState(initialState);
        </label>
       </div>
       <br></br>
-        <div>
-        <label>
-         Username
-         <input name="username" label="Username" onChange={handleChange} />
-       </label>
-      </div>
-      <br></br>
        <div>
       <label>
         Password:
@@ -199,7 +196,7 @@ const [formData, setFormData]=useState(initialState);
       <div>
       <label>
          Club Name
-         <input name="club" label="Club Name" onChange={handleChange} />
+         <input name="clubName" label="Club Name" onChange={handleChange} />
        </label>
       
       </div>
