@@ -2,6 +2,7 @@ import ClubModel from '../models/ClubModel.js';
 import express from 'express';
 import mongoose from 'mongoose';
 
+
 export const getClubPageInfo = async(req,res)=>{
     console.log(req.body);
     const id = req.params
@@ -70,6 +71,7 @@ export const updatePage = async(req, res) =>{
     const updatedPage = await ClubModel.findByIdAndUpdate(_id,targetPage,{new: true});
     res.json(updatedPage);
 }
+    
 export const getClubs = async (req, res)=>{
     try {
         console.log('hello')
