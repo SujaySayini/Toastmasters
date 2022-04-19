@@ -18,7 +18,17 @@ const evaluationSchema = mongoose.Schema({
     interest: Number,
     additionalComments: String, 
     time: String,
-    fillerWords: String
+    fillerWords:  {
+        Ah: Number,
+        Um: Number, 
+        Er: Number, 
+        Well: Number, 
+        So: Number,
+        Like: Number,
+        But: Number,
+        Repeats: Number,
+        Other: Number
+    }
 });
 
 const evaluationModel = mongoose.model('EvaluationModel', evaluationSchema);
