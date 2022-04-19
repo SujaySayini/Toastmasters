@@ -192,9 +192,9 @@ const SearchBar = (props)=> {
         {filterData.length != 0 && (
           <div className="pageResult">
             {filterData.slice(0, 30).map((value, key) => {
-              console.log(value.url)
               return <a className="dataItem" href="#" onClick={() => { //swap to club info, but also document.cookie = 'searchedFor=clubName'
-                props.swap(value.url) }}>
+                document.cookie= 'clubName=' + value.clubName
+                props.swap('ClubInfo')}}>
                 <p>{value.clubName}</p>
 
               </a>

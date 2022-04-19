@@ -50,7 +50,7 @@ import React from "react";
      
    });
    await new Promise(r => setTimeout(r, 2000));
-   console.log(document.cookie)
+   //console.log(document.cookie)
  
    //user has successfully logged in if the page has changed to be the homepage
    expect(document.cookie.substring(0, 14)).toBe("page=SignUp;");
@@ -86,7 +86,7 @@ import React from "react";
       
     });
     await new Promise(r => setTimeout(r, 2000));
-    console.log(document.cookie)
+    //console.log(document.cookie)
   
     //user has successfully logged in if the page has changed to be the homepage
     expect(document.cookie.substring(0, 14)).toBe("page=SignUp;");
@@ -121,7 +121,7 @@ import React from "react";
       
     });
     await new Promise(r => setTimeout(r, 2000));
-    console.log(document.cookie)
+    //console.log(document.cookie)
   
     //user has successfully logged in if the page has changed to be the homepage
     expect(document.cookie.substring(0, 14)).toBe("page=SignUp;");
@@ -156,7 +156,7 @@ import React from "react";
       
     });
     await new Promise(r => setTimeout(r, 2000));
-    console.log(document.cookie)
+    //console.log(document.cookie)
   
     //user has successfully logged in if the page has changed to be the homepage
     expect(document.cookie.substring(0, 14)).toBe("page=SignUp;");
@@ -191,7 +191,7 @@ import React from "react";
       
     });
     await new Promise(r => setTimeout(r, 2000));
-    console.log(document.cookie)
+    //console.log(document.cookie)
   
     //user has successfully logged in if the page has changed to be the homepage
     expect(document.cookie.substring(0, 14)).toBe("page=SignUp;");
@@ -225,7 +225,7 @@ import React from "react";
       
     });
     await new Promise(r => setTimeout(r, 2000));
-    console.log(document.cookie)
+    //console.log(document.cookie)
   
     //user has successfully logged in if the page has changed to be the homepage
     expect(document.cookie.substring(0, 14)).toBe("page=SignUp;");
@@ -259,7 +259,7 @@ import React from "react";
       
     });
     await new Promise(r => setTimeout(r, 2000));
-    console.log(document.cookie)
+    //console.log(document.cookie)
   
     //user has successfully logged in if the page has changed to be the homepage
     expect(document.cookie.substring(0, 14)).toBe("page=Homepage;");

@@ -1,6 +1,6 @@
 import express from 'express';
-import{getPages,getPageBySearch, createPage, updatePage} from '../controllers/pages.js'
-import{ getClubs} from '../controllers/pages.js'
+import{getPages,getPageBySearch, createPage, updatePage, getClubPageInfo} from '../controllers/pages.js'
+import{ getClubs, setActive} from '../controllers/pages.js'
 
 const router = express.Router();
 
@@ -9,4 +9,6 @@ router.get('/search' ,getPageBySearch);
 router.post('/', createPage);
 router.patch('/:id', updatePage);
 router.post('/getClub', getClubs);
+router.post('/setActive', setActive)
+router.post('/getOneClub', getClubPageInfo)
 export default router;

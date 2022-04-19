@@ -7,8 +7,20 @@ export const getClubPageInfo = async(req,res)=>{
     const id = req.params
     try {
         console.log(req.body)
-        const clubInfo  =await ClubModel.findById(id);
-        res.status(200).json(evaluations);
+        const clubInfo  =await ClubModel.findOne(req.body);
+        console.log(clubInfo)
+        res.status(200).json(clubInfo);
+    } catch (error) {
+        res.status(404).json({message: error.message});
+        
+    }
+}
+
+export const setActive = async(req, res) => {
+    console.log(req.body)
+    try {
+        const clubInfo  =await ClubModel.updateOne({clubName: req.body.clubName}, {$set : {'active': req.body.active}});
+        res.status(200).json(clubInfo);
     } catch (error) {
         res.status(404).json({message: error.message});
         
@@ -36,7 +48,12 @@ export const createPage = async (req,res)=>{
 
     // userModel.updateOne({userEmail: req.body.userEmail}, {$set: {club: whatever the new clubname is, userLevel: 'Eboard', title: 'President'}})
     const page = req.body;
-    const newPage = new ClubModel(page);
+    const exists = await ClubModel.find({clubName : page.clubName})
+    if(exists.length > 0){
+        res.status(409).json({message: 'duplicate'});
+        return 
+    }
+    const newPage = new ClubModel({...page, active: 'Yes'});
     try{
         await newPage.save();
 

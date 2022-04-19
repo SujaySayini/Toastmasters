@@ -51,7 +51,7 @@ it("Logs in successfully with valid credentials on Home Page", async () => {
     document.getElementById('login-submit').dispatchEvent(new MouseEvent("click"))
   });
   await new Promise(r => setTimeout(r, 2000));
-  console.log(document.cookie)
+  //console.log(document.cookie)
 
   //user has successfully logged in if the page has changed to be the homepage
   expect(document.cookie.substring(0, 14)).toBe("page=HomePage;");
@@ -78,7 +78,7 @@ it("Logs in successfully on Search Page", async () => {
     document.getElementById('login-submit').dispatchEvent(new MouseEvent("click"))
   });
   await new Promise(r => setTimeout(r, 2000));
-  console.log(document.cookie)
+  //console.log(document.cookie)
 
   //user has successfully logged in if the page has changed to be the homepage
   expect(document.cookie.substring(0, 14)).toBe("page=Search;");
@@ -107,7 +107,7 @@ it("Logs in successfully on Admin Page", async () => {
     document.getElementById('login-submit').dispatchEvent(new MouseEvent("click"))
   });
   await new Promise(r => setTimeout(r, 2000));
-  console.log(document.cookie)
+  //console.log(document.cookie)
 
   //user has successfully logged in if the page has changed to be the homepage
   expect(document.cookie.substring(0, 14)).toBe("page=Admin;");
@@ -135,7 +135,7 @@ it("Logs in successfully on Eboard Page", async () => {
     document.getElementById('login-submit').dispatchEvent(new MouseEvent("click"))
   });
   await new Promise(r => setTimeout(r, 2000));
-  console.log(document.cookie)
+  //console.log(document.cookie)
 
   //user has successfully logged in if the page has changed to be the homepage
   expect(document.cookie.substring(0, 14)).toBe("page=ManageMembers;");
@@ -148,7 +148,7 @@ it("Logs in successfully on Eboard Page", async () => {
 
 
 it("Does not login with invalid credentials", async () => {
-    console.log(document.cookie)
+    //console.log(document.cookie)
     act(() => {
       render(
           <Provider store={store}>
@@ -173,7 +173,7 @@ it("Does not login with invalid credentials", async () => {
   
 
   /*it("Resets password with valid credentials", async () => {
-    console.log(document.cookie)
+    //console.log(document.cookie)
     act(() => {
       render(
           <Provider store={store}>

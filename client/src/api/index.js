@@ -162,7 +162,31 @@ export const clubDeregister=(email)=>baseAPI.post('/users/clubDeregister', email
  }, (error) => {
   console.log(error);
  });;
+
+
+
+ export const setClubActive = async (data) => {
+  let theData = []
+  await axios.post(theURL + '/pages/setActive', data).then((response) => {
+  theData = response.data
+}, (error) => {
+  console.log(error);
+});
+console.log(theData);
+return theData
+}
   
+
+export const findOneClub =async(data) => {
+  let theData = []
+  await axios.post(theURL + '/pages/getOneClub', data).then((response) => {
+    theData = response.data
+  }, (error) => {
+    console.log(error);
+  });
+  console.log(theData);
+  return theData
+}
  //export const signIn=(data)=>axios.post(url8, data);
  //export const signUp=(data)=>axios.post(url9, data);
   

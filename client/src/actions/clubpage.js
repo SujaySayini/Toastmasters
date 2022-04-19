@@ -27,7 +27,9 @@ export const getPageBySearch = (searchQuery) => async(dispatch) =>{
 export const createPages = (page) => async (dispatch) => {
     try {
         const { data } = await api.createPages(page);
+        
         dispatch({type: 'CREATE', payload:data});
+        return data
         
     } catch (error) {
         console.log(error.message);
@@ -47,4 +49,30 @@ export const getClubs = (data) => async (dispatch) => {
         
     }
 
+}
+
+export const setClubActive = (data) => async (dispatch) => {
+    try {
+        //const { data } = await api.fetchSpeech(date);
+        const data2 = await api.setClubActive(data);
+        //console.log(data2)
+        dispatch({type: 'FETCH', payload:data2});
+        return data2;
+    } catch (error) {
+        console.log(error.message);
+        
+    }
+}
+
+export const findOneClub = (data) => async (dispatch) => {
+    try {
+        //const { data } = await api.fetchSpeech(date);
+        const data2 = await api.findOneClub(data);
+        //console.log(data2)
+        dispatch({type: 'FETCH', payload:data2});
+        return data2;
+    } catch (error) {
+        console.log(error.message);
+        
+    }
 }

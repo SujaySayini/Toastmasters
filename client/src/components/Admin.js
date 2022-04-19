@@ -8,6 +8,7 @@ import { useDispatch } from 'react-redux';
 import { getSpeech } from '../actions/speech';
 import { getUsers } from '../actions/user'
 import './Homepage.css'
+import { setClubActive } from '../actions/clubpage';
 import { admin } from '../actions/user';
 import { getClubs } from '../actions/clubpage';
 const Admin = (props) => {
@@ -37,22 +38,36 @@ const Admin = (props) => {
     const accept = (email) => {
         dispatch(admin({email: email, requestAdmin: 'No', userLevel: 'Admin'}))
         getRequests()
+        
+        getActiveClubs()
+        getInactiveClubs()
 
     }
     const deny = (user) => {
         dispatch(admin({email: user.email, requestAdmin: 'No', userLevel: user.userLevel}))     
         getRequests()
+        
+        getActiveClubs()
+        getInactiveClubs()
     }
-    const inactivate = (clubName) => {
-        //dispatch(setClubActive({clubName: clubName, active: 'No'}))
+    const inactivate = async (clubName) => {
+        await dispatch(setClubActive({clubName: clubName, active: 'No'}))
+        
+        getRequests()
+        getActiveClubs()
+        getInactiveClubs()
     }
-    const activate = (clubName) => {
-        //dispatch(setClubActive({clubName: clubName, active: 'No'}))
+    const activate = async (clubName) => {
+        await dispatch(setClubActive({clubName: clubName, active: 'Yes'}))
+        
+        getRequests()
+        getActiveClubs()
+        getInactiveClubs()
     }
     const getRequests = async () => {
         const users = await dispatch(getUsers({requestAdmin : 'Yes'}))
         console.log(users)
-        const elem = users.map((user) => {
+        let elem = users.map((user) => {
             return (<div className='message'>    
                 <div  className = 'row' style={{marginLeft: '10px', marginRight: '10px',padding:'10px'}}>
                     <div className='col-4' style={{textDecoration:'none'}}>
@@ -70,6 +85,10 @@ const Admin = (props) => {
                 </div>
             </div>)
         })
+        if(elem.length === 0){
+            elem = <h4>No New Requests</h4>
+        }
+        console.log(elem.length)
         setRequests(elem)
 
     }
@@ -105,6 +124,8 @@ const Admin = (props) => {
             </div>)
         })
         setInactiveClubs(elem)
+
+
 
     }
     useEffect(async ()=>{

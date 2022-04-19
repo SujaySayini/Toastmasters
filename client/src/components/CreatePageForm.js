@@ -24,13 +24,18 @@ const CreatePageForm = () => {
      picture:""
   });
   const dispatch = useDispatch();
-  const handleSubmit = (e) =>{
+  const handleSubmit = async (e) =>{
     
 
       e.preventDefault();
     // add in user data, pass in the user's email as well
-    dispatch(createPages(pageData));
+    const res = await dispatch(createPages(pageData));
+    console.log(res)
+    if(res){
     alert("Club Page has created");
+    } else {
+      alert("Name is taken")
+    }
 
   }
   const clear = () =>{
