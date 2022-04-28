@@ -13,29 +13,42 @@ const ClubInfo = () => {
 
 
     const dispatch = useDispatch()
-    let user = ''
-    const cname = 'clubName'
-    let name = cname + "=";
-    let decodedCookie = decodeURIComponent(document.cookie);
-    let ca = decodedCookie.split(';');
-    for(let i = 0; i <ca.length; i++) {
-      let c = ca[i];
-      while (c.charAt(0) == ' ') {
-        c = c.substring(1);
-      }
-      if (c.indexOf(name) == 0) {
-        user = c.substring(name.length, c.length);
-      }
-    }
     const [clubInfo, setClubInfo] = useState({description: 'None'})
-    console.log(user)
+    const [currentClub, setCurrentClub] = useState(false)
     useEffect(async ()=>{
+        let user = ''
+        const cname = 'clubName'
+        let name = cname + "=";
+        let decodedCookie = decodeURIComponent(document.cookie);
+        let ca = decodedCookie.split(';');
+        for(let i = 0; i <ca.length; i++) {
+          let c = ca[i];
+          while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+          }
+          if (c.indexOf(name) == 0) {
+            user = c.substring(name.length, c.length);
+          }
+        }
+        if(user === ''||user==='*'){
+        setCurrentClub(true)
+        name = 'user='
+        for(let i = 0; i <ca.length; i++) {
+            let c = ca[i];
+            while (c.charAt(0) == ' ') {
+              c = c.substring(1);
+            }
+            if (c.indexOf(name) == 0) {
+              user = JSON.parse(c.substring(name.length, c.length)).user.club;
+            }
+          }
+        }
         
         const res = await dispatch(findOneClub({clubName: user}))
         console.log(res)
         setClubInfo(res)
         
-        document.cookie = "clubnName=; expires=Thu, 01 Jan 1970 00:00:00 UTC"
+        document.cookie = "clubName=*;"
     }, []);
 
 
@@ -44,17 +57,17 @@ const ClubInfo = () => {
 
     return(
         
-            <div className='background'>
+            <div>
             
             <section className='section'>
+            <h2 style={{marginTop: '20px'}} className='club-name'>{clubInfo.clubName} Toastmasters</h2>
                 <div className='container'>
                     <div className='row'>
                         <div className = "col-md-6">
-                            <h2 className='club-name'>{clubInfo.clubName}</h2>
                             <div className='underline'></div>
                             <h4 className='club-des'>Club description</h4>
-                            <div className='text-box'>
-                                    <p>{clubInfo.description}</p>
+                            <div className='mycard2' style={{overflow: 'auto', height: '30vh', padding: '10px'}}>
+                                    <p>{clubInfo.description}</p> 
                             </div>
                         </div>
                         <div className = "col-md-6 align-self-center">
@@ -74,16 +87,14 @@ const ClubInfo = () => {
             <section className='section'>
                 <div className='container'>
                     <div className='row'>
-                    <div className = "col-md-6 align-self-center">
-                            <h3 className='contact-us'>Contact us</h3>
-                            <div className='text-box'>
-                                <p>Location: SEC 107<br/>
-                                         Email: club1@rutgers.edu<br/>
-                                          Phone: (234)-567-8901<br/>
-                                           Website: https://club1.com<br/> 
-                                           Facebook page: club1_rutgers<br/>
-                                            Instagram: club1_rutgers
-                                </p>
+                    <div className = "col-md-6">
+                            <h3 style={{marginTop: '20px'}}className='contact-us'>Contact us</h3>
+                            <div className='mycard2' style={{padding: '10px', textAlign: 'left'}}>
+                                <p> <strong>    Location: </strong>{clubInfo.location}  </p>
+                                <p>    <strong>    Email: </strong>{clubInfo.email} </p>
+                                <p>    <strong>    Website: </strong> {clubInfo.website} </p>
+                                <p>    <strong>    Extra Info: </strong>{clubInfo.extraContactInfo}</p>
+                                
                             </div>
                         </div>
                         <div className = "col-md-6 align-self-center">
@@ -94,6 +105,7 @@ const ClubInfo = () => {
                     </div>
                 </div>
             </section>
+            {!currentClub ? <button className='btn btn-info'>Join This Club!</button> : <p></p> }
         </div>
 
 

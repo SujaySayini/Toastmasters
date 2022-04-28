@@ -15,29 +15,44 @@ import {createEvaluation, getEvaluation} from '../actions/evaluation.js'
 
 
 const Agenda = () => {
-    //const speech = useSelector((state)=>state.speech)
-    //console.log("HERE:")
-    //console.log(speech)
     const dispatch = useDispatch();
 
-    
+    // Get current date and modify it to be easily displayable on the page
     let today = new Date();
     const dd = String(today.getDate()).padStart(2, '0');
     const mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
     const yyyy = today.getFullYear();
-    
     today = mm + '/' + dd + '/' + yyyy;
+
+
+
+    //store all speeches for the current day, default values are set to make it clear how many open spots there are
     const [speeches, setSpeeches] = useState([{speechGiver: 'None', speechTitle: 'None'}, {speechGiver: 'None', speechTitle: 'None'}, {speechGiver: 'None', speechTitle: 'None'}])
+   
+    //store all evals for the current day
     const [evals, setEvals] = useState([{speechGiver: 'None'}, {speechGiver: 'None'}, {speechGiver: 'None'}])
+    
+    //store table topics master for current day
     const [ttmaster, setTTMaster] = useState({speechGiver: 'None'})
+
+    //state to store the date, users can change which date's agenda they view so need to track this
     const [date, setDate] = useState(today)
+
+    //store members in club so that they can sign up for roles at a meeting
     const [members, setMembers] = useState([])
+
+    //store timer for current day
     const [timer, setTimer] = useState({speechGiver: 'None'})
+
+    //store ah counter for current day
     const [ahCounter, setAhCounter] = useState({speechGiver: 'None'})
+
+    //set data for the current user
     const [user, setUser] = useState([])
 
 
 
+    //store all of the different eboard roles for the club
     const [pres, setPres] = useState("None")
     const [vpe, setVpe] = useState("None")
     const [vpm, setVpm] = useState("None")
@@ -48,9 +63,11 @@ const Agenda = () => {
 
 
 
+    // called 
     const updateMembers = async (club) =>{
-        //first, get the eboard and other club information
 
+
+        //first, get the eboard and other club information
         const eboard = await dispatch(getUsers({club: club, userLevel: "Eboard"}))
         for(let i =0; i < eboard.length; i++){
             switch(eboard[i].title){

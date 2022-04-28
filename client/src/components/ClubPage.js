@@ -15,12 +15,12 @@ function ClubPage() {
   }, [dispatch]);
 
   const pages = useSelector((state) => state.clubpage);
-  console.log(pages);
+  //console.log(pages);
 
   return (
     <Container maxidth="lg">
         <AppBar position = "static" color = "inherit">
-            <Typography variant="h2" align='"center'>
+            <Typography variant="h2" align="center">
                 Create A Club
             </Typography>
         </AppBar>

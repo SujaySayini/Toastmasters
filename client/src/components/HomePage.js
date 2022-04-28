@@ -27,7 +27,7 @@ const HomePage = (props) => {
         user = JSON.parse(c.substring(name.length, c.length)).user;
       }
     }
-    console.log(user)
+    //console.log(user)
 
 
     useEffect(async ()=>{

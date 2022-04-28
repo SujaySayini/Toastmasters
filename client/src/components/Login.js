@@ -51,7 +51,7 @@ function Login2(props){
       //console.log(document.cookie)
       document.cookie = 'user=' + JSON.stringify(jwt_decode(res.data.token)) 
       const userdata = jwt_decode(res.data.token).user
-      console.log(userdata)
+      //console.log(userdata)
 
       if(userdata.club===""){
         props.swap('Search')
@@ -82,7 +82,7 @@ function Login2(props){
  
 
  const responseGoogleFailure=(error)=>{
-   console.log(error);
+   //console.log(error);
    //console.log(response.profileObj);
    console.log('Google Sign In was unsuccessful. Try Again Later!');
    
@@ -94,7 +94,7 @@ function Login2(props){
    const result=res?.profileObj; //undefined 
    //check if email is in database
    const token=res?.tokenId;
-   console.log(token);
+   //console.log(token);
   
 
   

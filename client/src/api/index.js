@@ -22,7 +22,7 @@ const url8 = theURL+'/pages'
 const url9 = theURL + '/user/admin'
 
 export const setAdmin = async (data) => {
-  console.log('setadmin!')
+  //console.log('setadmin!')
   axios.post(url9, data)
 }
 //const url8 = 'theURLusers/signin'
@@ -33,7 +33,7 @@ export const fetchSpeech2 = async (date) => {
     await axios.post(theURL+'/speech/test', date).then((response) => {
     theData = response.data
   }, (error) => {
-    console.log(error);
+    //console.log(error);
   });
   return theData
 }
@@ -43,7 +43,7 @@ export const fetchEvaluation = async (date) => {
   await axios.post(theURL+'/evaluation/get', date).then((response) => {
   theData = response.data
 }, (error) => {
-  console.log(error);
+  //console.log(error);
 });
 return theData
 }
@@ -53,9 +53,9 @@ export const getAllUsers = async (club) => {
   await axios.post(theURL+'/user/getUser', club).then((response) => {
   theData = response.data
 }, (error) => {
-  console.log(error);
+  //console.log(error);
 });
-console.log(theData);
+////console.log(theData);
 return theData
 }
 
@@ -64,9 +64,9 @@ export const getAllClubs = async (data) => {
   await axios.post(theURL + '/pages/getClub', data).then((response) => {
   theData = response.data
 }, (error) => {
-  console.log(error);
+  //console.log(error);
 });
-console.log(theData);
+////console.log(theData);
 return theData
 }
 
@@ -76,9 +76,9 @@ export const setTime = async (data) => {
   await axios.post(url3, data).then((response) => {
   theData = response.data
 }, (error) => {
-  console.log(error);
+  //console.log(error);
 });
-console.log("the data is " + theData);
+//console.log("the data is " + theData);
 return theData
 }
 
@@ -87,9 +87,9 @@ export const postAhCounter = async (data) => {
   await axios.post(url6, data).then((response) => {
   theData = response.data
 }, (error) => {
-  console.log(error);
+  //console.log(error);
 });
-console.log("the data for ah " + theData);
+//console.log("the data for ah " + theData);
 return theData
 }
 
@@ -102,10 +102,10 @@ export const fetchAllPages = async (clubsData) => {
   await axios.get(url8,clubsData).then((response) => {
   theData = response.data
 }, (error) => {
-  console.log(error);
+  //console.log(error);
 });
-console.log("Got it");
-console.log(theData);
+//console.log("Got it");
+////console.log(theData);
 return theData
 }
 
@@ -130,22 +130,22 @@ export const signIn=(formData)=>baseAPI.post('/users/signin', formData).then((re
   const theData = response
   return theData
 }, (error) => {
-  console.log(error);
+  //console.log(error);
 });;
 export const signUp=(formData)=>baseAPI.post('/users/signup', formData).then((response) => {
   //const theData = response.status
   const theData = response
   return theData
 }, (error) => {
-  //this error function is called upon an error in the post. however it doesn't retain the data, just that an error happened. you can see this by console logging the error and seeing that its just blank
-  console.log(error)
+  //this error function is called upon an error in the post. however it doesn't retain the data, just that an error happened. you can see this by //console logging the error and seeing that its just blank
+  //console.log(error)
   return {status: 400, data: {message: 'Could Not Sign Up :('}};
 });;
 export const changePassword=(formData)=>baseAPI.post('/users/changePassword', formData).then((response) => {
   const theData = response
   return theData
 }, (error) => {
-  console.log(error);
+  //console.log(error);
 });;
 
 //export const signIn=(data)=>axios.post(url8, data);
@@ -154,13 +154,13 @@ export const clubDeregister=(email)=>baseAPI.post('/users/clubDeregister', email
   const theData = response.status
   return theData
  }, (error) => {
-  console.log(error);
+  //console.log(error);
  });;
  export const updateProfile=(formData)=>baseAPI.post('/users/updateProfile', formData).then((response) => {
   const theData = response
   return theData
  }, (error) => {
-  console.log(error);
+  //console.log(error);
  });;
 
 
@@ -170,9 +170,9 @@ export const clubDeregister=(email)=>baseAPI.post('/users/clubDeregister', email
   await axios.post(theURL + '/pages/setActive', data).then((response) => {
   theData = response.data
 }, (error) => {
-  console.log(error);
+  //console.log(error);
 });
-console.log(theData);
+////console.log(theData);
 return theData
 }
   
@@ -182,9 +182,9 @@ export const findOneClub =async(data) => {
   await axios.post(theURL + '/pages/getOneClub', data).then((response) => {
     theData = response.data
   }, (error) => {
-    console.log(error);
+    //console.log(error);
   });
-  console.log(theData);
+  ////console.log(theData);
   return theData
 }
  //export const signIn=(data)=>axios.post(url8, data);
