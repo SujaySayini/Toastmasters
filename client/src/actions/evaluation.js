@@ -17,7 +17,8 @@ export const getEvaluation = (date) => async (dispatch) => {
 
 export const createEvaluation = (evaluation) => async(dispatch) => {
     try {
-        const { data } = await api.createEvaluation(evaluation)
+        const  data  = await api.createEvaluation(evaluation)
+        return data
         dispatch({type:"CREATE", payload: data})
     } catch (error) {
         console.log(error);

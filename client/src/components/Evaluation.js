@@ -67,10 +67,10 @@ const Evaluation = () => {
         updateMembers(user.club);
     }, []);
 
-    const handleSubmit = (evt) => {
+    const handleSubmit = async (evt) => {
         evt.preventDefault();
         let name = user.first + " " + user.last;
-        let data = dispatch(createEvaluation({speechDate: date,
+        let data = await dispatch(createEvaluation({speechDate: date,
                                    speechGiver: currMember, 
                                    speechType: "Evaluation",
                                    speechEvaluator: name, 
@@ -88,8 +88,8 @@ const Evaluation = () => {
                                 }));
         console.log(data);
         if(data){
-            console.log(data.ifExists);
-            if(data.ifExists == "No"){
+            console.log(data.data.ifExists);
+            if(data.data.ifExists == "No"){
                 alert("The speech doesn't exist. Please try again.");
             } else {
                 alert(`Evaluation Submitted`);

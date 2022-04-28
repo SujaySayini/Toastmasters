@@ -24,12 +24,15 @@ export const createEvaluation = async (req, res)=>{
         console.log(newEvaluation)
         try {
             await newEvaluation.save();
-            res.status(201).json(newEvaluation)
+            res.status(201).send({ifExists: 'Yes'})
         } catch (error) {
             console.log(error)
 
             res.status(409).json({message: error.message});
         
         }
+    } else {
+        res.status(201).send({ifExists: 'No'})
+
     }
 }

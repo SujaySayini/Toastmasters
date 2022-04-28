@@ -118,8 +118,20 @@ export const fetchPageBySearch =(searchQuery) => baseAPI.get(`/pages/search?sear
 //export const fetchPage=() =>baseAPI.get('/');
 //export const fetchPostsBySearch =(searchQuery) => baseAPI.get(`/search?searchQuery=${searchQuery.search || 'none'}`)
 //export const setTime = (data) => axios.post(url3, data)
-export const addCommentCards = (data) => axios.post(url4, data)
-export const createEvaluation = (data) => axios.post(url5, data)
+export const addCommentCards = (data) => axios.post(url4, data).then((response) => {
+  const theData = response
+  return theData
+}, (error) => {
+  return error
+  //console.log(error);
+});;
+export const createEvaluation = (data) => axios.post(url5, data).then((response) => {
+  const theData = response
+  return theData
+}, (error) => {
+  return error
+  //console.log(error);
+});;
 //export const postAhCounter = (data) => axios.post(url6, data)
 export const createUser = (data) => axios.post(url7, data)
 export const changeUserRole = (data) => axios.post(theURL+'/user/changeUserRole', data)

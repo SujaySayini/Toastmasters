@@ -52,17 +52,18 @@ const CommentCard = () => {
         updateMembers(user.club);
     }, []);
 
-    const handleSubmit = (evt) => {
+    const handleSubmit = async (evt) => {
         evt.preventDefault();
         
         const positive_1 = document.getElementById("positive1").value;
         const positive_2 = document.getElementById('positive2').value;
         const negative_1 = document.getElementById('negative1').value;
-        let data = dispatch(createCommentCard({speaker: currMember, positive1: positive_1, positive2: positive_2, negative1: negative_1}));
+        console.log('submitted')
+        let data = await dispatch(createCommentCard({speaker: currMember, positive1: positive_1, positive2: positive_2, negative1: negative_1}));
         console.log(data);
         if(data){
-            console.log(data.ifExists);
-            if(data.ifExists == "No"){
+            console.log(data.data.ifExists);
+            if(data.data.ifExists === "No"){
               alert("The speech doesn't exist. Please try again.");
             } else {
                 alert(`Comment Card Submitted`);

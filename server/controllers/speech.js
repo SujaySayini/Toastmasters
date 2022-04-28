@@ -151,7 +151,13 @@ export const addCommentCard = async (req, res) => {
             {$push: {commentCards : commentcard}})
 
         console.log(update)
+        if(update.matchedCount === 0){
+            res.status(200).send({ifExists: 'No'})
+        } else {
+            res.status(200).send({ifExists: 'Yes'})
+        }
     } catch (error) {
+        console.log(error)
         res.status(404).json({message:error.message})
     }
     
