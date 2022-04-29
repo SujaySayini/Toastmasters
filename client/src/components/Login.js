@@ -1,14 +1,10 @@
 import React from 'react';
 
 import Img from '../images/Toastmasters.png';
-import background from "./Background.jpg";
-// import App from '../App';
+import background from "./Background.JPG";
 import "./custom.css";
-import HomePage from './HomePage';
-import GoogleLogin from 'react-google-login'
 import {useDispatch} from 'react-redux'
 import {useNavigate} from 'react-router-dom'
-
 import 'bootstrap/dist/css/bootstrap.css';
 import {signin} from '../actions/auth.js'
 import {useState} from 'react'
@@ -18,6 +14,9 @@ import {BrowserRouter as Router}  from 'react-router-dom';
 
  const initialState={email: '', password: ' '};
 
+    /**
+    * Allows user to log in
+    */ 
  function Login(props){
   return (
     <Router>
@@ -28,11 +27,7 @@ import {BrowserRouter as Router}  from 'react-router-dom';
 
   )
 
-  
-//} 
- 
-//class Login extends React.Component{
-  //const Login = () =>{
+
 function Login2(props){
   
   const dispatch=useDispatch();
@@ -43,16 +38,21 @@ function Login2(props){
     console.log('test')
     e.preventDefault();
     const res = await dispatch(signin({email: document.getElementById('login-email').value, password: document.getElementById('login-password').value}, navigate))
-    //console.log('---------')
-    //console.log(res.data.token)
-    //console.log(jwt_decode(res.data.token).user.email);
+  
 
     if(res?.status === 200){
-      //console.log(document.cookie)
+      
       document.cookie = 'user=' + JSON.stringify(jwt_decode(res.data.token)) 
       const userdata = jwt_decode(res.data.token).user
-      //console.log(userdata)
-
+      
+      /** 
+      * Once a user succesfully sign in, 
+      * they are directed to a page based on their information.
+      * A General User in no club gets directed to the search page.
+      * An Admin gers directced to the Admin Page.
+      * An Eboard member gets directed to the Manage Club page.
+      * A General User in a club gets directed to the Home pagee.
+      */ 
       if(userdata.club===""){
         props.swap('Search')
       }else if(userdata.userLevel === 'Admin'){
@@ -66,58 +66,14 @@ function Login2(props){
     
       alert('Invalid Email or Password');
     }
-  //console.log(res)
-   //console.log(formData)
-    
-   //this.props.swap('HomePage')
-  
-   //alert('Login credentials entered: ' + this.state.value);
-   //event.preventDefault();
+ 
  }
 
  const handleChange=(e)=>{
   setFormData({email: document.getElementById('login-email').value, password: document.getElementById('login-password').value})
  }
 
- 
 
- const responseGoogleFailure=(error)=>{
-   //console.log(error);
-   //console.log(response.profileObj);
-   console.log('Google Sign In was unsuccessful. Try Again Later!');
-   
-
- }
-
- const responseGoogleSuccess=async (res)=>{
-
-   const result=res?.profileObj; //undefined 
-   //check if email is in database
-   const token=res?.tokenId;
-   //console.log(token);
-  
-
-  
-
-   
-//hi
-   
-   try{
-     dispatch({type:'AUTH', data: {result, token}});
-     //navigate.push('/');
-     props.swap('HomePage')
-     navigate('/');
-
-
-   }catch(error){
-     console.log(error);
-
-   }
-
-  
-
-}
-  //render(){
       
       return (
        
@@ -139,16 +95,7 @@ function Login2(props){
        </div>
        <div className='col-12'>
        </div>
-        <GoogleLogin
-        clientId="422408827622-1n56espplvd573e6epkhs90o0r7bif7r.apps.googleusercontent.com"
-        buttonText="Login"
-        onSuccess={responseGoogleSuccess}
-        onFailure={responseGoogleFailure}
-        cookiePolicy={'single_host_origin'}
-          
-          
-          
-          />
+      
           
 
   
@@ -219,12 +166,10 @@ function Login2(props){
 
      </div> 
      </div>
-     
- 
-      
+
        
       );
-   // };
+
  }
 }
 export default Login;

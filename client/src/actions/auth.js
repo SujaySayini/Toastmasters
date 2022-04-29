@@ -2,99 +2,87 @@
 import {AUTH} from './user.js'
 import * as api from '../api/index.js'
 
-//import dispatch from ''
 
-
+/**
+    * Sends information from signin form to api signIn 
+    *
+    * @param  formData   Information from the sign in form.
+    *   
+    */
 export const signin =(formData, navigate) => async(dispatch) => {
 try{
 
-    console.log(formData);
+    //console.log(formData);
     const data=await api.signIn(formData);
     return data
-   // console.log(data);
-    dispatch({type:AUTH,  payload: data});
-    //login the user 
-    //navigate to the home page 
-
-    //navigate.push('/');
-    navigate('/');
 
 
 }
 catch(error){
-    console.log(error)
+    //console.log(error)
 
 
 }
 
 
-
-
 }
 
+/**
+    * Sends information from signup form to api signUp 
+    *
+    * @param  formData   Information from the sign up form.
+    *   
+    */
 export const signup =(formData, navigate) => async(dispatch) => {
     try{
 
-        console.log(formData);
+        //console.log(formData);
     const data=await api.signUp(formData);
-    console.log('---------------------')
-    console.log(data)
     return data
-        ////const {data}=await api.signUp(formData);
-    ////dispatch({type:AUTH, data});
-        //login the user 
-        //navigate to the home page 
-    
-        //history.push('/');
-        navigate('/');
-    
     
     }
     catch(error){
-        console.log(error)
+        //console.log(error)
     
     
     }
-    
-    
-    
     
     }
 
+    /**
+    * Sends information from change password form to api changePassword
+    *
+    * @param  formData   Information from the change password form.
+    *   
+    */
     export const changepassword =(formData, navigate) => async(dispatch) => {
         try{
     
-            console.log(formData);
         const data=await api.changePassword(formData);
         return data
-            ////const {data}=await api.signUp(formData);
-        ////dispatch({type:AUTH, data});
-            //login the user 
-            //navigate to the home page 
-        
-            //history.push('/');
-            navigate('/');
-        
         
         }
         catch(error){
-            console.log(error)
+            //console.log(error)
         
         
         }
-        
-        
+    
         
         
         }
 
-    //const res = await dispatch(changePassword(formData, navigate))
+    /**
+    * Sends information from profile page to api clubDeregister
+    *
+    * @param  formData   email stored in cookie from profile page.
+    *   
+    */
     export const clubderegister =(email) => async(dispatch) => {
-        //user.email
+       
         try{
    
-            console.log(email);
-        //const data=await api.changePassword(formData);
+
        const data=await api.clubDeregister(email);
         return data
         }
@@ -107,8 +95,8 @@ export const signup =(formData, navigate) => async(dispatch) => {
         export const updateprofile =(formData,email) => async(dispatch) => {
             //user.email
             try{
-                console.log(email)
-                console.log({...formData, email: email});
+               // console.log(email)
+                //console.log({...formData, email: email});
             //const data=await api.changePassword(formData);
            const data=await api.updateProfile({...formData, email: email});
             return data

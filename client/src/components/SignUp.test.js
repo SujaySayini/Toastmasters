@@ -43,14 +43,16 @@ import React from "react";
      document.getElementById('signup-email').value= 'ijacquelynnei@yahoo.com'
      document.getElementById('signup-password').value= 'password'
      document.getElementById('signup-pass').value = 'password'
-     document.getElementById('signup-securityQuestion').value = 'In What City Were You Born In?'
-     document.getElementById('signup-securityAnswer').value = 'Silver Spring '
-     document.getElementById('signup-clubName').value = 'Rutgers'
+     document.getElementById('signup-securityquestion').value = 'In What City Were You Born In?'
+     document.getElementById('signup-securityanswer').value = 'Silver Spring '
+     document.getElementById('signup-club').value = 'Rutgers'
+     document.getElementById('signup-submit').dispatchEvent(new MouseEvent("click"))
+     document.get
     
      
    });
    await new Promise(r => setTimeout(r, 2000));
-   //console.log(document.cookie)
+   console.log(document.cookie)
  
    //user has successfully logged in if the page has changed to be the homepage
    expect(document.cookie.substring(0, 14)).toBe("page=SignUp;");
@@ -79,14 +81,15 @@ import React from "react";
       document.getElementById('signup-email').value= 'ijacquelynnei@yahoo.com'
       document.getElementById('signup-password').value= 'password'
       document.getElementById('signup-pass').value = 'password'
-      document.getElementById('signup-securityQuestion').value = 'In What City Were You Born In?'
-      document.getElementById('signup-securityAnswer').value = 'Silver Spring '
-      document.getElementById('signup-clubName').value = 'Rutgers'
+      document.getElementById('signup-4').value = 'In What City Were You Born In?'
+      document.getElementById('signup-securityanswer').value = 'Silver Spring '
+      document.getElementById('signup-club').value = 'Rutgers'
+      document.getElementById('signup-submit').dispatchEvent(new MouseEvent("click"))
      
       
     });
     await new Promise(r => setTimeout(r, 2000));
-    //console.log(document.cookie)
+    console.log(document.cookie)
   
     //user has successfully logged in if the page has changed to be the homepage
     expect(document.cookie.substring(0, 14)).toBe("page=SignUp;");
@@ -114,14 +117,14 @@ import React from "react";
       document.getElementById('signup-email').value= 'temp'
       document.getElementById('signup-password').value= 'password'
       document.getElementById('signup-pass').value = 'password'
-      document.getElementById('signup-securityQuestion').value = 'In What City Were You Born In?'
-      document.getElementById('signup-securityAnswer').value = 'Silver Spring '
-      document.getElementById('signup-clubName').value = 'Rutgers'
-     
+      document.getElementById('signup-securityquestion').value = 'In What City Were You Born In?'
+      document.getElementById('signup-securityanswer').value = 'Silver Spring '
+      document.getElementById('signup-club').value = 'Rutgers'
+      document.getElementById('signup-submit').dispatchEvent(new MouseEvent("click"))
       
     });
     await new Promise(r => setTimeout(r, 2000));
-    //console.log(document.cookie)
+    console.log(document.cookie)
   
     //user has successfully logged in if the page has changed to be the homepage
     expect(document.cookie.substring(0, 14)).toBe("page=SignUp;");
@@ -149,14 +152,16 @@ import React from "react";
       document.getElementById('signup-email').value= 'ijacquelynnei@yahoo.com'
       document.getElementById('signup-password').value= 'password'
       document.getElementById('signup-pass').value = 'passwor'
-      document.getElementById('signup-securityQuestion').value = 'In What City Were You Born In?'
-      document.getElementById('signup-securityAnswer').value = 'Silver Spring '
-      document.getElementById('signup-clubName').value = 'Rutgers'
+      document.getElementById('signup-securityquestion').value = 'In What City Were You Born In?'
+      document.getElementById('signup-securityanswer').value = 'Silver Spring '
+      document.getElementById('signup-club').value = 'Rutgers'
+      document.getElementById('signup-submit').dispatchEvent(new MouseEvent("click"))
+      
      
       
     });
     await new Promise(r => setTimeout(r, 2000));
-    //console.log(document.cookie)
+    console.log(document.cookie)
   
     //user has successfully logged in if the page has changed to be the homepage
     expect(document.cookie.substring(0, 14)).toBe("page=SignUp;");
@@ -184,14 +189,15 @@ import React from "react";
       document.getElementById('signup-email').value= 'ijacquelynnei@yahoo.com'
       document.getElementById('signup-password').value= 'password'
       document.getElementById('signup-pass').value = 'password'
-      document.getElementById('signup-securityQuestion').value = 'In What City Were You Born In?'
-      document.getElementById('signup-securityAnswer').value = ''
-      document.getElementById('signup-clubName').value = 'Rutgers'
+      document.getElementById('signup-securityquestion').value = 'In What City Were You Born In?'
+      document.getElementById('signup-securityanswer').value = ''
+      document.getElementById('signup-club').value = 'Rutgers'
+      document.getElementById('signup-submit').dispatchEvent(new MouseEvent("click"))
      
       
     });
     await new Promise(r => setTimeout(r, 2000));
-    //console.log(document.cookie)
+    console.log(document.cookie)
   
     //user has successfully logged in if the page has changed to be the homepage
     expect(document.cookie.substring(0, 14)).toBe("page=SignUp;");
@@ -218,14 +224,15 @@ import React from "react";
       document.getElementById('signup-email').value= 'ijacquelynnei@yahoo.com'
       document.getElementById('signup-password').value= 'password'
       document.getElementById('signup-pass').value = 'password'
-      document.getElementById('signup-securityQuestion').value = 'In What City Were You Born In?'
-      document.getElementById('signup-securityAnswer').value = 'Silver Spring '
-      document.getElementById('signup-clubName').value = 'Rutgers'
+      document.getElementById('signup-securityquestion').value = 'In What City Were You Born In?'
+      document.getElementById('signup-securityanswer').value = 'Silver Spring '
+      document.getElementById('signup-club').value = 'Rutgers'
+      document.getElementById('signup-submit').dispatchEvent(new MouseEvent("click"))
      
       
     });
     await new Promise(r => setTimeout(r, 2000));
-    //console.log(document.cookie)
+    console.log(document.cookie)
   
     //user has successfully logged in if the page has changed to be the homepage
     expect(document.cookie.substring(0, 14)).toBe("page=SignUp;");
@@ -252,17 +259,19 @@ import React from "react";
       document.getElementById('signup-email').value= 'ijacquelynnei@yahoo.com'
       document.getElementById('signup-password').value= 'password'
       document.getElementById('signup-pass').value = 'password'
-      document.getElementById('signup-securityQuestion').value = 'In What City Were You Born In?'
-      document.getElementById('signup-securityAnswer').value = 'Silver Spring '
-      document.getElementById('signup-clubName').value = ''
+      document.getElementById('signup-securityquestion').value = 'In What City Were You Born In?'
+      document.getElementById('signup-securityanswer').value = 'Silver Spring '
+      document.getElementById('signup-club').value = ''
+      document.getElementById('signup-submit').dispatchEvent(new MouseEvent("click"))
+    
      
       
     });
     await new Promise(r => setTimeout(r, 2000));
-    //console.log(document.cookie)
+    console.log(document.cookie)
   
     //user has successfully logged in if the page has changed to be the homepage
-    expect(document.cookie.substring(0, 14)).toBe("page=Homepage;");
+    expect(document.cookie.substring(0, 14)).toBe("page=HomepPge;");
   
     //AFTER EACH TEST MAKE SURE TO RESET COOKIES!!
     document.cookie = "user=; expires=Thu, 01 Jan 1970 00:00:00 UTC"

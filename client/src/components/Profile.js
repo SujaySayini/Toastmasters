@@ -41,20 +41,32 @@ const Profile = (props) =>{
      user = JSON.parse(c.substring(name.length, c.length)).user;
    }
   }
-  console.log(user)
+  //console.log(user)
+
+  /**
+    * Remove user from a club.
+    */
   const clubDeregister = async (e)=> {
     e.preventDefault();
-    console.log('Deregister from club.');
+    //console.log('Deregister from club.');
+
+    /**
+    * Check to see if user is actully in a club.
+    */
     if (user.club==""){
       alert("You are not registered in a club")
     } else{
-         //ARE YOU SURE YOU WANT TO LEAVE THIS CLUB?
-        //const res = await dispatch(changepassword(formData, navigate))
+        
+        
         const res = await dispatch(clubderegister({email: user.email}))
-    console.log(res);
-    console.log('---------')
+    //console.log(res);
+    //console.log('---------')
+    /**
+    * Club succesfully removed.
+    * Log user out.
+    * Send user to the Login page.
+    */
          if(res === 200){
-        //logout?
         localStorage.clear()
         props.swap('Login')
        }
@@ -63,37 +75,42 @@ const Profile = (props) =>{
         }
    }
   
-   //you are not part of a club
-   //Alert aree you sure you want to deregister from cliub "...."???/
   
  }
  
+ /**
+    * Allow user to update their profile.
+    */
  async function updateProfile(e) {
    e.preventDefault();
    const res=await dispatch(updateprofile(formData,user.email))
-    console.log('__________') 
-    console.log(res)
+    //console.log('__________') 
+    //console.log(res)
     if(res?.data.message==="Profile Updated!"){
-      console.log(formData)
+      //console.log(formData)
       if(formData.first !== ''){
         user.first = formData.first
       } else if (formData.last !== ''){
         user.last = formData.last
       }
-      console.log(document.cookie)
+      //console.log(document.cookie)
       document.cookie = 'user='+JSON.stringify({user: user})
-      console.log(document.cookie)
+      //console.log(document.cookie)
       props.swap('Profile')
     } else{
-      console.log(res.data.message)
+      //console.log(res.data.message)
       alert(res.data.message)
     }
  }
  
+ 
+ /**
+    * Send user to Reset password page if link is pressed. 
+    */
  function resetPassword(e) {
    e.preventDefault();
    //clear cookies/logout
-   console.log('Reset Password.');
+   //console.log('Reset Password.');
    props.swap('ResetPassword');
  }
 

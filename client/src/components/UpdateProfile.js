@@ -5,18 +5,13 @@ import Img from '../images/Toastmasters.png';
 import "./custom.css";
 import {useDispatch} from 'react-redux';
 import {useState} from 'react'
-import {signup } from '../actions/auth.js';
  import {updateprofile } from '../actions/auth.js';
-import {BrowserRouter as Router}  from 'react-router-dom';
- 
- 
  
  
 const initialState={first: '', last: ' ', imageURL:''};
  
 const UpdateProfile = (props) =>{
   const dispatch = useDispatch()
-  //const [chart, setChart] = useState(<div></div>)
   let user = ''
   const cname = 'user'
   let name = cname + "=";
@@ -31,7 +26,6 @@ const UpdateProfile = (props) =>{
       user = JSON.parse(c.substring(name.length, c.length)).user;
     }
   }
-  console.log(user)
  
   const [formData, setFormData]=useState(initialState);
  
@@ -43,12 +37,13 @@ const UpdateProfile = (props) =>{
   const handleSubmit=async(e) =>{
     e.preventDefault()
     const res=await dispatch(updateprofile(formData,user.email))
-    console.log('__________') 
-    console.log(res)
     if(res?.data.message==="Profile Updated!"){
+    /**
+    * User updates their profile successfully 
+    * and is directed to their profile.
+    */
       props.swap('Profile')
     } else{
-      console.log(res.data.message)
       alert(res.data.message)
     }
   }
