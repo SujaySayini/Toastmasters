@@ -47,7 +47,7 @@ import React from "react";
      document.getElementById('signup-securityanswer').value = 'Silver Spring '
      document.getElementById('signup-club').value = 'Rutgers'
      document.getElementById('signup-submit').dispatchEvent(new MouseEvent("click"))
-     document.get
+    
     
      
    });

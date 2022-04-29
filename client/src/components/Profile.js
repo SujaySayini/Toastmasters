@@ -143,13 +143,13 @@ const Profile = (props) =>{
                   <label className="text-center"style={{marginLeft: '75px'}}>New Profile Image: 
                     <input className="text-center" style={{marginBottom: '10px', paddingLeft: '5px'}} type="file" accept="image/*" id="myFile" name="filename" title=' '/> </label>
                   <div>
-                  <label> First Name: <input id = 'first' name="first" label="First Name" onChange={handleChange} /></label>
+                  <label> First Name: <input id = 'profile-first' name="first" label="First Name" onChange={handleChange} /></label>
      </div>
      <br></br>
      <div>
      <label>
         Last Name:
-        <input id = 'last' name="last" label="Last Name" onChange={handleChange} />
+        <input id = 'profile-last' name="last" label="Last Name" onChange={handleChange} />
       </label>
      </div>
    
