@@ -3,7 +3,7 @@ import React from "react";
  import { act } from "react-dom/test-utils";
  import { Provider } from "react-redux";
 
- import Profile from "./Profile.js";
+ import Profile from "../components/Profile.js";
  //import App from "../App.js";
  import {createStore, applyMiddleware, compose} from 'redux';
  import thunk from 'redux-thunk';

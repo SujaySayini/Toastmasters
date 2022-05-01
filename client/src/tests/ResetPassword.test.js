@@ -6,7 +6,7 @@
  import { act } from "react-dom/test-utils";
  import { Provider } from "react-redux";
 
- import ResetPassword from "./ResetPassword.js";
+ import ResetPassword from "../components/ResetPassword.js";
  //import App from "../App.js";
  import {createStore, applyMiddleware, compose} from 'redux';
  import thunk from 'redux-thunk';

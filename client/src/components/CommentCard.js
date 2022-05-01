@@ -8,6 +8,7 @@ import { createCommentCard } from '../actions/speech.js';
 
 
 const CommentCard = () => {
+    //variables to store form values
     const [positive1, setPositive1] = useState("");
     const [positive2, setPositive2] = useState("");
     const [improvement, setImprovement] = useState("");
@@ -15,6 +16,7 @@ const CommentCard = () => {
     const [currMember, setCurrMember] = useState("Member");
     const dispatch = useDispatch();
 
+    //make sure the user cookies work
     let user = ''
     const cname = 'user'
     let name = cname + "=";
@@ -30,6 +32,7 @@ const CommentCard = () => {
       }
     }
 
+    //updates the members list in the dropdown to include all members in the current user's club
     const updateMembers = async (club) =>{
         console.log('dispatch')
         const result = await dispatch(getUsers({club: club}));
@@ -52,17 +55,15 @@ const CommentCard = () => {
         updateMembers(user.club);
     }, []);
 
+    //sends all of the data from the form to the backend to update a database entry containing the speech
     const handleSubmit = async (evt) => {
         evt.preventDefault();
         
         const positive_1 = document.getElementById("positive1").value;
         const positive_2 = document.getElementById('positive2').value;
         const negative_1 = document.getElementById('negative1').value;
-        console.log('submitted')
         let data = await dispatch(createCommentCard({speaker: currMember, positive1: positive_1, positive2: positive_2, negative1: negative_1}));
-        console.log(data);
         if(data){
-            console.log(data.data.ifExists);
             if(data.data.ifExists === "No"){
               alert("The speech doesn't exist. Please try again.");
             } else {
@@ -80,6 +81,7 @@ const CommentCard = () => {
             setPositive2("");
             setImprovement("");
         }
+        return data.data.ifExists;
     }
 
     return (

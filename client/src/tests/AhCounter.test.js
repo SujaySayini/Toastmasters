@@ -7,7 +7,7 @@
  import { Provider } from "react-redux";
  
  import App from "../App.js";
- import AhCounter from "../AhCounter.js";
+ import AhCounter from "../components/AhCounter.js";
  //import ForgotPassword from ".ForgotPassword/"
  import {createStore, applyMiddleware, compose} from 'redux';
  import thunk from 'redux-thunk';
