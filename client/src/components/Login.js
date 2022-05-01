@@ -1,7 +1,7 @@
 import React from 'react';
 
 import Img from '../images/Toastmasters.png';
-import background from "./Background.jpg";
+import background from "./Background.JPG";
 // import App from '../App';
 import "./custom.css";
 import HomePage from './HomePage';
