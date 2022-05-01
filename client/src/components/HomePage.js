@@ -4,14 +4,14 @@ import Message from './Message';
 import Agenda from './Agenda';
 import toastyblack from '../images/toasty-black.png'
 import React, {useEffect, useState} from 'react';
-import { useDispatch } from 'react-redux';
+import { use } from 'react-redux';
 import { getSpeech } from '../actions/speech';
 import {LineChart, Line, CartesianGrid, XAxis, YAxis, ResponsiveContainer, Legend, Tooltip, ScatterChart} from 'recharts';
 import './Homepage.css'
 const HomePage = (props) => {
 
 
-    const dispatch = useDispatch()
+    
     const [chart, setChart] = useState(<div></div>)
     let user = ''
     const cname = 'user'
@@ -27,12 +27,12 @@ const HomePage = (props) => {
         user = JSON.parse(c.substring(name.length, c.length)).user;
       }
     }
-    console.log(user)
+    //console.log(user)
 
 
     useEffect(async ()=>{
         //for actual thing, change speechGiver to have space between them!
-        const theSpeeches = await dispatch(getSpeech({speechGiver: user.first + '' + user.last, speechType: 'Pathways Speech'}))
+        const theSpeeches = await (getSpeech({speechGiver: user.first + '' + user.last, speechType: 'Pathways Speech'}))
 
         const firstChart = []
         let max = 0

@@ -1,6 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
-import { useDispatch } from 'react-redux';
+import { use } from 'react-redux';
 import { getSpeech } from '../actions/speech';
 import { useSelector } from 'react-redux';
 import React, {useEffect, useState} from 'react';
@@ -13,14 +13,14 @@ const Reports = (props) => {
     const mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
     const yyyy = today.getFullYear();
     const currentDate = mm + '/' + dd + '/' + yyyy;
-    const dispatch = useDispatch()
+    
     const speech = useSelector((state)=>state.speech)
     const [items, setItems] = useState([])
     const [date, setDate] = useState(currentDate)
 
     const updateReports = async (data) => {
-        const speeches = await dispatch(getSpeech({speechDate: data}))
-        const evaluations = await dispatch(getEvaluation({speechDate: data}))
+        const speeches = await (getSpeech({speechDate: data}))
+        const evaluations = await (getEvaluation({speechDate: data}))
         let words = []
         let iChange = 0
         for(let i =0; i < speeches.length; i++){

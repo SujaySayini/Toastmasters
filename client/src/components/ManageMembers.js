@@ -5,33 +5,39 @@ import toastyblack from '../images/toasty-black.png'
 import {LineChart, Line, CartesianGrid, XAxis, YAxis, ResponsiveContainer, Legend, Tooltip} from 'recharts';
 import { getUsers, changeUserRole as cUR, removeUserClub as rUC } from '../actions/user';
 import React, {useEffect, useState} from 'react';
-import { useDispatch } from 'react-redux';
+import { use } from 'react-redux';
 import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 import Expand from '@mui/icons-material/Expand'
 
 const ManageMembers = (props) => {
-    const dispatch = useDispatch()
+    
 
-    const[user, setUser] = useState([])
     const[members, setMembers] = useState([])
     const[memberList, setMemberList] = useState([])
     const[minimize, setMinimize] = useState(false)
-
-
-    //stuff I need you to do
-
-
-    // this needs to get which role was selected (the form has an id of 'new-role'+username) and then update the database to give 
-    // this user the new role. First it should check that there aren't any other club members with the role they're trying to update as u cant
-    // have 2 of the same eboard member, if there isn't then you should set their userLevel to Eboard and their title to the selected role
-
-    // if the role selected is just General Member, you should set their userLevel to general member and their title to ''
-
-    //maybe also you should confirm that they aren't making it so there are 0 eboard members in the club before changing it
-    // as you kinda need at least 1 in order to change the eboard
-
-    //to make it easy to search i pass in the email to this function
+    
+   
+    let temp = ''
+    const cname = 'user'
+    let name = cname + "=";
+    let decodedCookie = decodeURIComponent(document.cookie);
+    let ca = decodedCookie.split(';');
+    for(let i = 0; i <ca.length; i++) {
+      let c = ca[i];
+      while (c.charAt(0) == ' ') {
+        c = c.substring(1);
+      }
+      if (c.indexOf(name) == 0) {
+        temp = JSON.parse(c.substring(name.length, c.length)).user;
+      }
+    }
+    const user = temp
+    
+    
+    useEffect(()=>{
+        updateMembers(temp.club);
+    }, [])
     const changeUserRole = async (userEmail, userClub) => {
         console.log(userEmail)
         let selectedRole = document.getElementById("new-role"+userEmail).value;
@@ -43,16 +49,18 @@ const ManageMembers = (props) => {
             default:
                 break;
         }
-        let result = await dispatch(cUR({userEmail: userEmail, selectedRole: selectedRole, userClub: userClub}));
-        console.log(selectedRole)
+        let result = await (cUR({userEmail: userEmail, selectedRole: selectedRole, userClub: userClub}));
+        console.log(user)
+        updateMembers(user.club)
     }
 
     //this literally just needs to set their clubName to ''
 
     const removeUserClub = async (userEmail) => {
         console.log(userEmail)
-        let result = await dispatch(rUC({userEmail: userEmail}));
+        let result = await (rUC({userEmail: userEmail}));
         console.log(result);
+        updateMembers(user.club)
     }
 
 
@@ -77,8 +85,8 @@ const ManageMembers = (props) => {
         //first, get the eboard and other club information
 
 
-        console.log('dispatch')
-        let result = await dispatch(getUsers({club: club}));
+        console.log('')
+        let result = await (getUsers({club: club}));
         
         console.log(result);
     
@@ -163,26 +171,7 @@ const ManageMembers = (props) => {
         setMembers(listElements)
     
     }
-
-    useEffect(()=>{ 
-        let temp = ''
-        const cname = 'user'
-        let name = cname + "=";
-        let decodedCookie = decodeURIComponent(document.cookie);
-        let ca = decodedCookie.split(';');
-        for(let i = 0; i <ca.length; i++) {
-          let c = ca[i];
-          while (c.charAt(0) == ' ') {
-            c = c.substring(1);
-          }
-          if (c.indexOf(name) == 0) {
-            temp = JSON.parse(c.substring(name.length, c.length)).user;
-          }
-        }
-        setUser(temp)
-        updateMembers(temp.club)
-        console.log(temp)
-    }, [])
+    
 
     const data = [{
         name: '1/28',
@@ -255,6 +244,7 @@ const ManageMembers = (props) => {
 
     return (
         <div>
+            <p style={{opacity: 0}}>{user.club}</p>
             <div className='container'>
                 <h2 style ={{marginTop: '10px'}}>Manage Your Club.</h2>
                 <div className = 'row'>
@@ -306,7 +296,7 @@ const ManageMembers = (props) => {
                     </div>
                 </div>
             </div>
-
+                        
         </div>
 
     );

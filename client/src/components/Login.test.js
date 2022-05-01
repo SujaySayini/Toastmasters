@@ -46,9 +46,9 @@ it("Logs in successfully with valid credentials on Home Page", async () => {
   //setting the inputs
   await act(async () => {
     //is in club
-    document.getElementById('login-email').value= 'nick2@gmail.com'
+    document.getElementById('login-email').value= 'harry'
     document.getElementById('login-password').value = 'password'
-    document.getElementById('login-submit').dispatchEvent(new MouseEvent("click"))
+    document.getElementById('login-submit').Event(new MouseEvent("click"))
   });
   await new Promise(r => setTimeout(r, 2000));
   //console.log(document.cookie)
@@ -75,13 +75,13 @@ it("Logs in successfully on Search Page", async () => {
     //has no club
     document.getElementById('login-email').value= 'gabbyidowu@gmail.com'
     document.getElementById('login-password').value = 'gabby'
-    document.getElementById('login-submit').dispatchEvent(new MouseEvent("click"))
+    document.getElementById('login-submit').Event(new MouseEvent("click"))
   });
   await new Promise(r => setTimeout(r, 2000));
   //console.log(document.cookie)
 
   //user has successfully logged in if the page has changed to be the homepage
-  expect(document.cookie.substring(0, 14)).toBe("page=Search;");
+  expect(document.cookie.substring(0, 12)).toBe("page=Search;");
 
   //AFTER EACH TEST MAKE SURE TO RESET COOKIES!!
   document.cookie = "user=; expires=Thu, 01 Jan 1970 00:00:00 UTC"
@@ -89,34 +89,7 @@ it("Logs in successfully on Search Page", async () => {
   
 });
 
-it("Logs in successfully on Admin Page", async () => {
-  act(() => {
-    render(
-        <Provider store={store}>
-            <React.StrictMode>
-                <App />
-            </React.StrictMode> 
-        </Provider>, container);
-  });
 
-  //setting the inputs
-  await act(async () => {
-    //user who is an admin
-    document.getElementById('login-email').value= 'nick@gmail.com'
-    document.getElementById('login-password').value = 'password'
-    document.getElementById('login-submit').dispatchEvent(new MouseEvent("click"))
-  });
-  await new Promise(r => setTimeout(r, 2000));
-  //console.log(document.cookie)
-
-  //user has successfully logged in if the page has changed to be the homepage
-  expect(document.cookie.substring(0, 14)).toBe("page=Admin;");
-
-  //AFTER EACH TEST MAKE SURE TO RESET COOKIES!!
-  document.cookie = "user=; expires=Thu, 01 Jan 1970 00:00:00 UTC"
-  document.cookie = "page=; expires=Thu, 01 Jan 1970 00:00:00 UTC"
-  
-});
 it("Logs in successfully on Eboard Page", async () => {
   act(() => {
     render(
@@ -130,15 +103,15 @@ it("Logs in successfully on Eboard Page", async () => {
   //setting the inputs
   await act(async () => {
     //user who is eboard
-    document.getElementById('login-email').value= 'temp'
-    document.getElementById('login-password').value = 'gabby'
-    document.getElementById('login-submit').dispatchEvent(new MouseEvent("click"))
+    document.getElementById('login-email').value= 'gauri'
+    document.getElementById('login-password').value = 'password'
+    document.getElementById('login-submit').Event(new MouseEvent("click"))
   });
   await new Promise(r => setTimeout(r, 2000));
   //console.log(document.cookie)
 
   //user has successfully logged in if the page has changed to be the homepage
-  expect(document.cookie.substring(0, 14)).toBe("page=ManageMembers;");
+  expect(document.cookie.substring(0, 16)).toBe("page=ManageClub;");
 
   //AFTER EACH TEST MAKE SURE TO RESET COOKIES!!
   document.cookie = "user=; expires=Thu, 01 Jan 1970 00:00:00 UTC"
@@ -162,13 +135,46 @@ it("Does not login with invalid credentials", async () => {
     await act(async () => {
       document.getElementById('login-email').value= 'nick@gmail.com'
       document.getElementById('login-password').value = 'word'
-      document.getElementById('login-submit').dispatchEvent(new MouseEvent("click"))
+      document.getElementById('login-submit').Event(new MouseEvent("click"))
     });
     // same as sleeping for 2 seconds (gives mongodb time to respond)
     await new Promise(r => setTimeout(r, 2000));
 
     //user has successfully logged in if the page has remained the Login Page
     expect(document.cookie.substring(0, 14)).toBe("page=Login");
+  });
+
+  it("Logs in successfully on Admin Page", async () => {
+    act(() => {
+      render(
+          <Provider store={store}>
+              <React.StrictMode>
+                  <App />
+              </React.StrictMode> 
+          </Provider>, container);
+    });
+  
+    //setting the inputs
+    await act(async () => {
+      //user who is an admin
+      document.getElementById('login-email').value= 'nick@gmail.com'
+      document.getElementById('login-password').value = 'password'
+      document.getElementById('login-submit').Event(new MouseEvent("click"))
+    });
+    await new Promise(r => setTimeout(r, 1000));
+    document.getElementById('navbar-button').Event(new MouseEvent("click"))
+    await new Promise(r => setTimeout(r, 500));
+    document.getElementById('create').Event(new MouseEvent("click"))
+    await new Promise(r => setTimeout(r, 2000));
+    console.log(document.cookie)
+  
+    //user has successfully logged in if the page has changed to be the homepage
+    expect(document.cookie.substring(0, 11)).toBe("page=Admin;");
+  
+    //AFTER EACH TEST MAKE SURE TO RESET COOKIES!!
+    document.cookie = "user=; expires=Thu, 01 Jan 1970 00:00:00 UTC"
+    document.cookie = "page=; expires=Thu, 01 Jan 1970 00:00:00 UTC"
+    
   });
   
 
@@ -187,7 +193,7 @@ it("Does not login with invalid credentials", async () => {
     await act(async () => {
       document.getElementById('login-email').value= 'nick@gmail.com'
       document.getElementById('login-password').value = 'word'
-      document.getElementById('login-submit').dispatchEvent(new MouseEvent("click"))
+      document.getElementById('login-submit').Event(new MouseEvent("click"))
     });
     // same as sleeping for 2 seconds (gives mongodb time to respond)
     await new Promise(r => setTimeout(r, 2000));

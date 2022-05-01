@@ -1,48 +1,39 @@
-//import React, { createElement } from 'react';
 import React from 'react';
 import Img from '../images/Toastmasters.png';
-//import background from "./Background.JPG";
-//import App from '../App';
 import "./custom.css";
-//import HomePage from './HomePage';
-//import { createUser } from '../actions/user.js';
-//import UploadAndDisplayImage from './UploadAndDisplayImage';
-import {useDispatch} from 'react-redux';
 import {useNavigate} from 'react-router-dom'
-//import {useHistory} from 'react-router-dom'
 import {useState} from 'react'
-//import axios from 'axios'
  import {signup } from '../actions/auth.js';
  import {BrowserRouter as Router}  from 'react-router-dom';
  
  const options = [
+   
   {
     label:" What is your mother's maiden name? ",
     value: " What is your mother's maiden name? ",
+    id:"1",
   },
   {
     label: " What high school did you attend? ",
     value: " What high school did you attend? ",
+    id:"2",
   },
   {
     label: " What is the name of your first school?",
     value: " What is the name of your first school?",
+    id:"3",
   },
   {
     label: "In what city were you born?",
     value: "In what city were you born?",
+    id:"4",
   },
   
 ];
 
-
-
-
  const initialState={first: '', last: ' ', email: '', password:'', pass: '', securityQuestion:'In what city were you born?', securityAnswer:'', clubName:'', requestAdmin:'No'};
 
 function SignUp(props){
-  //const dispatch =useDispatch();
-//const navigate=useNavigate();
   return (
     <Router>
       <SignUp2 swap ={props.swap}/>
@@ -52,18 +43,9 @@ function SignUp(props){
 
 
   )
-
-  
- 
-
-
-
-  //const SignUp = () =>{
     function SignUp2(props){
-   // function SignUp(){
-const dispatch =useDispatch();
+
 const navigate=useNavigate();
-//const history=useHistory();
 
 const [formData, setFormData]=useState(initialState);
 
@@ -78,48 +60,42 @@ const [formData, setFormData]=useState(initialState);
        
    
       e.preventDefault()
-      const res=await dispatch(signup(formData, navigate))
-      //console.log(res);
-      //dispatchEvent(signup(formData, navigate));
-      console.log('__________')
-      //console.log()
-      //console.log(res.status);
-      //^not returning response 
-      //console.log(res)
-     
+      const res=await signup(formData, navigate)
       if(res?.data.message==="Signed Up!"){
 
 
+        /**
+        * User signs up succesfully.
+        * Information is stored in cookie. 
+        * User is then directed to the home page.
+        */
         document.cookie = 'user='+JSON.stringify({user: {
           first: formData.first,
           last: formData.last,
           email: formData.email,
           club: formData.club
         }})
-        props.swap('HomePage')
-        //props.swap
+        if(formData.club===""){
+          props.swap('Search')
+
+        } else{
+          props.swap('HomePage')
+        }
       } else{
-       
-       //alert(res.data.message)
-       console.log(res.data.message)
+     
       alert(res.data.message)
       }
      
     }
-
-    
-   
    
      return (
-    
-    
        <div className="container-fluid layout">
    
   
-      <div className="title">
+       <div className="title">
         
       
-      <h12>
+      <h2>
          <center>
        <img src= {Img} alt="pic" width="55"  />
        <br/> <b></b>
@@ -127,7 +103,7 @@ const [formData, setFormData]=useState(initialState);
       SIGN UP
  
   
-      </h12>
+      </h2>
       </div>
       
       <div>
@@ -139,35 +115,35 @@ const [formData, setFormData]=useState(initialState);
       
       <label>
          First Name:
-         <input name="first" label="First Name" onChange={handleChange} />
+         <input id= "signup-first" name="first" label="First Name" onChange={handleChange} />
        </label>
       </div>
       <br></br>
       <div>
       <label>
          Last Name:
-         <input name="last" label="Last Name" onChange={handleChange} />
+         <input id= "signup-last" name="last" label="Last Name" onChange={handleChange} />
        </label>
       </div>
       <br></br>
       <div>
       <label>
          Email:
-         <input name="email" label="Email" onChange={handleChange} />
+         <input id= "signup-email" name="email" label="Email" onChange={handleChange} />
        </label>
       </div>
       <br></br>
        <div>
       <label>
         Password:
-        <input name="password" input type="password" onChange={handleChange} />
+        <input id= "signup-password" name="password" input type="password" onChange={handleChange} />
       </label>
       </div>
        <br></br>
       <div>
       <label>
          Re-enter Password:
-        <input name="pass" input type="password" onChange={handleChange} />
+        <input id= "signup-pass" name="pass" input type="password" onChange={handleChange} />
       </label>
       </div>
        <br></br>
@@ -176,7 +152,7 @@ const [formData, setFormData]=useState(initialState);
            Security Question:
            <select>
             {options.map((option) => (
-              <option value={option.value}>{option.label}</option>
+              <option id = "signup-securityquestion" value={option.value}>{option.label}</option>
             ))}
           </select>
 
@@ -187,7 +163,7 @@ const [formData, setFormData]=useState(initialState);
        <div>
        <label>
          Security Answer
-         <input name="securityAnswer" label="Security Answer" onChange={handleChange} />
+         <input id= "signup-securityanswer" name="securityAnswer" label="Security Answer" onChange={handleChange} />
        </label>
       </div>
        <br></br>
@@ -196,7 +172,7 @@ const [formData, setFormData]=useState(initialState);
       <div>
       <label>
          Club Name
-         <input name="clubName" label="Club Name" onChange={handleChange} />
+         <input id= "signup-club" name="clubName" label="Club Name" onChange={handleChange} />
        </label>
       
       </div>

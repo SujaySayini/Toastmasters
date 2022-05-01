@@ -12,22 +12,15 @@ import Evaluation from './components/Evaluation';
 import Login from './components/Login'
 import ResetPassword from './components/ResetPassword';
 import ClubInfo from './components/ClubInfo';
-import SearchBar from './components/SearchBar';
 import Search from './components/Search';
 import Statistics from './components/Statistics';
 import ClubPage from './components/ClubPage';
 import Admin from './components/Admin';
-import ErrorPage from './components/ErrorPage';
-import Club2 from './components/Club2'
-import Club3 from './components/Club3'
-import Club4 from './components/Club4'
-import ClubPageInfo from'./components/ClubPageInfo'
 import Profile from './components/Profile'
 import SignUp from './components/SignUp'
 import UpdateProfile from './components/UpdateProfile'
 import Reports from './components/Reports';
 import React from 'react';
-import CreatePageForm from './components/CreatePageForm';
 
 
 function App(props) {
@@ -75,21 +68,13 @@ function App(props) {
       setPage(<ManageMembers swap = {changePage}></ManageMembers>)
     } else if(newPage === 'Statistics'){
       setPage(<Statistics swap={changePage}></Statistics>)
-    }else if(newPage === 'Errorpage'){
-      setPage(<ErrorPage swap = {changePage}></ErrorPage>)
-    }else if(newPage === 'Club2'){
-      setPage(<Club2 swap = {changePage}></Club2>)
-    }else if(newPage === 'Club3'){
-      setPage(<Club3 swap = {changePage}></Club3>)
-    }else if(newPage === 'Club4'){
-      setPage(<Club4 swap = {changePage}></Club4>)
-
     } else if (newPage === 'SignUp'){
       setPage(<SignUp swap={changePage}></SignUp>)
     } else if (newPage === 'Reports'){
       setPage(<Reports swap={changePage}></Reports>)
     } else if (newPage === 'Logout'){
       localStorage.clear()
+      document.cookie = "user=*"
       setPage(<Login swap={changePage}></Login>)
     } else if (newPage === 'Admin') {
       setPage(<Admin swap={changePage}></Admin>)

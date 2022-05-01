@@ -1,71 +1,72 @@
-import * as api from '../api';
-
-//functions that return actions
-
-export const getSpeech = (date) => async (dispatch) => {
-    try {
-        //const { data } = await api.fetchSpeech(date);
-        const  data2  = await api.fetchSpeech2(date);
-        console.log(data2)
-        dispatch({type: 'FETCH', payload:data2});
-        return data2;
-    } catch (error) {
-        console.log(error.message);
-        
-    }
-
+import axios from 'axios';
+const devURL = 'http://localhost:5000'
+const publicURL = 'https://nick-toastmasters-app.herokuapp.com'
+let theURL = ''
+if(true){
+  theURL = devURL
+} else {
+  theURL = publicURL
 }
 
-export const createSpeech = (speech) => async(dispatch) => {
+export const getSpeech = async (date) => {
     try {
-        const { data } = await api.createSpeech(speech)
-        dispatch({type:"CREATE", payload: data})
+        const res = await axios.post(theURL+'/speech/test', date).then(
+            (response) => {return response.data}, 
+            (error) => {console.log(error);});
+        return res
     } catch (error) {
-        console.log(error);
+        console.log(error.message); 
     }
 }
 
-export const deleteSpeech = (speech) => async(dispatch) => {
+export const createSpeech = async (speech) => {
     try {
-        const { data } = await api.deleteSpeech(speech)
-        dispatch({type:"DELETE", payload: data})
+        const data = await axios.post(theURL+'/speech', speech)
+        return data
     } catch (error) {
         console.log(error);
     }
 }
 
-export const setTimer = (data) => async(dispatch) => {
+export const deleteSpeech = async (speech) =>  {
     try {
-        console.log('called action')
-        const data2 = await api.setTime(data)
-        dispatch({type:"SETTIME", payload: data2})
-        return data2;
+        const  data  = await axios.post(theURL+'/deletespeech', speech)
+        return data
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export const setTimer = async (data) => {
+    try {
+        const res = await axios.post(theURL + '/timer', data).then(
+            (response) => {return response.data}, 
+            (error) => {console.log(error);}
+        );
+        return res
     } catch (error) {
         console.log(error)
     }
 }
 
-export const createCommentCard = (data) => async(dispatch) => {
+export const createCommentCard = async (data) =>  {
     try {
-        const { res } = await api.addCommentCards(data)
-        dispatch({type:"ADDCOMMENTCARD", payload: res})
+        const res = await axios.post(theURL+'/commentcard', data).then(
+            (response) => {return response},
+            (error) => {return error}
+        );
+        return res
     } catch (error) {
-        console.log(error)
-        
+        console.log(error)    
     }
 }
-
-// export const createAhCounter = (data) =>async(dispatch) => {
-//     const { res } = await api.postAhCounter(data)
-//     dispatch({type:"ADDCOMMENTCARD", payload: res})
-// }
-
-export const createAhCounter = (data) => async(dispatch) => {
+export const createAhCounter = async (data) => {
     try {
-        console.log('called action')
-        const data2 = await api.postAhCounter(data)
-        dispatch({type:"ADDAHCOUNTER", payload: data2})
-        return data2;
+        const res = await axios.post(theURL+'/ahcounter', data).then(
+            (response) => {return response.data},
+            (error) => {return error}
+        );
+        return res
     } catch (error) {
         console.log(error)
     }

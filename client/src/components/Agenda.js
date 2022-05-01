@@ -1,10 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import toastyblack from '../images/toasty-black.png';
-import Navbar from './Navbar';
 import React, {useEffect, useState} from 'react';
-import { useDispatch } from 'react-redux';
-import { useSelector } from 'react-redux';
 import {getSpeech} from '../actions/speech.js';
 import { deleteSpeech } from '../actions/speech';
 import { createSpeech } from '../actions/speech.js';
@@ -15,29 +12,43 @@ import {createEvaluation, getEvaluation} from '../actions/evaluation.js'
 
 
 const Agenda = () => {
-    //const speech = useSelector((state)=>state.speech)
-    //console.log("HERE:")
-    //console.log(speech)
-    const dispatch = useDispatch();
 
-    
+    // Get current date and modify it to be easily displayable on the page
     let today = new Date();
     const dd = String(today.getDate()).padStart(2, '0');
     const mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
     const yyyy = today.getFullYear();
-    
     today = mm + '/' + dd + '/' + yyyy;
+
+
+
+    //store all speeches for the current day, default values are set to make it clear how many open spots there are
     const [speeches, setSpeeches] = useState([{speechGiver: 'None', speechTitle: 'None'}, {speechGiver: 'None', speechTitle: 'None'}, {speechGiver: 'None', speechTitle: 'None'}])
+   
+    //store all evals for the current day
     const [evals, setEvals] = useState([{speechGiver: 'None'}, {speechGiver: 'None'}, {speechGiver: 'None'}])
+    
+    //store table topics master for current day
     const [ttmaster, setTTMaster] = useState({speechGiver: 'None'})
+
+    //state to store the date, users can change which date's agenda they view so need to track this
     const [date, setDate] = useState(today)
+
+    //store members in club so that they can sign up for roles at a meeting
     const [members, setMembers] = useState([])
+
+    //store timer for current day
     const [timer, setTimer] = useState({speechGiver: 'None'})
+
+    //store ah counter for current day
     const [ahCounter, setAhCounter] = useState({speechGiver: 'None'})
+
+    //set data for the current user
     const [user, setUser] = useState([])
 
 
 
+    //store all of the different eboard roles for the club
     const [pres, setPres] = useState("None")
     const [vpe, setVpe] = useState("None")
     const [vpm, setVpm] = useState("None")
@@ -48,10 +59,12 @@ const Agenda = () => {
 
 
 
+    // called 
     const updateMembers = async (club) =>{
-        //first, get the eboard and other club information
 
-        const eboard = await dispatch(getUsers({club: club, userLevel: "Eboard"}))
+
+        //first, get the eboard and other club information
+        const eboard = await (getUsers({club: club, userLevel: "Eboard"}))
         for(let i =0; i < eboard.length; i++){
             switch(eboard[i].title){
                 case 'President':
@@ -81,8 +94,8 @@ const Agenda = () => {
 
 
 
-        console.log('dispatch')
-        const result = await dispatch(getUsers({club: club}));
+        console.log('')
+        const result = await getUsers({club: club});
         console.log(result);
         const elements = result.map((user) => {
             if(user.name){
@@ -126,15 +139,15 @@ const Agenda = () => {
 
 
     const updateSpeeches = async (date) =>{
-        const result = await dispatch(getSpeech({speechDate: date, clubName: user.club}));
-        const eval_res = await dispatch(getEvaluation({speechDate: date, clubName: user.club}))
+        const result = await getSpeech({speechDate: date, clubName: user.club});
+        const eval_res = await getEvaluation({speechDate: date, clubName: user.club})
         let theSpeeches = result
         let evaluations = []
         let tabletopics = []
         let preparedspeeches = []
         let thetimer = {speechGiver:'None'}
         let theahcounter = {speechGiver:'None'}
-        console.log('dispatch')
+        console.log(result)
         for(let i = 0; i < theSpeeches.length; i++){
             if(theSpeeches[i].speechType === 'Pathways Speech'){
                 preparedspeeches.push(theSpeeches[i])
@@ -202,12 +215,12 @@ const Agenda = () => {
                 alert('there are not enough speeches for you to sign up to be an evaluator')
                 return
             }
-            await(dispatch(createEvaluation({clubName: user.club, speechDate: date,
+            await((createEvaluation({clubName: user.club, speechDate: date,
                 speechGiver: speeches[eval_length].speechGiver, 
                 speechType: role,
                 speechEvaluator: name})))
         } else{
-            await dispatch(createSpeech({clubName: user.club, speechType: role, speechGiver: name, speechDate: date, speechTitle: title,  fillerWords: {
+            await (createSpeech({clubName: user.club, speechType: role, speechGiver: name, speechDate: date, speechTitle: title,  fillerWords: {
                 Ah: 0,
                 Um: 0,
                 Er: 0,
@@ -230,7 +243,7 @@ const Agenda = () => {
         if(role === 'Select Role' || name === 'Select Name'){
             return
         }
-        await dispatch(deleteSpeech({clubName: user.club, speechType: role, speechGiver: name, speechDate: date, speechTitle: title}))
+        await (deleteSpeech({clubName: user.club, speechType: role, speechGiver: name, speechDate: date, speechTitle: title}))
         updateSpeeches(date)
     }
     const selected = () => { //dates

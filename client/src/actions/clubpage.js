@@ -1,76 +1,86 @@
-import * as api from '../api';
-
-export const getPages = (clubsData) => async (dispatch) => {
-    console.log("getting");
+import axios from 'axios';
+const devURL = 'http://localhost:5000'
+const publicURL = 'https://nick-toastmasters-app.herokuapp.com'
+let theURL = ''
+if(true){
+  theURL = devURL
+} else {
+  theURL = publicURL
+}
+export const getPages = async (clubsData) => {
     try {
-        console.log("close");
-        const {data}  = await api.fetchAllPages(clubsData);
-        console.log("should be ok?");
-        dispatch({type: 'FETCH_ALL', payload:data});
-        console.log(data);
-        
+        const res = await axios.post(theURL + '/pages', clubsData).then(
+            (response) => { return response },
+            (error) => {console.log(error)}
+        )
+        return res;
     } catch (error) {
         console.log(error.message);
     }
 
 }
-export const getPageBySearch = (searchQuery) => async(dispatch) =>{
+export const getPageBySearch = async (searchQuery) => {
     try{
-        const {data: data}= await api.fetchPageBySearch(searchQuery);
-        console.log(data);
-
+        const res = await axios.get(theURL + '/pages/search?searchQuery=Club')
+        return res
     }catch(error){
         console.log(error);
-
     }
 }
-export const createPages = (page) => async (dispatch) => {
+export const createPages = async(page) => {
     try {
-        const { data } = await api.createPages(page);
-        
-        dispatch({type: 'CREATE', payload:data});
-        return data
-        
+        const res = await axios.post(theURL + '/pages', page)
+        return res  
+    } catch (error) {
+        console.log(error.message);
+    }
+}
+
+export const getClubs = async (data) =>{
+    try {
+        const res = await axios.post(theURL + '/pages/getClub', data).then(
+            (response) => { return response.data },
+            (error) => {console.log(error)}
+        )
+        return res;
     } catch (error) {
         console.log(error.message);
     }
 
 }
 
-export const getClubs = (data) => async (dispatch) => {
+export const setClubActive = async (data) => {
     try {
-        //const { data } = await api.fetchSpeech(date);
-        const data2 = await api.getAllClubs(data);
-        //console.log(data2)
-        dispatch({type: 'FETCH', payload:data2});
-        return data2;
+        const res = await axios.post(theURL + '/pages/setActive', data).then(
+            (response) => { return response.data },
+            (error) => {console.log(error)}
+        )
+        return res;
+    } catch (error) {
+        console.log(error.message);   
+    }
+}
+
+export const findOneClub = async (data) => {
+    try {
+        const res = await axios.post(theURL + '/pages/getOneClub', data).then(
+            (response) => { return response.data },
+            (error) => {console.log(error)}
+        )
+        return res;
     } catch (error) {
         console.log(error.message);
         
     }
-
 }
 
-export const setClubActive = (data) => async (dispatch) => {
+export const setUserClub = async(data)=>{
     try {
-        //const { data } = await api.fetchSpeech(date);
-        const data2 = await api.setClubActive(data);
-        //console.log(data2)
-        dispatch({type: 'FETCH', payload:data2});
-        return data2;
-    } catch (error) {
-        console.log(error.message);
-        
-    }
-}
-
-export const findOneClub = (data) => async (dispatch) => {
-    try {
-        //const { data } = await api.fetchSpeech(date);
-        const data2 = await api.findOneClub(data);
-        //console.log(data2)
-        dispatch({type: 'FETCH', payload:data2});
-        return data2;
+        const res = await axios.post(theURL + '/pages/setUserClub', data).then(
+            (response) => { return response.data },
+            (error) => {console.log(error)}
+        )
+        return res;
     } catch (error) {
         console.log(error.message);
         
