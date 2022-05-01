@@ -6,7 +6,7 @@ import background from "./Background.jpg";
 import "./custom.css";
 import HomePage from './HomePage';
 import GoogleLogin from 'react-google-login'
-import {useDispatch} from 'react-redux'
+import {use} from 'react-redux'
 import {useNavigate} from 'react-router-dom'
 
 import 'bootstrap/dist/css/bootstrap.css';
@@ -35,29 +35,23 @@ import {BrowserRouter as Router}  from 'react-router-dom';
   //const Login = () =>{
 function Login2(props){
   
-  const dispatch=useDispatch();
+  ;
   const navigate=useNavigate();
   const [formData, setFormData]=useState(initialState);
  
   const handleSubmit= async (e) =>{
     console.log('test')
     e.preventDefault();
-    const res = await dispatch(signin({email: document.getElementById('login-email').value, password: document.getElementById('login-password').value}, navigate))
-    //console.log('---------')
-    //console.log(res.data.token)
-    //console.log(jwt_decode(res.data.token).user.email);
-
+    const res = await signin({email: document.getElementById('login-email').value, password: document.getElementById('login-password').value})
+    console.log(res)
     if(res?.status === 200){
-      //console.log(document.cookie)
       document.cookie = 'user=' + JSON.stringify(jwt_decode(res.data.token)) 
       const userdata = jwt_decode(res.data.token).user
-      //console.log(userdata)
-
-      if(userdata.club===""){
-        props.swap('Search')
-      }else if(userdata.userLevel === 'Admin'){
+      if(userdata.userLevel === 'Admin'){
         props.swap('Admin')
-      } else if(userdata.userLevel === 'Eboard'){
+      } else if(userdata.club===""){
+        props.swap('Search')
+      }else if(userdata.userLevel === 'Eboard'){
         props.swap('ManageClub')
       } else{
         props.swap('HomePage')
@@ -66,13 +60,6 @@ function Login2(props){
     
       alert('Invalid Email or Password');
     }
-  //console.log(res)
-   //console.log(formData)
-    
-   //this.props.swap('HomePage')
-  
-   //alert('Login credentials entered: ' + this.state.value);
-   //event.preventDefault();
  }
 
  const handleChange=(e)=>{
@@ -82,11 +69,7 @@ function Login2(props){
  
 
  const responseGoogleFailure=(error)=>{
-   //console.log(error);
-   //console.log(response.profileObj);
    console.log('Google Sign In was unsuccessful. Try Again Later!');
-   
-
  }
 
  const responseGoogleSuccess=async (res)=>{
@@ -103,7 +86,6 @@ function Login2(props){
 //hi
    
    try{
-     dispatch({type:'AUTH', data: {result, token}});
      //navigate.push('/');
      props.swap('HomePage')
      navigate('/');

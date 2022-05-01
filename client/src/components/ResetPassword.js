@@ -7,7 +7,7 @@ import App from '../App';
 import "./custom.css";
 import HomePage from './HomePage';
 //import GoogleLogin from 'react-google-login'
-import {useDispatch} from 'react-redux'
+import {use} from 'react-redux'
 import {useNavigate} from 'react-router-dom'
  
 import 'bootstrap/dist/css/bootstrap.css';
@@ -53,14 +53,14 @@ function ChangePassword(props){
 //class Login extends React.Component{
  //const Login = () =>{
    function ChangePassword2(props){
-    const dispatch=useDispatch();
+    ;
   const navigate=useNavigate();
   const [formData, setFormData]=useState(initialState);
 const handleSubmit= async (e) =>{
  
   e.preventDefault();
-  //const res = await dispatch(signin(formData, navigate))
-  const res = await dispatch(changepassword(formData, navigate))
+  //const res = await (signin(formData, navigate))
+  const res = await (changepassword(formData, navigate))
   console.log('_________________');
  //if(res === 200){
   

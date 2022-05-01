@@ -3,7 +3,7 @@ import 'bootstrap/dist/js/bootstrap.bundle.min';
 import React, { createElement } from 'react';
 import Img from '../images/Toastmasters.png';
 import "./custom.css";
-import {useDispatch} from 'react-redux';
+import {use} from 'react-redux';
 import {useState} from 'react'
 import {signup } from '../actions/auth.js';
  import {updateprofile } from '../actions/auth.js';
@@ -15,7 +15,7 @@ import {BrowserRouter as Router}  from 'react-router-dom';
 const initialState={first: '', last: ' ', imageURL:''};
  
 const UpdateProfile = (props) =>{
-  const dispatch = useDispatch()
+  
   //const [chart, setChart] = useState(<div></div>)
   let user = ''
   const cname = 'user'
@@ -42,7 +42,7 @@ const UpdateProfile = (props) =>{
  
   const handleSubmit=async(e) =>{
     e.preventDefault()
-    const res=await dispatch(updateprofile(formData,user.email))
+    const res=await (updateprofile(formData,user.email))
     console.log('__________') 
     console.log(res)
     if(res?.data.message==="Profile Updated!"){

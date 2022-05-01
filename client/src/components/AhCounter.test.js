@@ -44,7 +44,7 @@
     await act(async () => {
         document.getElementById('member').value= "Nick"
         document.getElementById('type-speech').value = 'Evaluator'
-        document.getElementById('ahCounter-submit').dispatchEvent(new MouseEvent("click"))
+        document.getElementById('ahCounter-submit').Event(new MouseEvent("click"))
       
     });
     await new Promise(r => setTimeout(r, 2000));

@@ -4,7 +4,7 @@ import 'bootstrap/dist/js/bootstrap.bundle.min';
 import toastyblack from '../images/toasty-black.png'
 import Img from '../images/Toastmasters.png';
 import "./custom.css";
-import {useDispatch} from 'react-redux';
+import {use} from 'react-redux';
 import {signup } from '../actions/auth.js';
 import {BrowserRouter as Router}  from 'react-router-dom';
 import {clubderegister} from '../actions/auth.js'
@@ -20,12 +20,12 @@ import React, { useState, useEffect } from "react";
 //user.userLevel
  
 const Profile = (props) =>{
-  const dispatch =useDispatch();
+  ;
   const initialState={first: '', last: ' ', imageURL:''};
   
   const [formData, setFormData]=useState(initialState);
  
-  //const dispatch = useDispatch()
+  //
   //const [chart, setChart] = useState(<div></div>)
   let user = ''
   const cname = 'user'
@@ -49,8 +49,8 @@ const Profile = (props) =>{
       alert("You are not registered in a club")
     } else{
          //ARE YOU SURE YOU WANT TO LEAVE THIS CLUB?
-        //const res = await dispatch(changepassword(formData, navigate))
-        const res = await dispatch(clubderegister({email: user.email}))
+        //const res = await (changepassword(formData, navigate))
+        const res = await (clubderegister({email: user.email}))
     console.log(res);
     console.log('---------')
          if(res === 200){
@@ -70,7 +70,7 @@ const Profile = (props) =>{
  
  async function updateProfile(e) {
    e.preventDefault();
-   const res=await dispatch(updateprofile(formData,user.email))
+   const res=await (updateprofile(formData,user.email))
     console.log('__________') 
     console.log(res)
     if(res?.data.message==="Profile Updated!"){

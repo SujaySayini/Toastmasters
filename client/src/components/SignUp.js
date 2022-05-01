@@ -7,7 +7,7 @@ import "./custom.css";
 //import HomePage from './HomePage';
 //import { createUser } from '../actions/user.js';
 //import UploadAndDisplayImage from './UploadAndDisplayImage';
-import {useDispatch} from 'react-redux';
+import {use} from 'react-redux';
 import {useNavigate} from 'react-router-dom'
 //import {useHistory} from 'react-router-dom'
 import {useState} from 'react'
@@ -41,7 +41,7 @@ import {useState} from 'react'
  const initialState={first: '', last: ' ', email: '', password:'', pass: '', securityQuestion:'In what city were you born?', securityAnswer:'', clubName:'', requestAdmin:'No'};
 
 function SignUp(props){
-  //const dispatch =useDispatch();
+  //;
 //const navigate=useNavigate();
   return (
     <Router>
@@ -61,7 +61,7 @@ function SignUp(props){
   //const SignUp = () =>{
     function SignUp2(props){
    // function SignUp(){
-const dispatch =useDispatch();
+;
 const navigate=useNavigate();
 //const history=useHistory();
 
@@ -78,15 +78,7 @@ const [formData, setFormData]=useState(initialState);
        
    
       e.preventDefault()
-      const res=await dispatch(signup(formData, navigate))
-      //console.log(res);
-      //dispatchEvent(signup(formData, navigate));
-      console.log('__________')
-      //console.log()
-      //console.log(res.status);
-      //^not returning response 
-      //console.log(res)
-     
+      const res=await (signup(formData, navigate))
       if(res?.data.message==="Signed Up!"){
 
 
@@ -96,7 +88,12 @@ const [formData, setFormData]=useState(initialState);
           email: formData.email,
           club: formData.club
         }})
-        props.swap('HomePage')
+        if(formData.club===""){
+          props.swap('Search')
+
+        } else{
+          props.swap('HomePage')
+        }
         //props.swap
       } else{
        
@@ -119,7 +116,7 @@ const [formData, setFormData]=useState(initialState);
       <div className="title">
         
       
-      <h12>
+      <h2>
          <center>
        <img src= {Img} alt="pic" width="55"  />
        <br/> <b></b>
@@ -127,7 +124,7 @@ const [formData, setFormData]=useState(initialState);
       SIGN UP
  
   
-      </h12>
+      </h2>
       </div>
       
       <div>

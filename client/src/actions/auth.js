@@ -1,128 +1,75 @@
-//import {AUTH} from '../constants/actionTypes'
-import {AUTH} from './user.js'
-import * as api from '../api/index.js'
-
-//import dispatch from ''
-
-
-export const signin =(formData, navigate) => async(dispatch) => {
-try{
-
-    console.log(formData);
-    const data=await api.signIn(formData);
-    return data
-   // console.log(data);
-    dispatch({type:AUTH,  payload: data});
-    //login the user 
-    //navigate to the home page 
-
-    //navigate.push('/');
-    navigate('/');
-
-
+import axios from 'axios';
+const devURL = 'http://localhost:5000'
+const publicURL = 'https://nick-toastmasters-app.herokuapp.com'
+let theURL = ''
+if(true){
+  theURL = devURL
+} else {
+  theURL = publicURL
 }
-catch(error){
-    console.log(error)
-
-
-}
-
-
-
-
-}
-
-export const signup =(formData, navigate) => async(dispatch) => {
+export const signin = async (formData) => {
     try{
-
-        console.log(formData);
-    const data=await api.signUp(formData);
-    console.log('---------------------')
-    console.log(data)
-    return data
-        ////const {data}=await api.signUp(formData);
-    ////dispatch({type:AUTH, data});
-        //login the user 
-        //navigate to the home page 
-    
-        //history.push('/');
-        navigate('/');
-    
-    
+        const res = await axios.post(theURL + '/users/signin', formData).then(
+            (response) => { return response },
+            (error) => {console.log(error)}
+        );
+        return res
     }
     catch(error){
         console.log(error)
-    
-    
     }
-    
-    
-    
-    
+}
+
+export const signup = async(formData)  => {
+    try{
+        const res = await axios.post(theURL + '/users/signup', formData).then(
+            (response) => {return response},
+            (error) => { return {status: 400, data: {message: 'Could Not Sign Up :('}};}
+        );
+        return res
     }
+    catch(error){
+        console.log(error)
+    }
+}
 
-    export const changepassword =(formData, navigate) => async(dispatch) => {
-        try{
-    
-            console.log(formData);
-        const data=await api.changePassword(formData);
-        return data
-            ////const {data}=await api.signUp(formData);
-        ////dispatch({type:AUTH, data});
-            //login the user 
-            //navigate to the home page 
-        
-            //history.push('/');
-            navigate('/');
-        
-        
-        }
-        catch(error){
-            console.log(error)
-        
-        
-        }
-        
-        
-        
-        
-        }
+export const changepassword = async (formData) => {
+    try{
+        const res = await axios.post(theURL + '/users/changePassword', formData).then(
+            (response) => {return response},
+            (error) => {console.log(error)}
+        );
+        return res
+    }
+    catch(error){
+        console.log(error)
+    }    
+}
 
-    //const res = await dispatch(changePassword(formData, navigate))
-    export const clubderegister =(email) => async(dispatch) => {
-        //user.email
-        try{
-   
-            console.log(email);
-        //const data=await api.changePassword(formData);
-       const data=await api.clubDeregister(email);
-        return data
-        }
-        catch(error){
-            console.log(error)
-       
-       
-        }
-        }
-        export const updateprofile =(formData,email) => async(dispatch) => {
-            //user.email
-            try{
-                console.log(email)
-                console.log({...formData, email: email});
-            //const data=await api.changePassword(formData);
-           const data=await api.updateProfile({...formData, email: email});
-            return data
-           
-            }
-            catch(error){
-                console.log(error)
-           
-           
-            }
-           
-       
-       
-       
-        }
+export const clubderegister = async(email) => {
+    try{
+        const res = await axios.post(theURL + '/users/clubDeregister', email).then(
+            (response) => { return response.status },
+            (error) => {console.log(error)}
+        );
+        return res
+    }
+    catch(error){
+        console.log(error)   
+    }
+}
+
+export const updateprofile = async (formData,email) => {
+    try{
+        const res = await axios.post(theURL + '/users/updateProfile', {...formData, email: email}).then(
+            (response) => { return response },
+            (error) => {console.log(error)}
+        );
+        return res
+    }
+    catch(error){
+        console.log(error)
+    }
+}
   
  

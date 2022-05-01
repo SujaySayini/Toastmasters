@@ -46,7 +46,7 @@
      document.getElementById('resetPassword-pass').value= 'password'
      document.getElementById('resetPassword-securityQuestion').value = 'In What City Were You Born In?'
      document.getElementById('resetPassword-securityAnswer').value = 'Silver Spring '
-     document.getElementById('login-submit').dispatchEvent(new MouseEvent("click"))
+     document.getElementById('login-submit').Event(new MouseEvent("click"))
    });
    await new Promise(r => setTimeout(r, 2000));
    //console.log(document.cookie)
@@ -76,7 +76,7 @@
       document.getElementById('resetPassword-pass').value= 'password'
       document.getElementById('resetPassword-securityQuestion').value = 'In What City Were You Born In?'
       document.getElementById('resetPassword-securityAnswer').value = 'Silver Spring '
-      document.getElementById('login-submit').dispatchEvent(new MouseEvent("click"))
+      document.getElementById('login-submit').Event(new MouseEvent("click"))
     });
     await new Promise(r => setTimeout(r, 2000));
     //console.log(document.cookie)
@@ -109,7 +109,7 @@
       document.getElementById('resetPassword-pass').value= 'password'
       document.getElementById('resetPassword-securityQuestion').value = 'In What City Were You Born In?'
       document.getElementById('resetPassword-securityAnswer').value = 'Silver Spring '
-      document.getElementById('login-submit').dispatchEvent(new MouseEvent("click"))
+      document.getElementById('login-submit').Event(new MouseEvent("click"))
     });
     await new Promise(r => setTimeout(r, 2000));
     //console.log(document.cookie)
@@ -140,7 +140,7 @@
       document.getElementById('resetPassword-pass').value= 'password'
       document.getElementById('resetPassword-securityQuestion').value = "What is your mother's maiden name"
       document.getElementById('resetPassword-securityAnswer').value = 'Silver'
-      document.getElementById('login-submit').dispatchEvent(new MouseEvent("click"))
+      document.getElementById('login-submit').Event(new MouseEvent("click"))
     });
     await new Promise(r => setTimeout(r, 2000));
     //console.log(document.cookie)
@@ -171,7 +171,7 @@
       document.getElementById('resetPassword-pass').value= 'password'
       document.getElementById('resetPassword-securityQuestion').value = 'In what city were you born in?'
       document.getElementById('resetPassword-securityAnswer').value = 'Silver'
-      document.getElementById('login-submit').dispatchEvent(new MouseEvent("click"))
+      document.getElementById('login-submit').Event(new MouseEvent("click"))
     });
     await new Promise(r => setTimeout(r, 2000));
     //console.log(document.cookie)
@@ -201,7 +201,7 @@
       document.getElementById('resetPassword-pass').value= 'password'
       document.getElementById('resetPassword-securityQuestion').value = 'In what city were you born in?'
       document.getElementById('resetPassword-securityAnswer').value = 'Silver Spring'
-      document.getElementById('login-submit').dispatchEvent(new MouseEvent("click"))
+      document.getElementById('login-submit').Event(new MouseEvent("click"))
     });
     await new Promise(r => setTimeout(r, 2000));
     //console.log(document.cookie)

@@ -1,20 +1,20 @@
 import { useState, useEffect } from "react";
 import Tracker from "./Tracker";
 import DropDownList from "./DropDownList";
-import { useDispatch } from 'react-redux';
+import { use } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { getUsers } from "../actions/user.js";
 import {createAhCounter} from '../actions/speech.js';
 
 const AhCounter = (props) => {
-    const dispatch = useDispatch();
+    ;
     const [trackerStates, setTrackerStates] = useState([0, 0, 0, 0, 0, 0, 0, 0, 0]);
     const [members, setMember] = useState([]); 
     const [currMember, setCurrMember] = useState("Member");
     const [currSpeech, setSpeech] = useState("Type of Speech");
     
     const saveAhCounter = async () =>{
-        let data = await dispatch(createAhCounter({speaker: currMember, type: currSpeech, counts: trackerStates}))
+        let data = await (createAhCounter({speaker: currMember, type: currSpeech, counts: trackerStates}))
         console.log("data is " + data);
         console.log(data);
         if(data){
@@ -45,8 +45,8 @@ const AhCounter = (props) => {
     }
 
     const updateMembers = async (club) =>{
-        console.log('dispatch')
-        const result = await dispatch(getUsers({club: club}));
+        console.log('')
+        const result = await (getUsers({club: club}));
         console.log(result);
         setMember(result.map((user) => {
             if(user.name){

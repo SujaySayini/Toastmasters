@@ -1,6 +1,7 @@
 import ClubModel from '../models/ClubModel.js';
 import express from 'express';
 import mongoose from 'mongoose';
+import userModel from '../models/userModel.js';
 
 export const getClubPageInfo = async(req,res)=>{
     console.log(req.body);
@@ -105,5 +106,11 @@ export const getClubs = async (req, res)=>{
         res.status(404).json({message: error.message});
         
     }
+}
+
+export const setUserClub = async (req, res) => {
+    const result = await userModel.updateOne({email: req.body.email}, {$set: {club: req.body.clubName}})
+    res.status(200).json(result)
+    return
 }
 

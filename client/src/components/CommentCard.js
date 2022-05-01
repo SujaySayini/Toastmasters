@@ -3,7 +3,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import DropDownList from "./DropDownList";
 import { getUsers } from "../actions/user.js";
-import { useDispatch } from 'react-redux';
 import { createCommentCard } from '../actions/speech.js';
 
 
@@ -13,7 +12,7 @@ const CommentCard = () => {
     const [improvement, setImprovement] = useState("");
     const [members, setMember] = useState([]); 
     const [currMember, setCurrMember] = useState("Member");
-    const dispatch = useDispatch();
+    
 
     let user = ''
     const cname = 'user'
@@ -31,20 +30,11 @@ const CommentCard = () => {
     }
 
     const updateMembers = async (club) =>{
-        console.log('dispatch')
-        const result = await dispatch(getUsers({club: club}));
+        console.log('')
+        const result = await (getUsers({club: club}));
         console.log(result);
         setMember(result.map((user) => {
-            if(user.name){
-                return user.name;
-            }else if(user.first){
-                if(user.last){
-                    return user.first + " "+user.last;
-                }else {
-                    return user.first
-                }
-            }
-            return "no name";
+            return user.first + " "+user.last;
         }));
     }
     useEffect(()=>{
@@ -59,7 +49,7 @@ const CommentCard = () => {
         const positive_2 = document.getElementById('positive2').value;
         const negative_1 = document.getElementById('negative1').value;
         console.log('submitted')
-        let data = await dispatch(createCommentCard({speaker: currMember, positive1: positive_1, positive2: positive_2, negative1: negative_1}));
+        let data = await (createCommentCard({clubName: user.club, speaker: currMember, positive1: positive_1, positive2: positive_2, negative1: negative_1}));
         console.log(data);
         if(data){
             console.log(data.data.ifExists);
