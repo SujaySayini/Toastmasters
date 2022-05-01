@@ -1,32 +1,18 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
- 
 import toastyblack from '../images/toasty-black.png'
-import Img from '../images/Toastmasters.png';
 import "./custom.css";
-import {useDispatch} from 'react-redux';
-import {signup } from '../actions/auth.js';
-import {BrowserRouter as Router}  from 'react-router-dom';
 import {clubderegister} from '../actions/auth.js'
- 
 import {updateprofile } from '../actions/auth.js';
 import "./Profile.css"
-//cookies
-//first name, last name, club,  email, phone number, img url, role,
 import React, { useState, useEffect } from "react";
  
  
- 
-//user.userLevel
- 
 const Profile = (props) =>{
-  const dispatch =useDispatch();
+  ;
   const initialState={first: '', last: ' ', imageURL:''};
   
   const [formData, setFormData]=useState(initialState);
- 
-  //const dispatch = useDispatch()
-  //const [chart, setChart] = useState(<div></div>)
   let user = ''
   const cname = 'user'
   let name = cname + "=";
@@ -41,14 +27,12 @@ const Profile = (props) =>{
      user = JSON.parse(c.substring(name.length, c.length)).user;
    }
   }
-  //console.log(user)
 
   /**
     * Remove user from a club.
     */
   const clubDeregister = async (e)=> {
     e.preventDefault();
-    //console.log('Deregister from club.');
 
     /**
     * Check to see if user is actully in a club.
@@ -56,26 +40,15 @@ const Profile = (props) =>{
     if (user.club==""){
       alert("You are not registered in a club")
     } else{
-        
-        
-        const res = await dispatch(clubderegister({email: user.email}))
-    //console.log(res);
-    //console.log('---------')
-    /**
-    * Club succesfully removed.
-    * Log user out.
-    * Send user to the Login page.
-    */
-         if(res === 200){
+      const res = await clubderegister({email: user.email})
+      if(res === 200){
         localStorage.clear()
         props.swap('Login')
-       }
-        else{
-      alert("Something went wrong");
-        }
-   }
-  
-  
+      }
+      else{
+        alert("Something went wrong");
+      }
+    }
  }
  
  /**
@@ -83,22 +56,16 @@ const Profile = (props) =>{
     */
  async function updateProfile(e) {
    e.preventDefault();
-   const res=await dispatch(updateprofile(formData,user.email))
-    //console.log('__________') 
-    //console.log(res)
+   const res=await updateprofile(formData,user.email)
     if(res?.data.message==="Profile Updated!"){
-      //console.log(formData)
       if(formData.first !== ''){
         user.first = formData.first
       } else if (formData.last !== ''){
         user.last = formData.last
       }
-      //console.log(document.cookie)
       document.cookie = 'user='+JSON.stringify({user: user})
-      //console.log(document.cookie)
       props.swap('Profile')
     } else{
-      //console.log(res.data.message)
       alert(res.data.message)
     }
  }
@@ -110,7 +77,6 @@ const Profile = (props) =>{
  function resetPassword(e) {
    e.preventDefault();
    //clear cookies/logout
-   //console.log('Reset Password.');
    props.swap('ResetPassword');
  }
 
@@ -172,7 +138,6 @@ const Profile = (props) =>{
  
  
  
- //const SignUp = () =>{
   }
 export default Profile;
 

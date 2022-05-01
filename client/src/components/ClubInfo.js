@@ -1,22 +1,36 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
-import toastyblack from '../images/toasty-black.png';
 import './Clubinfo.css'
-import toasty from '../images/toasty.jpg';
 import React from 'react';
 import {useEffect, useState} from 'react';
-import { useDispatch } from 'react-redux';
 import { findOneClub } from '../actions/clubpage';
+import {setUserClub} from '../actions/clubpage'
 
-const ClubInfo = () => {
+const ClubInfo = (props) => {
+
+    let user = ''
+    const cname = 'user'
+    let name = cname + "=";
+    let decodedCookie = decodeURIComponent(document.cookie);
+    let ca = decodedCookie.split(';');
+    for(let i = 0; i <ca.length; i++) {
+      let c = ca[i];
+      while (c.charAt(0) == ' ') {
+        c = c.substring(1);
+      }
+      if (c.indexOf(name) == 0) {
+        user = JSON.parse(c.substring(name.length, c.length)).user;
+      }
+    }
+    console.log(user)
 
 
-
-    const dispatch = useDispatch()
+    
     const [clubInfo, setClubInfo] = useState({description: 'None'})
     const [currentClub, setCurrentClub] = useState(false)
     useEffect(async ()=>{
-        let user = ''
+        console.log(document.cookie)
+        let temp = ''
         const cname = 'clubName'
         let name = cname + "=";
         let decodedCookie = decodeURIComponent(document.cookie);
@@ -27,29 +41,40 @@ const ClubInfo = () => {
             c = c.substring(1);
           }
           if (c.indexOf(name) == 0) {
-            user = c.substring(name.length, c.length);
+            temp = c.substring(name.length, c.length);
           }
         }
-        if(user === ''||user==='*'){
-        setCurrentClub(true)
-        name = 'user='
-        for(let i = 0; i <ca.length; i++) {
-            let c = ca[i];
-            while (c.charAt(0) == ' ') {
-              c = c.substring(1);
+        if(temp === ''||temp==='*'|| temp === user.club){
+            setCurrentClub(true)
+            name = 'user='
+            for(let i = 0; i <ca.length; i++) {
+                let c = ca[i];
+                while (c.charAt(0) == ' ') {
+                  c = c.substring(1);
+                }
+                if (c.indexOf(name) == 0) {
+                  temp = JSON.parse(c.substring(name.length, c.length)).user.club;
+                }
             }
-            if (c.indexOf(name) == 0) {
-              user = JSON.parse(c.substring(name.length, c.length)).user.club;
-            }
-          }
+        }
+        console.log(temp)
+        if(!temp){
+            props.swap('Search')
         }
         
-        const res = await dispatch(findOneClub({clubName: user}))
+        const res = await findOneClub({clubName: temp})
         console.log(res)
         setClubInfo(res)
         
         document.cookie = "clubName=*;"
     }, []);
+
+    const updateClub = async ()=> {
+        const res = await setUserClub({email: user.email, clubName:clubInfo.clubName})
+        document.cookie = "user=" + JSON.stringify({user: {...user, club: clubInfo.clubName}})
+        setCurrentClub(true)
+        
+    }
 
 
 
@@ -64,32 +89,15 @@ const ClubInfo = () => {
                 <div className='container'>
                     <div className='row'>
                         <div className = "col-md-6">
-                            <div className='underline'></div>
-                            <h4 className='club-des'>Club description</h4>
-                            <div className='mycard2' style={{overflow: 'auto', height: '30vh', padding: '10px'}}>
-                                    <p>{clubInfo.description}</p> 
+                            <h3 style={{marginTop: '20px'}}className='club-des'>Club description</h3>
+                            <div className='mycard2' style={{overflow: 'auto', height: '60vh', padding: '20px'}}>
+                                    <p style={{textAlign: 'left'}}>{clubInfo.description}</p> 
                             </div>
                         </div>
-                        <div className = "col-md-6 align-self-center">
-                            <h4 className='Recent-ann'>Recent Announcement</h4>
-                            <div className='text-box'>
-                                    <p className='ann'>General Members Meeting, 2/17/2022 
-                                    <br/>-You have signed up to be the ah counter for this meeting!
-                                    <br/>-Find the agenda here 
-                                    <br/>Some club activity, 3/20/2022 
-                                    <br/>-You have not signed up to take on any roles at this meeting, sign up here</p>
-                            </div>
-                        </div>
-                        
-                    </div>
-                </div>
-            </section>
-            <section className='section'>
-                <div className='container'>
-                    <div className='row'>
-                    <div className = "col-md-6">
-                            <h3 style={{marginTop: '20px'}}className='contact-us'>Contact us</h3>
-                            <div className='mycard2' style={{padding: '10px', textAlign: 'left'}}>
+
+                        <div className = "col-md-6">
+                            <h3 style={{marginTop: '20px'}}className='contact-us'>Contact/General Info</h3>
+                            <div className='mycard2' style={{padding: '20px', height: '60vh', textAlign: 'left'}}>
                                 <p> <strong>    Location: </strong>{clubInfo.location}  </p>
                                 <p>    <strong>    Email: </strong>{clubInfo.email} </p>
                                 <p>    <strong>    Website: </strong> {clubInfo.website} </p>
@@ -97,15 +105,11 @@ const ClubInfo = () => {
                                 
                             </div>
                         </div>
-                        <div className = "col-md-6 align-self-center">
-                            <h4 className='photo-title'>Photo</h4>
-                            <img src={toastyblack}></img>
-                        </div>
                         
                     </div>
                 </div>
             </section>
-            {!currentClub ? <button className='btn btn-info'>Join This Club!</button> : <p></p> }
+            {!currentClub ? <button style={{marginTop: '20px'}} className='btn btn-info' onClick = {()=>updateClub()}>Join This Club!</button> : <p style={{marginTop: '20px'}}>This is your current club</p> }
         </div>
 
 

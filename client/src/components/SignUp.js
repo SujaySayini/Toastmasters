@@ -1,7 +1,6 @@
 import React from 'react';
 import Img from '../images/Toastmasters.png';
 import "./custom.css";
-import {useDispatch} from 'react-redux';
 import {useNavigate} from 'react-router-dom'
 import {useState} from 'react'
  import {signup } from '../actions/auth.js';
@@ -45,8 +44,7 @@ function SignUp(props){
 
   )
     function SignUp2(props){
-  
-const dispatch =useDispatch();
+
 const navigate=useNavigate();
 
 const [formData, setFormData]=useState(initialState);
@@ -62,9 +60,7 @@ const [formData, setFormData]=useState(initialState);
        
    
       e.preventDefault()
-      const res=await dispatch(signup(formData, navigate))
-      //console.log('__________')
-     
+      const res=await signup(formData, navigate)
       if(res?.data.message==="Signed Up!"){
 
 
@@ -79,11 +75,14 @@ const [formData, setFormData]=useState(initialState);
           email: formData.email,
           club: formData.club
         }})
-        props.swap('HomePage')
-      
+        if(formData.club===""){
+          props.swap('Search')
+
+        } else{
+          props.swap('HomePage')
+        }
       } else{
      
-       //console.log(res.data.message)
       alert(res.data.message)
       }
      
@@ -96,7 +95,7 @@ const [formData, setFormData]=useState(initialState);
        <div className="title">
         
       
-      <h12>
+      <h2>
          <center>
        <img src= {Img} alt="pic" width="55"  />
        <br/> <b></b>
@@ -104,7 +103,7 @@ const [formData, setFormData]=useState(initialState);
       SIGN UP
  
   
-      </h12>
+      </h2>
       </div>
       
       <div>

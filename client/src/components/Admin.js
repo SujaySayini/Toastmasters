@@ -3,7 +3,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import React, {useEffect, useState} from 'react';
-import { useDispatch } from 'react-redux';
 import { getUsers } from '../actions/user'
 import './Homepage.css'
 import { setClubActive } from '../actions/clubpage';
@@ -16,7 +15,6 @@ import { getClubs } from '../actions/clubpage';
 
 
 const Admin = (props) => {
-    const dispatch = useDispatch()
 
     //read in user data from cookies 
     let user = ''
@@ -41,7 +39,7 @@ const Admin = (props) => {
     // Called when an admin chooses to deny a request from another user to be an admin
     const accept = (email) => {
         //update DB
-        dispatch(admin({email: email, requestAdmin: 'No', userLevel: 'Admin'}))
+        admin({email: email, requestAdmin: 'No', userLevel: 'Admin'})
 
         //refresh page
         getRequests()
@@ -53,7 +51,7 @@ const Admin = (props) => {
     // Called when an admin chooses to accept a request from another user to be an admin
     const deny = (user) => {
         //updateDB
-        dispatch(admin({email: user.email, requestAdmin: 'No', userLevel: user.userLevel}))     
+        admin({email: user.email, requestAdmin: 'No', userLevel: user.userLevel})     
         
         //refresh page
         getRequests()
@@ -64,7 +62,7 @@ const Admin = (props) => {
     //called when an admin chooses to inactivate an active club
     const inactivate = async (clubName) => {
         //updateDB
-        await dispatch(setClubActive({clubName: clubName, active: 'No'}))
+        await setClubActive({clubName: clubName, active: 'No'})
         
         //refresh page
         getRequests()
@@ -76,7 +74,7 @@ const Admin = (props) => {
     const activate = async (clubName) => {
 
         //update DB
-        await dispatch(setClubActive({clubName: clubName, active: 'Yes'}))
+        await setClubActive({clubName: clubName, active: 'Yes'})
         
         //refresh page
         getRequests()
@@ -88,16 +86,16 @@ const Admin = (props) => {
     // get all admin requests and convert them to HTML to display on the page.
     const getRequests = async () => {
         // get all users who have requested to become admin
-        const users = await dispatch(getUsers({requestAdmin : 'Yes'}))
+        const users = await getUsers({requestAdmin : 'Yes'})
 
         //map their data to become a nice looking box with buttons to accept or deny
         let elem = users.map((user) => {
             return (<div className='message'>    
                 <div  className = 'row' style={{marginLeft: '10px', marginRight: '10px',padding:'10px'}}>
-                    <div className='col-4' style={{textDecoration:'none'}}>
+                    <div className='col-2' style={{textDecoration:'none'}}>
                         <p>{user.first + ' ' + user.last}</p>
                     </div>
-                    <div className='col-4' style={{textDecoration:'none'}}>
+                    <div className='col-6' style={{textDecoration:'none'}}>
                         <p>{user.email}</p>
                     </div>
                     <div className='col-2'>
@@ -124,7 +122,7 @@ const Admin = (props) => {
     //get all clubs that are active and convert them to HTML to display
     const getActiveClubs = async () => {
         //get active clubs
-        const clubs = await dispatch(getClubs({active:'Yes'}))
+        const clubs = await getClubs({active:'Yes'})
 
         // map their data into HTML elems to display
         const elem = clubs.map((club) => {
@@ -148,7 +146,7 @@ const Admin = (props) => {
     //get all clubs that are inactive and convert them to HTML to display
     const getInactiveClubs = async () => {
         //get inactive clubs
-        const clubs = await dispatch(getClubs({active:'No'}))
+        const clubs = await getClubs({active:'No'})
 
         //convert to html
         const elem = clubs.map((club) => {

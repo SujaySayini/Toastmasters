@@ -1,11 +1,8 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
-import toastyblack from '../images/toasty-black.png'
 import {LineChart, Line, CartesianGrid, XAxis, YAxis, ResponsiveContainer, Legend, Tooltip} from 'recharts';
 import React, {useEffect, useState} from 'react';
-import { useDispatch } from 'react-redux';
 import { getSpeech } from '../actions/speech';
-import { collapseClasses } from '@mui/material';
 import { getEvaluation } from '../actions/evaluation.js';
 
 
@@ -25,9 +22,8 @@ const Statistics = (props) => {
         user = JSON.parse(c.substring(name.length, c.length)).user;
       }
     }
-    console.log(user)
 
-    const dispatch = useDispatch()
+    
     const [currentSpeech, setCurrentSpeech] = useState({title: 'You have not given a speech',
     date: '', 
     evaluator: '', 
@@ -52,17 +48,17 @@ const Statistics = (props) => {
     const [chartNum, setChartNum] = useState(0)
     useEffect(async ()=>{
         //for actual thing, change speechGiver to have space between them!
-        const theSpeeches = await dispatch(getSpeech({speechGiver: user.first + '' + user.last, speechType: 'Pathways Speech'}))
-        const theEvals = await dispatch(getEvaluation({speechGiver: user.first + '' + user.last}))
-        console.log(theEvals)
+        const theSpeeches = await (getSpeech({clubName: user.club, speechGiver: user.first + '' + user.last, speechType: 'Pathways Speech'}))
+        const theEvals = await (getEvaluation({clubName: user.club, speechGiver: user.first + '' + user.last}))
+        //console.log(theEvals)
 
         //find corresponding evaluations for speeches
         for(let i = 0; i < theSpeeches.length; i++){
             for(let j = 0; j < theEvals.length; j++){
                 if(theSpeeches[i].speechDate === theEvals[j].speechDate && theSpeeches[i].speechGiver === theEvals[j].speechGiver){
-                    console.log('found an eval ' + i)
+                    //console.log('found an eval ' + i)
                     theSpeeches[i].speechEvaluator = theEvals[j].speechEvaluator
-                    console.log(theSpeeches[i].speechEvaluator)
+                    //console.log(theSpeeches[i].speechEvaluator)
                     theSpeeches[i].eval = theEvals[j]
                     break;
                 } else{
@@ -116,14 +112,11 @@ const Statistics = (props) => {
             if(!theSpeeches[i].fillerWords){
                 continue
             }
-            console.log(theSpeeches[i].fillerWords)
             let fillerWordCount = 0
             for(let j in theSpeeches[i].fillerWords){
-                console.log(j)
+                
                 fillerWordCount += theSpeeches[i].fillerWords[j]
             }
-            //const fillerWordCount = theSpeeches[i].fillerWords?.Ah + theSpeeches[i].fillerWords?.But + theSpeeches[i].fillerWords?.Er + theSpeeches[i].fillerWords?.Like + theSpeeches[i].fillerWords?.Well + theSpeeches[i].fillerWords?.So + theSpeeches[i].fillerWords?.Um + theSpeeches[i].fillerWords?.Ah + theSpeeches[i].fillerWords?.Repeats + theSpeeches[i].fillerWords?.Other       
-            console.log(fillerWordCount)
             if(fillerWordCount > max){
                 max = fillerWordCount + 5
             }
@@ -148,7 +141,6 @@ const Statistics = (props) => {
 
         
         setSpeeches(theSpeeches)
-        console.log(theSpeeches)
         const speech1 = theSpeeches[theSpeeches.length-1]
         if(!speech1.fillerWords){
             speech1.fillerWords = {
@@ -180,7 +172,6 @@ const Statistics = (props) => {
         if(newNum < speeches.length && newNum > 0){
             setSpeechNum(newNum)
             let curspeech = speeches[newNum]
-            console.log(curspeech)
             if(!curspeech.fillerWords){
                 curspeech.fillerWords = {
                     Ah: 0,
@@ -203,7 +194,6 @@ const Statistics = (props) => {
         );
             setCurrentSpeech({... currentSpeech, title: curspeech.speechTitle, date: curspeech.speechDate, speechEvaluator: curspeech.speechEvaluator, eval:curspeech.eval, time: curspeech.time, fillerWords: curspeech.fillerWords, commentCards: listItems })
         } 
-        console.log(newNum)
 
     }
 
@@ -378,12 +368,6 @@ const Statistics = (props) => {
                     </div>
                     
                     </div>
-                </div>
-                <div className = 'row'>
-                        <div className='container-fluid' style={{marginTop: '3vh'}}>
-                            <h5>Talk to an Executive Board Member About Your Progress</h5>
-                            <p> Click <a href='#'>here</a> to message our Eboard!</p>
-                        </div>
                 </div>
             </div>
         </div>

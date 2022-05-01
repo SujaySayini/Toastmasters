@@ -1,25 +1,33 @@
-import * as api from '../api';
-
+import axios from 'axios';
+const devURL = 'http://localhost:5000'
+const publicURL = 'https://nick-toastmasters-app.herokuapp.com'
+let theURL = ''
+if(true){
+  theURL = devURL
+} else {
+  theURL = publicURL
+}
 //functions that return actions
 
-export const getEvaluation = (date) => async (dispatch) => {
+export const getEvaluation = async (date) => {
     try {
-        const  data2  = await api.fetchEvaluation(date);
-        console.log(data2)
-        dispatch({type: 'FETCH', payload:data2});
-        return data2;
+        const res = await axios.post(theURL + '/evaluation/get', date).then(
+            (response) => { return response.data },
+            (error) => {console.log(error)}
+        )
+        return res;
     } catch (error) {
-        console.log(error.message);
-        
+        console.log(error.message);   
     }
-
 }
 
-export const createEvaluation = (evaluation) => async(dispatch) => {
+export const createEvaluation = async (evaluation) => {
     try {
-        const  data  = await api.createEvaluation(evaluation)
-        return data
-        dispatch({type:"CREATE", payload: data})
+        const res = await axios.post(theURL + '/evaluation', evaluation).then(
+            (response) => { return response},
+            (error) => {console.log(error)}
+        )
+        return res;
     } catch (error) {
         console.log(error);
     }

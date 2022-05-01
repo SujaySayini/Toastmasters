@@ -1,9 +1,7 @@
 import React from 'react';
 
 import Img from '../images/Toastmasters.png';
-import background from "./Background.JPG";
 import "./custom.css";
-import {useDispatch} from 'react-redux'
 import {useNavigate} from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.css';
 import {signin} from '../actions/auth.js'
@@ -30,21 +28,16 @@ import {BrowserRouter as Router}  from 'react-router-dom';
 
 function Login2(props){
   
-  const dispatch=useDispatch();
+  ;
   const navigate=useNavigate();
   const [formData, setFormData]=useState(initialState);
  
   const handleSubmit= async (e) =>{
-    console.log('test')
-    e.preventDefault();
-    const res = await dispatch(signin({email: document.getElementById('login-email').value, password: document.getElementById('login-password').value}, navigate))
-  
 
+    e.preventDefault();
+    const res = await signin({email: document.getElementById('login-email').value, password: document.getElementById('login-password').value})
+    console.log(res)
     if(res?.status === 200){
-      
-      document.cookie = 'user=' + JSON.stringify(jwt_decode(res.data.token)) 
-      const userdata = jwt_decode(res.data.token).user
-      
       /** 
       * Once a user succesfully sign in, 
       * they are directed to a page based on their information.
@@ -53,11 +46,13 @@ function Login2(props){
       * An Eboard member gets directed to the Manage Club page.
       * A General User in a club gets directed to the Home pagee.
       */ 
-      if(userdata.club===""){
-        props.swap('Search')
-      }else if(userdata.userLevel === 'Admin'){
+      document.cookie = 'user=' + JSON.stringify(jwt_decode(res.data.token)) 
+      const userdata = jwt_decode(res.data.token).user
+      if(userdata.userLevel === 'Admin'){
         props.swap('Admin')
-      } else if(userdata.userLevel === 'Eboard'){
+      } else if(userdata.club===""){
+        props.swap('Search')
+      }else if(userdata.userLevel === 'Eboard'){
         props.swap('ManageClub')
       } else{
         props.swap('HomePage')
@@ -73,104 +68,61 @@ function Login2(props){
   setFormData({email: document.getElementById('login-email').value, password: document.getElementById('login-password').value})
  }
 
-
       
-      return (
-       
-       
+  return (
         <div className="container-fluid layout">
-      
-           
-        <div className='row'> 
-          <div className='col-12'>
-      <center>
-         <img src= {Img} alt="pic" />
-         <br/> <b></b>
-       </center>
+          <div className='row'> 
+            <div className='col-12'>
+              <center>
+                <img src= {Img} alt="pic" />
+                  <br/>
+              </center>
+              <div className="title">
+                <div className='row'>
+                  <div className='col-12'>
+                    <h4>SIGN IN</h4>
+                  </div>
+                  <div className='col-12'>
+                  </div>
+                </div>
+              </div>
+              <br></br>
+              <div>
+                <center>
+                  <form onSubmit={handleSubmit}>
+                    <div>
+                      <label> Email: <input id='login-email' name="email" label="Email" onChange={handleChange} /> </label>
+                    </div>
+                    <br/>
 
-       <div className="title">
-         <div className='row'>
-           <div className='col-12'>
-       <h4>SIGN IN</h4>
-       </div>
-       <div className='col-12'>
-       </div>
-      
-          
+                    <div>
+                      <label>Password: <input id='login-password' name= "password" label="Password" input type="password" onChange={handleChange} /></label>
+                    </div>
+                    <br/>
 
-  
-
-     </div>
-     
-     </div>
-       <div className='col-12'>
-       
-       <div>
-       </div>
-       </div>
-       
-       <br></br>
- 
-       <div>
-       <center>
-       <form onSubmit={handleSubmit}>
-         <div>
-       <label>
-         Email:
-         <input id='login-email' name="email" label="Email" onChange={handleChange} />
-       </label>
-       </div>
-       <br></br>
- 
-       <div>
-       <label>
-         Password:
-         <input id='login-password' name= "password" label="Password" input type="password" onChange={handleChange} />
-       </label>
-       </div>
- 
-       <br></br>
-       
-       <center>
-       <input id = 'login-submit' type="submit" value= "Sign In"  />
-       </center>
-       <br></br>
-
-      
+                    <center>
+                      <input id = 'login-submit' type="submit" value= "Sign In"  />
+                    </center>
+                    <br></br>
+                  </form>
+                </center>
     
+                <center>
+                  <div>
+                    <a href="#" onClick = {()=>props.swap('ResetPassword')}>Forgot Password?</a>
+                  </div>
+                </center>
+                <br></br>
      
-     </form>
-     </center>
-    
-     <center>
-     <div>
-     <a href="#" onClick = {()=>props.swap('ResetPassword')}>Forgot Password?</a>
-     
-     </div>
-     </center>
- 
-   
-     <br></br>
-     <center>
-      
-     <a href="#" onClick = {()=>props.swap('SignUp')}> New User? Sign Up!</a>
-     </center>
-    
- 
- 
-     </div>
-     </div>
-
-
-   
-
-     </div> 
-     </div>
-
-       
+                <center>
+                  <a href="#" onClick = {()=>props.swap('SignUp')}> New User? Sign Up!</a>
+                </center>
+              </div>
+            </div>
+          </div> 
+        </div>   
       );
-
- }
+    }
 }
 export default Login;
  

@@ -48,7 +48,7 @@ it("Logs in successfully with valid credentials on Home Page", async () => {
     //is in club
     document.getElementById('login-email').value= 'harry'
     document.getElementById('login-password').value = 'password'
-    document.getElementById('login-submit').dispatchEvent(new MouseEvent("click"))
+    document.getElementById('login-submit').Event(new MouseEvent("click"))
   });
   await new Promise(r => setTimeout(r, 2000));
   //console.log(document.cookie)
@@ -75,7 +75,7 @@ it("Logs in successfully on Search Page", async () => {
     //has no club
     document.getElementById('login-email').value= 'gabbyidowu@gmail.com'
     document.getElementById('login-password').value = 'gabby'
-    document.getElementById('login-submit').dispatchEvent(new MouseEvent("click"))
+    document.getElementById('login-submit').Event(new MouseEvent("click"))
   });
   await new Promise(r => setTimeout(r, 2000));
   //console.log(document.cookie)
@@ -105,7 +105,7 @@ it("Logs in successfully on Eboard Page", async () => {
     //user who is eboard
     document.getElementById('login-email').value= 'gauri'
     document.getElementById('login-password').value = 'password'
-    document.getElementById('login-submit').dispatchEvent(new MouseEvent("click"))
+    document.getElementById('login-submit').Event(new MouseEvent("click"))
   });
   await new Promise(r => setTimeout(r, 2000));
   //console.log(document.cookie)
@@ -135,7 +135,7 @@ it("Does not login with invalid credentials", async () => {
     await act(async () => {
       document.getElementById('login-email').value= 'nick@gmail.com'
       document.getElementById('login-password').value = 'word'
-      document.getElementById('login-submit').dispatchEvent(new MouseEvent("click"))
+      document.getElementById('login-submit').Event(new MouseEvent("click"))
     });
     // same as sleeping for 2 seconds (gives mongodb time to respond)
     await new Promise(r => setTimeout(r, 2000));
@@ -159,12 +159,12 @@ it("Does not login with invalid credentials", async () => {
       //user who is an admin
       document.getElementById('login-email').value= 'nick@gmail.com'
       document.getElementById('login-password').value = 'password'
-      document.getElementById('login-submit').dispatchEvent(new MouseEvent("click"))
+      document.getElementById('login-submit').Event(new MouseEvent("click"))
     });
     await new Promise(r => setTimeout(r, 1000));
-    document.getElementById('navbar-button').dispatchEvent(new MouseEvent("click"))
+    document.getElementById('navbar-button').Event(new MouseEvent("click"))
     await new Promise(r => setTimeout(r, 500));
-    document.getElementById('create').dispatchEvent(new MouseEvent("click"))
+    document.getElementById('create').Event(new MouseEvent("click"))
     await new Promise(r => setTimeout(r, 2000));
     console.log(document.cookie)
   
@@ -193,7 +193,7 @@ it("Does not login with invalid credentials", async () => {
     await act(async () => {
       document.getElementById('login-email').value= 'nick@gmail.com'
       document.getElementById('login-password').value = 'word'
-      document.getElementById('login-submit').dispatchEvent(new MouseEvent("click"))
+      document.getElementById('login-submit').Event(new MouseEvent("click"))
     });
     // same as sleeping for 2 seconds (gives mongodb time to respond)
     await new Promise(r => setTimeout(r, 2000));

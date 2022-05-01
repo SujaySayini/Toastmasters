@@ -2,10 +2,7 @@
  
 import React from 'react'
 import Img from '../images/Toastmasters.png';
-import background from "./Background.JPG";
 import "./custom.css";
-import HomePage from './HomePage';
-import {useDispatch} from 'react-redux'
 import {useNavigate} from 'react-router-dom'
  
 import 'bootstrap/dist/css/bootstrap.css';
@@ -48,18 +45,14 @@ function ChangePassword(props){
  )
 
    function ChangePassword2(props){
-    const dispatch=useDispatch();
+    ;
   const navigate=useNavigate();
   const [formData, setFormData]=useState(initialState);
 const handleSubmit= async (e) =>{
  
   e.preventDefault();
-  
-  const res = await dispatch(changepassword(formData, navigate))
-  //console.log('_________________');
-
-  
-   if(res?.data.message==="You have succesfully changed your password!"){
+  const res = await (changepassword(formData, navigate))
+  if(res?.data.message==="You have succesfully changed your password!"){
     /**
     * User resets their password successfully 
     * and is directed to the home page s.
@@ -69,7 +62,6 @@ const handleSubmit= async (e) =>{
  } else{
   
  
-  //console.log(res.data.message)
  alert(res.data.message)
  }
 

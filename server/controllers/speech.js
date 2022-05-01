@@ -141,13 +141,13 @@ export const addCommentCard = async (req, res) => {
         const mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
         const yyyy = today.getFullYear();
         today = mm + '/' + dd + '/' + yyyy;
-        const {speaker, positive1, positive2, negative1} = req.body
+        const {clubName, speaker, positive1, positive2, negative1} = req.body
         const commentcard = {positive1: positive1, negative1: negative1, positive2: positive2}
         console.log(speaker)
         console.log(today)
         
         const update = await speechModel.updateOne(
-            {speechDate: today, speechType: 'Pathways Speech', speechGiver: speaker}, 
+            {clubName: clubName, speechDate: today, speechType: 'Pathways Speech', speechGiver: speaker}, 
             {$push: {commentCards : commentcard}})
 
         console.log(update)

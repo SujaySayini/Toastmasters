@@ -1,14 +1,14 @@
 import { Fragment, useEffect, useState } from "react";
 import DropDownList from "./DropDownList";
 import { getUsers } from "../actions/user.js";
-import { useDispatch } from 'react-redux';
+import { use } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { setTimer } from '../actions/speech.js';
 
 
 const Timer = () => {
     //const speech = useSelector((state)=>state.speech)
-    const dispatch = useDispatch();
+    ;
     const [time, setTime] = useState(0);
     //const [inputState, setInputState] = useState("");
     const [start, setStart] = useState(false);
@@ -20,11 +20,11 @@ const Timer = () => {
     const [isPTag, setPTag] = useState(true);
 
     /*useEffect(async ()=>{
-        let theSpeeches = await dispatch(getSpeech());
+        let theSpeeches = await (getSpeech());
         for(let i =0; i < theSpeeches.length; i++){
             console.log(theSpeeches[i])
         }
-    }, [dispatch]);*/
+    }, []);*/
 
     let user = ''
     const cname = 'user'
@@ -42,8 +42,8 @@ const Timer = () => {
     }
 
     const updateMembers = async (club) =>{
-        console.log('dispatch')
-        const result = await dispatch(getUsers({club: club}));
+        console.log('')
+        const result = await (getUsers({club: club}));
         console.log(result);
         setMember(result.map((user) => {
             if(user.name){
@@ -113,7 +113,7 @@ const Timer = () => {
                 seconds = '0'+seconds
             }
             const minutes = Math.floor(temp/60)
-            let data = await dispatch(setTimer({type: currSpeech, speaker: currMember, time: minutes+':'+seconds}))
+            let data = await (setTimer({type: currSpeech, speaker: currMember, time: minutes+':'+seconds}))
             console.log(data);
             if(data){
                 console.log(data.ifExists);

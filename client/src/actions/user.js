@@ -1,37 +1,21 @@
-import * as api from '../api';
- 
+import axios from 'axios';
+const devURL = 'http://localhost:5000'
+const publicURL = 'https://nick-toastmasters-app.herokuapp.com'
+let theURL = ''
+if(true){
+  theURL = devURL
+} else {
+  theURL = publicURL
+}
 //functions that return actions
  
-/*export const getSpeech = () => async (dispatch) => {
-   try {
-       const { data } = await api.fetchSpeech();
-       dispatch({type: 'FETCH', payload:data});
-       return data;
-   } catch (error) {
-       console.log(error.message);
-      
-   }
-} */
- 
-/*export const getUser = () => async (dispatch) => {
-   try {
-       //const { data } = await api.fetchSpeech();
-       //dispatch({type: 'FETCH', payload:data});
-       //return data;
-   } catch (error) {
-       console.log(error.message);
-      
-   }
- 
-}
-*/
-export const getUsers = (club) => async (dispatch) => {
+export const getUsers = async (club) => {
     try {
-        //const { data } = await api.fetchSpeech(date);
-        const data2 = await api.getAllUsers(club);
-        console.log(data2)
-        dispatch({type: 'FETCH', payload:data2});
-        return data2;
+        const res = await axios.post(theURL+'/user/getUser', club).then(
+            (response) => {return response.data},
+            (error) => {return error}
+        );
+        return res
     } catch (error) {
         console.log(error.message);
         
@@ -39,66 +23,40 @@ export const getUsers = (club) => async (dispatch) => {
 
 }
  
- 
-/*export const createSpeech = (speech) => async(dispatch) => {
-   try {
-       const { data } = await api.createSpeech(speech)
-       dispatch({type:"CREATE", payload: data})
-   } catch (error) {
-       console.log(error);
-   }
-} */
 //create the user using newUser input and export the user
 ////send to the api createUser
-export const createUser = (newUser) => async(dispatch) => {
+export const createUser = async(data) => {
    try {
-       const { data } = await api.createUser(newUser)
-       dispatch({type:"CREATE", payload: data})
+       const res = await axios.post(theURL+'/signup', data)
+       return res
    } catch (error) {
        console.log(error);
    }
 }
 
-export const changeUserRole = (email) => async(dispatch) => {
+export const changeUserRole = async (data) => {
     try {
-        const { data } = await api.changeUserRole(email)
-        dispatch({type:"UPDATE", payload: data})
+        const res = await axios.post(theURL+'/user/changeUserRole', data)
+        return res
     } catch (error) {
         console.log(error);
     }
  }
 
-export const removeUserClub = (email) => async(dispatch) => {
+export const removeUserClub = async (data) => {
     try {
-        const { data } = await api.removeUserClub(email)
-        dispatch({type:"UPDATE", payload: data})
+        const res =  await axios.post(theURL+'/user/removeUserClub', data)
+        return res
     } catch (error) {
         console.log(error);
     }
  }
 
- export const admin = (data) => async(dispatch) => {
+ export const admin = async (data) =>  {
     try {
-        const data2  = await api.setAdmin(data)
-        dispatch({type:"UPDATE", payload: data2})
-        return data2
+        const res = await axios.post(theURL+'/user/admin', data)
+        return res
     } catch (error) {
         console.log(error);
     }
  }
- 
- 
- 
- 
-/*export const deleteSpeech = (speech) => async(dispatch) => {
-   try {
-       const { data } = await api.deleteSpeech(speech)
-       dispatch({type:"DELETE", payload: data})
-   } catch (error) {
-       console.log(error);
-   }
-} */
- 
-
-export const AUTH='AUTH';
-export const LOGOUT='LOGOUT';

@@ -3,7 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import DropDownList from "./DropDownList";
 import { getUsers } from "../actions/user.js";
-import { useDispatch } from 'react-redux';
+import { use } from 'react-redux';
 import { createEvaluation } from "../actions/evaluation.js";
 import { getSpeech } from '../actions/speech.js';
 
@@ -22,15 +22,6 @@ const Evaluation = () => {
     const [comfortLevel, setComfortLevel] = useState("");
     const [interest, setInterest] = useState("");
     const [additionalComments, setAdditionalComments] = useState("");
-    const dispatch = useDispatch();
-
-    // useEffect(async ()=>{
-    //     let theSpeeches = await dispatch(getSpeech());
-    //     for(let i =0; i < theSpeeches.length; i++){
-    //         console.log(theSpeeches[i])
-    //     }
-    // }, [dispatch]);
-
     let user = ''
     const cname = 'user'
     let name = cname + "=";
@@ -47,19 +38,11 @@ const Evaluation = () => {
     }
 
     const updateMembers = async (club) =>{
-        console.log('dispatch')
-        const result = await dispatch(getUsers({club: club}));
+        console.log('')
+        const result = await (getUsers({club: club}));
         console.log(result);
         setMember(result.map((user) => {
-            if(user.name){
-                return user.name;
-            }else if(user.first){
-                if(user.last){
-                    return user.first + " " + user.last
-                }
-                return user.first 
-            }
-            return "no name";
+            return user.first + " " + user.last       
         }));
     }
     useEffect(()=>{
@@ -70,7 +53,8 @@ const Evaluation = () => {
     const handleSubmit = async (evt) => {
         evt.preventDefault();
         let name = user.first + " " + user.last;
-        let data = await dispatch(createEvaluation({speechDate: date,
+        let data = await (createEvaluation({clubName: user.club,
+                                   speechDate: date,
                                    speechGiver: currMember, 
                                    speechType: "Evaluation",
                                    speechEvaluator: name, 
@@ -143,7 +127,7 @@ const Evaluation = () => {
             <form className="container" onSubmit={handleSubmit}>
                 <div className='row align-items-center' style={{ margin: '2em' }}>
                     <div className='col-12'>
-                            <label> <h3 style={{display: "inline", margin: '1em'}}>Name:</h3>
+                            <label> <h3 style={{display: "inline", margin: '1em'}}>Person You Are Evaluating:</h3>
                             <DropDownList name={currMember} elements={members} setSelected={setCurrMember}></DropDownList>
                             </label>
                         </div>
