@@ -2,12 +2,7 @@
  
 import React from 'react'
 import Img from '../images/Toastmasters.png';
-import background from "./Background.jpg";
-import App from '../App';
 import "./custom.css";
-import HomePage from './HomePage';
-//import GoogleLogin from 'react-google-login'
-import {use} from 'react-redux'
 import {useNavigate} from 'react-router-dom'
  
 import 'bootstrap/dist/css/bootstrap.css';
@@ -48,10 +43,7 @@ function ChangePassword(props){
  
  
  )
- 
- //}
-//class Login extends React.Component{
- //const Login = () =>{
+
    function ChangePassword2(props){
     ;
   const navigate=useNavigate();
@@ -59,26 +51,20 @@ function ChangePassword(props){
 const handleSubmit= async (e) =>{
  
   e.preventDefault();
-  //const res = await (signin(formData, navigate))
   const res = await (changepassword(formData, navigate))
-  console.log('_________________');
- //if(res === 200){
-  
-   if(res?.data.message==="You have succesfully changed your password!"){
+  if(res?.data.message==="You have succesfully changed your password!"){
+    /**
+    * User resets their password successfully 
+    * and is directed to the home page s.
+    */
    props.swap('HomePage')
-   //props.swap
+ 
  } else{
   
-  //alert(res.data.message)
-  console.log(res.data.message)
+ 
  alert(res.data.message)
  }
- //console.log(res)
-  //console.log(formData)
-  
-  //this.props.swap('HomePage')
-   //alert('Login credentials entered: ' + this.state.value);
-  //event.preventDefault();
+
 }
  
 const handleChange=(e)=>{
@@ -87,9 +73,7 @@ setFormData({...formData,[e.target.name]:e.target.value})
  
 }
  
- 
- //render(){
-    
+
      return (
      
      
@@ -128,21 +112,21 @@ setFormData({...formData,[e.target.name]:e.target.value})
         <div>
       <label>
         Email:
-        <input name="email" label="Email" onChange={handleChange} />
+        <input id= "resetpassword-email" name="email" label="Email" onChange={handleChange} />
       </label>
       </div>
       <br></br>
       <div>
       <label>
         Password:
-        <input name= "password" label="Password" input type="password" onChange={handleChange} />
+        <input id= "resetpassword-password" name= "password" label="Password" input type="password" onChange={handleChange} />
       </label>
       </div>
       <br></br>
       <div>
       <label>
         Confirm Password:
-        <input name= "pass" label="Confirm Password:" input type="password" onChange={handleChange} />
+        <input id= "resetpassword-pass" name= "pass" label="Confirm Password:" input type="password" onChange={handleChange} />
       </label>
       </div>
       <br></br>
@@ -151,7 +135,7 @@ setFormData({...formData,[e.target.name]:e.target.value})
           Security Question:
           <select>
            {options.map((option) => (
-             <option value={option.value}>{option.label}</option>
+             <option id = "resetpassword-securityquestion" value={option.value}>{option.label}</option>
            ))}
          </select>
  
@@ -160,14 +144,14 @@ setFormData({...formData,[e.target.name]:e.target.value})
       <br></br>
       <label>
         Security Answer:
-        <input name="securityAnswer" label="Security Answer" onChange={handleChange} />
+        <input id= "resetpassword-securityanswer" name="securityAnswer" label="Security Answer" onChange={handleChange} />
       </label>
       <br></br>
      
       <center>
-      <input type="submit" input value= "Reset Password"  />
+      <input id= "resetpassword-submit" type="submit" input value= "Reset Password"  />
       </center>
-      <br></br>
+      
  
     
   
@@ -177,16 +161,18 @@ setFormData({...formData,[e.target.name]:e.target.value})
   
     <center>
     <div>
-    <a href="#" onClick = {()=>props.swap('ResetPassword')}>Forgot Password?</a>
+    <a href="#" onClick = {()=>props.swap('Login')}>Login</a>
    
     </div>
     </center>
- 
-    <br></br>
+
     <center>
     
     <a href="#" onClick = {()=>props.swap('SignUp')}> New User? Sign Up!</a>
     </center>
+ 
+    
+    
   
     </div>
     </div>
@@ -200,7 +186,7 @@ setFormData({...formData,[e.target.name]:e.target.value})
     
      
      );
-  // };
+
 }
 }
 export default ChangePassword;

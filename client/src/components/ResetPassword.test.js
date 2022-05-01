@@ -41,12 +41,12 @@
  
    //setting the inputs
    await act(async () => {
-     document.getElementById('resetPassword-email').value= 'z'
-     document.getElementById('resetPassword-password').value = 'password'
-     document.getElementById('resetPassword-pass').value= 'password'
-     document.getElementById('resetPassword-securityQuestion').value = 'In What City Were You Born In?'
-     document.getElementById('resetPassword-securityAnswer').value = 'Silver Spring '
-     document.getElementById('login-submit').Event(new MouseEvent("click"))
+     document.getElementById('resetpassword-email').value= 'z'
+     document.getElementById('resetpassword-password').value = 'password'
+     document.getElementById('resetpassword-pass').value= 'password'
+     document.getElementById('resetpassword-securityquestion').value = 'In What City Were You Born In?'
+     document.getElementById('resetpassword-securityanswer').value = 'Silver Spring '
+     document.getElementById('resetpassword-submit').dispatchEvent(new MouseEvent("click"))
    });
    await new Promise(r => setTimeout(r, 2000));
    //console.log(document.cookie)
@@ -71,12 +71,12 @@
   
     //setting the inputs
     await act(async () => {
-      document.getElementById('resetPassword-email').value= ""
-      document.getElementById('resetPassword-password').value = 'password'
-      document.getElementById('resetPassword-pass').value= 'password'
-      document.getElementById('resetPassword-securityQuestion').value = 'In What City Were You Born In?'
-      document.getElementById('resetPassword-securityAnswer').value = 'Silver Spring '
-      document.getElementById('login-submit').Event(new MouseEvent("click"))
+      document.getElementById('resetpassword-email').value= ""
+      document.getElementById('resetpassword-password').value = 'password'
+      document.getElementById('resepassword-pass').value= 'password'
+      document.getElementById('resetpassword-securityquestion').value = 'In What City Were You Born In?'
+      document.getElementById('resetpassword-securityanswer').value = 'Silver Spring '
+      document.getElementById('resetpassword-submit').dispatchEvent(new MouseEvent("click"))
     });
     await new Promise(r => setTimeout(r, 2000));
     //console.log(document.cookie)
@@ -104,12 +104,12 @@
   
     //setting the inputs
     await act(async () => {
-      document.getElementById('resetPassword-email').value= 'temp'
-      document.getElementById('resetPassword-password').value = ""
-      document.getElementById('resetPassword-pass').value= 'password'
-      document.getElementById('resetPassword-securityQuestion').value = 'In What City Were You Born In?'
-      document.getElementById('resetPassword-securityAnswer').value = 'Silver Spring '
-      document.getElementById('login-submit').Event(new MouseEvent("click"))
+      document.getElementById('resetpassword-email').value= 'temp'
+      document.getElementById('resetpassword-password').value = ""
+      document.getElementById('resetpassword-pass').value= 'password'
+      document.getElementById('resetpassword-securityquestion').value = 'In What City Were You Born In?'
+      document.getElementById('resetpassword-securityanswer').value = 'Silver Spring '
+      document.getElementById('resetpassword-submit').dispatchEvent(new MouseEvent("click"))
     });
     await new Promise(r => setTimeout(r, 2000));
     //console.log(document.cookie)
@@ -135,12 +135,12 @@
   
     //setting the inputs
     await act(async () => {
-      document.getElementById('resetPassword-email').value= 'temp'
-      document.getElementById('resetPassword-password').value = 'password'
-      document.getElementById('resetPassword-pass').value= 'password'
-      document.getElementById('resetPassword-securityQuestion').value = "What is your mother's maiden name"
-      document.getElementById('resetPassword-securityAnswer').value = 'Silver'
-      document.getElementById('login-submit').Event(new MouseEvent("click"))
+      document.getElementById('resetpassword-email').value= 'temp'
+      document.getElementById('resetpassword-password').value = 'password'
+      document.getElementById('resetpassword-pass').value= 'password'
+      document.getElementById('resetpassword-securityquestion').value = "What is your mother's maiden name"
+      document.getElementById('resetpassword-securityanswer').value = 'Silver'
+      document.getElementById('resetpassword-submit').dispatchEvent(new MouseEvent("click"))
     });
     await new Promise(r => setTimeout(r, 2000));
     //console.log(document.cookie)
@@ -166,12 +166,12 @@
   
     //setting the inputs
     await act(async () => {
-      document.getElementById('resetPassword-email').value= 'temp'
-      document.getElementById('resetPassword-password').value = 'password'
-      document.getElementById('resetPassword-pass').value= 'password'
-      document.getElementById('resetPassword-securityQuestion').value = 'In what city were you born in?'
-      document.getElementById('resetPassword-securityAnswer').value = 'Silver'
-      document.getElementById('login-submit').Event(new MouseEvent("click"))
+      document.getElementById('resetpassword-email').value= 'temp'
+      document.getElementById('resetpassword-password').value = 'password'
+      document.getElementById('resetpassword-pass').value= 'password'
+      document.getElementById('resetpassword-securityquestion').value = 'In what city were you born in?'
+      document.getElementById('resetpassword-securityanswer').value = 'Silver'
+      document.getElementById('resetpassword-submit').dispatchEvent(new MouseEvent("click"))
     });
     await new Promise(r => setTimeout(r, 2000));
     //console.log(document.cookie)
@@ -196,12 +196,12 @@
   
     //setting the inputs
     await act(async () => {
-      document.getElementById('resetPassword-email').value= 'temp'
-      document.getElementById('resetPassword-password').value = 'password'
-      document.getElementById('resetPassword-pass').value= 'password'
-      document.getElementById('resetPassword-securityQuestion').value = 'In what city were you born in?'
-      document.getElementById('resetPassword-securityAnswer').value = 'Silver Spring'
-      document.getElementById('login-submit').Event(new MouseEvent("click"))
+      document.getElementById('resepassword-email').value= 'temp'
+      document.getElementById('resetpassword-password').value = 'password'
+      document.getElementById('resetpassword-pass').value= 'password'
+      document.getElementById('resetpassword-securityquestion').value = 'In what city were you born in?'
+      document.getElementById('resetpassword-securityanswer').value = 'Silver Spring'
+      document.getElementById('resetpassword-submit').dispatchEvent(new MouseEvent("click"))
     });
     await new Promise(r => setTimeout(r, 2000));
     //console.log(document.cookie)

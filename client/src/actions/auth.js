@@ -7,6 +7,14 @@ if(true){
 } else {
   theURL = publicURL
 }
+
+/**
+    * Sends information from signin form to server's /users/signin page using axios. will login/fail depending on credentials 
+    *
+    * @param  formData   Information from the sign in form.
+    *   
+    */
+
 export const signin = async (formData) => {
     try{
         const res = await axios.post(theURL + '/users/signin', formData).then(
@@ -19,6 +27,13 @@ export const signin = async (formData) => {
         console.log(error)
     }
 }
+
+/**
+    * Sends information from signup form to server's /users/signup page using axios. will create a new user or return an error message if it fails 
+    *
+    * @param  formData   Information from the sign up form.
+    *   
+    */
 
 export const signup = async(formData)  => {
     try{
@@ -33,6 +48,14 @@ export const signup = async(formData)  => {
     }
 }
 
+
+
+/**
+    * Sends information from change password form to server's /users/changePassword page which will change the user's password using axios
+    *
+    * @param  formData   Information from the change password form.
+    *   
+    */
 export const changepassword = async (formData) => {
     try{
         const res = await axios.post(theURL + '/users/changePassword', formData).then(
@@ -45,6 +68,14 @@ export const changepassword = async (formData) => {
         console.log(error)
     }    
 }
+
+
+ /**
+    * Sends information from profile page to the route on the server which will deregister user using axios
+    *
+    * @param  email   email stored in cookie from profile page.
+    *   
+    */
 
 export const clubderegister = async(email) => {
     try{
@@ -59,6 +90,15 @@ export const clubderegister = async(email) => {
     }
 }
 
+
+
+ /**
+    * Sends information from profile page to the route on the server which will change user's data using axios
+    *
+    * @param  email   email stored in cookie from profile page.
+    *  @param  formData   new data that the user's profile will be updated to contain
+    */
+
 export const updateprofile = async (formData,email) => {
     try{
         const res = await axios.post(theURL + '/users/updateProfile', {...formData, email: email}).then(
@@ -71,5 +111,3 @@ export const updateprofile = async (formData,email) => {
         console.log(error)
     }
 }
-  
- 

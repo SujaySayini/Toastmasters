@@ -1,32 +1,18 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
- 
 import toastyblack from '../images/toasty-black.png'
-import Img from '../images/Toastmasters.png';
 import "./custom.css";
-import {use} from 'react-redux';
-import {signup } from '../actions/auth.js';
-import {BrowserRouter as Router}  from 'react-router-dom';
 import {clubderegister} from '../actions/auth.js'
- 
 import {updateprofile } from '../actions/auth.js';
 import "./Profile.css"
-//cookies
-//first name, last name, club,  email, phone number, img url, role,
 import React, { useState, useEffect } from "react";
  
- 
- 
-//user.userLevel
  
 const Profile = (props) =>{
   ;
   const initialState={first: '', last: ' ', imageURL:''};
   
   const [formData, setFormData]=useState(initialState);
- 
-  //
-  //const [chart, setChart] = useState(<div></div>)
   let user = ''
   const cname = 'user'
   let name = cname + "=";
@@ -41,59 +27,56 @@ const Profile = (props) =>{
      user = JSON.parse(c.substring(name.length, c.length)).user;
    }
   }
-  console.log(user)
+
+  /**
+    * Remove user from a club.
+    */
   const clubDeregister = async (e)=> {
     e.preventDefault();
-    console.log('Deregister from club.');
+
+    /**
+    * Check to see if user is actully in a club.
+    */
     if (user.club==""){
       alert("You are not registered in a club")
     } else{
-         //ARE YOU SURE YOU WANT TO LEAVE THIS CLUB?
-        //const res = await (changepassword(formData, navigate))
-        const res = await (clubderegister({email: user.email}))
-    console.log(res);
-    console.log('---------')
-         if(res === 200){
-        //logout?
+      const res = await clubderegister({email: user.email})
+      if(res === 200){
         localStorage.clear()
         props.swap('Login')
-       }
-        else{
-      alert("Something went wrong");
-        }
-   }
-  
-   //you are not part of a club
-   //Alert aree you sure you want to deregister from cliub "...."???/
-  
+      }
+      else{
+        alert("Something went wrong");
+      }
+    }
  }
  
+ /**
+    * Allow user to update their profile.
+    */
  async function updateProfile(e) {
    e.preventDefault();
-   const res=await (updateprofile(formData,user.email))
-    console.log('__________') 
-    console.log(res)
+   const res=await updateprofile(formData,user.email)
     if(res?.data.message==="Profile Updated!"){
-      console.log(formData)
       if(formData.first !== ''){
         user.first = formData.first
       } else if (formData.last !== ''){
         user.last = formData.last
       }
-      console.log(document.cookie)
       document.cookie = 'user='+JSON.stringify({user: user})
-      console.log(document.cookie)
       props.swap('Profile')
     } else{
-      console.log(res.data.message)
       alert(res.data.message)
     }
  }
  
+ 
+ /**
+    * Send user to Reset password page if link is pressed. 
+    */
  function resetPassword(e) {
    e.preventDefault();
    //clear cookies/logout
-   console.log('Reset Password.');
    props.swap('ResetPassword');
  }
 
@@ -126,13 +109,13 @@ const Profile = (props) =>{
                   <label className="text-center"style={{marginLeft: '75px'}}>New Profile Image: 
                     <input className="text-center" style={{marginBottom: '10px', paddingLeft: '5px'}} type="file" accept="image/*" id="myFile" name="filename" title=' '/> </label>
                   <div>
-                  <label> First Name: <input id = 'first' name="first" label="First Name" onChange={handleChange} /></label>
+                  <label> First Name: <input id = 'profile-first' name="first" label="First Name" onChange={handleChange} /></label>
      </div>
      <br></br>
      <div>
      <label>
         Last Name:
-        <input id = 'last' name="last" label="Last Name" onChange={handleChange} />
+        <input id = 'profile-last' name="last" label="Last Name" onChange={handleChange} />
       </label>
      </div>
    
@@ -155,7 +138,6 @@ const Profile = (props) =>{
  
  
  
- //const SignUp = () =>{
   }
 export default Profile;
 
