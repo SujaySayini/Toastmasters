@@ -26,16 +26,14 @@ app.use(bodyParser.urlencoded({limit: "30mb", extended: true}));
 app.use(cors());
 
 app.use('/timer', timerRoutes);
+app.use('/ahcounter', ahCounterRoutes);
+app.use('/commentcard', commentCardRoutes);
 app.use('/speech', speechRoutes);
 app.use('/deletespeech', deleteSpeechRoutes);
-app.use('/commentcard', commentCardRoutes);
 app.use('/evaluation', evaluationRoutes);
-app.use('/ahcounter', ahCounterRoutes);
 app.use('/user', signUpRoutes);
 app.use('/pages',pagesRoutes);
-//app.use('/signup', signUpRoutes);
-//app.use('/users', userRoutes)
-app.use('/users', userRoutes)
+app.use('/users', userRoutes);
 
 
 const CONNECTION_URL = 'mongodb+srv://m220student:m220password@cluster0.lgpgi.mongodb.net/react-hero?retryWrites=true&w=majority'

@@ -7,26 +7,12 @@ if(true){
 } else {
   theURL = publicURL
 }
-export const getPages = async (clubsData) => {
-    try {
-        const res = await axios.post(theURL + '/pages', clubsData).then(
-            (response) => { return response },
-            (error) => {console.log(error)}
-        )
-        return res;
-    } catch (error) {
-        console.log(error.message);
-    }
 
-}
-export const getPageBySearch = async (searchQuery) => {
-    try{
-        const res = await axios.get(theURL + '/pages/search?searchQuery=Club')
-        return res
-    }catch(error){
-        console.log(error);
-    }
-}
+/**
+    * Sends data to server to create a club
+    *
+    * @param page contains the data for the new club (name, contact info, etc)
+    */
 export const createPages = async(page) => {
     try {
         const res = await axios.post(theURL + '/pages', page)
@@ -35,6 +21,12 @@ export const createPages = async(page) => {
         console.log(error.message);
     }
 }
+
+/**
+    * Used to get ALL clubs from the server that fit a certain condition
+    *
+    * @param data an object which specifies what conditions the clubs we are searching for must satisfy
+    */
 
 export const getClubs = async (data) =>{
     try {
@@ -49,6 +41,12 @@ export const getClubs = async (data) =>{
 
 }
 
+/**
+    * Sends info to server to tell it to update the active status of a club
+    *
+    * @param data contains both the club's name and the new value its active field should be set to
+    */
+
 export const setClubActive = async (data) => {
     try {
         const res = await axios.post(theURL + '/pages/setActive', data).then(
@@ -60,6 +58,12 @@ export const setClubActive = async (data) => {
         console.log(error.message);   
     }
 }
+
+/**
+    * Used to find a singular club fitting params (in practice used to find a club by name)
+    *
+    * @param data params we want the club to match
+    */
 
 export const findOneClub = async (data) => {
     try {
@@ -73,6 +77,13 @@ export const findOneClub = async (data) => {
         
     }
 }
+
+
+/**
+    * Sends data to server to tell it to change the user's club
+    *
+    * @param  data contains both the user as well as their new club
+    */
 
 export const setUserClub = async(data)=>{
     try {

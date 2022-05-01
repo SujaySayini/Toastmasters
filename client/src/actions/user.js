@@ -7,7 +7,13 @@ if(true){
 } else {
   theURL = publicURL
 }
-//functions that return actions
+
+
+/**
+    * Sends data to server and tells it to retrieve all users matching input params
+    *
+    * @param club contains the club we want to get users from
+    */
  
 export const getUsers = async (club) => {
     try {
@@ -23,17 +29,12 @@ export const getUsers = async (club) => {
 
 }
  
-//create the user using newUser input and export the user
-////send to the api createUser
-export const createUser = async(data) => {
-   try {
-       const res = await axios.post(theURL+'/signup', data)
-       return res
-   } catch (error) {
-       console.log(error);
-   }
-}
 
+/**
+    * Sends data to server and tells it to update the role for the specified user
+    *
+    * @param  data contains both the user data and the role that the user should now have
+    */
 export const changeUserRole = async (data) => {
     try {
         const res = await axios.post(theURL+'/user/changeUserRole', data)
@@ -43,6 +44,11 @@ export const changeUserRole = async (data) => {
     }
  }
 
+ /**
+    * Sends data to server and tells it to set user's club to '' (none)
+    *
+    * @param  data contains the user data
+    */
 export const removeUserClub = async (data) => {
     try {
         const res =  await axios.post(theURL+'/user/removeUserClub', data)
@@ -51,6 +57,12 @@ export const removeUserClub = async (data) => {
         console.log(error);
     }
  }
+
+ /**
+    * tells server to make user an admin 
+    *
+    * @param  data contains the user who should become an admin
+    */
 
  export const admin = async (data) =>  {
     try {

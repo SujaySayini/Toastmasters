@@ -2,7 +2,6 @@ import React from 'react';
 
 import Img from '../images/Toastmasters.png';
 import "./custom.css";
-import {useNavigate} from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.css';
 import {signin} from '../actions/auth.js'
 import {useState} from 'react'
@@ -27,9 +26,6 @@ import {BrowserRouter as Router}  from 'react-router-dom';
 
 
 function Login2(props){
-  
-  ;
-  const navigate=useNavigate();
   const [formData, setFormData]=useState(initialState);
  
   const handleSubmit= async (e) =>{

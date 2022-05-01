@@ -23,6 +23,9 @@ const Navbar = (props) =>{
             user = JSON.parse(c.substring(name.length, c.length)).user;
           }
         }
+        if(!user){
+            user = {first: 'test', club: 'test'}
+        }
 
     return(
             <nav className = "navbar align-left navbar-dark" style={{background: 'linear-gradient(rgb(119, 36, 50), rgb(119, 36, 50) 30%, rgb(76, 23, 32))'}} >
