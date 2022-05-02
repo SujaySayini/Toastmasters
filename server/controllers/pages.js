@@ -64,6 +64,8 @@ export const createPage = async (req,res)=>{
     }
 }
 
+<<<<<<< HEAD
+=======
 
 
 /**
@@ -74,6 +76,7 @@ export const createPage = async (req,res)=>{
     */
 
 
+>>>>>>> bf579ee9a9c65b35262d517d27306fcbed83299c
 export const updatePage = async(req, res) =>{
     const{id: _id} = req.params;
     const targetPage = req.body;
@@ -82,7 +85,10 @@ export const updatePage = async(req, res) =>{
     res.json(updatedPage);
 }
     
+<<<<<<< HEAD
+=======
 
+>>>>>>> bf579ee9a9c65b35262d517d27306fcbed83299c
 export const getClubs = async (req, res)=>{
     try {
         let clubs = ''
