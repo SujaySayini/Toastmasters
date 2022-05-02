@@ -46,7 +46,6 @@ const Evaluation = () => {
         }));
     }
     useEffect(()=>{
-        console.log('updated users')
         updateMembers(user.club);
     }, []);
 
@@ -70,9 +69,7 @@ const Evaluation = () => {
                                    interest: parseInt(interest),
                                    additionalComments: additionalComments
                                 }));
-        console.log(data);
         if(data){
-            console.log(data.data.ifExists);
             if(data.data.ifExists == "No"){
                 alert("The speech doesn't exist. Please try again.");
             } else {

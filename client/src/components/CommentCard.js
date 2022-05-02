@@ -33,15 +33,12 @@ const CommentCard = () => {
 
     //updates the members list in the dropdown to include all members in the current user's club
     const updateMembers = async (club) =>{
-        console.log('')
         const result = await (getUsers({club: club}));
-        console.log(result);
         setMember(result.map((user) => {
             return user.first + " "+user.last;
         }));
     }
     useEffect(()=>{
-        console.log('updated users')
         updateMembers(user.club);
     }, []);
 
@@ -52,9 +49,7 @@ const CommentCard = () => {
         const positive_1 = document.getElementById("positive1").value;
         const positive_2 = document.getElementById('positive2').value;
         const negative_1 = document.getElementById('negative1').value;
-        console.log('submitted')
         let data = await (createCommentCard({clubName: user.club, speaker: currMember, positive1: positive_1, positive2: positive_2, negative1: negative_1}));
-        console.log(data);
         if(data){
             if(data.data.ifExists === "No"){
               alert("The speech doesn't exist. Please try again.");
@@ -73,7 +68,6 @@ const CommentCard = () => {
             setPositive2("");
             setImprovement("");
         }
-        return data.data.ifExists;
     }
 
     return (

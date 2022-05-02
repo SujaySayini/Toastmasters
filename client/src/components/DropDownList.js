@@ -1,7 +1,7 @@
 import React from 'react';
 
 const DropDownList = (props) => {
-    const {id, name, elements, setSelected } = props;
+    const {name, elements, setSelected } = props;
     const listElements = elements.map((m) => 
         <li key={Math.random()} onClick={()=>{setSelected(m)}}>
             <a className="dropdown-item" href="#">{m}</a>
