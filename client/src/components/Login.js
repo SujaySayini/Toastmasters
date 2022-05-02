@@ -1,7 +1,7 @@
 import React from 'react';
 
 import Img from '../images/Toastmasters.png';
-//import background from "./Background.JPG";
+//import background from "./Background.jpg";
 // import App from '../App';
 import "./custom.css";
 import 'bootstrap/dist/css/bootstrap.css';
@@ -48,7 +48,7 @@ function Login2(props){
       const userdata = jwt_decode(res.data.token).user
       if(userdata.userLevel === 'Admin'){
         props.swap('Admin')
-      } else if(userdata.club===""){
+      } else if(!userdata.club || userdata.club==="" || userdata.club.trim===""){
         props.swap('Search')
       }else if(userdata.userLevel === 'Eboard'){
         props.swap('ManageClub')

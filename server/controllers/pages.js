@@ -1,5 +1,4 @@
 import ClubModel from '../models/ClubModel.js';
-import mongoose from 'mongoose';
 import userModel from '../models/userModel.js';
 
 
@@ -39,12 +38,14 @@ export const setActive = async(req, res) => {
 }
 
 
-
+/**
+    * Creates a new club
+    *
+    * @param req Contains the request from the client side, req.body contains the data for the new club
+    * @param res the response, we can use this to send a response back to the client
+    */
 
 export const createPage = async (req,res)=>{
-
-
-    // userModel.updateOne({userEmail: req.body.userEmail}, {$set: {club: whatever the new clubname is, userLevel: 'Eboard', title: 'President'}})
     const page = req.body;
     const exists = await ClubModel.find({clubName : page.clubName})
     if(exists.length > 0){
@@ -63,6 +64,19 @@ export const createPage = async (req,res)=>{
     }
 }
 
+<<<<<<< HEAD
+=======
+
+
+/**
+    * Finds clubs which match the given params
+    *
+    * @param req Contains the request from the client side, req.body contains the params the clubs should match
+    * @param res the response, we can use this to send a response back to the client
+    */
+
+
+>>>>>>> bf579ee9a9c65b35262d517d27306fcbed83299c
 export const updatePage = async(req, res) =>{
     const{id: _id} = req.params;
     const targetPage = req.body;
@@ -71,22 +85,28 @@ export const updatePage = async(req, res) =>{
     res.json(updatedPage);
 }
     
+<<<<<<< HEAD
+=======
+
+>>>>>>> bf579ee9a9c65b35262d517d27306fcbed83299c
 export const getClubs = async (req, res)=>{
     try {
-        console.log('hello')
-        console.log(req.body)
         let clubs = ''
-        // clubs = await userModel.find({club: req.body.club});
         clubs = await ClubModel.find(req.body);
-        //console.log(clubs)
-        //console.log(clubs)
         res.status(200).json(clubs);
     } catch (error) {
-        //console.log("fhere")
         res.status(404).json({message: error.message});
         
     }
 }
+
+/**
+    * Updates the user's club to be the new one provided
+    *
+    * @param req Contains the request from the client side, req.body contains user info and the new club to add them to
+    * @param res the response, we can use this to send a response back to the client
+    */
+
 
 export const setUserClub = async (req, res) => {
     const result = await userModel.updateOne({email: req.body.email}, {$set: {club: req.body.clubName}})

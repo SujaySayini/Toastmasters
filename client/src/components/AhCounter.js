@@ -63,9 +63,6 @@ const AhCounter = (props) => {
     }
     useEffect(()=>{
         console.log('updated users')
-        //let clubname = "Rutgers";
-        //let clubName = getCookie("club");
-        //console.log("club names is the2 " + clubName);
         updateMembers(user.club);
     }, []);
     return (

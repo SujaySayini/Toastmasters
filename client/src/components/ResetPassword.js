@@ -2,7 +2,7 @@
  
 import React from 'react'
 import Img from '../images/Toastmasters.png';
-//import background from "./Background.JPG";
+//import background from "./Background.jpg";
 //import App from '../App';
 import "./custom.css";
 import {useNavigate} from 'react-router-dom'
