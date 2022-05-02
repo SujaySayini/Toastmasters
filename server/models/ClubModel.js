@@ -1,8 +1,11 @@
 import mongoose from "mongoose";
 
 const clubSchema = mongoose.Schema({
-    clubID: Number,
-    clubName: String,
+    clubName:{
+        type:String,
+        require: true,
+    },
+    
     description: String,
     location: String,
     meetingTime: String, // need to have specific format
@@ -11,6 +14,8 @@ const clubSchema = mongoose.Schema({
     extraContactInfo: String,
     announcement: String,
     active: String,
+    location: String, //may need to have more fields (zipcode, etc)
+    picture: String
      //may need to have more fields (zipcode, etc)
 });
 

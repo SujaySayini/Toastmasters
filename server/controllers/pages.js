@@ -65,12 +65,23 @@ export const createPage = async (req,res)=>{
 }
 
 
+
 /**
     * Finds clubs which match the given params
     *
     * @param req Contains the request from the client side, req.body contains the params the clubs should match
     * @param res the response, we can use this to send a response back to the client
     */
+
+
+export const updatePage = async(req, res) =>{
+    const{id: _id} = req.params;
+    const targetPage = req.body;
+    if(!mongoose.Types.ObjectId.isValid(_id)) return res.status(404).send("Cannot find the Page");
+    const updatedPage = await ClubModel.findByIdAndUpdate(_id,targetPage,{new: true});
+    res.json(updatedPage);
+}
+    
 
 export const getClubs = async (req, res)=>{
     try {
