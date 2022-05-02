@@ -46,7 +46,7 @@ function Login2(props){
       const userdata = jwt_decode(res.data.token).user
       if(userdata.userLevel === 'Admin'){
         props.swap('Admin')
-      } else if(userdata.club===""){
+      } else if(!userdata.club || userdata.club==="" || userdata.club.trim===""){
         props.swap('Search')
       }else if(userdata.userLevel === 'Eboard'){
         props.swap('ManageClub')

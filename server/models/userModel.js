@@ -75,8 +75,4 @@ userSchema.pre("save", async function (next) {
 const userModel = mongoose.model('users', userSchema)
 export default userModel
 
-//export default mongoose.model("users", userSchema);
-
-//var temp=mongoose.model('users',signUpTemplate)
-
 

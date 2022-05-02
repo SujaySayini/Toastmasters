@@ -18,7 +18,6 @@ import ClubPage from './components/ClubPage';
 import Admin from './components/Admin';
 import Profile from './components/Profile'
 import SignUp from './components/SignUp'
-import UpdateProfile from './components/UpdateProfile'
 import Reports from './components/Reports';
 import React from 'react';
 
@@ -82,9 +81,7 @@ function App(props) {
       setPage(<ClubPage swap={changePage}></ClubPage>)
     } else if (newPage === 'Profile'){
       setPage(<Profile swap={changePage}> </Profile>)
-    } else if (newPage === 'UpdateProfile'){
-      setPage(<UpdateProfile swap={changePage}> </UpdateProfile>)
-    }
+    } 
     
     else {
       localStorage.clear()

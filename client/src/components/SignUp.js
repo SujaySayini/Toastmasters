@@ -75,7 +75,7 @@ const [formData, setFormData]=useState(initialState);
           email: formData.email,
           club: formData.club
         }})
-        if(formData.club===""){
+        if(formData.club.trim()===""){
           props.swap('Search')
 
         } else{
