@@ -1,22 +1,9 @@
 import React from 'react'
-import { useSelector } from 'react-redux';
 import { Container, AppBar, Typography, Grow, Grid } from '@material-ui/core';
 import CreatePageForm from './CreatePageForm';
-import {use} from 'react-redux';
-import {useEffect, useState} from 'react';
-import {getPages} from '../actions/clubpage'
 
 function ClubPage() {
-  ;
-  
-
-  useEffect(() => {
-    (getPages());
-  }, []);
-
-  const pages = useSelector((state) => state.clubpage);
-  //console.log(pages);
-
+ 
   return (
     <Container maxidth="lg">
         <AppBar position = "static" color = "inherit">

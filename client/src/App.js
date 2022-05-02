@@ -1,4 +1,4 @@
-//import logo from './logo.svg';
+
 import './App.css';
 import Agenda  from './components/Agenda';
 import { useState } from 'react';
@@ -33,10 +33,10 @@ function App(props) {
   let ca = decodedCookie.split(';');
   for(let i = 0; i <ca.length; i++) {
     let c = ca[i];
-    while (c.charAt(0) == ' ') {
+    while (c.charAt(0) === ' ') {
       c = c.substring(1);
     }
-    if (c.indexOf(name) == 0) {
+    if (c.indexOf(name) === 0) {
       temp = c.substring(name.length, c.length);
     }
   }
@@ -74,7 +74,7 @@ function App(props) {
       setPage(<Reports swap={changePage}></Reports>)
     } else if (newPage === 'Logout'){
       localStorage.clear()
-      document.cookie = "user=*"
+      document.cookie = "user={}"
       setPage(<Login swap={changePage}></Login>)
     } else if (newPage === 'Admin') {
       setPage(<Admin swap={changePage}></Admin>)
