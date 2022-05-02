@@ -2,11 +2,8 @@
  
 import React from 'react'
 import Img from '../images/Toastmasters.png';
-<<<<<<< HEAD
-import background from "./Background.JPG";
-import App from '../App';
-=======
->>>>>>> fefd86085b73d86ebc4fc50687beb59ae5d92b4e
+//import background from "./Background.JPG";
+//import App from '../App';
 import "./custom.css";
 import {useNavigate} from 'react-router-dom'
  

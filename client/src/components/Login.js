@@ -1,11 +1,8 @@
 import React from 'react';
 
 import Img from '../images/Toastmasters.png';
-<<<<<<< HEAD
-import background from "./Background.JPG";
+//import background from "./Background.JPG";
 // import App from '../App';
-=======
->>>>>>> fefd86085b73d86ebc4fc50687beb59ae5d92b4e
 import "./custom.css";
 import {useNavigate} from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.css';

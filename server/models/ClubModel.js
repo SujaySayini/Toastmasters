@@ -14,12 +14,9 @@ const clubSchema = mongoose.Schema({
     extraContactInfo: String,
     announcement: String,
     active: String,
-<<<<<<< HEAD
     location: String, //may need to have more fields (zipcode, etc)
     picture: String
-=======
      //may need to have more fields (zipcode, etc)
->>>>>>> fefd86085b73d86ebc4fc50687beb59ae5d92b4e
 });
 
 const ClubModel = mongoose.model('ClubModel', clubSchema);
