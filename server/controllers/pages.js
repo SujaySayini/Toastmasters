@@ -3,15 +3,12 @@ import mongoose from 'mongoose';
 import userModel from '../models/userModel.js';
 
 
-<<<<<<< HEAD
-=======
 /**
     * Finds data for a given club
     *
     * @param req Contains the request from the client side, req.params contains the params we will search the club collection for
     * @param res the response, we can use this to send a response back to the client
     */
->>>>>>> c5b93cf54da2745ed56c8519d21ccabce7625de5
 export const getClubPageInfo = async(req,res)=>{
     const id = req.params
     try {
@@ -66,7 +63,6 @@ export const createPage = async (req,res)=>{
     }
 }
 
-<<<<<<< HEAD
 export const updatePage = async(req, res) =>{
     const{id: _id} = req.params;
     const targetPage = req.body;
@@ -75,8 +71,6 @@ export const updatePage = async(req, res) =>{
     res.json(updatedPage);
 }
     
-=======
->>>>>>> c5b93cf54da2745ed56c8519d21ccabce7625de5
 export const getClubs = async (req, res)=>{
     try {
         console.log('hello')
