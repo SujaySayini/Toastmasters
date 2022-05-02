@@ -106,8 +106,6 @@ const Profile = (props) =>{
                    </div>
                    <form>
    
-                  <label className="text-center"style={{marginLeft: '75px'}}>New Profile Image: 
-                    <input className="text-center" style={{marginBottom: '10px', paddingLeft: '5px'}} type="file" accept="image/*" id="myFile" name="filename" title=' '/> </label>
                   <div>
                   <label> First Name: <input id = 'profile-first' name="first" label="First Name" onChange={handleChange} /></label>
      </div>

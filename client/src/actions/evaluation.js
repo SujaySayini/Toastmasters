@@ -7,11 +7,17 @@ if(true){
 } else {
   theURL = publicURL
 }
-//functions that return actions
 
-export const getEvaluation = async (date) => {
+
+/**
+    * Tells server to get evaluations that match given params
+    *
+    * @param  data params which the evals we want must match 
+    */
+
+export const getEvaluation = async (data) => {
     try {
-        const res = await axios.post(theURL + '/evaluation/get', date).then(
+        const res = await axios.post(theURL + '/evaluation/get', data).then(
             (response) => { return response.data },
             (error) => {console.log(error)}
         )
@@ -20,6 +26,12 @@ export const getEvaluation = async (date) => {
         console.log(error.message);   
     }
 }
+
+/**
+    * Sends info to server to create a new eval
+    *
+    * @param  evaluation contains all data that to store the new eval
+    */
 
 export const createEvaluation = async (evaluation) => {
     try {
